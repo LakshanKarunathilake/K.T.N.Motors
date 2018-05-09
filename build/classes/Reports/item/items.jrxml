@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="items" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14e320e9-ae9f-463b-9b02-1691126abaa5">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select * from item]]>
+	</queryString>
+	<field name="itemNo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cost" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="selling" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qty" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="addedDate" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="130" y="0" width="312" height="45" uuid="ad84472e-7867-4dd6-b6e8-1581fa91d408"/>
+				<textElement>
+					<font size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[K.T.N. Motors (Pvt) Ltd.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="117" y="32" width="340" height="20" uuid="4190e1a6-3c5e-4475-9c31-66e0f88586e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<text><![CDATA[No-152, Aluthgama Road, Mathugama Tel : 034-4939958 Fax: 034-2248844]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="2" uuid="9ed21267-055c-4c91-a62c-bee0fa2a545f"/>
+			</line>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="455" y="15" width="100" height="20" uuid="bc0b0f77-8970-4f7f-ae17-79112d53a123"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="204" y="0" width="140" height="35" uuid="125920ab-7ce8-4c57-bada-01fed3f01a35"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="25"/>
+				</textElement>
+				<text><![CDATA[Item Report]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="2" uuid="76bd0434-1e6a-482c-a7b8-f992033b9fa5"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="92" height="20" uuid="b22887df-10a2-4d12-9221-bf050d517986"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Part Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="92" y="0" width="166" height="20" uuid="e9967cdd-b33a-4ffc-9824-aa5059638dbb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="2" width="60" height="20" uuid="d2522f6b-e10f-4e00-8f21-64abf1bbd84a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cost]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="0" width="70" height="20" uuid="64672921-dd3c-4ee5-81d0-1273bcb2f8ed"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Selling]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="388" y="0" width="72" height="20" uuid="d0574dbb-e028-4b08-b960-391a1e8ced08"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="92" height="20" uuid="1699a188-6eff-43f9-b69f-ce7a521bcc06"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Added Date]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="22" width="552" height="1" uuid="f2a10f60-d6e0-4c3e-9982-c1ef7b1ee217"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="0" width="82" height="20" uuid="0c67096e-5f69-420f-b638-277dda65ced7"/>
+				<textFieldExpression><![CDATA[$F{itemNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="0" width="166" height="20" uuid="17d797ab-3a71-45c0-9cc8-9abea57ae924"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="258" y="0" width="60" height="20" uuid="e935c4f8-5919-4727-abaa-48c9d8006f1e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{cost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="318" y="0" width="70" height="20" uuid="1f120776-99d9-4e55-85b0-bf506563faad"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{selling}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="388" y="0" width="72" height="20" uuid="5fe2716d-e190-4244-9132-a737fba6fe36"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="92" height="20" uuid="995422e4-0c89-428d-b3f7-4653f441e23a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{addedDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="418" y="13" width="80" height="20" uuid="63c82f36-9a3b-47c7-a1ca-ccfe9e6bf0f1"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="498" y="13" width="40" height="20" uuid="91ee7fb3-a88e-4f68-bbd5-9f8fd467fec5"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="0" y="13" width="100" height="20" uuid="4c573a07-2c57-4007-b886-7a9d229cd900"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

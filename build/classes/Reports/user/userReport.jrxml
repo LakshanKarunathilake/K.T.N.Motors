@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="userReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e9693f3-ea8d-4d4b-b0d4-00b85e58f832">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[Select * from users
+]]>
+	</queryString>
+	<field name="userID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="designation" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="address" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telNo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="addedDate" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="67" splitType="Stretch">
+			<staticText>
+				<reportElement x="117" y="0" width="312" height="45" uuid="a8f3ea03-dec4-416d-b3af-d8ff7feab734"/>
+				<textElement>
+					<font size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[K.T.N. Motors (Pvt) Ltd.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="104" y="32" width="340" height="20" uuid="8cbfefa1-a6c2-49ee-b8cf-5a61c96641b3"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<text><![CDATA[No-152, Aluthgama Road, Mathugama Tel : 034-4939958 Fax: 034-2248844]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="37" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="2" uuid="a1419e99-0f33-4452-a06d-5777e3f2a273"/>
+			</line>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="454" y="17" width="100" height="20" uuid="5d4b5f6e-6cad-4a1c-8537-8be7117c31b8"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="203" y="2" width="140" height="35" uuid="aff3ad22-6b53-462b-99bc-49264187c59c"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="25"/>
+				</textElement>
+				<text><![CDATA[User Report]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<line>
+				<reportElement x="-1" y="0" width="555" height="2" uuid="c100b37c-88c9-4840-bb61-ca045782f2b1"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="2" width="40" height="20" uuid="033ddd83-347c-41f7-9aa3-3a3ceeb606f5"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[userID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="69" y="2" width="119" height="20" uuid="1b40d7d5-a5b8-4da3-9ad3-7409ad6f6bec"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="188" y="2" width="148" height="20" uuid="6dabf7ad-a538-4ded-853a-81fd29f456c5"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="336" y="2" width="138" height="20" uuid="fbbb3fef-0a18-4ee2-9d85-066749e1d9f9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telephone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="474" y="2" width="79" height="20" uuid="344bd819-aa43-4901-ab33-2b1c125f84f7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[addedDate]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="26" width="555" height="2" uuid="33cf5847-4a1b-459c-a2d9-8e011989b02b"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="40" height="20" uuid="08120214-c6f5-4ac9-9315-e617015d9c1e"/>
+				<textFieldExpression><![CDATA[$F{userID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="0" width="29" height="20" uuid="4f0ba10c-a0e8-41af-9e8a-0f85cce7e94d"/>
+				<textFieldExpression><![CDATA[$F{designation}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="0" width="119" height="20" uuid="d7bb2f35-33ef-4b07-99bc-31dea213ae7d"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="188" y="0" width="148" height="20" uuid="a77f059c-0e35-4ca3-9de3-36366c5ea41f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="336" y="0" width="138" height="20" uuid="521b7ddd-4d2d-4f1b-bd61-957d09ed9428"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{telNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="474" y="0" width="79" height="20" uuid="245dee4a-78da-4200-9cd6-b8d8ad8383b9"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{addedDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="433" y="5" width="80" height="20" uuid="27825491-d455-41af-ae09-df1a55f1dba0"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="513" y="5" width="40" height="20" uuid="b5e37b62-3a68-4d40-808c-45211b96d418"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="0" y="3" width="100" height="20" uuid="6c9bd3da-451f-4170-a66d-4230aaf81e93"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="555" height="2" uuid="f7e67f40-3d61-45d2-8846-ce93115561a8"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

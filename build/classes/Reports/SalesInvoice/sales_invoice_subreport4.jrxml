@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sales_invoice_subreport4" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e4e2de46-e13d-487d-a4b4-1fd05780863f">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="invoiceID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from orders where orderID like $P{invoiceID}]]>
+	</queryString>
+	<field name="orderID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="discount" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="grandTotal" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="orderDate" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="userID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Status" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<staticText>
+				<reportElement x="408" y="0" width="30" height="20" uuid="144c5186-8150-4d61-a8ad-32128f526288"/>
+				<text><![CDATA[Total : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="392" y="20" width="46" height="16" uuid="2ad730ec-7afc-4076-994f-c9eb23181314"/>
+				<text><![CDATA[Discount : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="473" y="20" width="66" height="20" uuid="e6d7f884-6968-4309-a817-2f0271b160d5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{discount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="353" y="41" width="85" height="20" uuid="e10a18f7-ff98-4845-9bc0-36766a6e3f90"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grand Total : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="446" y="42" width="93" height="20" uuid="0f5d1d0b-7773-48fc-8659-c0decd8c7d02"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grandTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="474" y="0" width="66" height="20" uuid="8b057070-e6ec-4e42-8a30-edfef3aaa190"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="452" y="40" width="100" height="1" uuid="b493f49c-a65b-468c-a47f-11db1a1289c4"/>
+			</line>
+			<line>
+				<reportElement x="453" y="63" width="100" height="1" uuid="4c3a1146-071c-4b63-85e3-d6bbeff681d9"/>
+			</line>
+			<line>
+				<reportElement x="453" y="66" width="100" height="1" uuid="a1f06017-77d6-43fa-886b-f035d605af29"/>
+			</line>
+			<staticText>
+				<reportElement x="540" y="20" width="15" height="16" uuid="3149a717-6efe-421d-a402-258be26b3f31"/>
+				<text><![CDATA[)%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="20" width="5" height="16" uuid="729aa924-e497-46c3-83f2-42c47654ed34"/>
+				<text><![CDATA[(]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
