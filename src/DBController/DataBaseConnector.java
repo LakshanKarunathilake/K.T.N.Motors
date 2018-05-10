@@ -29,14 +29,9 @@ public class DataBaseConnector {
     ResultSet rst = null;
     PreparedStatement pst = null;
        
-    public Connection startConnection() throws SQLException{       
-        
-                
-       
-            conn = DriverManager.getConnection(CONN_STRING,USERNAME,PASSWORD);
-            
-            statement = conn.createStatement();
-            
+    public Connection startConnection() throws SQLException{
+            conn = DriverManager.getConnection(CONN_STRING,USERNAME,PASSWORD);            
+            statement = conn.createStatement();            
             return conn;
         
     }

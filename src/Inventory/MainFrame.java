@@ -6,11 +6,15 @@
 package Inventory;
 
 import DBController.DataBaseConnector;
+import DataManipulation.DataManipulation;
 import Printing.PrintData;
 import Printing.Printsupport;
 import Printing.Printsupport.MyPrintable;
+import SalesReturn.SalesReturn;
 
 import Validation.StartUpValidation;
+import ViewManipulation.ViewManipulation;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
@@ -56,6 +60,10 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     DataBaseConnector connector;
+    DataManipulation manipulation;
+    SalesReturn sales_return;
+    
+    
     String report_folder_path = "C:\\kade-1.0\\src\\Reports";
     String report_folder_path_sub = "\"E:\\\\kade-1.0\\\\src\\\\Reports";
     Connection conn = null;
@@ -63,6 +71,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         
         connector = new DataBaseConnector();
+        manipulation = new DataManipulation(connector);
         
         initComponents();
         showTime();
@@ -110,7 +119,7 @@ public class MainFrame extends javax.swing.JFrame {
         updateQtylbl = new javax.swing.JLabel();
         AddUserLabel = new javax.swing.JLabel();
         payBillsLabel = new javax.swing.JLabel();
-        ReportLabel1 = new javax.swing.JLabel();
+        Return_label = new javax.swing.JLabel();
         MainChangeFrame = new javax.swing.JPanel();
         SalesPanel = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -160,6 +169,37 @@ public class MainFrame extends javax.swing.JFrame {
         editBtn = new javax.swing.JButton();
         designationCombo = new javax.swing.JComboBox<>();
         saveBtn = new javax.swing.JButton();
+        SalesReturnPanel = new javax.swing.JPanel();
+        jLabel45 = new javax.swing.JLabel();
+        return_userName_combo = new javax.swing.JComboBox<>();
+        jLabel46 = new javax.swing.JLabel();
+        return_reason_combo = new javax.swing.JComboBox<>();
+        jLabel47 = new javax.swing.JLabel();
+        return_userID_combo = new javax.swing.JComboBox<>();
+        jLabel49 = new javax.swing.JLabel();
+        selectAll_button = new javax.swing.JToggleButton();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        return_no = new javax.swing.JRadioButton();
+        return_yes = new javax.swing.JRadioButton();
+        return_button = new javax.swing.JButton();
+        return_cancel_btn = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        sales_return_subPanel = new javax.swing.JPanel();
+        returns_item_table = new javax.swing.JScrollPane();
+        return_item_table = new javax.swing.JTable();
+        returns_search_panel = new javax.swing.JPanel();
+        return_search_item_combo = new javax.swing.JComboBox<>();
+        jLabel48 = new javax.swing.JLabel();
+        return_from_picker = new com.toedter.calendar.JDateChooser();
+        jLabel53 = new javax.swing.JLabel();
+        return_to_picker = new com.toedter.calendar.JDateChooser();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel52 = new javax.swing.JLabel();
+        return_invoiceID_combo = new javax.swing.JComboBox<>();
+        jButton15 = new javax.swing.JButton();
+        jLabel54 = new javax.swing.JLabel();
         ReportPanel = new javax.swing.JPanel();
         reports_customer_btn = new javax.swing.JButton();
         report_items_btn = new javax.swing.JButton();
@@ -343,16 +383,19 @@ public class MainFrame extends javax.swing.JFrame {
         });
         MenuBar.add(payBillsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 200, 100));
 
-        ReportLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        ReportLabel1.setText("     Reports");
-        ReportLabel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        ReportLabel1.setOpaque(true);
-        ReportLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        Return_label.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        Return_label.setText("     Returns");
+        Return_label.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        Return_label.setOpaque(true);
+        Return_label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ReportLabel1MouseClicked(evt);
+                Return_labelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Return_labelMouseEntered(evt);
             }
         });
-        MenuBar.add(ReportLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 200, 110));
+        MenuBar.add(Return_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 200, 110));
 
         getContentPane().add(MenuBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 1020));
 
@@ -756,6 +799,179 @@ public class MainFrame extends javax.swing.JFrame {
         AddUserPannel.add(saveBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 540, 134, 81));
 
         MainChangeFrame.add(AddUserPannel, "card5");
+
+        SalesReturnPanel.setBackground(new java.awt.Color(255, 255, 255));
+        SalesReturnPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel45.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel45.setText("User Name");
+        SalesReturnPanel.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, -1, -1));
+
+        return_userName_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        return_userName_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        SalesReturnPanel.add(return_userName_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 510, 40));
+
+        jLabel46.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel46.setText("0");
+        SalesReturnPanel.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 730, -1, -1));
+
+        return_reason_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        return_reason_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        SalesReturnPanel.add(return_reason_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 650, 270, 40));
+
+        jLabel47.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel47.setText("User ID");
+        SalesReturnPanel.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, -1, -1));
+
+        return_userID_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        return_userID_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        SalesReturnPanel.add(return_userID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 200, 40));
+
+        jLabel49.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel49.setText("Returned Cash");
+        SalesReturnPanel.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 610, -1, -1));
+
+        selectAll_button.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        selectAll_button.setText("Select All");
+        SalesReturnPanel.add(selectAll_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, 200, 70));
+
+        jLabel50.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel50.setText("Total Return Amount :");
+        SalesReturnPanel.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 730, -1, -1));
+
+        jLabel51.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel51.setText("Reason:");
+        SalesReturnPanel.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 620, -1, -1));
+
+        return_no.setBackground(new java.awt.Color(255, 255, 255));
+        return_no.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        return_no.setText("No");
+        return_no.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                return_noActionPerformed(evt);
+            }
+        });
+        SalesReturnPanel.add(return_no, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 650, -1, -1));
+
+        return_yes.setBackground(new java.awt.Color(255, 255, 255));
+        return_yes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        return_yes.setText("Yes");
+        return_yes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                return_yesActionPerformed(evt);
+            }
+        });
+        SalesReturnPanel.add(return_yes, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 650, -1, -1));
+
+        return_button.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        return_button.setText("Return");
+        SalesReturnPanel.add(return_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 750, 190, 100));
+
+        return_cancel_btn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        return_cancel_btn.setText("Cancel");
+        return_cancel_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                return_cancel_btnActionPerformed(evt);
+            }
+        });
+        SalesReturnPanel.add(return_cancel_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 150, 120, 50));
+
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton4.setText("Select Invoice");
+        SalesReturnPanel.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 210, 50));
+
+        sales_return_subPanel.setLayout(new java.awt.CardLayout());
+
+        return_item_table.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        return_item_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Item Number", "Description", "Cost", "Returned Qty", "Purchaised Qty", "Selection"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        returns_item_table.setViewportView(return_item_table);
+
+        sales_return_subPanel.add(returns_item_table, "card2");
+
+        returns_search_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        return_search_item_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        return_search_item_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        return_search_item_combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                return_search_item_comboActionPerformed(evt);
+            }
+        });
+        returns_search_panel.add(return_search_item_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 280, 40));
+
+        jLabel48.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel48.setText("From");
+        returns_search_panel.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, -1, -1));
+
+        return_from_picker.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        returns_search_panel.add(return_from_picker, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, 230, 50));
+
+        jLabel53.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel53.setText("To");
+        returns_search_panel.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, -1, -1));
+
+        return_to_picker.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        returns_search_panel.add(return_to_picker, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 50, 230, 50));
+
+        jTable1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Item No", "Category", "Purchaised Date", "Invoice No"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable1);
+
+        returns_search_panel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 910, 210));
+
+        jLabel52.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel52.setText("Item No");
+        returns_search_panel.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        sales_return_subPanel.add(returns_search_panel, "card3");
+
+        SalesReturnPanel.add(sales_return_subPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 970, 360));
+
+        return_invoiceID_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        return_invoiceID_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        return_invoiceID_combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                return_invoiceID_comboActionPerformed(evt);
+            }
+        });
+        SalesReturnPanel.add(return_invoiceID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 200, 40));
+
+        jButton15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton15.setText("Search Invoice");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+        SalesReturnPanel.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 210, 50));
+
+        jLabel54.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel54.setText("Invoice No");
+        SalesReturnPanel.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        MainChangeFrame.add(SalesReturnPanel, "card9");
 
         ReportPanel.setBackground(new java.awt.Color(255, 255, 255));
         ReportPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1621,14 +1837,9 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_AddProductLabelMouseClicked
 
     private void ReportLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReportLabelMouseClicked
-        MainChangeFrame.removeAll();
-        MainChangeFrame.repaint();
-        MainChangeFrame.revalidate();
-
-        MainChangeFrame.add(ReportPanel);
-        MainChangeFrame.repaint();
-        MainChangeFrame.revalidate();
         
+        ViewManipulation.changePanel(MainChangeFrame, ReportPanel);       
+       
         item_date1_label.setVisible(false);
         item_date2_label.setVisible(false);
         item_date2_picker.setVisible(false);
@@ -1639,22 +1850,21 @@ public class MainFrame extends javax.swing.JFrame {
         user_date2_picker.setVisible(false);
         user_date1_picker.setVisible(false);
         
-        setDefaultDateRange();
+        setDefaultDateRange(item_date2_picker,item_date1_picker,12);
+        setDefaultDateRange(user_date2_picker,user_date1_picker,12);
         
         populateWiseReportPanel();
     }//GEN-LAST:event_ReportLabelMouseClicked
 
-    public void setDefaultDateRange(){
+    public void setDefaultDateRange(JDateChooser from,JDateChooser to,int range){
         Date d = new Date();        
-        item_date2_picker.setDate(d);
-        user_date2_picker.setDate(d);
+        to.setDate(d);        
         Calendar c = Calendar.getInstance();
         c.setTime(d);
-        c.add(Calendar.MONTH,-12);
+        c.add(Calendar.MONTH,-range);
         d= c.getTime();  
-        item_date1_picker.setDate(d);
-        user_date1_picker.setDate(d);
-       
+        from.setDate(d);
+              
         
     }
     
@@ -1666,9 +1876,9 @@ public class MainFrame extends javax.swing.JFrame {
         report_item_combo.removeAllItems();
         report_name_combo.removeAllItems();
         report_userID_combo.removeAllItems();
-        getRecords("item", "itemNo", report_item_combo);
-        getRecords("users", "userID", report_userID_combo);
-        getRecords("users", "name", report_name_combo);
+        manipulation.getRecords("item", "itemNo", report_item_combo);
+        manipulation.getRecords("users", "userID", report_userID_combo);
+        manipulation.getRecords("users", "name", report_name_combo);
         
     }
     
@@ -1802,7 +2012,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         AutoCompleteDecorator.decorate(edit_combo);
 
-        getRecords("item", "itemNo", edit_combo);
+        manipulation.getRecords("item", "itemNo", edit_combo);
         String itemNo = null;
 
         final JComponent[] inputs = new JComponent[]{
@@ -2080,23 +2290,15 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sales_itemno_comboKeyPressed
 
     private void sales_itemno_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_itemno_comboActionPerformed
-          
-        
         String itemNo = (String) sales_itemno_combo.getSelectedItem();
         
-        
-        String description = searchRecord("item", "description", "itemNo", itemNo);
-       
-        
+        String description = searchRecord("item", "description", "itemNo", itemNo); 
         sales_item_name_combo.setSelectedItem(description);
         
-        
         //Qty Adding to the text Box
-        
-        String qty = searchRecord("item", "qty", "itemNo", itemNo);
-        
-        
+        String qty = searchRecord("item", "qty", "itemNo", itemNo);    
         sales_available_qty_txt.setText(qty);
+        
     }//GEN-LAST:event_sales_itemno_comboActionPerformed
 
     private void sales_qty_TxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_qty_TxtKeyPressed
@@ -2303,7 +2505,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         update_qty_txt.setText("0");
         update_itemNo_combo.removeAllItems();
-        getRecords("item", "itemNo",update_itemNo_combo);
+        manipulation.getRecords("item", "itemNo",update_itemNo_combo);
         update_itemNo_combo.requestFocusInWindow();
     }//GEN-LAST:event_updateQtylblMouseClicked
 
@@ -2856,7 +3058,7 @@ public class MainFrame extends javax.swing.JFrame {
        
         AutoCompleteDecorator.decorate(search_invoiceID);
 
-        getRecords("orders", "orderID", search_invoiceID);
+        manipulation.getRecords("orders", "orderID", search_invoiceID);
         String invoiceID="";
         
        
@@ -3015,9 +3217,55 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void ReportLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReportLabel1MouseClicked
+    private void Return_labelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Return_labelMouseClicked
+        return_cancel_btn.setEnabled(false);
+        setDefaultDateRange(return_from_picker,return_to_picker,6);
+        ViewManipulation.changePanel(MainChangeFrame, SalesReturnPanel);
+        sales_return=new SalesReturn(return_invoiceID_combo,return_userID_combo,return_userName_combo,connector);
+        sales_return.fillDataToCombo();
+    }//GEN-LAST:event_Return_labelMouseClicked
+
+    private void return_noActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_noActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ReportLabel1MouseClicked
+    }//GEN-LAST:event_return_noActionPerformed
+
+    private void return_yesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_yesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_return_yesActionPerformed
+
+    private void return_cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_cancel_btnActionPerformed
+        return_cancel_btn.setEnabled(false);
+        
+        ViewManipulation.changePanel(sales_return_subPanel, returns_item_table);
+                
+    }//GEN-LAST:event_return_cancel_btnActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        return_cancel_btn.setEnabled(true);
+        AutoCompleteDecorator.decorate(return_search_item_combo);
+        manipulation.getRecords("item", "itemNo", return_search_item_combo);
+        ViewManipulation.changePanel(sales_return_subPanel,returns_search_panel);       
+        
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void return_invoiceID_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_invoiceID_comboActionPerformed
+        String invoice_id = (String) return_invoiceID_combo.getSelectedItem();
+       
+        String customer_id = searchRecord("orders", "userID", "orderID", invoice_id);
+        return_userID_combo.setSelectedItem(customer_id);
+
+        //Qty Adding to the text Box
+        String customer_name= searchRecord("users", "name", "userID",customer_id);
+        return_userName_combo.setSelectedItem(customer_name);
+    }//GEN-LAST:event_return_invoiceID_comboActionPerformed
+
+    private void Return_labelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Return_labelMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Return_labelMouseEntered
+
+    private void return_search_item_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_search_item_comboActionPerformed
+        
+    }//GEN-LAST:event_return_search_item_comboActionPerformed
     
     
     public void fillInvoice(String invoiceID){
@@ -3222,11 +3470,11 @@ public class MainFrame extends javax.swing.JFrame {
          AutoCompleteDecorator.decorate(sales_item_name_combo);
          AutoCompleteDecorator.decorate(sales_itemno_combo);
          
-         
-        getRecords("users", "userID",sales_CID_combo);
-        getRecords("users","name",sales_CName_combo);
-        getRecords("item", "itemNo", sales_itemno_combo);
-        getRecords("item", "description", sales_item_name_combo); 
+       
+        manipulation.getRecords("users", "userID",sales_CID_combo);
+        manipulation.getRecords("users","name",sales_CName_combo);
+        manipulation.getRecords("item", "itemNo", sales_itemno_combo);
+        manipulation.getRecords("item", "description", sales_item_name_combo); 
         
         String orderID = generateSaleID();
         sales_InvoiceID_txt.setText(orderID);
@@ -3247,23 +3495,9 @@ public class MainFrame extends javax.swing.JFrame {
         return "A"+idFormatted;
     }
     
-    public void getRecords(String tableName,String coloumn,JComboBox combo){
-        ArrayList list = new ArrayList();        
-        list = connector.retreveDataColumn(tableName, coloumn);
-       
-        for (int i = 0; i < list.size(); i++) {
-            combo.addItem(list.get(i));
-        }
-    }
     
-    public void getRecordsWithCondtion(String tableName,String coloumn1,String coloumn2,String condition,JComboBox combo){
-        ArrayList list = new ArrayList();        
-        list = connector.retreveDataColoumnWithCondition(tableName, coloumn1,coloumn2,condition);
-       
-        for (int i = 0; i < list.size(); i++) {
-            combo.addItem(list.get(i));
-        }
-    }
+    
+   
     
     public String searchRecord(String tableName,String coloumnName1,String coloumnName2,String value){
         
@@ -3514,9 +3748,9 @@ public class MainFrame extends javax.swing.JFrame {
         bill_name_combo.removeAllItems();
         bill_InvoiceID_combo.removeAllItems();
         
-        getRecords("users","userID",bill_userID_combo);
-        getRecords("users","name",bill_name_combo);
-        getRecordsWithCondtion("orders","orderID","status","0",bill_InvoiceID_combo);
+        manipulation.getRecords("users","userID",bill_userID_combo);
+        manipulation.getRecords("users","name",bill_name_combo);
+        manipulation.getRecordsWithCondtion("orders","orderID","status","0",bill_InvoiceID_combo);
         
         
         
@@ -3569,10 +3803,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton NewBtn;
     private javax.swing.JTextField PrecentageTxt;
     private javax.swing.JLabel ReportLabel;
-    private javax.swing.JLabel ReportLabel1;
     private javax.swing.JPanel ReportPanel;
+    private javax.swing.JLabel Return_label;
     private javax.swing.JLabel SalesLabel;
     private javax.swing.JPanel SalesPanel;
+    private javax.swing.JPanel SalesReturnPanel;
     private javax.swing.JTextField SellingTxt;
     private javax.swing.JPanel SettingsPanel;
     private javax.swing.JTextField TelephoneTxt;
@@ -3613,7 +3848,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -3659,7 +3896,17 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -3671,7 +3918,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton newBtn;
     private javax.swing.JLabel payBillsLabel;
     private javax.swing.JComboBox<String> report_item_combo;
@@ -3681,6 +3930,20 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton reports_customer_btn;
     private javax.swing.JButton reports_customer_btn1;
     private javax.swing.JButton reports_customer_btn2;
+    private javax.swing.JButton return_button;
+    private javax.swing.JButton return_cancel_btn;
+    private com.toedter.calendar.JDateChooser return_from_picker;
+    private javax.swing.JComboBox<String> return_invoiceID_combo;
+    private javax.swing.JTable return_item_table;
+    private javax.swing.JRadioButton return_no;
+    private javax.swing.JComboBox<String> return_reason_combo;
+    private javax.swing.JComboBox<String> return_search_item_combo;
+    private com.toedter.calendar.JDateChooser return_to_picker;
+    private javax.swing.JComboBox<String> return_userID_combo;
+    private javax.swing.JComboBox<String> return_userName_combo;
+    private javax.swing.JRadioButton return_yes;
+    private javax.swing.JScrollPane returns_item_table;
+    private javax.swing.JPanel returns_search_panel;
     private javax.swing.JComboBox<String> sales_CID_combo;
     private javax.swing.JComboBox<String> sales_CName_combo;
     private javax.swing.JTextField sales_InvoiceID_txt;
@@ -3695,11 +3958,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton sales_print_btn;
     private javax.swing.JTextField sales_qty_Txt;
     private javax.swing.JButton sales_remove_btn;
+    private javax.swing.JPanel sales_return_subPanel;
     private javax.swing.JButton sales_save_btn;
     private javax.swing.JButton sales_searchI_btn1;
     private javax.swing.JButton sales_search_user_btn;
     private javax.swing.JTextField sales_total_txt;
     private javax.swing.JButton saveBtn;
+    private javax.swing.JToggleButton selectAll_button;
     private javax.swing.JLabel updateQtylbl;
     private javax.swing.JLabel update_availabel_txt;
     private javax.swing.JTextField update_cost_txt;
