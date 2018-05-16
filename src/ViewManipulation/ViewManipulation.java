@@ -6,7 +6,11 @@
 package ViewManipulation;
 
 import java.awt.Component;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,5 +25,19 @@ public class ViewManipulation {
         firstPanel.add(movingPanel);
         firstPanel.repaint();
         firstPanel.revalidate();
+    }
+    
+    public static void emptyComboBoxes(ArrayList<JComboBox> combos){
+        for (int i = 0; i < combos.size(); i++) {
+            JComboBox combo = combos.get(i);
+            combo.removeAllItems();
+        }
+    }
+    
+    public static void emptyTable(JTable table){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }        
     }
 }

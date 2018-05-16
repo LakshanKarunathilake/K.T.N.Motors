@@ -1075,7 +1075,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="520" y="70" width="510" height="40"/>
+                  <AbsoluteConstraints x="520" y="70" width="480" height="40"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -1136,6 +1136,10 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="return_userID_comboActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="return_userID_comboKeyPressed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -1271,6 +1275,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Select Invoice"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="30" y="150" width="210" height="50"/>
@@ -1306,11 +1313,11 @@
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="6" rowCount="0">
                             <Column editable="false" title="Item Number" type="java.lang.Object"/>
-                            <Column editable="false" title="Description" type="java.lang.Object"/>
-                            <Column editable="false" title="Cost" type="java.lang.Object"/>
-                            <Column editable="false" title="Returned Qty" type="java.lang.Object"/>
-                            <Column editable="true" title="Purchaised Qty" type="java.lang.Object"/>
-                            <Column editable="true" title="Selection" type="java.lang.Object"/>
+                            <Column editable="false" title="UnitPrice" type="java.lang.Object"/>
+                            <Column editable="false" title="TotalPrice" type="java.lang.Object"/>
+                            <Column editable="false" title="Returnable" type="java.lang.Object"/>
+                            <Column editable="true" title="Purchaised" type="java.lang.Object"/>
+                            <Column editable="true" title="Selection" type="java.lang.Boolean"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

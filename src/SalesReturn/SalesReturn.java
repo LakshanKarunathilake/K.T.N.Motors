@@ -7,13 +7,16 @@ package SalesReturn;
 
 import DBController.DataBaseConnector;
 import DataManipulation.DataManipulation;
-import com.toedter.calendar.JDateChooser;
-import java.awt.Component;
+import DataManipulation.MyCombo;
+import java.awt.Font;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -25,31 +28,103 @@ public class SalesReturn {
     JComboBox customer_name ;
     DataBaseConnector connector;
     
+   
+    
     public SalesReturn(JComboBox invoice_no,JComboBox customer_no,JComboBox customer_name,DataBaseConnector connector){
+        
         this.invoice_no = invoice_no;
         this.customer_name = customer_name;
         this.customer_no = customer_no;
+        
         this.connector = connector;
     }
 
     private void autoCompleteCombo() {
-        AutoCompleteDecorator.decorate(customer_no);
-        AutoCompleteDecorator.decorate(invoice_no);
-        AutoCompleteDecorator.decorate(customer_name);
+       MyCombo autoCombo1 = new MyCombo();
+       MyCombo autoCombo2 = new MyCombo();
+       MyCombo autoCombo3 = new MyCombo();
+       
+       
+       autoCombo1.setSearchableCombo(this.invoice_no, true, "No Result Found");
+       autoCombo2.setSearchableCombo(this.customer_no, true, "No Result Found");
+       autoCombo3.setSearchableCombo(this.customer_name, true, "No Result Found");
+       
+        ArrayList<String> myList = new ArrayList<String>();
+        //       Getting the value from a second table -- userID from the user table
+        ArrayList<String> secondTableCondition = new ArrayList<String>();
+        
+       myList.add("Orders");
+       myList.add("orderID");
+       myList.add("userID");
+        
+       autoCombo2.populateSecondCombo(customer_no, invoice_no,connector,myList,null,false);       
+       
+//       Adding values to the secondtableCondition
+        secondTableCondition.add("users");
+        secondTableCondition.add("userID");
+        secondTableCondition.add("name");
+       
+        autoCombo3.populateSecondCombo(customer_name, invoice_no,connector,myList,secondTableCondition,true);
     }
 
     public void  fillDataToCombo() {
         
-        autoCompleteCombo();       
-        
-        DataManipulation manipulation = new DataManipulation(connector);
+        DataManipulation manipulation = new DataManipulation(connector); 
         
         manipulation.getRecords("orders", "orderID", invoice_no);
         manipulation.getRecords("users", "userID", customer_no);
         manipulation.getRecords("users", "name", customer_name);
+        
+        autoCompleteCombo();
     }
     
-    public void fill_search_table(String itemNo){
+    public static void getInvoiceRecords(String invoiceNo,JTable table,DataBaseConnector connector){
+        ArrayList conditionCols = new ArrayList();
+        conditionCols.add("orderID");
+        
+        ArrayList conditionVals = new ArrayList();
+        conditionVals.add(invoiceNo);
+        
+        DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+        
+        
+        
+        ArrayList<String []> records = connector.retreveLargeDataSet(conditionCols, conditionVals);
+        System.out.println("Array list : "+records.size());
+        for (int i = 0; i < records.size(); i++) {
+            Object rowData[] = new Object[5];
+            String row[] = records.get(i);           
+            
+            rowData[0] = row[0];
+            
+            BigDecimal price = new BigDecimal(row[3]);
+            price = price.setScale(2, RoundingMode.HALF_UP);
+            BigDecimal divider = new BigDecimal(2);
+            
+            rowData[1] = price.divide(divider);
+            rowData[2] = price;
+            rowData[3] = row[2];
+            rowData[4] = row[2];
+            System.out.println("For loop"+i); 
+            for (int k = 0; k < rowData.length; k++) {
+                System.out.println("In SalesRe " + row[k]);
+            }
+            dtm.addRow(rowData);
+        }
+    }
+    
+    public void changeTableView(JTable table){
+        Font f = new Font("Arial", Font.BOLD, 14);
+        JTableHeader header = table.getTableHeader();
+        header.setFont(f);
+        
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.getColumnModel().getColumn(0).setPreferredWidth(330);
+        table.getColumnModel().getColumn(1).setPreferredWidth(155);
+        table.getColumnModel().getColumn(2).setPreferredWidth(155);
+        table.getColumnModel().getColumn(3).setPreferredWidth(120);
+        table.getColumnModel().getColumn(4).setPreferredWidth(120);
+        table.getColumnModel().getColumn(5).setPreferredWidth(80);
         
     }
     

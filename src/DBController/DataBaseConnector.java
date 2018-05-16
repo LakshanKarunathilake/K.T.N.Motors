@@ -148,6 +148,7 @@ public class DataBaseConnector {
     }
     
     public ArrayList retreveDataColumn(String tableName,String coloumnName){
+       
         String sql = "SELECT "+coloumnName+" from "+tableName+" ";
         
         try {
@@ -157,7 +158,7 @@ public class DataBaseConnector {
             while(rst.next()){
                 list.add(rst.getString(coloumnName));                
             }
-           
+            
             return list;
             
         } catch (SQLException ex) {
@@ -340,5 +341,48 @@ public class DataBaseConnector {
         }
         return null;
     }
+     
+     public ArrayList retreveLargeDataSet(ArrayList conditionColoumns,ArrayList conditionVals){
+         
+        ArrayList<String []> records = new ArrayList();
+        String condition = "";
+        
+         for (int i = 0; i < conditionColoumns.size(); i++) {
+             condition+=String.valueOf(conditionColoumns.get(i));
+             condition+=" like '";
+             condition+=String.valueOf(conditionVals.get(i));
+             condition+="'";
+             if(i!=(conditionColoumns.size()-1)){
+                 condition+=" And ";
+             }
+         }
+         
+         
+         String sql = "Select * from orderitems where "+condition;
+         System.out.println("SQL : "+sql);
+         
+         try {
+            statement = conn.createStatement();
+            rst = statement.executeQuery(sql);
+            int colCount = rst.getMetaData().getColumnCount();
+                        
+             while(rst.next()){
+                String[] row = new String[colCount];                 
+                for (int j = 1; j < colCount; j++) {     
+                    
+                    String columnName = rst.getMetaData().getColumnName(j);                    
+                    row[j-1] = rst.getString(columnName);                   
+                }                 
+                records.add(row);
+             }         
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnector.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error in retreveLargeDate :"+ex.getMessage());
+        }
+         return records;
+     }
+     
+     
     
 }

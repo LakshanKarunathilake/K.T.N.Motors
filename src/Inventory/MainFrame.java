@@ -15,7 +15,9 @@ import SalesReturn.SalesReturn;
 import Validation.StartUpValidation;
 import ViewManipulation.ViewManipulation;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Component;
 import java.awt.Point;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
@@ -41,6 +43,7 @@ import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.text.JTextComponent;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -809,7 +812,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         return_userName_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         return_userName_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
-        SalesReturnPanel.add(return_userName_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 510, 40));
+        SalesReturnPanel.add(return_userName_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 480, 40));
 
         jLabel46.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel46.setText("0");
@@ -825,6 +828,16 @@ public class MainFrame extends javax.swing.JFrame {
 
         return_userID_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         return_userID_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        return_userID_combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                return_userID_comboActionPerformed(evt);
+            }
+        });
+        return_userID_combo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                return_userID_comboKeyPressed(evt);
+            }
+        });
         SalesReturnPanel.add(return_userID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 200, 40));
 
         jLabel49.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -878,6 +891,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton4.setText("Select Invoice");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         SalesReturnPanel.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 210, 50));
 
         sales_return_subPanel.setLayout(new java.awt.CardLayout());
@@ -888,12 +906,19 @@ public class MainFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Item Number", "Description", "Cost", "Returned Qty", "Purchaised Qty", "Selection"
+                "Item Number", "UnitPrice", "TotalPrice", "Returnable", "Purchaised", "Selection"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, true, true
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -3219,10 +3244,27 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void Return_labelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Return_labelMouseClicked
         return_cancel_btn.setEnabled(false);
+        
+        ArrayList<JComboBox> combos = new ArrayList<JComboBox>();
+
+        combos.add(return_invoiceID_combo);
+        combos.add(return_userID_combo);
+        combos.add(return_userName_combo);
+        
+        ViewManipulation.emptyComboBoxes(combos);
+        
+        ButtonGroup return_yesno = new ButtonGroup();
+        return_yesno.add(return_no);
+        return_yesno.add(return_yes);
+        
         setDefaultDateRange(return_from_picker,return_to_picker,6);
         ViewManipulation.changePanel(MainChangeFrame, SalesReturnPanel);
-        sales_return=new SalesReturn(return_invoiceID_combo,return_userID_combo,return_userName_combo,connector);
-        sales_return.fillDataToCombo();
+        sales_return = new SalesReturn(return_invoiceID_combo,return_userID_combo,return_userName_combo,connector);        
+        sales_return.fillDataToCombo(); 
+        sales_return.changeTableView(return_item_table);
+        
+        
+        
     }//GEN-LAST:event_Return_labelMouseClicked
 
     private void return_noActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_noActionPerformed
@@ -3266,6 +3308,39 @@ public class MainFrame extends javax.swing.JFrame {
     private void return_search_item_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_search_item_comboActionPerformed
         
     }//GEN-LAST:event_return_search_item_comboActionPerformed
+
+    private void return_userID_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_userID_comboActionPerformed
+        
+    }//GEN-LAST:event_return_userID_comboActionPerformed
+
+    private void return_userID_comboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_return_userID_comboKeyPressed
+        
+        
+        
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER ){
+            if (((JTextComponent) ((JComboBox) ((Component) evt
+                    .getSource()).getParent()).getEditor()
+                    .getEditorComponent()).getText().isEmpty()) {
+                System.out.println("please dont make me blank");
+            }
+            
+            //        Populating the combobox and make them dropdown
+            String customer_id = (String) return_userID_combo.getSelectedItem();
+
+            String customer_name = searchRecord("users", "name", "userID", customer_id);
+            return_userName_combo.setSelectedItem(customer_name);
+            
+            return_invoiceID_combo.removeAllItems();
+            manipulation.getRecordsWithCondtion("orders", "orderID", "userID", customer_id, return_invoiceID_combo);
+            return_invoiceID_combo.showPopup();
+        }
+    }//GEN-LAST:event_return_userID_comboKeyPressed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        ViewManipulation.emptyTable(return_item_table);
+        String invoiceNo = String.valueOf(return_invoiceID_combo.getSelectedItem());
+        SalesReturn.getInvoiceRecords(invoiceNo, return_item_table, connector);
+    }//GEN-LAST:event_jButton4ActionPerformed
     
     
     public void fillInvoice(String invoiceID){
@@ -3275,9 +3350,9 @@ public class MainFrame extends javax.swing.JFrame {
         sales_CName_combo.setSelectedItem(connector.getRelavantRecord("users", "name", "userID", userID));
         
         
-        ArrayList itemNoList = new ArrayList();
-        ArrayList itemQtyList = new ArrayList();
-        ArrayList itemTotalList = new ArrayList();
+        ArrayList itemNoList; 
+        ArrayList itemQtyList; 
+        ArrayList itemTotalList; 
         itemNoList = connector.retreveDataColoumnWithCondition("orderitems", "itemNo", "orderID", invoiceID);
         itemQtyList = connector.retreveDataColoumnWithCondition("orderitems", "qty", "orderID", invoiceID);
         itemTotalList = connector.retreveDataColoumnWithCondition("orderitems", "total", "orderID", invoiceID);
@@ -3499,8 +3574,7 @@ public class MainFrame extends javax.swing.JFrame {
     
    
     
-    public String searchRecord(String tableName,String coloumnName1,String coloumnName2,String value){
-        
+    public String searchRecord(String tableName,String coloumnName1,String coloumnName2,String value){        
        return connector.getRelavantRecord(tableName, coloumnName1, coloumnName2, value);
     }
     
