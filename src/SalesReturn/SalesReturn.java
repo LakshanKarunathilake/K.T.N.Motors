@@ -49,9 +49,9 @@ public class SalesReturn {
        autoCombo2.setSearchableCombo(this.customer_no, true, "No Result Found");
        autoCombo3.setSearchableCombo(this.customer_name, true, "No Result Found");
        
-        ArrayList<String> myList = new ArrayList<String>();
+        ArrayList<String> myList = new ArrayList<>();
         //       Getting the value from a second table -- userID from the user table
-        ArrayList<String> secondTableCondition = new ArrayList<String>();
+        ArrayList<String> secondTableCondition = new ArrayList<>();
         
        myList.add("Orders");
        myList.add("orderID");
@@ -87,8 +87,6 @@ public class SalesReturn {
         
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
         
-        
-        
         ArrayList<String []> records = connector.retreveLargeDataSet(conditionCols, conditionVals);
         System.out.println("Array list : "+records.size());
         for (int i = 0; i < records.size(); i++) {
@@ -114,10 +112,13 @@ public class SalesReturn {
     }
     
     public void changeTableView(JTable table){
+        
+        //Changing the font of the table
         Font f = new Font("Arial", Font.BOLD, 14);
         JTableHeader header = table.getTableHeader();
         header.setFont(f);
         
+        //Defining the table lengths
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.getColumnModel().getColumn(0).setPreferredWidth(330);
         table.getColumnModel().getColumn(1).setPreferredWidth(155);
@@ -127,6 +128,8 @@ public class SalesReturn {
         table.getColumnModel().getColumn(5).setPreferredWidth(80);
         
     }
+    
+    
     
     
 }

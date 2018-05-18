@@ -10,6 +10,7 @@ import DataManipulation.DataManipulation;
 import Printing.PrintData;
 import Printing.Printsupport;
 import Printing.Printsupport.MyPrintable;
+import Sales.ItemSale;
 import SalesReturn.SalesReturn;
 
 import Validation.StartUpValidation;
@@ -17,7 +18,6 @@ import ViewManipulation.ViewManipulation;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
 import java.awt.Point;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
@@ -65,6 +65,7 @@ public class MainFrame extends javax.swing.JFrame {
     DataBaseConnector connector;
     DataManipulation manipulation;
     SalesReturn sales_return;
+    ItemSale item_sale;
     
     
     String report_folder_path = "C:\\kade-1.0\\src\\Reports";
@@ -1923,13 +1924,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_newBtnActionPerformed
 
     private void SalesLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalesLabelMouseClicked
-        MainChangeFrame.removeAll();
-        MainChangeFrame.repaint();
-        MainChangeFrame.revalidate();
-
-        MainChangeFrame.add(SalesPanel);
-        MainChangeFrame.repaint();
-        MainChangeFrame.revalidate();
+                
+        ViewManipulation.changePanel(MainChangeFrame, SalesPanel);
         
         sales_new_btn.requestFocusInWindow();
         sales_InvoiceID_txt.setEditable(false);
@@ -2241,12 +2237,19 @@ public class MainFrame extends javax.swing.JFrame {
         makeAllSalesComponents(true);
         sales_save_btn.setEnabled(true);
         sales_print_btn.setEnabled(true);
-        sales_CID_combo.removeAllItems();
-        sales_CName_combo.removeAllItems();
-        sales_itemno_combo.removeAllItems();
-        sales_item_name_combo.removeAllItems();
+        
+        ArrayList<JComboBox> emptyCombos = new ArrayList<JComboBox>();
+        emptyCombos.add(sales_CID_combo);
+        emptyCombos.add(sales_CName_combo);
+        emptyCombos.add(sales_item_name_combo);
+        emptyCombos.add(sales_itemno_combo);
+        
+        ViewManipulation.emptyComboBoxes(emptyCombos);
+        
+        item_sale = new ItemSale(sales_itemno_combo, sales_item_name_combo, connector);
+       
         sales_discount_txt.setText("0");
-        newSale();                
+//        newSale();                
         sales_CID_combo.requestFocusInWindow();
         sales_new_btn.setEnabled(false);
         sales_save_btn.setEnabled(false);
@@ -2258,10 +2261,9 @@ public class MainFrame extends javax.swing.JFrame {
         sales_discount_txt.setEditable(true);
         sales_grand_txt.setEditable(true);
         
-        DefaultTableModel model = (DefaultTableModel) sales_item_table.getModel();
-        for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
+        
+        ViewManipulation.emptyTable(sales_item_table);
+        
         
     }//GEN-LAST:event_sales_new_btnActionPerformed
 
@@ -3540,10 +3542,10 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     public void newSale(){
-         AutoCompleteDecorator.decorate(sales_CID_combo);
-         AutoCompleteDecorator.decorate(sales_CName_combo);
-         AutoCompleteDecorator.decorate(sales_item_name_combo);
-         AutoCompleteDecorator.decorate(sales_itemno_combo);
+        AutoCompleteDecorator.decorate(sales_CID_combo);
+        AutoCompleteDecorator.decorate(sales_CName_combo);
+        AutoCompleteDecorator.decorate(sales_item_name_combo);
+        AutoCompleteDecorator.decorate(sales_itemno_combo);
          
        
         manipulation.getRecords("users", "userID",sales_CID_combo);
@@ -3672,11 +3674,11 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     public static double round(double value, int places) {
-    if (places < 0) throw new IllegalArgumentException();
+        if (places < 0) throw new IllegalArgumentException();
 
-    BigDecimal bd = new BigDecimal(value);
-    bd = bd.setScale(places, RoundingMode.HALF_UP);
-    return bd.doubleValue();
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
     
     public String TableToDB(){

@@ -8,8 +8,10 @@ package ViewManipulation;
 import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -39,5 +41,20 @@ public class ViewManipulation {
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             model.removeRow(i);
         }        
+    }
+    
+    public static void makeAllComponents(ArrayList<Component> comps,boolean enabled){
+        for (int i = 0; i < comps.size(); i++) {
+            Component comp = comps.get(i);
+            comp.setEnabled(enabled);
+        }
+    }
+    
+    public static void emptyTextBoxes(ArrayList<JTextField> texts){
+        for (int i = 0; i < texts.size(); i++) {
+            JTextField text = texts.get(i);
+            text.setText("");
+            
+        }
     }
 }
