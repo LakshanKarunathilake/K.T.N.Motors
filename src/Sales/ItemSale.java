@@ -12,8 +12,8 @@ import java.awt.Component;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
 /**
@@ -23,25 +23,34 @@ import javax.swing.table.TableModel;
 public class ItemSale {
     JComboBox itemNo;
     JComboBox category;
+    JComboBox customerID;
+    JComboBox customerName;
     DataBaseConnector connector;
     JTable table;
     
-    public ItemSale(JComboBox itemNo,JComboBox category,DataBaseConnector connector){
+    public ItemSale(JComboBox itemNo,JComboBox category,JComboBox customerID,JComboBox customerName,DataBaseConnector connector){
         this.itemNo = itemNo;
         this.category = category;
         this.connector = connector;
+        this.customerID = customerID;
+        this.customerName = customerName;
     }
     
     private void autoCompleteCombo() {
         MyCombo autoCombo1 = new MyCombo();
         MyCombo autoCombo2 = new MyCombo();
+        MyCombo autoCombo3 = new MyCombo();
+        MyCombo autoCombo4 = new MyCombo();
         
 
         autoCombo1.setSearchableCombo(this.itemNo, true, "No Result Found");
         autoCombo2.setSearchableCombo(this.category, true, "No Result Found");
+        autoCombo3.setSearchableCombo(this.customerID, true, "No Result Found");
+        autoCombo4.setSearchableCombo(this.customerName, true, "No Result Found");
        
 
         ArrayList<String> myList = new ArrayList<>();
+        
         //       Getting the value from a second table -- userID from the user table
         
         myList.add("items");
@@ -49,6 +58,15 @@ public class ItemSale {
         myList.add("ITCat");
 
         autoCombo2.populateSecondCombo(itemNo, category, connector, myList, null, false);
+        
+        myList.set(0, "users");
+        myList.set(1, "name");
+        myList.set(2, "userID");
+        autoCombo3.populateSecondCombo(customerID, customerName, connector, myList, null, false);
+        
+        myList.set(1, "userID");
+        myList.set(2, "name");
+        autoCombo4.populateSecondCombo(customerName, customerID, connector, myList, null, false);
    
     }
     
@@ -56,14 +74,17 @@ public class ItemSale {
         
         DataManipulation manipulation = new DataManipulation(connector); 
         
-        manipulation.getRecords("items", "ITCode", itemNo);
-        manipulation.getRecords("items", "ITCat", category);
+//        manipulation.getRecords("items", "ITCode", itemNo);
+//        manipulation.getRecords("items", "ITCat", category);
+        manipulation.getRecords("users", "userID", customerID);
+        manipulation.getRecords("users", "name", customerName);
+        
         
         
         autoCompleteCombo();
     }
     
-    public String generateSaleID(){
+    public static String generateSaleID(DataBaseConnector connector){
         String lastID = connector.retreveLastRecord("Orders","orderID", "orderDate");
         String parts[] = lastID.split("A");
         int currentID = Integer.parseInt(parts[1]);
@@ -76,7 +97,13 @@ public class ItemSale {
         return "A"+idFormatted;
     }
     
-        public String searchRecord(String tableName, String coloumnName1, String coloumnName2, String value) {
+    public static void setSaleID(JTextField txt,DataBaseConnector connector){
+        String ID = generateSaleID(connector);
+        txt.setText(ID);
+        txt.setEditable(false);
+    }
+    
+    public String searchRecord(String tableName, String coloumnName1, String coloumnName2, String value) {
         return connector.getRelavantRecord(tableName, coloumnName1, coloumnName2, value);
     }
 

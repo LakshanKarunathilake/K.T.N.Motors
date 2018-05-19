@@ -342,9 +342,12 @@ public class DataBaseConnector {
         return null;
     }
      
-     public ArrayList retreveLargeDataSet(ArrayList conditionColoumns,ArrayList conditionVals){
+     
+     //Used to retreve large table like records. condition coloumns and values according to that are sent in seperate arraylists
+     //And arrayList containing array of row values are returned
+     public ArrayList retreveLargeDataSet(ArrayList conditionColoumns,ArrayList conditionVals,String table){
          
-        ArrayList<String []> records = new ArrayList();
+        ArrayList<String []> records = new ArrayList<>();
         String condition = "";
         
          for (int i = 0; i < conditionColoumns.size(); i++) {
@@ -358,7 +361,7 @@ public class DataBaseConnector {
          }
          
          
-         String sql = "Select * from orderitems where "+condition;
+         String sql = "Select * from "+table+" where "+condition;
          System.out.println("SQL : "+sql);
          
          try {

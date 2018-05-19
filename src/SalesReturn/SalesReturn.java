@@ -87,7 +87,7 @@ public class SalesReturn {
         
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
         
-        ArrayList<String []> records = connector.retreveLargeDataSet(conditionCols, conditionVals);
+        ArrayList<String []> records = connector.retreveLargeDataSet(conditionCols, conditionVals,"orderItems");
         System.out.println("Array list : "+records.size());
         for (int i = 0; i < records.size(); i++) {
             Object rowData[] = new Object[5];
@@ -129,7 +129,28 @@ public class SalesReturn {
         
     }
     
+    public void selectAllInTable(JTable table){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            model.setValueAt(true, i, 5);
+        }
+        
+    }
     
-    
+    public static void searchInvoice(JComboBox combo,JTable table,DataBaseConnector connector){
+        //First Have to clear comboboxes for replication of data
+        ArrayList<JComboBox> combos = new ArrayList<JComboBox>();
+        combos.add(combo);
+
+        ViewManipulation.ViewManipulation.emptyComboBoxes(combos);
+        //Populating combo with values
+        DataManipulation dm = new DataManipulation(connector);
+        dm.getRecords("item", "itemNo", combo);
+        //Make the combo autocomplete
+        MyCombo autoCombo = new MyCombo();
+        autoCombo.setSearchableCombo(combo, true, "No result Found");
+        
+        autoCombo.populateAJTable(combo, table, connector);
+    }
     
 }

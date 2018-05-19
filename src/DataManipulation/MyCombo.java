@@ -17,7 +17,9 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.JComboBox;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -107,6 +109,38 @@ public class MyCombo {
             }            
             });   
         
+    }
+    
+    public void populateAJTable(final JComboBox combo,final JTable table,final DataBaseConnector connector){
+        txt = (JTextField) combo.getEditor().getEditorComponent();
+        txt.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt) {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    String itemNo = String.valueOf(combo.getSelectedItem());
+                    
+                    ArrayList<String> conditionCols = new ArrayList<>();
+                    ArrayList<String> conditionVals = new ArrayList<>();
+                    
+                    conditionCols.add("itemNo");
+                    conditionVals.add(itemNo);                    
+                    
+                    ArrayList<String[]> list = connector.retreveLargeDataSet(conditionCols,conditionVals,"orderItems");
+                    
+                    DefaultTableModel model = (DefaultTableModel) table.getModel();                    
+                    
+                    for (int i = 0; i < list.size(); i++) {
+                        String [] row = list.get(i);
+                        Object [] rowData = new Object[5];
+                        rowData[0] = row[1];                        
+                        rowData[1] = connector.getRelavantRecord("orders", "orderDate", "orderID", row[1]);
+                        rowData[2] = row[2];
+                        rowData[3] = row[4];
+                        
+                        model.addRow(rowData);                        
+                    }
+                }
+            }
+        });
     }
     
 }
