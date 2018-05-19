@@ -118,6 +118,8 @@ public class MyCombo {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                     String itemNo = String.valueOf(combo.getSelectedItem());
                     
+                    ViewManipulation.ViewManipulation.emptyTable(table);
+                    
                     ArrayList<String> conditionCols = new ArrayList<>();
                     ArrayList<String> conditionVals = new ArrayList<>();
                     

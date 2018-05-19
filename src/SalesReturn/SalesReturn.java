@@ -9,11 +9,15 @@ import DBController.DataBaseConnector;
 import DataManipulation.DataManipulation;
 import DataManipulation.MyCombo;
 import java.awt.Font;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -151,6 +155,22 @@ public class SalesReturn {
         autoCombo.setSearchableCombo(combo, true, "No result Found");
         
         autoCombo.populateAJTable(combo, table, connector);
+        
+        eventForTable(table);
+        
+    }
+    
+    private static void eventForTable(JTable table){
+        table.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent mouseEvent) {
+                JTable table = (JTable) mouseEvent.getSource();
+                Point point = mouseEvent.getPoint();
+                int row = table.rowAtPoint(point);
+                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                    JOptionPane.showMessageDialog(null, "clicked at "+row);
+                }
+            }
+        });
     }
     
 }
