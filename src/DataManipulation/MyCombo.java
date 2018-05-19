@@ -135,6 +135,7 @@ public class MyCombo {
                         rowData[1] = connector.getRelavantRecord("orders", "orderDate", "orderID", row[1]);
                         rowData[2] = row[2];
                         rowData[3] = row[4];
+                        System.out.println("Row 4 :"+ row[4]);
                         
                         model.addRow(rowData);                        
                     }

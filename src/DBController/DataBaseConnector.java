@@ -371,10 +371,11 @@ public class DataBaseConnector {
                         
              while(rst.next()){
                 String[] row = new String[colCount];                 
-                for (int j = 1; j < colCount; j++) {     
+                for (int j = 1; j < colCount+1; j++) {     
                     
                     String columnName = rst.getMetaData().getColumnName(j);                    
-                    row[j-1] = rst.getString(columnName);                   
+                    row[j-1] = rst.getString(columnName); 
+                    System.out.println("Row in Connector "+(j-1)+" : "+row[j-1]);
                 }                 
                 records.add(row);
              }         
