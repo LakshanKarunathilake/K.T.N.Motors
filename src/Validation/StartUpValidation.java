@@ -27,7 +27,7 @@ public class StartUpValidation {
     
     public boolean validateDate(){
         Date d = new Date();
-        String last_date_string = db.retreveLastRecord("orders", "orderDate", "orderDate");
+        String last_date_string = db.retreveLastRecord("invoices", "orderDate", "orderDate");
         if(last_date_string !=null){
             Timestamp last_date_ts = Timestamp.valueOf(last_date_string);
             System.out.println("Last Order Placed date is : " + last_date_string);

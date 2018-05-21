@@ -53,7 +53,7 @@ public class DataBaseConnector {
     
     public String retreveLastRecord(String tableName,String coloumn,String orderBy){
        String sql = "SELECT "+coloumn+" FROM "+tableName+" ORDER BY "+orderBy+" DESC LIMIT 1;" ;
-        
+        System.out.println("Sql :" +sql);
         String ID=null;
        try {
             statement = conn.createStatement();
@@ -205,7 +205,7 @@ public class DataBaseConnector {
             if (rst.next()) {
                 ResultSetMetaData meta = rst.getMetaData();
                 
-                for (int i = 1; i<meta.getColumnCount(); i++) {
+                for (int i = 1; i<=meta.getColumnCount(); i++) {
                     list.add(rst.getString(i));
                 }                     
             }

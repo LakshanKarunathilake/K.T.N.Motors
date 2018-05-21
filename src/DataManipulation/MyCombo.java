@@ -12,6 +12,7 @@ package DataManipulation;
  */
 
 import DBController.DataBaseConnector;
+import java.awt.Component;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -32,6 +33,9 @@ public class MyCombo {
     private  ArrayList<String> ar;
     private  JTextField txt;
     public  KeyEvent eventEnter;
+    Component comp;
+    
+       
 
     public void setSearchableCombo(final JComboBox cmb, boolean mustSort, final String noReultsText) {
         ar = new ArrayList<String>();
@@ -78,7 +82,7 @@ public class MyCombo {
                     cmb.hidePopup();
                 } else if (key == KeyEvent.VK_ENTER && cmb.getSelectedIndex() == -1) {                    
                     if (cmb.getItemCount() == 1 && !cmb.getItemAt(0).equals(noReultsText)) {                        
-                        cmb.setSelectedIndex(0);
+                        cmb.setSelectedIndex(0);                        
                     } else if (cmb.getItemCount() > 1) {
                         cmb.setSelectedIndex(0);
                     }                  
@@ -141,6 +145,25 @@ public class MyCombo {
                         
                         model.addRow(rowData);                        
                     }
+                }
+            }
+        });
+    }
+    
+    int focusCount = 0;
+    
+    public void moveFocusToNext(final JComboBox combo,final Component comp){
+        txt = (JTextField) combo.getEditor().getEditorComponent();
+        txt.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt) {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    focusCount++;
+                    if(txt.isFocusOwner()){
+                        System.out.println("TRue : "+focusCount);
+                        comp.requestFocusInWindow();
+                        focusCount = 0;
+                    }
+                    
                 }
             }
         });

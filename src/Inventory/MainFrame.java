@@ -10,7 +10,10 @@ import DataManipulation.DataManipulation;
 import Printing.PrintData;
 import Printing.Printsupport;
 import Printing.Printsupport.MyPrintable;
-import Sales.ItemSale;
+import Sales.Invoice;
+import Sales.InvoiceSearch;
+import Sales.InvoiceToDB;
+import Sales.ItemToTable;
 import SalesReturn.SalesReturn;
 
 import Validation.StartUpValidation;
@@ -65,7 +68,7 @@ public class MainFrame extends javax.swing.JFrame {
     DataBaseConnector connector;
     DataManipulation manipulation;
     SalesReturn sales_return;
-    ItemSale item_sale;
+    Invoice item_sale;
     
     
     String report_folder_path = "C:\\kade-1.0\\src\\Reports";
@@ -101,8 +104,22 @@ public class MainFrame extends javax.swing.JFrame {
         sales_save_btn.setEnabled(false);
         sales_print_btn.setEnabled(false);
         
-        AutoCompleteDecorator.decorate(update_itemNo_combo);
-                
+        
+        ArrayList<JComboBox> emptyCombos = new ArrayList<JComboBox>();
+        emptyCombos.add(sales_CID_combo);
+        emptyCombos.add(sales_CName_combo);
+        emptyCombos.add(sales_item_name_combo);
+        emptyCombos.add(sales_itemno_combo);
+
+        ViewManipulation.emptyComboBoxes(emptyCombos);
+        
+        Invoice.changeTableView(sales_item_table);
+        
+        item_sale = new Invoice(sales_itemno_combo, sales_item_name_combo, sales_CID_combo, sales_CName_combo,sales_qty_Txt, connector);
+        item_sale.fillDataToCombo();
+        
+        Invoice.setSaleID(sales_InvoiceID_txt, connector);
+        
          
     }
 
@@ -158,6 +175,8 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         sales_remove_btn = new javax.swing.JButton();
+        sales_unit_Txt = new javax.swing.JTextField();
+        jLabel55 = new javax.swing.JLabel();
         AddUserPannel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         userIDTxt = new javax.swing.JTextField();
@@ -460,7 +479,7 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_itemno_comboKeyTyped(evt);
             }
         });
-        SalesPanel.add(sales_itemno_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 310, 50));
+        SalesPanel.add(sales_itemno_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 250, 50));
 
         jButton14.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jButton14.setText("Search Item");
@@ -477,22 +496,26 @@ public class MainFrame extends javax.swing.JFrame {
         SalesPanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 120, 20));
 
         sales_item_name_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        sales_item_name_combo.setFocusable(false);
         sales_item_name_combo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sales_item_name_comboActionPerformed(evt);
             }
         });
-        SalesPanel.add(sales_item_name_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, 310, 50));
+        SalesPanel.add(sales_item_name_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 260, 50));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel17.setText("Description");
-        SalesPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, 120, 20));
+        jLabel17.setText("Category");
+        SalesPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 120, 20));
 
         sales_qty_Txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         sales_qty_Txt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 sales_qty_TxtFocusGained(evt);
+            }
+        });
+        sales_qty_Txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sales_qty_TxtActionPerformed(evt);
             }
         });
         sales_qty_Txt.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -503,11 +526,11 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_qty_TxtKeyTyped(evt);
             }
         });
-        SalesPanel.add(sales_qty_Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 110, 50));
+        SalesPanel.add(sales_qty_Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 90, 50));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel18.setText("Qty Need");
-        SalesPanel.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 210, -1, -1));
+        jLabel18.setText("Unit");
+        SalesPanel.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, -1, -1));
 
         sales_available_qty_txt.setEditable(false);
         sales_available_qty_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -521,11 +544,11 @@ public class MainFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Part Number", "Description", "UnitPrice", "Qty", "Total"
+                "Part Number", "Description", "Unit", "UnitPrice", "Qty", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -687,6 +710,32 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         SalesPanel.add(sales_remove_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 660, 130, 50));
+
+        sales_unit_Txt.setEditable(false);
+        sales_unit_Txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        sales_unit_Txt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                sales_unit_TxtFocusGained(evt);
+            }
+        });
+        sales_unit_Txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sales_unit_TxtActionPerformed(evt);
+            }
+        });
+        sales_unit_Txt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sales_unit_TxtKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                sales_unit_TxtKeyTyped(evt);
+            }
+        });
+        SalesPanel.add(sales_unit_Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 240, 90, 50));
+
+        jLabel55.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel55.setText("Qty Need");
+        SalesPanel.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, -1, -1));
 
         MainChangeFrame.add(SalesPanel, "card2");
 
@@ -2256,18 +2305,19 @@ public class MainFrame extends javax.swing.JFrame {
         sales_save_btn.setEnabled(true);
         sales_print_btn.setEnabled(true);
         
-        ArrayList<JComboBox> emptyCombos = new ArrayList<JComboBox>();
-        emptyCombos.add(sales_CID_combo);
-        emptyCombos.add(sales_CName_combo);
-        emptyCombos.add(sales_item_name_combo);
-        emptyCombos.add(sales_itemno_combo);
-        
-        ViewManipulation.emptyComboBoxes(emptyCombos);
-        
-        item_sale = new ItemSale(sales_itemno_combo, sales_item_name_combo,sales_CID_combo,sales_CName_combo, connector);
-        item_sale.fillDataToCombo();
-        ItemSale.setSaleID(sales_InvoiceID_txt, connector);
-       
+//        ArrayList<JComboBox> emptyCombos = new ArrayList<JComboBox>();
+//        emptyCombos.add(sales_CID_combo);
+//        emptyCombos.add(sales_CName_combo);
+//        emptyCombos.add(sales_item_name_combo);
+//        emptyCombos.add(sales_itemno_combo);
+//        
+//        ViewManipulation.emptyComboBoxes(emptyCombos);
+//        
+//        item_sale = new ItemSale(sales_itemno_combo, sales_item_name_combo,sales_CID_combo,sales_CName_combo, connector);
+//        item_sale.fillDataToCombo();
+//        ItemSale.setSaleID(sales_InvoiceID_txt, connector);
+        sales_InvoiceID_txt.setText(item_sale.generateSaleID(connector));
+
         sales_discount_txt.setText("0");
 //        newSale();                
         sales_CID_combo.requestFocusInWindow();
@@ -2296,7 +2346,7 @@ public class MainFrame extends javax.swing.JFrame {
             
             String userID = (String) sales_CID_combo.getSelectedItem();
           
-            String userName = searchRecord("customers", "name", "customer_code", userID);
+            String userName = connector.getRelavantRecord("customers", "name", "customer_code", userID);
             
             sales_CName_combo.setSelectedItem(userName);
         
@@ -2322,7 +2372,7 @@ public class MainFrame extends javax.swing.JFrame {
            
         String name = (String) sales_CName_combo.getSelectedItem();
         
-        String userID = searchRecord("customers", "customer_code", "name", name);
+        String userID = connector.getRelavantRecord("customers", "customer_code", "name", name);
        
         sales_CID_combo.setSelectedItem(userID);
     }//GEN-LAST:event_sales_CName_comboActionPerformed
@@ -2339,31 +2389,33 @@ public class MainFrame extends javax.swing.JFrame {
     private void sales_itemno_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_itemno_comboActionPerformed
         String itemNo = (String) sales_itemno_combo.getSelectedItem();
         
-        String description = searchRecord("items", "category", "item_code", itemNo); 
+        String description = connector.getRelavantRecord("items", "category", "item_code", itemNo); 
         sales_item_name_combo.setSelectedItem(description);
         
         //Qty Adding to the text Box
-        String qty = searchRecord("items", "stock", "item_code", itemNo);    
+        String qty = connector.getRelavantRecord("items", "stock", "item_code", itemNo);    
         sales_available_qty_txt.setText(qty);
+        
+        String unit = connector.getRelavantRecord("items","unit","item_code",itemNo);
+        sales_unit_Txt.setText(unit);
         
     }//GEN-LAST:event_sales_itemno_comboActionPerformed
 
     private void sales_qty_TxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_qty_TxtKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            if(sales_qty_Txt.getText().equals("")){
-                
-            }else{
-                String itemNo = (String) sales_itemno_combo.getSelectedItem();
-
+            ItemToTable toTable = new ItemToTable(sales_itemno_combo, sales_qty_Txt, sales_available_qty_txt, sales_total_txt, sales_discount_txt, sales_grand_txt, sales_item_table, connector);
+            
+            if(!sales_qty_Txt.getText().equals("")){
                 try {
-                    if (itemToTable()) {
+                    if (toTable.itemToTable()) {
                         sales_itemno_combo.requestFocusInWindow();
-                        calculatetotal();
+                        toTable.calculatetotal();
                         sales_save_btn.setEnabled(true);
 
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Exception in table adding :" + e.getMessage() + " Error line : ");
+                    Logger.getLogger(DataBaseConnector.class.getName()).log(Level.SEVERE, null, e);
                 }
             }
         }
@@ -2500,11 +2552,16 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void sales_save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_save_btnActionPerformed
         calculateGrandTotal();
-        if(validUserPurchaise()){
-            String msg = TableToDB();
+        
+        InvoiceToDB toDB = new InvoiceToDB(sales_CID_combo, sales_InvoiceID_txt, sales_item_table, connector);
+        toDB.setValuesForInsertOrder(sales_total_txt, sales_discount_txt, sales_grand_txt);
+        
+        if(toDB.validUserPurchaise()){
+            String msg = toDB.TableToDB();
             String error1 = "Enter completed";
             String error2 = "OrderItemsNotDoneButOrderDone";
             String error3 = "Complete failure";
+            
             if(msg.equals(error1)){
                JOptionPane.showMessageDialog(null, "The record is added Successfully", "Successful", JOptionPane.INFORMATION_MESSAGE);
 
@@ -3094,18 +3151,12 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_ItemNoTxtFocusLost
 
     private void sales_searchI_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_searchI_btn1ActionPerformed
-//        search_invoice instance = new search_invoice(connector);
-//        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-//        instance.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-//        instance.setVisible(true);
-//        setDefaultCloseOperation(instance.DISPOSE_ON_CLOSE);
+        InvoiceSearch search = new InvoiceSearch(sales_InvoiceID_txt, sales_CID_combo, sales_CName_combo, sales_item_table, sales_total_txt, sales_discount_txt, sales_grand_txt, connector);
         
-
-        JComboBox search_invoiceID = new JComboBox();
-       
+        JComboBox search_invoiceID = new JComboBox();       
         AutoCompleteDecorator.decorate(search_invoiceID);
 
-        manipulation.getRecords("orders", "orderID", search_invoiceID);
+        manipulation.getRecords("invoices", "invoice_id", search_invoiceID);
         String invoiceID="";
         
        
@@ -3117,7 +3168,7 @@ public class MainFrame extends javax.swing.JFrame {
         int result = JOptionPane.showConfirmDialog(null, inputs, "My custom dialog", JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             invoiceID = String.valueOf(search_invoiceID.getSelectedItem());
-            fillInvoice(invoiceID);
+            search.fillInvoice(invoiceID);
             sales_save_btn.setEnabled(false);
             sales_remove_btn.setEnabled(false);
             sales_total_txt.setEditable(false);
@@ -3316,11 +3367,11 @@ public class MainFrame extends javax.swing.JFrame {
     private void return_invoiceID_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_invoiceID_comboActionPerformed
         String invoice_id = (String) return_invoiceID_combo.getSelectedItem();
        
-        String customer_id = searchRecord("orders", "userID", "orderID", invoice_id);
+        String customer_id = connector.getRelavantRecord("orders", "userID", "orderID", invoice_id);
         return_userID_combo.setSelectedItem(customer_id);
 
         //Qty Adding to the text Box
-        String customer_name= searchRecord("users", "name", "userID",customer_id);
+        String customer_name= connector.getRelavantRecord("users", "name", "userID",customer_id);
         return_userName_combo.setSelectedItem(customer_name);
     }//GEN-LAST:event_return_invoiceID_comboActionPerformed
 
@@ -3350,7 +3401,7 @@ public class MainFrame extends javax.swing.JFrame {
             //        Populating the combobox and make them dropdown
             String customer_id = (String) return_userID_combo.getSelectedItem();
 
-            String customer_name = searchRecord("users", "name", "userID", customer_id);
+            String customer_name = connector.getRelavantRecord("users", "name", "userID", customer_id);
             return_userName_combo.setSelectedItem(customer_name);
             
             return_invoiceID_combo.removeAllItems();
@@ -3372,6 +3423,26 @@ public class MainFrame extends javax.swing.JFrame {
     private void selectAll_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectAll_buttonActionPerformed
         sales_return.selectAllInTable(return_item_table);
     }//GEN-LAST:event_selectAll_buttonActionPerformed
+
+    private void sales_qty_TxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_qty_TxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sales_qty_TxtActionPerformed
+
+    private void sales_unit_TxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sales_unit_TxtFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sales_unit_TxtFocusGained
+
+    private void sales_unit_TxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_unit_TxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sales_unit_TxtActionPerformed
+
+    private void sales_unit_TxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_unit_TxtKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sales_unit_TxtKeyPressed
+
+    private void sales_unit_TxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_unit_TxtKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sales_unit_TxtKeyTyped
     
     
     public void fillInvoice(String invoiceID){
@@ -3605,9 +3676,7 @@ public class MainFrame extends javax.swing.JFrame {
     
    
     
-    public String searchRecord(String tableName,String coloumnName1,String coloumnName2,String value){        
-       return connector.getRelavantRecord(tableName, coloumnName1, coloumnName2, value);
-    }
+    
     
     public ArrayList getRowInATable(String tableName,String coloumn,String condition){
         return connector.readRow(tableName, coloumn, condition);
@@ -3698,7 +3767,7 @@ public class MainFrame extends javax.swing.JFrame {
         double total = Double.parseDouble(sales_total_txt.getText());
         double discount = Double.parseDouble(sales_discount_txt.getText());
         double grand = total-(total*(discount/100));
-        grand = round(grand,3);
+        grand = round(grand,2);
         sales_grand_txt.setText(String.valueOf(grand));
     }
     
@@ -3804,13 +3873,13 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     public void emptyFieldsInSales(){
-        sales_InvoiceID_txt.setText("");
-        sales_CID_combo.setSelectedItem("");
-        sales_CName_combo.setSelectedItem("");
-        sales_itemno_combo.setSelectedItem("");
-        sales_item_name_combo.setSelectedItem("");
+//        sales_InvoiceID_txt.setText("");
+//        sales_CID_combo.setSelectedItem("");
+//        sales_CName_combo.setSelectedItem("");
+//        sales_itemno_combo.setSelectedItem("");
+//        sales_item_name_combo.setSelectedItem("");
         sales_qty_Txt.setText("");
-        sales_available_qty_txt.setText("");
+//        sales_available_qty_txt.setText("");
         sales_total_txt.setText("");
         sales_grand_txt.setText("");
         sales_discount_txt.setText("");
@@ -4011,6 +4080,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -4068,6 +4138,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton sales_searchI_btn1;
     private javax.swing.JButton sales_search_user_btn;
     private javax.swing.JTextField sales_total_txt;
+    private javax.swing.JTextField sales_unit_Txt;
     private javax.swing.JButton saveBtn;
     private javax.swing.JToggleButton selectAll_button;
     private javax.swing.JLabel updateQtylbl;
