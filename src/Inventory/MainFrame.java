@@ -2337,14 +2337,14 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sales_itemno_comboKeyPressed
 
     private void sales_itemno_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_itemno_comboActionPerformed
-//        String itemNo = (String) sales_itemno_combo.getSelectedItem();
-//        
-//        String description = searchRecord("items", "category", "item_code", itemNo); 
-//        sales_item_name_combo.setSelectedItem(description);
-//        
-//        //Qty Adding to the text Box
-//        String qty = searchRecord("items", "stock", "item_code", itemNo);    
-//        sales_available_qty_txt.setText(qty);
+        String itemNo = (String) sales_itemno_combo.getSelectedItem();
+        
+        String description = searchRecord("items", "category", "item_code", itemNo); 
+        sales_item_name_combo.setSelectedItem(description);
+        
+        //Qty Adding to the text Box
+        String qty = searchRecord("items", "stock", "item_code", itemNo);    
+        sales_available_qty_txt.setText(qty);
         
     }//GEN-LAST:event_sales_itemno_comboActionPerformed
 

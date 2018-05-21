@@ -172,13 +172,16 @@ public class DataBaseConnector {
     }
     
     public String getRelavantRecord(String tableName,String columnName1,String columnName2,String value){
-        String sql = "Select "+columnName1+" from "+tableName+" where "+columnName2+" like "+"\""+value+"\"";
-        
+//        String sql = "Select "+columnName1+" from "+tableName+" where "+columnName2+" like "+"'"+value+"\"";
+        String sql = "Select "+columnName1+" from "+tableName+" where "+columnName2+"  like ?";
         
         String record=null;
         try {
-            statement = conn.createStatement();
-            rst = statement.executeQuery(sql);
+            
+            pst = conn.prepareStatement(sql);            
+            pst.setString(1, value);
+            System.out.println("SQL : "+pst);
+            rst =  pst.executeQuery();      
             
             if(rst.next()){
                 record = rst.getString(columnName1);
@@ -259,12 +262,17 @@ public class DataBaseConnector {
     }
     
     public ArrayList retreveDataColoumnWithCondition(String tableName,String coloumnName,String coloumn2,String condition){
-        String sql = "SELECT "+coloumnName+" from "+tableName+" where "+coloumn2+" like " + "\""+condition+ "\"";
+        String sql = "SELECT "+coloumnName+" from "+tableName+" where "+coloumn2+" like ?";
         System.out.println("SQL" + sql);
         
         try {
-            statement = conn.createStatement();
-            rst = statement.executeQuery(sql);
+            pst = conn.prepareStatement(sql);            
+            pst.setString(1, condition);
+            
+            rst = pst.executeQuery();
+            
+//            statement = conn.createStatement();
+//            rst = statement.executeQuery(sql);
             ArrayList list = new ArrayList();
             while(rst.next()){
                 list.add(rst.getString(coloumnName));                
