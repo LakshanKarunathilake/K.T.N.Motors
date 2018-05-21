@@ -81,18 +81,21 @@ public class Invoice {
    
     }
     
-    public void  fillDataToCombo() {
+    public ArrayList[]  fillDataToCombo() {
+        
+        ArrayList[] lists = new ArrayList[2];
         
         DataManipulation manipulation = new DataManipulation(connector); 
         
-        manipulation.getRecords("items", "item_code", itemNo);
-        manipulation.getRecords("items", "category", category);
+        lists[0] = manipulation.getRecords("items", "item_code", itemNo);
+        lists[1] = manipulation.getRecords("items", "category", category);
         manipulation.getRecords("customers", "customer_code", customerID);
         manipulation.getRecords("customers", "name", customerName);
         
         
         
         autoCompleteCombo();
+        return lists;
     }
     
     public static String generateSaleID(DataBaseConnector connector){

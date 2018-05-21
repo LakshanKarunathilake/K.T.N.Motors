@@ -53,7 +53,7 @@ public class DataBaseConnector {
     
     public String retreveLastRecord(String tableName,String coloumn,String orderBy){
        String sql = "SELECT "+coloumn+" FROM "+tableName+" ORDER BY "+orderBy+" DESC LIMIT 1;" ;
-        System.out.println("Sql :" +sql);
+        
         String ID=null;
        try {
             statement = conn.createStatement();
@@ -94,7 +94,7 @@ public class DataBaseConnector {
         }
         
         String sql = "INSERT INTO "+tableName+" values("+values+")";
-        System.out.println("SQL : "+sql);
+       
         
         try {
             pst = conn.prepareStatement(sql);
@@ -136,7 +136,7 @@ public class DataBaseConnector {
         
         
         String sql = "INSERT INTO "+tableName+"("+values1+") values("+values2+")";
-        System.out.println("SQL : "+sql);
+        
         try {
             statement.executeUpdate(sql);
             return true;
@@ -180,7 +180,7 @@ public class DataBaseConnector {
             
             pst = conn.prepareStatement(sql);            
             pst.setString(1, value);
-            System.out.println("SQL : "+pst);
+            
             rst =  pst.executeQuery();      
             
             if(rst.next()){
@@ -223,7 +223,7 @@ public class DataBaseConnector {
                 + "SET "+coloumn2+"='"+value+"'\n"
                 + "WHERE "+coloumnName+" like "+"\""+condition+"\"";
         
-        System.out.println("SQL query : "+sql+"\n");
+        
         try {
             statement.executeUpdate(sql);
             return true;
@@ -250,7 +250,7 @@ public class DataBaseConnector {
                 + "SET " + value+ "\n"
                 + "WHERE " + coloumnName + " like " + "\"" + condition + "\"";
 
-        System.out.println("SQL query : " + sql + "\n");
+        
         try {
             statement.executeUpdate(sql);
             return true;
@@ -263,7 +263,7 @@ public class DataBaseConnector {
     
     public ArrayList retreveDataColoumnWithCondition(String tableName,String coloumnName,String coloumn2,String condition){
         String sql = "SELECT "+coloumnName+" from "+tableName+" where "+coloumn2+" like ?";
-        System.out.println("SQL" + sql);
+        
         
         try {
             pst = conn.prepareStatement(sql);            
@@ -293,7 +293,7 @@ public class DataBaseConnector {
     public ArrayList retreveDataColoumnWithTwoCondition(String tableName,String coloumnName,String coloumn2,String condition1,String coloumn3,String condition2){
         String sql = "SELECT "+coloumnName+" from "+tableName+" where "+coloumn2+" like " + "\""+condition1+ "\" AND "+coloumn3+" like "+"\""+condition2+ "\"";
         
-        System.out.println("SQL : "+sql);
+        
         try {
             statement = conn.createStatement();
             rst = statement.executeQuery(sql);
@@ -370,7 +370,7 @@ public class DataBaseConnector {
          
          
          String sql = "Select * from "+table+" where "+condition;
-         System.out.println("SQL : "+sql);
+         
          
          try {
             statement = conn.createStatement();
@@ -383,7 +383,7 @@ public class DataBaseConnector {
                     
                     String columnName = rst.getMetaData().getColumnName(j);                    
                     row[j-1] = rst.getString(columnName); 
-                    System.out.println("Row in Connector "+(j-1)+" : "+row[j-1]);
+                    
                 }                 
                 records.add(row);
              }         

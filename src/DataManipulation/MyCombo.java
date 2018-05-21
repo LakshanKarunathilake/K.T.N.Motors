@@ -127,10 +127,10 @@ public class MyCombo {
                     ArrayList<String> conditionCols = new ArrayList<>();
                     ArrayList<String> conditionVals = new ArrayList<>();
                     
-                    conditionCols.add("itemNo");
+                    conditionCols.add("item_code");
                     conditionVals.add(itemNo);                    
                     
-                    ArrayList<String[]> list = connector.retreveLargeDataSet(conditionCols,conditionVals,"orderItems");
+                    ArrayList<String[]> list = connector.retreveLargeDataSet(conditionCols,conditionVals,"invoiceitems");
                     
                     DefaultTableModel model = (DefaultTableModel) table.getModel();                    
                     
@@ -138,7 +138,7 @@ public class MyCombo {
                         String [] row = list.get(i);
                         Object [] rowData = new Object[5];
                         rowData[0] = row[1];                        
-                        rowData[1] = connector.getRelavantRecord("orders", "orderDate", "orderID", row[1]);
+                        rowData[1] = connector.getRelavantRecord("invoices", "orderDate", "invoice_id", row[1]);
                         rowData[2] = row[2];
                         rowData[3] = row[4];
                         System.out.println("Row 4 :"+ row[4]);

@@ -75,23 +75,23 @@ public class SalesReturn {
         
         DataManipulation manipulation = new DataManipulation(connector); 
         
-        manipulation.getRecords("orders", "orderID", invoice_no);
-        manipulation.getRecords("users", "userID", customer_no);
-        manipulation.getRecords("users", "name", customer_name);
+        manipulation.getRecords("invoices", "invoice_id", invoice_no);
+        manipulation.getRecords("customers", "customer_code", customer_no);
+        manipulation.getRecords("customers", "name", customer_name);
         
         autoCompleteCombo();
     }
     
     public static void getInvoiceRecords(String invoiceNo,JTable table,DataBaseConnector connector){
         ArrayList conditionCols = new ArrayList();
-        conditionCols.add("orderID");
+        conditionCols.add("invoice_id");
         
         ArrayList conditionVals = new ArrayList();
         conditionVals.add(invoiceNo);
         
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
         
-        ArrayList<String []> records = connector.retreveLargeDataSet(conditionCols, conditionVals,"orderItems");
+        ArrayList<String []> records = connector.retreveLargeDataSet(conditionCols, conditionVals,"invoiceitems");
         System.out.println("Array list : "+records.size());
         for (int i = 0; i < records.size(); i++) {
             Object rowData[] = new Object[5];
@@ -101,16 +101,14 @@ public class SalesReturn {
             
             BigDecimal price = new BigDecimal(row[3]);
             price = price.setScale(2, RoundingMode.HALF_UP);
-            BigDecimal divider = new BigDecimal(2);
+            BigDecimal divider = new BigDecimal(row[2]);
             
             rowData[1] = price.divide(divider);
             rowData[2] = price;
             rowData[3] = row[2];
             rowData[4] = row[2];
             System.out.println("For loop"+i); 
-            for (int k = 0; k < rowData.length; k++) {
-                System.out.println("In SalesRe " + row[k]);
-            }
+            
             dtm.addRow(rowData);
         }
     }
@@ -149,7 +147,7 @@ public class SalesReturn {
         ViewManipulation.ViewManipulation.emptyComboBoxes(combos);
         //Populating combo with values
         DataManipulation dm = new DataManipulation(connector);
-        dm.getRecords("item", "itemNo", combo);
+        dm.getRecords("items", "item_code", combo);
         //Make the combo autocomplete
         MyCombo autoCombo = new MyCombo();
         autoCombo.setSearchableCombo(combo, true, "No result Found");

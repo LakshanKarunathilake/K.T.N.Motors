@@ -164,4 +164,17 @@ public class InvoiceToDB {
         }
 
     }
+    
+    public static void fillToInvoiceCombos(ArrayList []lists,JComboBox combo1,JComboBox combo2){        
+            ArrayList list = lists[0];
+            for (int j = 0; j < list.size(); j++) {
+                combo1.addItem(list.get(j));
+            }
+            
+            list = lists[1];
+            for (int j = 0; j < list.size(); j++) {
+                combo2.addItem(list.get(j));
+            }
+        
+    }
 }

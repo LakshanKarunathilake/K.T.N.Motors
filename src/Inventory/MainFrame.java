@@ -69,6 +69,7 @@ public class MainFrame extends javax.swing.JFrame {
     DataManipulation manipulation;
     SalesReturn sales_return;
     Invoice item_sale;
+    ArrayList[] invoiceData;
     
     
     String report_folder_path = "C:\\kade-1.0\\src\\Reports";
@@ -116,7 +117,7 @@ public class MainFrame extends javax.swing.JFrame {
         Invoice.changeTableView(sales_item_table);
         
         item_sale = new Invoice(sales_itemno_combo, sales_item_name_combo, sales_CID_combo, sales_CName_combo,sales_qty_Txt, connector);
-        item_sale.fillDataToCombo();
+        invoiceData = item_sale.fillDataToCombo();
         
         Invoice.setSaleID(sales_InvoiceID_txt, connector);
         
@@ -2413,6 +2414,19 @@ public class MainFrame extends javax.swing.JFrame {
                         sales_save_btn.setEnabled(true);
 
                     }
+                    //Removing current items and populating again
+                    
+//                    {
+//                    ArrayList<JComboBox> combos = new ArrayList<>();
+//                    combos.add(sales_itemno_combo);
+//                    combos.add(sales_item_name_combo);
+//                    
+//                    ViewManipulation.emptyComboBoxes(combos);
+//                    
+//                    InvoiceToDB.fillToInvoiceCombos(invoiceData, sales_itemno_combo, sales_item_name_combo);
+//                    }
+                   
+                    
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Exception in table adding :" + e.getMessage() + " Error line : ");
                     Logger.getLogger(DataBaseConnector.class.getName()).log(Level.SEVERE, null, e);
@@ -2420,83 +2434,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_sales_qty_TxtKeyPressed
-    
-    public boolean itemToTable(){
-        
-        ArrayList list = new ArrayList();
-        list = getRowInATable("item", "itemNo", (String) sales_itemno_combo.getSelectedItem());
-
-        DefaultTableModel model = (DefaultTableModel) sales_item_table.getModel();
-        Object rowData[] = new Object[5];
-
-        rowData[0] = list.get(0); //Item Number to rowData
-        rowData[1] = list.get(1); //description to rowData
-
-        String unit = (String) list.get(3);
-        Double unitPrice = Double.parseDouble(unit);
-        
-        rowData[2] = unit;
-        
-        if (qtyValidation()) {
-           
-            int qty = Integer.parseInt(sales_qty_Txt.getText());
-            rowData[3] = sales_qty_Txt.getText();
-
-            double totalPrice = qty * unitPrice;
-            
-            BigDecimal bd = new BigDecimal(totalPrice);
-            bd = bd.setScale(2, RoundingMode.HALF_UP);
-            
-            totalPrice = bd.doubleValue();
-            
-            rowData[4] = String.valueOf(totalPrice);
-            model.addRow(rowData);
-            return true;
-        }else{
-            return false;
-        }
-        
-    }
-    
-    
-    
-    public boolean qtyValidation(){
-        int availableQty = Integer.parseInt(sales_available_qty_txt.getText());
-        int requestedQty = Integer.parseInt(sales_qty_Txt.getText());
-        String itemNo = (String) sales_itemno_combo.getSelectedItem();
-            
-        if(checkItemIsInTable(itemNo)){
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Item is already added to the table Do you want to update the qty by :" + sales_qty_Txt.getText(), "Warning", JOptionPane.YES_NO_OPTION);
-
-            if (dialogResult == JOptionPane.YES_OPTION) {                
-                addQtyToTheExistingRecord(itemNo,sales_qty_Txt.getText());
-                sales_itemno_combo.requestFocusInWindow();
-                calculatetotal();
-
-            } else if (dialogResult == JOptionPane.NO_OPTION) {                
-                sales_itemno_combo.requestFocusInWindow();
-                calculatetotal();
-
-            }
-            return false;
-            
-        }else if (availableQty < requestedQty) {
-            int number = 0;
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Don't have that much stock do you want to add the maximum qty in stock :"+availableQty, "Warning",number);
-            
-            if (dialogResult == JOptionPane.YES_OPTION) {
-                sales_qty_Txt.setText(sales_available_qty_txt.getText());
-                calculatetotal();
-                return true;
-            }else if(dialogResult == JOptionPane.NO_OPTION){
-                sales_qty_Txt.requestFocusInWindow();
-                calculatetotal();
-               
-                return false;
-            }
-        }
-        return true;
-    }
     
     private void sales_qty_TxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_qty_TxtKeyTyped
         char c = evt.getKeyChar();
@@ -2511,21 +2448,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void sales_item_name_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_item_name_comboActionPerformed
 
-        //Not working with the addition of itemNo
-        
-//        System.out.println("Action Performed itemName");        
-//        String description = (String) sales_item_name_combo.getSelectedItem();
-//        System.out.println("Description : " + description);
-//        String itemNo = searchRecord("item", "itemNo", "description", description);
-//        System.out.println("itemNo iS : " + itemNo);
-//        sales_itemno_combo.setSelectedItem(itemNo);
-//        
-//        
-//        //Qty Adding to the text Box
-//        
-//        String qty = searchRecord("item", "qty", "itemNo", itemNo);
-//        System.out.println("Qty available iS : " + qty);
-//        sales_available_qty_txt.setText(qty);
     }//GEN-LAST:event_sales_item_name_comboActionPerformed
 
     private void sales_itemno_comboKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_itemno_comboKeyTyped
@@ -3367,11 +3289,11 @@ public class MainFrame extends javax.swing.JFrame {
     private void return_invoiceID_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_invoiceID_comboActionPerformed
         String invoice_id = (String) return_invoiceID_combo.getSelectedItem();
        
-        String customer_id = connector.getRelavantRecord("orders", "userID", "orderID", invoice_id);
+        String customer_id = connector.getRelavantRecord("invoices", "customer_code", "invoice_id", invoice_id);
         return_userID_combo.setSelectedItem(customer_id);
 
         //Qty Adding to the text Box
-        String customer_name= connector.getRelavantRecord("users", "name", "userID",customer_id);
+        String customer_name= connector.getRelavantRecord("customers", "name", "customer_code",customer_id);
         return_userName_combo.setSelectedItem(customer_name);
     }//GEN-LAST:event_return_invoiceID_comboActionPerformed
 
@@ -3443,47 +3365,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void sales_unit_TxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_unit_TxtKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_sales_unit_TxtKeyTyped
-    
-    
-    public void fillInvoice(String invoiceID){
-        sales_InvoiceID_txt.setText(invoiceID);
-        String userID = connector.getRelavantRecord("orders", "userID", "orderID", invoiceID);
-        sales_CID_combo.setSelectedItem(userID);
-        sales_CName_combo.setSelectedItem(connector.getRelavantRecord("users", "name", "userID", userID));
-        
-        
-        ArrayList itemNoList; 
-        ArrayList itemQtyList; 
-        ArrayList itemTotalList; 
-        itemNoList = connector.retreveDataColoumnWithCondition("orderitems", "itemNo", "orderID", invoiceID);
-        itemQtyList = connector.retreveDataColoumnWithCondition("orderitems", "qty", "orderID", invoiceID);
-        itemTotalList = connector.retreveDataColoumnWithCondition("orderitems", "total", "orderID", invoiceID);
-        
-        
-        DefaultTableModel model = (DefaultTableModel) sales_item_table.getModel();
-        for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-        Object rowData[] = new Object[5];
-        
-        for (int i = 0; i < itemNoList.size(); i++) {
-            String itemNo  = String.valueOf(itemNoList.get(i));
-            ArrayList item_data = new ArrayList();
-            item_data = connector.readRow("item", "itemNo", itemNo);
-            rowData[0] = item_data.get(0);
-            rowData[1] = item_data.get(1);
-            rowData[2] = item_data.get(3);
-            rowData[3] = itemQtyList.get(i);
-            rowData[4] = itemTotalList.get(i);
-            model.addRow(rowData);         
-            
-        }
-        
-        sales_total_txt.setText(connector.getRelavantRecord("orders", "total", "orderID", invoiceID));
-        sales_discount_txt.setText(connector.getRelavantRecord("orders", "discount", "orderID", invoiceID));
-        sales_grand_txt.setText(connector.getRelavantRecord("orders", "grandTotal", "orderID", invoiceID));
-
-    }
     
     public void CheckAvailability(){
         String itemNo = ItemNoTxt.getText();
@@ -3641,98 +3522,7 @@ public class MainFrame extends javax.swing.JFrame {
         PrecentageTxt.setText("");
     }
     
-    public void newSale(){
-        AutoCompleteDecorator.decorate(sales_CID_combo);
-        AutoCompleteDecorator.decorate(sales_CName_combo);
-        AutoCompleteDecorator.decorate(sales_item_name_combo);
-        AutoCompleteDecorator.decorate(sales_itemno_combo);
-         
-       
-        manipulation.getRecords("users", "userID",sales_CID_combo);
-        manipulation.getRecords("users","name",sales_CName_combo);
-        manipulation.getRecords("item", "itemNo", sales_itemno_combo);
-        manipulation.getRecords("item", "description", sales_item_name_combo); 
-        
-        String orderID = generateSaleID();
-        sales_InvoiceID_txt.setText(orderID);
-        sales_InvoiceID_txt.setEditable(false);
-        
-    }
-    
-    public String generateSaleID(){
-        String lastID = connector.retreveLastRecord("Orders","orderID", "orderDate");
-        String parts[] = lastID.split("A");
-        int currentID = Integer.parseInt(parts[1]);
-        int nextID = ++currentID;
-        
-        DecimalFormat formatter = new DecimalFormat("0000");
-        String idFormatted = formatter.format(nextID);
-        
-        
-        return "A"+idFormatted;
-    }
-    
-    
-    
-   
-    
-    
-    
-    public ArrayList getRowInATable(String tableName,String coloumn,String condition){
-        return connector.readRow(tableName, coloumn, condition);
-    }
-    
-    public boolean checkItemIsInTable(String value){
-       int rowID = findIntheTable(value);
-       if(rowID==Integer.MAX_VALUE){
-           return false;
-       }else{
-           return true;
-       }
-        
-    }
-    
-    public int findIntheTable(String value){
-        TableModel model = sales_item_table.getModel();        
-        int rowCount = model.getRowCount();
-        
-
-        for (int i = 0; i < rowCount; i++) {
-            String id = (String) model.getValueAt(i, 0);
-            if (id.equals(value)) {
-                
-                return i;
-            }
-        }
-        return Integer.MAX_VALUE;
-    }
-    
-    public void addQtyToTheExistingRecord(String itemNo,String qty){
-        int rowNo = findIntheTable(itemNo);
-        TableModel model = sales_item_table.getModel();
-       
-       
-        String Stemp = String.valueOf(model.getValueAt(rowNo, 3));
-        int qtyNow = Integer.parseInt(Stemp);
-        int totalQty  = qtyNow + Integer.parseInt(qty);
-        int availability = Integer.parseInt(sales_available_qty_txt.getText());
-        if(totalQty > availability){
-            JOptionPane.showMessageDialog(null, "The maximum qty is set");
-            totalQty = availability;
-        }
-        model.setValueAt(totalQty, rowNo, 3); 
-        updateTotal(rowNo,totalQty);
-           
-    }
-        
-    public void updateTotal(int rowNo,int totalQty){
-        TableModel model = sales_item_table.getModel();
-        double d = Double.parseDouble((String) model.getValueAt(rowNo, 2));
-        double total = d * totalQty;
-        model.setValueAt(total, rowNo, 4);
-        
-    }
-    
+            
     public void makeAllSalesComponents(boolean b){
         sales_CID_combo.setEnabled(b);
         sales_CName_combo.setEnabled(b);
@@ -3779,99 +3569,6 @@ public class MainFrame extends javax.swing.JFrame {
         return bd.doubleValue();
     }
     
-    public String TableToDB(){
-        TableModel model = sales_item_table.getModel();
-        int rowCount  = model.getRowCount();
-        String msg = null;
-        
-        if(InsertToOrder()){
-          if(InsertToOrderItems(model,rowCount)){
-              msg="Enter completed";  
-          }else{
-              msg="OrderItemsNotDoneButOrderDone";
-          }          
-        }else{
-            msg = "Complete failure";
-        }
-        return msg;
-        
-        
-    }
-    
-    public boolean InsertToOrderItems(TableModel model,int rowCount){
-        ArrayList record = new ArrayList();
-        String invoiceID = sales_InvoiceID_txt.getText();
-        
-        
-        for (int i = 0; i < rowCount; i++) {
-            String itemNo = String.valueOf(model.getValueAt(i, 0));
-            String qty = String.valueOf(model.getValueAt(i, 3));
-            String rate = String.valueOf(model.getValueAt(i, 2));
-            double total = Double.parseDouble(qty) * Double.parseDouble(rate);
-            record.add(itemNo);
-            record.add(invoiceID);
-            record.add(qty);
-            record.add(total);
-            if(!connector.insertRecord("orderitems", record)){
-                JOptionPane.showMessageDialog(null, "Error addition in orderItems");
-            }
-            
-            int availableQty = Integer.parseInt(sales_available_qty_txt.getText());
-            int iqty = Integer.parseInt(qty);
-            availableQty-=iqty;
-            
-            System.out.println("QTy edit : "+iqty);
-            if(!connector.editRecordInTable("item","itemNo", "qty",String.valueOf(availableQty), itemNo)){
-                JOptionPane.showMessageDialog(null, "Error quantity change ");
-                return false;
-            }else{
-                record.clear();                
-            }            
-        }
-        if(rowCount<0){
-            return false;
-        }else{
-            return true;
-        }
-        
-    }
-    
-    public boolean InsertToOrder(){
-        
-        String invoiceID = sales_InvoiceID_txt.getText();
-        String userID = (String) sales_CID_combo.getSelectedItem();
-        String total  =  sales_total_txt.getText();
-        String discount = sales_discount_txt.getText();
-        String grandTotal = sales_grand_txt.getText();
-        
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        String timeStamp = String.valueOf(now);
-        
-        ArrayList record = new ArrayList();
-        record.add(invoiceID);       
-        record.add(total);
-        record.add(discount);
-        record.add(grandTotal);
-        record.add(timeStamp);
-        record.add(userID);
-        if(userID.equals("U001")){
-            record.add("1");
-        }else{
-            record.add("0");
-        }
-        
-       
-                
-        
-        if(!connector.insertRecord("orders", record)){
-            JOptionPane.showMessageDialog(null, "Insertion fails in order ");
-            return false;
-        }else{
-            return true;
-        }
-        
-    }
-    
     public void emptyFieldsInSales(){
 //        sales_InvoiceID_txt.setText("");
 //        sales_CID_combo.setSelectedItem("");
@@ -3901,18 +3598,7 @@ public class MainFrame extends javax.swing.JFrame {
         
     }
     
-    public void checkCreditLimitSufficient(String userID){
-       double limit =  Double.parseDouble(connector.getRelavantRecord("users", "creditLimit", "userID", userID));
-       double invoiceBalance = Double.valueOf(sales_grand_txt.getText());
-       double currentLimit = limit-invoiceBalance;
-       if(invoiceBalance<=0){
-           JOptionPane.showConfirmDialog(null, "The user exceeds the credit limit Do you want to increase the credit limit by :"+currentLimit);
-       }else{
-           connector.editRecordInTable("users", "creditLimit", "userID", String.valueOf(currentLimit), userID);
-       }
-       
-    }
-    
+      
     public void newBillPay(){
         AutoCompleteDecorator.decorate(bill_InvoiceID_combo);
         AutoCompleteDecorator.decorate(bill_name_combo);
@@ -3930,34 +3616,7 @@ public class MainFrame extends javax.swing.JFrame {
         
     }
     
-    public boolean validUserPurchaise(){
-        String userID = String.valueOf(sales_CID_combo.getSelectedItem());
-        Date d = new Date();
-        String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(d);
-        Calendar c = Calendar.getInstance();
-        c.setTime(d);
-        c.add(Calendar.MONTH,-3);
-        d= c.getTime();
-        String beforeDate = new SimpleDateFormat("yyyy-MM-dd").format(d);
-        System.out.println("Current Date :"+currentDate);
-        System.out.println("Current Date :"+beforeDate);
         
-        String sql = "Select orderID from orders where userID like \""+userID+"\" And orderDate <= \""+beforeDate+"\" AND status like '0'" ;
-        System.out.println("SQL :"+sql);
-        ArrayList list = connector.sqlExecutionaArray(sql, "orderID");
-        System.out.println("Lits SIze : "+list.size());
-        if(list.size()>0){
-            String values = "";
-            for (int i = 0; i < list.size(); i++) {
-                values+=list.get(i);
-                values+=" ,";                        
-            }
-            JOptionPane.showMessageDialog(null, "Sorry This user have 3 months old unpaid bills : "+values);
-            return false;
-        }
-        return true;
-    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddItemPanel;
     private javax.swing.JLabel AddProductLabel;
