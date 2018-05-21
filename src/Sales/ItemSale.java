@@ -54,17 +54,17 @@ public class ItemSale {
         //       Getting the value from a second table -- userID from the user table
         
         myList.add("items");
-        myList.add("ITCode");
-        myList.add("ITCat");
+        myList.add("item_code");
+        myList.add("category");
 
         autoCombo2.populateSecondCombo(itemNo, category, connector, myList, null, false);
         
-        myList.set(0, "users");
+        myList.set(0, "customers");
         myList.set(1, "name");
-        myList.set(2, "userID");
+        myList.set(2, "customer_code");
         autoCombo3.populateSecondCombo(customerID, customerName, connector, myList, null, false);
         
-        myList.set(1, "userID");
+        myList.set(1, "customer_code");
         myList.set(2, "name");
         autoCombo4.populateSecondCombo(customerName, customerID, connector, myList, null, false);
    
@@ -74,10 +74,10 @@ public class ItemSale {
         
         DataManipulation manipulation = new DataManipulation(connector); 
         
-//        manipulation.getRecords("items", "ITCode", itemNo);
-//        manipulation.getRecords("items", "ITCat", category);
-        manipulation.getRecords("users", "userID", customerID);
-        manipulation.getRecords("users", "name", customerName);
+        manipulation.getRecords("items", "item_code", itemNo);
+        manipulation.getRecords("items", "category", category);
+        manipulation.getRecords("customers", "customer_code", customerID);
+        manipulation.getRecords("customers", "name", customerName);
         
         
         

@@ -2296,7 +2296,7 @@ public class MainFrame extends javax.swing.JFrame {
             
             String userID = (String) sales_CID_combo.getSelectedItem();
           
-            String userName = searchRecord("users", "name", "userID", userID);
+            String userName = searchRecord("customers", "name", "customer_code", userID);
             
             sales_CName_combo.setSelectedItem(userName);
         
@@ -2304,14 +2304,14 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sales_CID_comboActionPerformed
 
     private void sales_CID_comboKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_CID_comboKeyReleased
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-          
-            String userID = (String) sales_CID_combo.getSelectedItem();
-            
-            String userName = searchRecord("users", "name", "userID", userID);
-           
-            sales_CName_combo.setSelectedItem(userName);
-        }
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//          
+//            String userID = (String) sales_CID_combo.getSelectedItem();
+//            
+//            String userName = searchRecord("customers", "name", "c", userID);
+//           
+//            sales_CName_combo.setSelectedItem(userName);
+//        }
     }//GEN-LAST:event_sales_CID_comboKeyReleased
 
     private void sales_CName_comboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_CName_comboKeyPressed
@@ -2322,7 +2322,7 @@ public class MainFrame extends javax.swing.JFrame {
            
         String name = (String) sales_CName_combo.getSelectedItem();
         
-        String userID = searchRecord("users", "userID", "name", name);
+        String userID = searchRecord("customers", "customer_code", "name", name);
        
         sales_CID_combo.setSelectedItem(userID);
     }//GEN-LAST:event_sales_CName_comboActionPerformed
@@ -2337,14 +2337,14 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sales_itemno_comboKeyPressed
 
     private void sales_itemno_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_itemno_comboActionPerformed
-        String itemNo = (String) sales_itemno_combo.getSelectedItem();
-        
-        String description = searchRecord("item", "description", "itemNo", itemNo); 
-        sales_item_name_combo.setSelectedItem(description);
-        
-        //Qty Adding to the text Box
-        String qty = searchRecord("item", "qty", "itemNo", itemNo);    
-        sales_available_qty_txt.setText(qty);
+//        String itemNo = (String) sales_itemno_combo.getSelectedItem();
+//        
+//        String description = searchRecord("items", "category", "item_code", itemNo); 
+//        sales_item_name_combo.setSelectedItem(description);
+//        
+//        //Qty Adding to the text Box
+//        String qty = searchRecord("items", "stock", "item_code", itemNo);    
+//        sales_available_qty_txt.setText(qty);
         
     }//GEN-LAST:event_sales_itemno_comboActionPerformed
 
