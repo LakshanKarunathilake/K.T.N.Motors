@@ -6,6 +6,7 @@
 package Sales;
 
 import DBController.DataBaseConnector;
+import DataManipulation.Rounding;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -63,7 +64,7 @@ public class ItemToTable {
         
         
         
-        rowData[3] = unitP;
+        rowData[3] = Rounding.RoundTo5(unitPrice, true);
         
         rowData[2] = list.get(9);
         
@@ -77,7 +78,8 @@ public class ItemToTable {
             
                
             
-            rowData[5] = df.format(totalPrice);
+//            rowData[5] = df.format(totalPrice);
+            rowData[5] = Rounding.RoundTo5(totalPrice, true);
             model.addRow(rowData);
             return true;
         } else {
@@ -171,9 +173,8 @@ public class ItemToTable {
         TableModel model = table.getModel();
         double d = Double.parseDouble(String.valueOf(model.getValueAt(rowNo, 3)));
         double total = d * totalQty;
-        BigDecimal bd = new BigDecimal(total);
-        bd = bd.setScale(2, RoundingMode.HALF_UP);
-        model.setValueAt(bd, rowNo, 5);
+        
+        model.setValueAt(Rounding.RoundTo5(total, true), rowNo, 5);
 
     }
     
@@ -188,25 +189,16 @@ public class ItemToTable {
 //        BigDecimal bd = new BigDecimal(total);
 //        bd = bd.setScale(2, RoundingMode.HALF_UP);
 
-        String totalString = df.format(total);
-        totalTxt.setText(totalString);
+        
+        totalTxt.setText(Rounding.RoundTo5(total, true));
         calculateGrandTotal();
     }
     
     public void calculateGrandTotal(){
         double total = Double.parseDouble(totalTxt.getText());
         double discount = Double.parseDouble(discountTxt.getText());
-        double grand = total-(total*(discount/100));
-        grand = round(grand,2);
-        
-        
-        grandTxt.setText(df.format(grand));
+        double grand = total-(total*(discount/100));        
+        grandTxt.setText(Rounding.RoundTo5(grand, true));
     }
     
-    public static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-        BigDecimal bd = new BigDecimal(value);
-        bd = bd.setScale(places, RoundingMode.HALF_UP);
-        return bd.doubleValue();
-    }
 }

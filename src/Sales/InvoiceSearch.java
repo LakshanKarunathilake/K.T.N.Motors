@@ -6,9 +6,12 @@
 package Sales;
 
 import DBController.DataBaseConnector;
+import DataManipulation.Rounding;
 import ViewManipulation.ViewManipulation;
 import java.util.ArrayList;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -29,6 +32,11 @@ public class InvoiceSearch {
     
     DataBaseConnector connector;
     
+    JCheckBox check;
+    JTextField cash_txt;
+    JTextField credit_txt;
+    JPanel halfpay;
+    
     public InvoiceSearch(JTextField invoice_txt,JComboBox customerID_combo,JComboBox customerName_combo,JTable table,JTextField totalTxt,JTextField discountTxt,JTextField grandTxt,DataBaseConnector connector){
         this.invoice_txt = invoice_txt;
         this.customerID_combo = customerID_combo;
@@ -38,6 +46,13 @@ public class InvoiceSearch {
         this.discountTxt = discountTxt;
         this.grandTxt = grandTxt;
         this.connector = connector;
+    }
+    
+    public void setHalfPayComponents(JCheckBox check,JTextField cash_txt,JTextField credit_txt,JPanel halfpay){
+        this.check = check;
+        this.credit_txt = credit_txt;
+        this.cash_txt = cash_txt;
+        this.halfpay = halfpay;
     }
     
     public void fillInvoice(String invoiceID) {
@@ -71,6 +86,17 @@ public class InvoiceSearch {
             rowData[5] = itemTotalList.get(i);
             model.addRow(rowData);
 
+        }
+        
+        String cash = connector.getRelavantRecord("invoices", "cash_paid", "invoice_id", invoiceID);
+        String grandTotal = connector.getRelavantRecord("invoices", "grandTotal", "invoice_id", invoiceID);
+        halfpay.setVisible(false);
+        if(!cash.equals(grandTotal)){
+            double credit = Double.parseDouble(grandTotal)- Double.parseDouble(cash);
+            halfpay.setVisible(true);
+            check.setSelected(true);
+            credit_txt.setText(Rounding.RoundTo5(credit, true));
+            cash_txt.setText(cash);
         }
 
         totalTxt.setText(connector.getRelavantRecord("invoices", "total", "invoice_id", invoiceID));

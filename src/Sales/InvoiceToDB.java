@@ -6,11 +6,13 @@
 package Sales;
 
 import DBController.DataBaseConnector;
+import DataManipulation.Rounding;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -29,6 +31,8 @@ public class InvoiceToDB {
     JTextField totalTxt;
     JTextField discountTxt;
     JTextField grandTxt;
+    JTextField cash_txt;
+    JCheckBox checkbox;
     
     public InvoiceToDB(JComboBox customer_code,JTextField invoiceID_text,JTable table, DataBaseConnector connector){
         this.customer_code = customer_code;
@@ -100,7 +104,8 @@ public class InvoiceToDB {
             record.add(itemNo);
             record.add(invoiceID);
             record.add(qty);
-            record.add(total);
+            record.add(Rounding.RoundTo5(total, true));
+            record.add(qty);
             if (!connector.insertRecord("invoiceitems", record)) {
                 JOptionPane.showMessageDialog(null, "Error addition in orderItems");
             }
@@ -125,10 +130,12 @@ public class InvoiceToDB {
         }
     }
     
-    public void setValuesForInsertOrder(JTextField totalTxt,JTextField discountTxt,JTextField grandTxt){
+    public void setValuesForInsertOrder(JTextField totalTxt,JTextField discountTxt,JTextField grandTxt,JTextField cash_txt,JCheckBox checkbox){
         this.totalTxt = totalTxt;
         this.discountTxt = discountTxt;
-        this.grandTxt = grandTxt;        
+        this.grandTxt = grandTxt;  
+        this.cash_txt = cash_txt;
+        this.checkbox = checkbox;
                 
     }
 
@@ -155,6 +162,12 @@ public class InvoiceToDB {
         } else {
             record.add("0");
         }
+        if(checkbox.isSelected()){
+            record.add(cash_txt.getText());
+        }else{
+            record.add(grandTotal);
+        }
+        
 
         if (!connector.insertRecord("invoices", record)) {
             JOptionPane.showMessageDialog(null, "Insertion fails in order ");
