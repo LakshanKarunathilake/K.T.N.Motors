@@ -140,7 +140,8 @@ public class MyCombo {
                         rowData[0] = row[1];                        
                         rowData[1] = connector.getRelavantRecord("invoices", "orderDate", "invoice_id", row[1]);
                         rowData[2] = row[2];
-                        rowData[3] = row[4];
+                        rowData[3] = row[3];
+                        rowData[4] = row[4];
                         System.out.println("Row 4 :"+ row[4]);
                         
                         model.addRow(rowData);                        

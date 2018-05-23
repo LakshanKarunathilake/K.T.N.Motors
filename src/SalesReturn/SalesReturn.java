@@ -8,6 +8,7 @@ package SalesReturn;
 import DBController.DataBaseConnector;
 import DataManipulation.DataManipulation;
 import DataManipulation.MyCombo;
+import ViewManipulation.ViewManipulation;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -15,9 +16,11 @@ import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -31,15 +34,18 @@ public class SalesReturn {
     JComboBox customer_no ;
     JComboBox customer_name ;
     DataBaseConnector connector;
+    JPanel panel1;
+    JScrollPane panel2;
+    JLabel total_lbl;
     
    
     
-    public SalesReturn(JComboBox invoice_no,JComboBox customer_no,JComboBox customer_name,DataBaseConnector connector){
+    public SalesReturn(JComboBox invoice_no,JComboBox customer_no,JComboBox customer_name,JLabel total_lbl,DataBaseConnector connector){
         
         this.invoice_no = invoice_no;
         this.customer_name = customer_name;
         this.customer_no = customer_no;
-        
+        this.total_lbl = total_lbl;
         this.connector = connector;
     }
 
@@ -82,7 +88,7 @@ public class SalesReturn {
         autoCompleteCombo();
     }
     
-    public static void getInvoiceRecords(String invoiceNo,JTable table,DataBaseConnector connector){
+    public void getInvoiceRecords(String invoiceNo,JTable table,DataBaseConnector connector){
         ArrayList conditionCols = new ArrayList();
         conditionCols.add("invoice_id");
         
@@ -111,6 +117,8 @@ public class SalesReturn {
             
             dtm.addRow(rowData);
         }
+//        eventForItemTable(table);
+        
     }
     
     public void changeTableView(JTable table){
@@ -139,12 +147,14 @@ public class SalesReturn {
         
     }
     
-    public static void searchInvoice(JComboBox combo,JTable table,DataBaseConnector connector){
+    
+    
+    public void searchInvoice(JComboBox combo,JTable table,JTable item_table,DataBaseConnector connector){
         //First Have to clear comboboxes for replication of data
         ArrayList<JComboBox> combos = new ArrayList<JComboBox>();
         combos.add(combo);
 
-        ViewManipulation.ViewManipulation.emptyComboBoxes(combos);
+        ViewManipulation.emptyComboBoxes(combos);
         //Populating combo with values
         DataManipulation dm = new DataManipulation(connector);
         dm.getRecords("items", "item_code", combo);
@@ -154,21 +164,73 @@ public class SalesReturn {
         
         autoCombo.populateAJTable(combo, table, connector);
         
-        eventForTable(table);
+        eventForSearchTable(table,item_table);
         
     }
     
-    private static void eventForTable(JTable table){
+    private void eventForSearchTable(JTable table,final JTable item_table){
         table.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
                 JTable table = (JTable) mouseEvent.getSource();
                 Point point = mouseEvent.getPoint();
                 int row = table.rowAtPoint(point);
-                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-                    JOptionPane.showMessageDialog(null, "clicked at "+row);
+                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {                    
+                    DefaultTableModel model = (DefaultTableModel) table.getModel();
+                    String invoiceNo = String.valueOf(model.getValueAt(row, 0));
+                    salesInvoiceSelection(invoiceNo, item_table);
                 }
             }
         });
+    }
+    
+//    private void eventForItemTable(JTable table) {
+//        table.addMouseListener(new MouseAdapter() {
+//            public void mousePressed(MouseEvent mouseEvent) {
+//                JTable table = (JTable) mouseEvent.getSource();
+//                Point point = mouseEvent.getPoint();
+//                int row = table.rowAtPoint(point);
+//                if (mouseEvent.getClickCount() == 1 && table.getSelectedRow() != -1) {
+//                    JOptionPane.showMessageDialog(null, "Clicked at :"+row);
+//                    calculateReturningTotal(table);
+//                    
+//                }
+//            }
+//        });
+//    }
+    
+    public void calculateReturningTotal(JTable table){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int rowCount = model.getRowCount();
+        double fullTotal=0;
+        for (int i = 0; i < rowCount; i++) {
+            boolean b = (Boolean) model.getValueAt(i, 5);
+            System.out.println("value :" +model.getValueAt(i, 5));
+            if(b== true){
+                String returning_qty = String.valueOf(model.getValueAt(i, 3));
+                String bought_qty = String.valueOf(model.getValueAt(i, 4));
+                if(returning_qty.equals(bought_qty)){
+                    String bought_total = String.valueOf(model.getValueAt(i, 2));
+                    fullTotal+=Double.parseDouble(bought_total);
+                }else{
+                    String unitPrice = String.valueOf(model.getValueAt(i, 1));
+                    double total = Double.parseDouble(returning_qty) * Double.parseDouble(unitPrice);
+                    fullTotal+=total;
+                } 
+                total_lbl.setText(String.valueOf(fullTotal));
+            }
+        }
+    }
+    
+    public void setPanels(JPanel panel1,JScrollPane panel2){
+        this.panel1 = panel1;
+        this.panel2 = panel2;
+        
+    }
+    
+    private void salesInvoiceSelection(String invoiceNo,JTable item_table){
+        invoice_no.setSelectedItem(invoiceNo);
+        ViewManipulation.changePanel(panel1, panel2);
+        getInvoiceRecords(invoiceNo, item_table, connector);
     }
     
 }
