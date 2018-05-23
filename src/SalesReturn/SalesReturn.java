@@ -8,6 +8,7 @@ package SalesReturn;
 import DBController.DataBaseConnector;
 import DataManipulation.DataManipulation;
 import DataManipulation.MyCombo;
+import DataManipulation.Rounding;
 import ViewManipulation.ViewManipulation;
 import java.awt.Font;
 import java.awt.Point;
@@ -203,21 +204,20 @@ public class SalesReturn {
         int rowCount = model.getRowCount();
         double fullTotal=0;
         for (int i = 0; i < rowCount; i++) {
-            boolean b = (Boolean) model.getValueAt(i, 5);
-            System.out.println("value :" +model.getValueAt(i, 5));
-            if(b== true){
+            if(model.getValueAt(i, 5) !=null){
                 String returning_qty = String.valueOf(model.getValueAt(i, 3));
                 String bought_qty = String.valueOf(model.getValueAt(i, 4));
-                if(returning_qty.equals(bought_qty)){
+                if (returning_qty.equals(bought_qty)) {
                     String bought_total = String.valueOf(model.getValueAt(i, 2));
-                    fullTotal+=Double.parseDouble(bought_total);
-                }else{
+                    fullTotal += Double.parseDouble(bought_total);
+                } else {
                     String unitPrice = String.valueOf(model.getValueAt(i, 1));
                     double total = Double.parseDouble(returning_qty) * Double.parseDouble(unitPrice);
-                    fullTotal+=total;
-                } 
-                total_lbl.setText(String.valueOf(fullTotal));
-            }
+                    fullTotal += total;
+                }
+                
+                total_lbl.setText(Rounding.RoundTo5(fullTotal, true)); 
+            }           
         }
     }
     

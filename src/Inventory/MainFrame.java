@@ -7,6 +7,7 @@ package Inventory;
 
 import DBController.DataBaseConnector;
 import DataManipulation.DataManipulation;
+import DataManipulation.Rounding;
 import Printing.PrintData;
 import Printing.Printsupport;
 import Printing.Printsupport.MyPrintable;
@@ -121,6 +122,8 @@ public class MainFrame extends javax.swing.JFrame {
         
         Invoice.setSaleID(sales_InvoiceID_txt, connector);
         
+        sales_halfPay_panel.setVisible(false);
+        
          
     }
 
@@ -178,6 +181,12 @@ public class MainFrame extends javax.swing.JFrame {
         sales_remove_btn = new javax.swing.JButton();
         sales_unit_Txt = new javax.swing.JTextField();
         jLabel55 = new javax.swing.JLabel();
+        sales_halfPay_check = new javax.swing.JCheckBox();
+        sales_halfPay_panel = new javax.swing.JPanel();
+        jLabel46 = new javax.swing.JLabel();
+        sales_halfPay_creditTxt = new javax.swing.JTextField();
+        sales_halfPay_txt = new javax.swing.JTextField();
+        jLabel56 = new javax.swing.JLabel();
         AddUserPannel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         userIDTxt = new javax.swing.JTextField();
@@ -711,7 +720,7 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_remove_btnActionPerformed(evt);
             }
         });
-        SalesPanel.add(sales_remove_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 660, 130, 50));
+        SalesPanel.add(sales_remove_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 640, 130, 50));
 
         sales_unit_Txt.setEditable(false);
         sales_unit_Txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -738,6 +747,70 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel55.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel55.setText("Qty Need");
         SalesPanel.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, -1, -1));
+
+        sales_halfPay_check.setBackground(new java.awt.Color(255, 255, 255));
+        sales_halfPay_check.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        sales_halfPay_check.setText("Half Pay");
+        sales_halfPay_check.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sales_halfPay_checkActionPerformed(evt);
+            }
+        });
+        SalesPanel.add(sales_halfPay_check, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 700, -1, -1));
+
+        sales_halfPay_panel.setBackground(new java.awt.Color(255, 255, 255));
+        sales_halfPay_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Half Payment", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+
+        jLabel46.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel46.setText("Pay In Cash");
+
+        sales_halfPay_creditTxt.setEditable(false);
+        sales_halfPay_creditTxt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        sales_halfPay_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        sales_halfPay_txt.setText("0");
+        sales_halfPay_txt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sales_halfPay_txtKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                sales_halfPay_txtKeyTyped(evt);
+            }
+        });
+
+        jLabel56.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel56.setText("Crediting amount");
+
+        javax.swing.GroupLayout sales_halfPay_panelLayout = new javax.swing.GroupLayout(sales_halfPay_panel);
+        sales_halfPay_panel.setLayout(sales_halfPay_panelLayout);
+        sales_halfPay_panelLayout.setHorizontalGroup(
+            sales_halfPay_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sales_halfPay_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(sales_halfPay_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel46)
+                    .addComponent(sales_halfPay_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(sales_halfPay_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel56)
+                    .addComponent(sales_halfPay_creditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(94, 94, 94))
+        );
+        sales_halfPay_panelLayout.setVerticalGroup(
+            sales_halfPay_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sales_halfPay_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(sales_halfPay_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel46)
+                    .addComponent(jLabel56))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sales_halfPay_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sales_halfPay_creditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sales_halfPay_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        SalesPanel.add(sales_halfPay_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 730, 460, 120));
 
         MainChangeFrame.add(SalesPanel, "card2");
 
@@ -980,7 +1053,7 @@ public class MainFrame extends javax.swing.JFrame {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
+                false, false, false, true, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -2486,7 +2559,7 @@ public class MainFrame extends javax.swing.JFrame {
         calculateGrandTotal();
         
         InvoiceToDB toDB = new InvoiceToDB(sales_CID_combo, sales_InvoiceID_txt, sales_item_table, connector);
-        toDB.setValuesForInsertOrder(sales_total_txt, sales_discount_txt, sales_grand_txt);
+        toDB.setValuesForInsertOrder(sales_total_txt, sales_discount_txt, sales_grand_txt,sales_halfPay_txt,sales_halfPay_check);
         
         if(toDB.validUserPurchaise()){
             String msg = toDB.TableToDB();
@@ -3084,7 +3157,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void sales_searchI_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_searchI_btn1ActionPerformed
         InvoiceSearch search = new InvoiceSearch(sales_InvoiceID_txt, sales_CID_combo, sales_CName_combo, sales_item_table, sales_total_txt, sales_discount_txt, sales_grand_txt, connector);
-        
+        search.setHalfPayComponents(sales_halfPay_check, sales_halfPay_txt, sales_halfPay_creditTxt, sales_halfPay_panel);
         JComboBox search_invoiceID = new JComboBox();       
         AutoCompleteDecorator.decorate(search_invoiceID);
 
@@ -3100,6 +3173,7 @@ public class MainFrame extends javax.swing.JFrame {
         int result = JOptionPane.showConfirmDialog(null, inputs, "My custom dialog", JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             invoiceID = String.valueOf(search_invoiceID.getSelectedItem());
+            
             search.fillInvoice(invoiceID);
             sales_save_btn.setEnabled(false);
             sales_remove_btn.setEnabled(false);
@@ -3380,6 +3454,56 @@ public class MainFrame extends javax.swing.JFrame {
     private void return_calculation_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_calculation_btnActionPerformed
         sales_return.calculateReturningTotal(return_item_table);
     }//GEN-LAST:event_return_calculation_btnActionPerformed
+
+    private void sales_halfPay_checkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_halfPay_checkActionPerformed
+        if(sales_CID_combo.getSelectedItem().equals("1")){
+            JOptionPane.showMessageDialog(null, "Sorry half payments can only be done with credit users");
+            sales_halfPay_check.setSelected(false);
+        }else{
+            if (sales_halfPay_check.isSelected()) {
+                sales_halfPay_panel.setVisible(true);
+                sales_halfPay_txt.requestFocusInWindow();
+            } else {
+                sales_halfPay_panel.setVisible(false);
+            }
+        }
+              
+        
+    }//GEN-LAST:event_sales_halfPay_checkActionPerformed
+
+    private void sales_halfPay_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_halfPay_txtKeyTyped
+//        char c = evt.getKeyChar();
+//        
+//            double grand = Double.parseDouble(sales_grand_txt.getText());
+//            if(!sales_halfPay_txt.getText().equals("")){
+//                double cash = Double.parseDouble(sales_halfPay_txt.getText());
+//                double credit = grand - cash;
+//                if (credit < 0) {
+//                    JOptionPane.showMessageDialog(null, "Sorry you are entering wrong cash amount");
+//                }
+//                sales_halfPay_creditTxt.setText(Rounding.RoundTo5(credit, editable));
+//            }
+//            
+            
+        
+    }//GEN-LAST:event_sales_halfPay_txtKeyTyped
+
+    private void sales_halfPay_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_halfPay_txtKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            double grand = Double.parseDouble(sales_grand_txt.getText());
+            if (!sales_halfPay_txt.getText().equals("")) {
+                double cash = Double.parseDouble(sales_halfPay_txt.getText());
+                double credit = grand - cash;
+                
+                if (credit < 0) {
+                    JOptionPane.showMessageDialog(null, "Sorry you are entering wrong cash amount");
+                    sales_halfPay_txt.setText("");
+                }
+                sales_halfPay_creditTxt.setText(Rounding.RoundTo5(credit, editable));
+            }
+        }
+        
+    }//GEN-LAST:event_sales_halfPay_txtKeyPressed
     
     public void CheckAvailability(){
         String itemNo = ItemNoTxt.getText();
@@ -3550,6 +3674,9 @@ public class MainFrame extends javax.swing.JFrame {
         sales_total_txt.setEnabled(b);
         sales_discount_txt.setEnabled(b);
         sales_grand_txt.setEnabled(b);
+        sales_halfPay_check.setEnabled(b);
+        sales_halfPay_creditTxt.setEnabled(b);
+        sales_halfPay_txt.setEnabled(b);
     }
     
     public void calculatetotal(){
@@ -3572,8 +3699,8 @@ public class MainFrame extends javax.swing.JFrame {
         double total = Double.parseDouble(sales_total_txt.getText());
         double discount = Double.parseDouble(sales_discount_txt.getText());
         double grand = total-(total*(discount/100));
-        grand = round(grand,2);
-        sales_grand_txt.setText(String.valueOf(grand));
+        
+        sales_grand_txt.setText(Rounding.RoundTo5(grand, true));
     }
     
     public static double round(double value, int places) {
@@ -3595,10 +3722,11 @@ public class MainFrame extends javax.swing.JFrame {
         sales_total_txt.setText("");
         sales_grand_txt.setText("");
         sales_discount_txt.setText("");
-        DefaultTableModel model = (DefaultTableModel) sales_item_table.getModel();
-        for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
+        ViewManipulation.emptyTable(sales_item_table);
+        
+        sales_halfPay_check.setSelected(false);
+        sales_halfPay_panel.setVisible(false);
+        
         
         
     }
@@ -3744,6 +3872,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
@@ -3754,6 +3883,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -3801,6 +3931,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton sales_cancel_btn;
     private javax.swing.JTextField sales_discount_txt;
     private javax.swing.JTextField sales_grand_txt;
+    private javax.swing.JCheckBox sales_halfPay_check;
+    private javax.swing.JTextField sales_halfPay_creditTxt;
+    private javax.swing.JPanel sales_halfPay_panel;
+    private javax.swing.JTextField sales_halfPay_txt;
     private javax.swing.JComboBox<String> sales_item_name_combo;
     private javax.swing.JTable sales_item_table;
     private javax.swing.JComboBox<String> sales_itemno_combo;
