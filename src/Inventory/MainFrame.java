@@ -8,6 +8,7 @@ package Inventory;
 import DBController.DataBaseConnector;
 import DataManipulation.DataManipulation;
 import DataManipulation.Rounding;
+import ItemAdding.ItemAdd;
 import Printing.PrintData;
 import Printing.Printsupport;
 import Printing.Printsupport.MyPrintable;
@@ -100,7 +101,7 @@ public class MainFrame extends javax.swing.JFrame {
             System.exit(0);
         }
         
-        changeStateAddItem(false);
+       
         changeStateAddUser(false);
         makeAllSalesComponents(false);
         sales_save_btn.setEnabled(false);
@@ -281,11 +282,11 @@ public class MainFrame extends javax.swing.JFrame {
         add_item_billPrice_txt = new javax.swing.JTextField();
         add_item_cancel_btn = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        SellingTxt = new javax.swing.JTextField();
+        add_item_selling_txt = new javax.swing.JTextField();
         UserPanel1 = new javax.swing.JPanel();
         item_add_new_btn = new javax.swing.JButton();
         item_add_edit_btn = new javax.swing.JButton();
-        add_item_saeve_btn = new javax.swing.JButton();
+        add_item_save_btn = new javax.swing.JButton();
         jLabel57 = new javax.swing.JLabel();
         add_item_category_combo = new javax.swing.JComboBox<>();
         jLabel58 = new javax.swing.JLabel();
@@ -293,10 +294,14 @@ public class MainFrame extends javax.swing.JFrame {
         add_item_sellingP_txt = new javax.swing.JTextField();
         jLabel59 = new javax.swing.JLabel();
         add_item_costP_txt = new javax.swing.JTextField();
-        SellingTxt3 = new javax.swing.JTextField();
+        add_item_cost_txt = new javax.swing.JTextField();
         jLabel60 = new javax.swing.JLabel();
         jLabel61 = new javax.swing.JLabel();
         jLabel62 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel63 = new javax.swing.JLabel();
+        add_item_location_txt = new javax.swing.JTextField();
+        add_item_unit_combo = new javax.swing.JComboBox<>();
         UpdateQtyPanel = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -1380,6 +1385,7 @@ public class MainFrame extends javax.swing.JFrame {
         AddItemPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 181, 56));
 
         add_itemNo_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add_itemNo_txt.setNextFocusableComponent(add_item_category_combo);
         add_itemNo_txt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 add_itemNo_txtFocusGained(evt);
@@ -1405,7 +1411,7 @@ public class MainFrame extends javax.swing.JFrame {
         AddItemPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 181, 56));
 
         add_item_vehicle_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        add_item_vehicle_txt.setNextFocusableComponent(add_item_desc_txt);
+        add_item_vehicle_txt.setNextFocusableComponent(add_item_brand_txt);
         add_item_vehicle_txt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 add_item_vehicle_txtKeyPressed(evt);
@@ -1434,6 +1440,12 @@ public class MainFrame extends javax.swing.JFrame {
         AddItemPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 181, 56));
 
         add_item_billPrice_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add_item_billPrice_txt.setNextFocusableComponent(add_item_costP_txt);
+        add_item_billPrice_txt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                add_item_billPrice_txtFocusGained(evt);
+            }
+        });
         add_item_billPrice_txt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 add_item_billPrice_txtKeyPressed(evt);
@@ -1454,17 +1466,17 @@ public class MainFrame extends javax.swing.JFrame {
         AddItemPanel.add(add_item_cancel_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 600, 142, 81));
 
         jLabel11.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
-        jLabel11.setText("Selling + %");
-        AddItemPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 181, 56));
+        jLabel11.setText("Unit :");
+        AddItemPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 670, 181, 56));
 
-        SellingTxt.setEditable(false);
-        SellingTxt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        SellingTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+        add_item_selling_txt.setEditable(false);
+        add_item_selling_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add_item_selling_txt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                SellingTxtKeyPressed(evt);
+                add_item_selling_txtKeyPressed(evt);
             }
         });
-        AddItemPanel.add(SellingTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 220, 56));
+        AddItemPanel.add(add_item_selling_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 220, 56));
 
         UserPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1500,30 +1512,32 @@ public class MainFrame extends javax.swing.JFrame {
 
         AddItemPanel.add(UserPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 140, -1, -1));
 
-        add_item_saeve_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        add_item_saeve_btn.setText("Save");
-        add_item_saeve_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+        add_item_save_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add_item_save_btn.setText("Save");
+        add_item_save_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                add_item_saeve_btnMouseClicked(evt);
+                add_item_save_btnMouseClicked(evt);
             }
         });
-        add_item_saeve_btn.addActionListener(new java.awt.event.ActionListener() {
+        add_item_save_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                add_item_saeve_btnActionPerformed(evt);
+                add_item_save_btnActionPerformed(evt);
             }
         });
-        add_item_saeve_btn.addKeyListener(new java.awt.event.KeyAdapter() {
+        add_item_save_btn.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                add_item_saeve_btnKeyPressed(evt);
+                add_item_save_btnKeyPressed(evt);
             }
         });
-        AddItemPanel.add(add_item_saeve_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 600, 134, 81));
+        AddItemPanel.add(add_item_save_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 600, 134, 81));
 
         jLabel57.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel57.setText("Vehicle");
         AddItemPanel.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 181, 56));
 
         add_item_category_combo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        add_item_category_combo.setNextFocusableComponent(add_item_vehicle_txt);
+        add_item_category_combo.setOpaque(false);
         AddItemPanel.add(add_item_category_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 450, 60));
 
         jLabel58.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
@@ -1531,6 +1545,7 @@ public class MainFrame extends javax.swing.JFrame {
         AddItemPanel.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 181, 56));
 
         add_item_brand_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add_item_brand_txt.setNextFocusableComponent(add_item_billPrice_txt);
         add_item_brand_txt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 add_item_brand_txtKeyPressed(evt);
@@ -1542,6 +1557,12 @@ public class MainFrame extends javax.swing.JFrame {
         AddItemPanel.add(add_item_brand_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 450, 56));
 
         add_item_sellingP_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add_item_sellingP_txt.setNextFocusableComponent(add_item_location_txt);
+        add_item_sellingP_txt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                add_item_sellingP_txtFocusLost(evt);
+            }
+        });
         add_item_sellingP_txt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 add_item_sellingP_txtKeyPressed(evt);
@@ -1551,9 +1572,15 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel59.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel59.setText("%");
-        AddItemPanel.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 540, 30, 56));
+        AddItemPanel.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 530, 30, 56));
 
         add_item_costP_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add_item_costP_txt.setNextFocusableComponent(add_item_sellingP_txt);
+        add_item_costP_txt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                add_item_costP_txtFocusLost(evt);
+            }
+        });
         add_item_costP_txt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 add_item_costP_txtKeyPressed(evt);
@@ -1561,14 +1588,14 @@ public class MainFrame extends javax.swing.JFrame {
         });
         AddItemPanel.add(add_item_costP_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, 120, 56));
 
-        SellingTxt3.setEditable(false);
-        SellingTxt3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        SellingTxt3.addKeyListener(new java.awt.event.KeyAdapter() {
+        add_item_cost_txt.setEditable(false);
+        add_item_cost_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add_item_cost_txt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                SellingTxt3KeyPressed(evt);
+                add_item_cost_txtKeyPressed(evt);
             }
         });
-        AddItemPanel.add(SellingTxt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 470, 220, 56));
+        AddItemPanel.add(add_item_cost_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 470, 220, 56));
 
         jLabel60.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel60.setText("Cost - %");
@@ -1581,6 +1608,27 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel62.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel62.setText("%");
         AddItemPanel.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 470, 30, 56));
+
+        jLabel13.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
+        jLabel13.setText("Selling + %");
+        AddItemPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 181, 56));
+
+        jLabel63.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
+        jLabel63.setText("Location");
+        AddItemPanel.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 610, 181, 56));
+
+        add_item_location_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add_item_location_txt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                add_item_location_txtKeyPressed(evt);
+            }
+        });
+        AddItemPanel.add(add_item_location_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 610, 230, 56));
+
+        add_item_unit_combo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        add_item_unit_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Set", "Feet", "Meter" }));
+        add_item_unit_combo.setNextFocusableComponent(add_item_save_btn);
+        AddItemPanel.add(add_item_unit_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 680, 230, 50));
 
         MainChangeFrame.add(AddItemPanel, "card5");
 
@@ -2054,21 +2102,19 @@ public class MainFrame extends javax.swing.JFrame {
         date_txt.setText(s.format(d));
     }
     private void AddProductLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddProductLabelMouseClicked
-        MainChangeFrame.removeAll();
-        MainChangeFrame.repaint();
-        MainChangeFrame.revalidate();
-
-        MainChangeFrame.add(AddItemPanel);
-        MainChangeFrame.repaint();
-        MainChangeFrame.revalidate();
+                
+        ViewManipulation.changePanel(MainChangeFrame, AddItemPanel);
         
-        changeStateAddItem(false);
-//        SellingTxt.setEditable(false);
-        item_add_new_btn.grabFocus();
-        item_add_new_btn.requestFocus();
+        ItemAdd item_add = ItemAdd.getInstance();
+                
+        item_add.setFields(add_itemNo_txt, add_item_vehicle_txt, add_item_brand_txt, add_item_desc_txt,add_item_location_txt, add_item_category_combo,add_item_unit_combo, connector);
+        item_add.setPriceFields(add_item_billPrice_txt, add_item_costP_txt, add_item_cost_txt, add_item_sellingP_txt, add_item_selling_txt);
+        
+        item_add.changeStateAddItem(false);
+        
+        item_add_new_btn.requestFocusInWindow();
         item_add_new_btn.setEnabled(true);
-        emptyItemFields();
-        AddQtyTxt.setText("0");
+        
     }//GEN-LAST:event_AddProductLabelMouseClicked
 
     private void ReportLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReportLabelMouseClicked
@@ -2228,9 +2274,9 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     private void item_add_new_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_add_new_btnActionPerformed
-        changeStateAddItem(true);
-        editable=false;
-        add_itemNo_txt.setFocusable(true);
+        ItemAdd.getInstance().changeStateAddItem(true);
+        ItemAdd.getInstance().emptyItemFields();
+//        add_itemNo_txt.setFocusable(true);
         add_itemNo_txt.requestFocusInWindow();
         
     }//GEN-LAST:event_item_add_new_btnActionPerformed
@@ -2242,7 +2288,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         AutoCompleteDecorator.decorate(edit_combo);
 
-        manipulation.getRecords("item", "itemNo", edit_combo);
+        manipulation.getRecords("items", "item_code", edit_combo);
         String itemNo = null;
 
         final JComponent[] inputs = new JComponent[]{
@@ -2253,7 +2299,7 @@ public class MainFrame extends javax.swing.JFrame {
         int result = JOptionPane.showConfirmDialog(null, inputs, "My custom dialog", JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             itemNo = String.valueOf(edit_combo.getSelectedItem());
-            fillEdit(itemNo);
+            ItemAdd.getInstance().fillEdit(itemNo);
             editable=true;
         } else {
             System.out.println("User canceled / closed the dialog, result = " + result);
@@ -2261,36 +2307,18 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_item_add_edit_btnActionPerformed
 
     
-    public void fillEdit(String itemNo){
-        ArrayList list = new ArrayList();
-        list = connector.readRow("item", "itemNo", itemNo);
+    private void add_item_save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_item_save_btnActionPerformed
+        ItemAdd.getInstance().itemSave(editable);
         
-        add_itemNo_txt.setFocusable(false);
-        add_item_vehicle_txt.setEditable(true);
-        add_item_desc_txt.setEditable(true);
-        SellingTxt.setEditable(true);
-        AddQtyTxt.setEditable(true);
         
-        add_itemNo_txt.setText(String.valueOf(list.get(0)));
-        add_item_vehicle_txt.setText(String.valueOf(list.get(1)));
-        add_item_desc_txt.setText(String.valueOf(list.get(2)));
-        SellingTxt.setText(String.valueOf(list.get(3)));
-        AddQtyTxt.setText(String.valueOf(list.get(4)));
-        
-    }
-    
-    private void add_item_saeve_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_item_saeve_btnActionPerformed
-        itemSave(editable);
-        
-        emptyItemFields();
         item_add_new_btn.setEnabled(true);
         item_add_new_btn.requestFocusInWindow();      
        
-    }//GEN-LAST:event_add_item_saeve_btnActionPerformed
+    }//GEN-LAST:event_add_item_save_btnActionPerformed
 
     private void add_item_cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_item_cancel_btnActionPerformed
-        changeStateAddItem(false);
-        emptyItemFields();
+        ItemAdd.getInstance().changeStateAddItem(false);
+        ItemAdd.getInstance().emptyItemFields();
         item_add_new_btn.setEnabled(true);
         item_add_new_btn.requestFocusInWindow();
     }//GEN-LAST:event_add_item_cancel_btnActionPerformed
@@ -2300,9 +2328,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_add_itemNo_txtActionPerformed
 
     private void add_itemNo_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_itemNo_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-           
-           checkItemAlreadyInDB();
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){           
+           ItemAdd.getInstance().CheckAvailability();
         }
     }//GEN-LAST:event_add_itemNo_txtKeyPressed
 
@@ -2317,7 +2344,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     private void add_item_vehicle_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_vehicle_txtKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-           add_item_desc_txt.requestFocus();
+           add_item_brand_txt.requestFocus();
         }
     }//GEN-LAST:event_add_item_vehicle_txtKeyPressed
 
@@ -2328,44 +2355,39 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_add_item_desc_txtKeyPressed
 
     private void add_item_billPrice_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_billPrice_txtKeyPressed
-        
-        
+        char c = evt.getKeyChar();
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            double cost = Double.parseDouble(add_item_desc_txt.getText());
-            double precentage = Double.parseDouble(add_item_billPrice_txt.getText());
-            double selling = (cost + (cost * (precentage/100)));
-            selling = round(selling, 2);
-            System.out.println("Selling : "+selling);
-            SellingTxt.setText(String.valueOf(selling));
-           AddQtyTxt.requestFocus();
+           add_item_costP_txt.requestFocusInWindow();
+        }else if(Character.isLetter(c) && !evt.isAltDown()){
+           evt.consume();              
         }
        
     }//GEN-LAST:event_add_item_billPrice_txtKeyPressed
 
-    private void SellingTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SellingTxtKeyPressed
+    private void add_item_selling_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_selling_txtKeyPressed
         char c = evt.getKeyChar();
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            double selling = Double.parseDouble(SellingTxt.getText());
+            double selling = Double.parseDouble(add_item_selling_txt.getText());
             double precentage = Double.parseDouble(add_item_billPrice_txt.getText());
             double cost = (selling - (selling * (precentage/100)));
             cost = round(cost, 2);
             add_item_desc_txt.setText(String.valueOf(cost));
-            AddQtyTxt.requestFocusInWindow();
+            
         }else if (Character.isLetter(c) && !evt.isAltDown()) {            
             evt.consume();
         }
-    }//GEN-LAST:event_SellingTxtKeyPressed
+    }//GEN-LAST:event_add_item_selling_txtKeyPressed
 
-    private void add_item_saeve_btnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_saeve_btnKeyPressed
+    private void add_item_save_btnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_save_btnKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             
-            itemSave(editable);
-            emptyItemFields();
+            ItemAdd.getInstance().itemSave(editable);
+            ItemAdd.getInstance().emptyItemFields();
             item_add_new_btn.setEnabled(true);
             item_add_new_btn.requestFocusInWindow();
             
         }
-    }//GEN-LAST:event_add_item_saeve_btnKeyPressed
+    }//GEN-LAST:event_add_item_save_btnKeyPressed
 
     private void item_add_new_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item_add_new_btnMouseClicked
         item_add_new_btn.setEnabled(false);
@@ -2379,15 +2401,15 @@ public class MainFrame extends javax.swing.JFrame {
             item_add_new_btn.setEnabled(false);
             add_itemNo_txt.grabFocus();
             add_itemNo_txt.requestFocusInWindow();
-            changeStateAddItem(true);
+            ItemAdd.getInstance().changeStateAddItem(true);
         }
         
         
     }//GEN-LAST:event_item_add_new_btnKeyPressed
 
-    private void add_item_saeve_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_item_saeve_btnMouseClicked
+    private void add_item_save_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_item_save_btnMouseClicked
        
-    }//GEN-LAST:event_add_item_saeve_btnMouseClicked
+    }//GEN-LAST:event_add_item_save_btnMouseClicked
 
     private void saveBtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_saveBtnKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
@@ -2416,10 +2438,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_newBtnKeyPressed
 
     private void add_item_desc_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_desc_txtKeyTyped
-        char c = evt.getKeyChar();
-           if(Character.isLetter(c) && !evt.isAltDown()){
-               evt.consume();              
-           }
+        
     }//GEN-LAST:event_add_item_desc_txtKeyTyped
 
     private void add_item_billPrice_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_billPrice_txtKeyTyped
@@ -3197,7 +3216,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_update_itemNo_comboFocusLost
 
     private void add_itemNo_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_add_itemNo_txtFocusLost
-        CheckAvailability();
+        
     }//GEN-LAST:event_add_itemNo_txtFocusLost
 
     private void sales_searchI_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_searchI_btn1ActionPerformed
@@ -3551,7 +3570,9 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sales_halfPay_txtKeyPressed
 
     private void add_item_brand_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_brand_txtKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            add_item_billPrice_txt.requestFocus();
+        }
     }//GEN-LAST:event_add_item_brand_txtKeyPressed
 
     private void add_item_brand_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_brand_txtKeyTyped
@@ -3559,27 +3580,46 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_add_item_brand_txtKeyTyped
 
     private void add_item_sellingP_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_sellingP_txtKeyPressed
-        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+           add_item_location_txt.requestFocusInWindow();
+        }else if(Character.isLetter(c) && !evt.isAltDown()){
+           evt.consume();              
+        }
     }//GEN-LAST:event_add_item_sellingP_txtKeyPressed
 
     private void add_item_costP_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_costP_txtKeyPressed
-        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+           add_item_sellingP_txt.requestFocusInWindow();
+        }else if(Character.isLetter(c) && !evt.isAltDown()){
+           evt.consume();              
+        }
     }//GEN-LAST:event_add_item_costP_txtKeyPressed
 
-    private void SellingTxt3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SellingTxt3KeyPressed
+    private void add_item_cost_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_cost_txtKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_SellingTxt3KeyPressed
-    
-    public void CheckAvailability(){
-        String itemNo = add_itemNo_txt.getText();
-        String availability = connector.getRelavantRecord("item", "itemNo", "itemNo", itemNo);
-        if(availability != null){
-            JOptionPane.showMessageDialog(null, "Item Number Already in the database");
-            add_itemNo_txt.requestFocusInWindow();
+    }//GEN-LAST:event_add_item_cost_txtKeyPressed
+
+    private void add_item_location_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_location_txtKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            add_item_unit_combo.requestFocusInWindow();
         }
-    }
+    }//GEN-LAST:event_add_item_location_txtKeyPressed
+
+    private void add_item_billPrice_txtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_add_item_billPrice_txtFocusGained
+        ItemAdd.getInstance().generateDescription();        
+    }//GEN-LAST:event_add_item_billPrice_txtFocusGained
+
+    private void add_item_costP_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_add_item_costP_txtFocusLost
+        ItemAdd.getInstance().calculateCost();
+    }//GEN-LAST:event_add_item_costP_txtFocusLost
+
+    private void add_item_sellingP_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_add_item_sellingP_txtFocusLost
+        ItemAdd.getInstance().calculateSelling();
+    }//GEN-LAST:event_add_item_sellingP_txtFocusLost
     
-    
+       
     public void FillBill(String invoiceID){
        ArrayList list =  connector.readRow("orders", "orderID", invoiceID);
        bill_invoiceValue_txt.setText(String.valueOf(list.get(3)));
@@ -3653,73 +3693,7 @@ public class MainFrame extends javax.swing.JFrame {
         TelephoneTxt.setEditable(b);
         
     }
-    
-    public void itemSave(boolean editable){
-        String itemNo;
-        String description;
-        String cost;
-        String selling;
-        String qtyAdding;
-
-        itemNo = add_itemNo_txt.getText();
-        description = add_item_vehicle_txt.getText();
-        cost = add_item_desc_txt.getText();
-        selling = SellingTxt.getText();        
-        qtyAdding = AddQtyTxt.getText();
-        
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        String timeStamp = String.valueOf(now);
-        
-        ArrayList list = new ArrayList();
-        list.add(itemNo);
-        list.add(description);
-        list.add(cost);
-        list.add(selling);
-        list.add(qtyAdding);
-        list.add(timeStamp);  
-        
-        ArrayList coloumn = new ArrayList();
-        
-        coloumn.add("description");
-        coloumn.add("cost");
-        coloumn.add("selling");
-        coloumn.add("qty");
-        
-        boolean success = false;
-        boolean success2 = false;
-        
-        if(editable){
-            success2 = connector.editRecordWithColoumns("item","itemNo",itemNo,list,coloumn);
-        }else{
-            success = connector.insertRecord("item", list);  
-        }
-       
-        
-        if(success){
-            JOptionPane.showMessageDialog(null, "Item Successfull added...");
-            success = false;
-            changeStateAddItem(false);
-        } 
-        if(success2){
-            JOptionPane.showMessageDialog(null, "Item Successfull Edited...");
-            success2 = false;
-            editable = false;
-            changeStateAddItem(false);
-        } 
-    }
-    
-    
-    
-    public void emptyItemFields(){
-        add_itemNo_txt.setText("");
-        add_item_vehicle_txt.setText("");
-        add_item_desc_txt.setText("");
-        SellingTxt.setText("");
-        AddQtyTxt.setText("");
-        add_item_billPrice_txt.setText("");
-    }
-    
-            
+                    
     public void makeAllSalesComponents(boolean b){
         sales_CID_combo.setEnabled(b);
         sales_CName_combo.setEnabled(b);
@@ -3835,8 +3809,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel SalesLabel;
     private javax.swing.JPanel SalesPanel;
     private javax.swing.JPanel SalesReturnPanel;
-    private javax.swing.JTextField SellingTxt;
-    private javax.swing.JTextField SellingTxt3;
     private javax.swing.JPanel SettingsPanel;
     private javax.swing.JTextField TelephoneTxt;
     private javax.swing.JPanel TitlePanel;
@@ -3850,9 +3822,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton add_item_cancel_btn;
     private javax.swing.JComboBox<String> add_item_category_combo;
     private javax.swing.JTextField add_item_costP_txt;
+    private javax.swing.JTextField add_item_cost_txt;
     private javax.swing.JTextField add_item_desc_txt;
-    private javax.swing.JButton add_item_saeve_btn;
+    private javax.swing.JTextField add_item_location_txt;
+    private javax.swing.JButton add_item_save_btn;
     private javax.swing.JTextField add_item_sellingP_txt;
+    private javax.swing.JTextField add_item_selling_txt;
+    private javax.swing.JComboBox<String> add_item_unit_combo;
     private javax.swing.JTextField add_item_vehicle_txt;
     private javax.swing.JComboBox<String> bill_InvoiceID_combo;
     private javax.swing.JComboBox<String> bill_bank_comnbo;
@@ -3898,6 +3874,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -3952,6 +3929,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

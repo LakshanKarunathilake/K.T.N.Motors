@@ -5,6 +5,8 @@
  */
 package DataManipulation;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 /**
@@ -30,7 +32,23 @@ public class Rounding {
         
     }
     
-     public static void RoundTo5(String value){
+    public static double roundCommon(double value, int places) {
+        if (places < 0) {
+            throw new IllegalArgumentException();
+        }
         
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        
+        
+        return bd.doubleValue();
+//    }
     }
+    
+    public static String decimalFormatiing(double val){
+        DecimalFormat df = new DecimalFormat("#.00");
+        String formatedVal = df.format(val);
+        return formatedVal;
+    }
+    
 }

@@ -238,7 +238,7 @@ public class DataBaseConnector {
         
         String value = "";
         for (int i = 0; i < coloumns.size(); i++) {
-            String coloumnData = String.valueOf(data.get(i+1));
+            String coloumnData = String.valueOf(data.get(i));
             String coloumn = String.valueOf(coloumns.get(i));
             value+=(coloumn+"=\""+coloumnData+"\"");
             if((coloumns.size()-1)>i){
