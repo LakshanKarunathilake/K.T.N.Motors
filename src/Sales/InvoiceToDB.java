@@ -167,7 +167,7 @@ public class InvoiceToDB {
         }else{
             record.add(grandTotal);
         }
-        
+        record.add("0");
 
         if (!connector.insertRecord("invoices", record)) {
             JOptionPane.showMessageDialog(null, "Insertion fails in order ");

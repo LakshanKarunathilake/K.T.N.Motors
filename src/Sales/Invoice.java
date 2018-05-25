@@ -33,6 +33,11 @@ public class Invoice {
     JTable table;
     JTextField qtyText;
     
+    MyCombo autoCombo1 = new MyCombo();
+    MyCombo autoCombo2 = new MyCombo();
+    MyCombo autoCombo3 = new MyCombo();
+    MyCombo autoCombo4 = new MyCombo();
+    
     public Invoice(JComboBox itemNo,JComboBox category,JComboBox customerID,JComboBox customerName,JTextField qtyText,DataBaseConnector connector){
         this.itemNo = itemNo;
         this.category = category;
@@ -42,18 +47,16 @@ public class Invoice {
         this.qtyText = qtyText;
     }
     
-    private void autoCompleteCombo() {
-        MyCombo autoCombo1 = new MyCombo();
-        MyCombo autoCombo2 = new MyCombo();
-        MyCombo autoCombo3 = new MyCombo();
-        MyCombo autoCombo4 = new MyCombo();
-        
-
+    public void salesAutoCombo(){
         autoCombo1.setSearchableCombo(this.itemNo, true, "No Result Found");
         autoCombo2.setSearchableCombo(this.category, true, "No Result Found");
         autoCombo3.setSearchableCombo(this.customerID, true, "No Result Found");
         autoCombo4.setSearchableCombo(this.customerName, true, "No Result Found");
+    }
+    
+    private void autoCompleteCombo() {
        
+        salesAutoCombo();
 
         ArrayList<String> catList1 = new ArrayList<>();
         ArrayList<String> catList2 = new ArrayList<>();

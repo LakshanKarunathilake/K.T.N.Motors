@@ -64,15 +64,15 @@ public class SalesReturn {
         //       Getting the value from a second table -- userID from the user table
         ArrayList<String> secondTableCondition = new ArrayList<>();
         
-       myList.add("Orders");
-       myList.add("orderID");
-       myList.add("userID");
+       myList.add("invoices");
+       myList.add("invoice_id");
+       myList.add("customer_code");
         
        autoCombo2.populateSecondCombo(customer_no, invoice_no,connector,myList,null,false);       
        
 //       Adding values to the secondtableCondition
-        secondTableCondition.add("users");
-        secondTableCondition.add("userID");
+        secondTableCondition.add("customers");
+        secondTableCondition.add("customer_code");
         secondTableCondition.add("name");
        
         autoCombo3.populateSecondCombo(customer_name, invoice_no,connector,myList,secondTableCondition,true);
@@ -87,6 +87,7 @@ public class SalesReturn {
         manipulation.getRecords("customers", "name", customer_name);
         
         autoCompleteCombo();
+        
     }
     
     public void getInvoiceRecords(String invoiceNo,JTable table,DataBaseConnector connector){
@@ -112,7 +113,7 @@ public class SalesReturn {
             
             rowData[1] = price.divide(divider);
             rowData[2] = price;
-            rowData[3] = row[2];
+            rowData[3] = row[4];
             rowData[4] = row[2];
             System.out.println("For loop"+i); 
             
@@ -184,20 +185,26 @@ public class SalesReturn {
         });
     }
     
-//    private void eventForItemTable(JTable table) {
-//        table.addMouseListener(new MouseAdapter() {
-//            public void mousePressed(MouseEvent mouseEvent) {
-//                JTable table = (JTable) mouseEvent.getSource();
-//                Point point = mouseEvent.getPoint();
-//                int row = table.rowAtPoint(point);
-//                if (mouseEvent.getClickCount() == 1 && table.getSelectedRow() != -1) {
-//                    JOptionPane.showMessageDialog(null, "Clicked at :"+row);
-//                    calculateReturningTotal(table);
-//                    
-//                }
-//            }
-//        });
-//    }
+    public void eventForItemTable(JTable table) {
+        table.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent mouseEvent) {
+                JTable table = (JTable) mouseEvent.getSource();
+                Point point = mouseEvent.getPoint();
+                int row = table.rowAtPoint(point);
+                int column = table.columnAtPoint(point);
+                if (mouseEvent.getClickCount() == 1 && table.getSelectedRow() != -1 && column==5) {
+                   DefaultTableModel model = (DefaultTableModel) table.getModel();
+                   if(model.getValueAt(row, 3).equals("0")){
+                       JOptionPane.showMessageDialog(null, "Sorry this item is fully Returned");
+                   }else{
+                        model.setValueAt(true, row, 5);
+                   }
+                  
+                    
+                }
+            }
+        });
+    }
     
     public void calculateReturningTotal(JTable table){
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -223,8 +230,7 @@ public class SalesReturn {
     
     public void setPanels(JPanel panel1,JScrollPane panel2){
         this.panel1 = panel1;
-        this.panel2 = panel2;
-        
+        this.panel2 = panel2;        
     }
     
     private void salesInvoiceSelection(String invoiceNo,JTable item_table){
@@ -233,4 +239,5 @@ public class SalesReturn {
         getInvoiceRecords(invoiceNo, item_table, connector);
     }
     
+        
 }

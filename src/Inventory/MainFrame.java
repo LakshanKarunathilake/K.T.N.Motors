@@ -16,6 +16,7 @@ import Sales.Invoice;
 import Sales.InvoiceSearch;
 import Sales.InvoiceToDB;
 import Sales.ItemToTable;
+import SalesReturn.ReturnToDB;
 import SalesReturn.SalesReturn;
 
 import Validation.StartUpValidation;
@@ -956,6 +957,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         return_userName_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         return_userName_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        return_userName_combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                return_userName_comboActionPerformed(evt);
+            }
+        });
         SalesReturnPanel.add(return_userName_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 480, 40));
 
         return_total_txt.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -963,7 +969,7 @@ public class MainFrame extends javax.swing.JFrame {
         SalesReturnPanel.add(return_total_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 730, -1, -1));
 
         return_reason_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        return_reason_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        return_reason_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Not Suitable", "Damaged ", "Damaged Replacing" }));
         SalesReturnPanel.add(return_reason_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 650, 270, 40));
 
         jLabel47.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -1160,6 +1166,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         return_button1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         return_button1.setText("Return");
+        return_button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                return_button1ActionPerformed(evt);
+            }
+        });
         SalesReturnPanel.add(return_button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 750, 190, 100));
 
         MainChangeFrame.add(SalesReturnPanel, "card9");
@@ -1567,6 +1578,9 @@ public class MainFrame extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 add_item_sellingP_txtKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                add_item_sellingP_txtKeyTyped(evt);
+            }
         });
         AddItemPanel.add(add_item_sellingP_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 540, 120, 56));
 
@@ -1584,6 +1598,9 @@ public class MainFrame extends javax.swing.JFrame {
         add_item_costP_txt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 add_item_costP_txtKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                add_item_costP_txtKeyTyped(evt);
             }
         });
         AddItemPanel.add(add_item_costP_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, 120, 56));
@@ -2276,6 +2293,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void item_add_new_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_add_new_btnActionPerformed
         ItemAdd.getInstance().changeStateAddItem(true);
         ItemAdd.getInstance().emptyItemFields();
+        add_item_save_btn.setEnabled(true);
 //        add_itemNo_txt.setFocusable(true);
         add_itemNo_txt.requestFocusInWindow();
         
@@ -2308,7 +2326,23 @@ public class MainFrame extends javax.swing.JFrame {
 
     
     private void add_item_save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_item_save_btnActionPerformed
-        ItemAdd.getInstance().itemSave(editable);
+        if(editable){
+            ItemAdd.getInstance().itemSave(editable);
+            add_item_save_btn.setEnabled(false);
+        }else{
+            if (!ItemAdd.getInstance().CheckAvailability()) {
+                if (ItemAdd.getInstance().itemSave(editable)) {
+                    add_item_save_btn.setEnabled(false);
+                }
+            } else {
+                ItemAdd.getInstance().emptyItemFields();
+                add_item_save_btn.setEnabled(false);
+                ItemAdd.getInstance().changeStateAddItem(false);
+            }
+        }
+        
+        
+        
         
         
         item_add_new_btn.setEnabled(true);
@@ -2449,25 +2483,21 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_add_item_billPrice_txtKeyTyped
 
     private void sales_new_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_new_btnActionPerformed
-        makeAllSalesComponents(true);
+        makeAllSalesComponents(true);        
         sales_save_btn.setEnabled(true);
         sales_print_btn.setEnabled(true);
-        
-//        ArrayList<JComboBox> emptyCombos = new ArrayList<JComboBox>();
-//        emptyCombos.add(sales_CID_combo);
-//        emptyCombos.add(sales_CName_combo);
-//        emptyCombos.add(sales_item_name_combo);
-//        emptyCombos.add(sales_itemno_combo);
-//        
-//        ViewManipulation.emptyComboBoxes(emptyCombos);
-//        
-//        item_sale = new ItemSale(sales_itemno_combo, sales_item_name_combo,sales_CID_combo,sales_CName_combo, connector);
-//        item_sale.fillDataToCombo();
-//        ItemSale.setSaleID(sales_InvoiceID_txt, connector);
+                
         sales_InvoiceID_txt.setText(item_sale.generateSaleID(connector));
 
         sales_discount_txt.setText("0");
-//        newSale();                
+        
+//        item_sale.salesAutoCombo();
+        
+        sales_CID_combo.setEnabled(true);
+        sales_CName_combo.setEnabled(true);
+        sales_item_name_combo.setEnabled(true);
+        sales_itemno_combo.setEnabled(true);
+               
         sales_CID_combo.requestFocusInWindow();
         sales_new_btn.setEnabled(false);
         sales_save_btn.setEnabled(false);
@@ -3180,7 +3210,9 @@ public class MainFrame extends javax.swing.JFrame {
         String path = report_folder_path+"\\SalesInvoice\\sales_invoice.jrxml";
         String userID = String.valueOf(report_userID_combo.getSelectedItem());        
         String sql = "select orders.orderID,orders.orderDate FROM orders WHERE orders.userID like '"+userID+"' ORDER BY orders.orderDate DESC LIMIT 1 ";
-        String invoiceID = connector.sqlExecution(sql, "orderID");
+        ArrayList list = new ArrayList();
+        list.add("invoice_id");
+        String invoiceID = connector.sqlExecution(sql,"invoice_id",list);
         System.out.println("Invoice ID : "+invoiceID);
         if(invoiceID != null){
             HashMap hm = new HashMap();
@@ -3399,12 +3431,15 @@ public class MainFrame extends javax.swing.JFrame {
         ButtonGroup return_yesno = new ButtonGroup();
         return_yesno.add(return_no);
         return_yesno.add(return_yes);
+        return_yes.setSelected(true);
         
         setDefaultDateRange(return_from_picker,return_to_picker,6);
         ViewManipulation.changePanel(MainChangeFrame, SalesReturnPanel);
         sales_return = new SalesReturn(return_invoiceID_combo,return_userID_combo,return_userName_combo,return_total_txt,connector);        
         sales_return.fillDataToCombo(); 
         sales_return.changeTableView(return_item_table);
+        
+        sales_return.eventForItemTable(return_item_table);
         
         
         
@@ -3618,6 +3653,36 @@ public class MainFrame extends javax.swing.JFrame {
     private void add_item_sellingP_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_add_item_sellingP_txtFocusLost
         ItemAdd.getInstance().calculateSelling();
     }//GEN-LAST:event_add_item_sellingP_txtFocusLost
+
+    private void add_item_costP_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_costP_txtKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c) && !evt.isAltDown()) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_add_item_costP_txtKeyTyped
+
+    private void add_item_sellingP_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_sellingP_txtKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c) && !evt.isAltDown()) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_add_item_sellingP_txtKeyTyped
+
+    private void return_button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_button1ActionPerformed
+        
+        ReturnToDB toDB = new ReturnToDB(return_invoiceID_combo,return_reason_combo,return_item_table,connector);
+        if(toDB.checkReturnTable(return_item_table)){
+            toDB.saveToDB();
+        }
+        
+    }//GEN-LAST:event_return_button1ActionPerformed
+
+    private void return_userName_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_userName_comboActionPerformed
+        String name = (String) return_userName_combo.getSelectedItem();
+
+        String customer_id = connector.getRelavantRecord("customers", "customer_code", "name", name);
+        return_userID_combo.setSelectedItem(customer_id);        
+    }//GEN-LAST:event_return_userName_comboActionPerformed
     
        
     public void FillBill(String invoiceID){

@@ -68,13 +68,16 @@ public class ItemAdd {
         return item_add;
     }
     
-    public void CheckAvailability(){
+    public boolean CheckAvailability(){
         String itemNo = itemNo_txt.getText();
         String availability = connector.getRelavantRecord("items", "item_code", "item_code", itemNo);
         if(availability != null){
             JOptionPane.showMessageDialog(null, "Item Number Already in the database");
             itemNo_txt.setText("");
             itemNo_txt.requestFocusInWindow();
+            return true;
+        }else{
+            return false;
         }
     }
     
@@ -112,10 +115,15 @@ public class ItemAdd {
         price_txt.setText("");
         itemNo_txt.setText("");
         unit_combo.setSelectedIndex(0);
+        brand_txt.setText("");
+        location_txt.setText("");
         
     }
     
-    public void itemSave(boolean editable){
+    public boolean itemSave(boolean editable){
+        calculateCost();
+        calculateSelling();
+        
         String itemNo;
         String category;
         String description;
@@ -211,13 +219,16 @@ public class ItemAdd {
             JOptionPane.showMessageDialog(null, "Item Successfull added...");
             success = false;
             changeStateAddItem(false);
+            return true;
         } 
         if(success2){
             JOptionPane.showMessageDialog(null, "Item Successfull Edited...");
             success2 = false;
             editable = false;
             changeStateAddItem(false);
+            return true;
         } 
+        return false;
     }
     
     public void generateDescription(){

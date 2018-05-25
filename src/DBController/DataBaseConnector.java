@@ -172,7 +172,7 @@ public class DataBaseConnector {
     }
     
     public String getRelavantRecord(String tableName,String columnName1,String columnName2,String value){
-//        String sql = "Select "+columnName1+" from "+tableName+" where "+columnName2+" like "+"'"+value+"\"";
+
         String sql = "Select "+columnName1+" from "+tableName+" where "+columnName2+"  like ?";
         
         String record=null;
@@ -292,7 +292,7 @@ public class DataBaseConnector {
     
     public ArrayList retreveDataColoumnWithTwoCondition(String tableName,String coloumnName,String coloumn2,String condition1,String coloumn3,String condition2){
         String sql = "SELECT "+coloumnName+" from "+tableName+" where "+coloumn2+" like " + "\""+condition1+ "\" AND "+coloumn3+" like "+"\""+condition2+ "\"";
-        
+        System.out.println("SQL : "+sql);
         
         try {
             statement = conn.createStatement();
@@ -314,22 +314,24 @@ public class DataBaseConnector {
         
     }
     
-    public String sqlExecution(String sql,String coloumn){
-        
+    public String sqlExecution(String sql,String column,ArrayList list){       
 
-        String record = null;
         try {
-            statement = conn.createStatement();
-            rst = statement.executeQuery(sql);
-
-            if (rst.next()) {
-                record = rst.getString(coloumn);
+            pst = conn.prepareStatement(sql);
+            for (int i = 0; i < list.size(); i++) {
+                pst.setString(i + 1, String.valueOf(list.get(i)));
             }
-            return record;
+            System.out.println(pst);
+            rst = pst.executeQuery();
+            if(rst.next()){
+                return rst.getString(column); 
+            }
+            return null;        
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error in Selecting custom query" + ex.getMessage());
             Logger.getLogger(DataBaseConnector.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return null;
     }
     
      public ArrayList sqlExecutionaArray(String sql,String coloumn){
@@ -348,6 +350,22 @@ public class DataBaseConnector {
             Logger.getLogger(DataBaseConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+     
+    public boolean sqlUpdate(String sql,ArrayList list){
+        try {            
+            pst = conn.prepareStatement(sql);
+            for (int i = 0; i < list.size(); i++) {
+                pst.setString(i+1,String.valueOf(list.get(i)));
+            }
+            System.out.println(pst);
+            pst.execute();
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error in editing custom query"+ ex.getMessage());
+            Logger.getLogger(DataBaseConnector.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
      
      
