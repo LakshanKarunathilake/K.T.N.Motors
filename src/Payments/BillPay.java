@@ -13,7 +13,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -33,8 +35,10 @@ public class BillPay {
     JTextField payable_text;
     JTextField paying_txt;
     
-    JCheckBox curentDate_check;
-    JCheckBox chooseDate_check;
+    JLabel return_txt;
+    
+    JRadioButton curentDate_check;
+    JRadioButton chooseDate_check;
     JDateChooser cashDate_chooser;
     
     JTabbedPane pane;
@@ -45,81 +49,12 @@ public class BillPay {
     
     private static BillPay bill_pay;
     
-    public void setFields(JComboBox customerID_combo,JComboBox customerName_combo,JComboBox invoiceID_combo,JTextField paying_txt,JTable table,DataBaseConnector connector){
-        this.customerID_combo = customerID_combo;
-        this.customerName_combo = customerName_combo;
-        this.invoiceID_combo = invoiceID_combo;      
-        
-        this.paying_txt = paying_txt;
-        this.table = table;
-        
-        this.connector = connector;
-    }
-    
-    public void setBillPaymentFields(JTextField billValue_txt,JTextField billDate_txt,JTextField payable_text,JTabbedPane pane){
-        this.billValue_txt = billValue_txt;
-        this.billDate_txt = billDate_txt;
-        this.pane = pane;
-        this.payable_text = payable_text;
-        
-    }
-    
-    public void setCashPayFields(JCheckBox curentDate_check,JCheckBox chooseDate_check,JDateChooser cashDate_chooser){
-        this.chooseDate_check = chooseDate_check;
-        this.curentDate_check  =curentDate_check;
-        this.cashDate_chooser = cashDate_chooser;
-    }
-    
-    public void cashPay(){
-        String orderID =String.valueOf(invoiceID_combo.getSelectedItem());
-        
-        if(curentDate_check.isSelected()){
-            
-            Timestamp now = new Timestamp(System.currentTimeMillis());
-            String timeStamp = String.valueOf(now);
-            
-            ArrayList data = new ArrayList();
-            data.add(String.valueOf(invoiceID_combo.getSelectedItem()));
-            data.add(timeStamp);
-            data.add("CASH");
+    private BillPay(){};
            
-            ArrayList coloumns = new ArrayList();
-            coloumns.add("invoice_id");
-            coloumns.add("paid_date");
-            coloumns.add("Type");
-            
-            connector.insertRecordColoumnCount("credit_payment", data, coloumns);
-            if(payable_text.getText().equals(paying_txt.getText())){
-                connector.editRecordInTable("invoices", "invoice_id", "status", "1", orderID);
-            }
-            
-            
-        }else if(chooseDate_check.isSelected()){
-            
-            Timestamp now = new Timestamp(cashDate_chooser.getDate().getTime());
-            String timeStamp = String.valueOf(now);
-            
-            ArrayList data = new ArrayList();
-            data.add(String.valueOf(invoiceID_combo.getSelectedItem()));
-            data.add(timeStamp);
-            data.add("CASH");
-           
-            ArrayList coloumns = new ArrayList();
-            coloumns.add("invoice_id");
-            coloumns.add("paid_date");
-            coloumns.add("Type");
-            
-            connector.insertRecordColoumnCount("order_payment", data, coloumns);
-            connector.editRecordInTable("invoices", "invoice_id", "status", "1", orderID);
-        }
-    }
-    
     public static BillPay getInstance(){
         if(bill_pay == null)
             bill_pay = new BillPay();
-        return bill_pay;
-        
-            
+        return bill_pay;            
     }
     
     private void autoCompleteCombo() {
@@ -136,7 +71,7 @@ public class BillPay {
        myList.add("customer_code");
        myList.add("name");
         
-       autoCombo2.populateSecondCombo(customerID_combo, customerName_combo,connector,myList,null,false);
+       autoCombo2.populateSecondCombo( customerName_combo,customerID_combo,connector,myList,null,false);
     }
     
     public void  fillDataToCombo() {
@@ -148,6 +83,73 @@ public class BillPay {
         manipulation.getRecordsWithCondtion("invoices", "invoice_id","status", "0", invoiceID_combo);
         
         autoCompleteCombo();
+        
+    }
+    
+    public void cashPay() {
+        String orderID = String.valueOf(invoiceID_combo.getSelectedItem());
+        String paying = paying_txt.getText();
+        
+
+        if (curentDate_check.isSelected()) {
+
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+            String timeStamp = String.valueOf(now);
+
+            ArrayList data = new ArrayList();
+            data.add(String.valueOf(invoiceID_combo.getSelectedItem()));
+            data.add(timeStamp);
+            data.add("CASH");
+            data.add(paying);
+            
+            ArrayList coloumns = new ArrayList();
+            coloumns.add("invoice_id");
+            coloumns.add("paid_date");
+            coloumns.add("Type");
+            coloumns.add("amount");
+
+            connector.insertRecordColoumnCount("credit_payments", data, coloumns);            
+            
+            if (payable_text.getText().equals(paying_txt.getText())) {
+                connector.editRecordInTable("invoices", "invoice_id", "status", "1", orderID);
+            }
+
+        } else if (chooseDate_check.isSelected()) {
+
+            Timestamp now = new Timestamp(cashDate_chooser.getDate().getTime());
+            String timeStamp = String.valueOf(now);
+
+            ArrayList data = new ArrayList();
+            data.add(String.valueOf(invoiceID_combo.getSelectedItem()));
+            data.add(timeStamp);
+            data.add("CASH");
+            data.add(paying);
+
+            ArrayList coloumns = new ArrayList();
+            coloumns.add("invoice_id");
+            coloumns.add("paid_date");
+            coloumns.add("Type");
+            coloumns.add("amount");
+
+            connector.insertRecordColoumnCount("credit_payments", data, coloumns);
+            if (payable_text.getText().equals(paying_txt.getText())) {
+                connector.editRecordInTable("invoices", "invoice_id", "status", "1", orderID);
+            }
+        }
+        
+        updatePaidAmount();
+        JOptionPane.showMessageDialog(null, "Payment is recorded sucessfully....");
+        
+    }
+    
+    public void updatePaidAmount(){
+        String invoice_id = String.valueOf(invoiceID_combo.getSelectedItem());
+        String now_paid = connector.getRelavantRecord("invoices", "cash_paid", "invoice_id", invoice_id);
+        
+        double now_paying = Double.parseDouble(paying_txt.getText());
+        double total_paid = Double.valueOf(now_paid)+now_paying;
+        
+        connector.editRecordInTable("invoices", "invoice_id", "cash_paid",String.valueOf(total_paid), invoice_id);
         
     }
     
@@ -177,9 +179,12 @@ public class BillPay {
        String userID = connector.getRelavantRecord("invoices", "customer_code", "invoice_id", invoiceID);
        String name = connector.getRelavantRecord("customers", "name", "customer_code", userID);
        
+       String returned_amount = connector.getRelavantRecord("invoices", "returned", "invoice_id", invoiceID);
+       
        invoiceID_combo.setSelectedItem(userID);
        customerName_combo.setSelectedItem(name);
        invoiceID_combo.setSelectedItem(invoiceID);
+       return_txt.setText(returned_amount);
        
        pane.setVisible(true);
        FillBill(invoiceID);
@@ -191,12 +196,40 @@ public class BillPay {
        double bill_val = Double.parseDouble(temp);
        billValue_txt.setText(String.valueOf(list.get(3)));
        billDate_txt.setText(String.valueOf(list.get(4)));
-       temp= String.valueOf(list.get(7));
+       temp= String.valueOf(list.get(7));       
        double paid = Double.parseDouble(temp);
-       double payable = bill_val - paid;
+       temp = return_txt.getText();
+       double returned_amount = Double.valueOf(temp);
+       double payable = bill_val - paid-returned_amount;
        payable_text.setText(String.valueOf(payable));
        paying_txt.setText(String.valueOf(payable));
 
         
+    }
+    
+    public void setBillPaymentFields(JTextField billValue_txt, JTextField billDate_txt, JTextField payable_text,JLabel return_txt, JTabbedPane pane) {
+        this.billValue_txt = billValue_txt;
+        this.billDate_txt = billDate_txt;
+        this.pane = pane;
+        this.payable_text = payable_text;
+        this.return_txt = return_txt;
+
+    }
+
+    public void setCashPayFields(JRadioButton curentDate_check, JRadioButton chooseDate_check, JDateChooser cashDate_chooser) {
+        this.chooseDate_check = chooseDate_check;
+        this.curentDate_check = curentDate_check;
+        this.cashDate_chooser = cashDate_chooser;
+    }
+    
+    public void setFields(JComboBox customerID_combo,JComboBox customerName_combo,JComboBox invoiceID_combo,JTextField paying_txt,JTable table,DataBaseConnector connector){
+        this.customerID_combo = customerID_combo;
+        this.customerName_combo = customerName_combo;
+        this.invoiceID_combo = invoiceID_combo;      
+        
+        this.paying_txt = paying_txt;
+        this.table = table;
+        
+        this.connector = connector;
     }
 }

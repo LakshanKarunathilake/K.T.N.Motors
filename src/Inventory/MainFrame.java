@@ -5,6 +5,8 @@
  */
 package Inventory;
 
+
+import Customers.AddCustomer;
 import DBController.DataBaseConnector;
 import DataManipulation.DataManipulation;
 import DataManipulation.Rounding;
@@ -14,11 +16,13 @@ import Printing.PrintData;
 import Printing.Printsupport;
 import Printing.Printsupport.MyPrintable;
 import Sales.Invoice;
+import Sales.InvoicePrint;
 import Sales.InvoiceSearch;
 import Sales.InvoiceToDB;
 import Sales.ItemToTable;
 import SalesReturn.ReturnToDB;
 import SalesReturn.SalesReturn;
+
 
 import Validation.StartUpValidation;
 import ViewManipulation.ViewManipulation;
@@ -104,7 +108,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
        
-        changeStateAddUser(false);
+        
         makeAllSalesComponents(false);
         sales_save_btn.setEnabled(false);
         sales_print_btn.setEnabled(false);
@@ -191,8 +195,6 @@ public class MainFrame extends javax.swing.JFrame {
         sales_halfPay_txt = new javax.swing.JTextField();
         jLabel56 = new javax.swing.JLabel();
         AddUserPannel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        userIDTxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         NameTxt = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -203,8 +205,9 @@ public class MainFrame extends javax.swing.JFrame {
         UserPanel = new javax.swing.JPanel();
         newBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
-        designationCombo = new javax.swing.JComboBox<>();
         saveBtn = new javax.swing.JButton();
+        jLabel67 = new javax.swing.JLabel();
+        AddressTxt1 = new javax.swing.JTextField();
         SalesReturnPanel = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
         return_userName_combo = new javax.swing.JComboBox<>();
@@ -333,7 +336,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         bill_currentDate = new javax.swing.JRadioButton();
         bill_chooseDate = new javax.swing.JRadioButton();
-        bill_datePicker = new com.toedter.calendar.JDateChooser();
+        bill_cash_datePicker = new com.toedter.calendar.JDateChooser();
         bill_cheque_number = new javax.swing.JPanel();
         bill_bank_comnbo = new javax.swing.JComboBox<>();
         bill_chequeNo_txt = new javax.swing.JTextField();
@@ -357,7 +360,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel65 = new javax.swing.JLabel();
         bill_payable_txt = new javax.swing.JTextField();
         jLabel66 = new javax.swing.JLabel();
-        jLabel67 = new javax.swing.JLabel();
+        bill_return_label = new javax.swing.JLabel();
         TitlePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         clock_txt = new javax.swing.JLabel();
@@ -839,16 +842,9 @@ public class MainFrame extends javax.swing.JFrame {
         AddUserPannel.setBackground(new java.awt.Color(255, 255, 255));
         AddUserPannel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
-        jLabel2.setText("User ID : ");
-        AddUserPannel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 181, 56));
-
-        userIDTxt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        AddUserPannel.add(userIDTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 450, 56));
-
         jLabel3.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel3.setText("Name :");
-        AddUserPannel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 181, 56));
+        AddUserPannel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 181, 56));
 
         NameTxt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         NameTxt.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -856,16 +852,21 @@ public class MainFrame extends javax.swing.JFrame {
                 NameTxtFocusGained(evt);
             }
         });
+        NameTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NameTxtActionPerformed(evt);
+            }
+        });
         NameTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 NameTxtKeyPressed(evt);
             }
         });
-        AddUserPannel.add(NameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, 320, 56));
+        AddUserPannel.add(NameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 450, 56));
 
         jLabel4.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
-        jLabel4.setText("Address : ");
-        AddUserPannel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 181, 56));
+        jLabel4.setText("Address 1 : ");
+        AddUserPannel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 181, 56));
 
         AddressTxt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         AddressTxt.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -878,11 +879,11 @@ public class MainFrame extends javax.swing.JFrame {
                 AddressTxtKeyPressed(evt);
             }
         });
-        AddUserPannel.add(AddressTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, 450, 56));
+        AddUserPannel.add(AddressTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 450, 56));
 
         jLabel5.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel5.setText("Telephone No : ");
-        AddUserPannel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 230, 56));
+        AddUserPannel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 230, 56));
 
         TelephoneTxt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         TelephoneTxt.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -890,7 +891,7 @@ public class MainFrame extends javax.swing.JFrame {
                 TelephoneTxtKeyPressed(evt);
             }
         });
-        AddUserPannel.add(TelephoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 450, 56));
+        AddUserPannel.add(TelephoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 450, 56));
 
         cancelBtn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         cancelBtn.setText("Cancel");
@@ -930,15 +931,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         AddUserPannel.add(UserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 70, -1, -1));
 
-        designationCombo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        designationCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "#", "Mr.", "Mrs.", "Rev.", " " }));
-        designationCombo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                designationComboKeyPressed(evt);
-            }
-        });
-        AddUserPannel.add(designationCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 96, 50));
-
         saveBtn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         saveBtn.setText("Save");
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -952,6 +944,23 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         AddUserPannel.add(saveBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 540, 134, 81));
+
+        jLabel67.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
+        jLabel67.setText("Address 2 : ");
+        AddUserPannel.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 181, 56));
+
+        AddressTxt1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        AddressTxt1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                AddressTxt1FocusGained(evt);
+            }
+        });
+        AddressTxt1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                AddressTxt1KeyPressed(evt);
+            }
+        });
+        AddUserPannel.add(AddressTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 450, 56));
 
         MainChangeFrame.add(AddUserPannel, "card5");
 
@@ -1891,7 +1900,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(bill_datePicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bill_cash_datePicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel35)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(bill_currentDate)
@@ -1909,7 +1918,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(bill_currentDate)
                     .addComponent(bill_chooseDate))
                 .addGap(68, 68, 68)
-                .addComponent(bill_datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bill_cash_datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 260, Short.MAX_VALUE)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
@@ -2085,9 +2094,9 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel66.setText("Should Pay");
         bill_pay_panel.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, -1, 50));
 
-        jLabel67.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel67.setText("0");
-        bill_pay_panel.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 320, 130, 40));
+        bill_return_label.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bill_return_label.setText("0");
+        bill_pay_panel.add(bill_return_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 320, 130, 40));
 
         MainChangeFrame.add(bill_pay_panel, "card8");
 
@@ -2212,15 +2221,10 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     private void newBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBtnActionPerformed
-        changeStateAddUser(true);
+        AddCustomer.getInstance().changeStateAddUser(true);
         newBtn.setEnabled(false);
-        emptyUserFields();
-        String ID = generateUserID();
-        userIDTxt.setText(ID);
-        userIDTxt.setEditable(false);
+        AddCustomer.getInstance().emptyUserFields();
         
-        designationCombo.requestFocus();
-        designationCombo.getAccessibleContext();
         
         
         
@@ -2232,64 +2236,25 @@ public class MainFrame extends javax.swing.JFrame {
         
         sales_new_btn.requestFocusInWindow();
         sales_InvoiceID_txt.setEditable(false);
-        sales_CID_combo.setEditable(false);
-        sales_CName_combo.setEditable(false);
-        sales_itemno_combo.setEditable(false);
-        sales_item_name_combo.setEditable(false);
+        sales_CID_combo.setEnabled(false);
+        sales_CName_combo.setEnabled(false);
+        sales_itemno_combo.setEnabled(false);
+        sales_item_name_combo.setEnabled(false);
         
     }//GEN-LAST:event_SalesLabelMouseClicked
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-          saveUser(); 
-          emptyUserFields();
+          AddCustomer.getInstance().saveUser(); 
+          saveBtn.setEnabled(false);
+          
     }//GEN-LAST:event_saveBtnActionPerformed
 
-    public void saveUser(){
-        String userID;
-        String name;
-        String address;
-        String designation;
-        String telNumber;
-        long creditLimit;
-        
-        userID = userIDTxt.getText();
-        name = NameTxt.getText();
-        address = AddressTxt.getText();
-        telNumber = TelephoneTxt.getText();        
-        designation = (String) designationCombo.getSelectedItem();
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        String timeStamp = String.valueOf(now);
-        
-       
-        
-        
-        ArrayList userList = new ArrayList();
-        userList.add(userID);
-        userList.add(designation);
-        userList.add(name);
-        userList.add(address);
-        userList.add(telNumber);        
-        userList.add(timeStamp);     
-        
-        boolean success = connector.insertRecord("users", userList);
-        
-        if(success){
-            JOptionPane.showMessageDialog(null, "User Successfull added...");
-            changeStateAddUser(false);
-        }
-        newBtn.setEnabled(true);
-    }
+    
     
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-       connector.createTable();    
+       JOptionPane.showMessageDialog(null, "Sorry Under construction contact the developer");
         
     }//GEN-LAST:event_editBtnActionPerformed
-
-    private void designationComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_designationComboKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            NameTxt.requestFocus();
-        }
-    }//GEN-LAST:event_designationComboKeyPressed
 
     private void NameTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NameTxtKeyPressed
          if(evt.getKeyCode() == KeyEvent.VK_ENTER){
@@ -2310,17 +2275,9 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_TelephoneTxtKeyPressed
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
-        emptyUserFields();
+        AddCustomer.getInstance().emptyUserFields();
     }//GEN-LAST:event_cancelBtnActionPerformed
 
-    public void emptyUserFields(){
-        userIDTxt.setText("");
-        NameTxt.setText("");
-        AddressTxt.setText("");
-        TelephoneTxt.setText("");        
-        newBtn.setEnabled(true);
-    }
-    
     private void item_add_new_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_add_new_btnActionPerformed
         ItemAdd.getInstance().changeStateAddItem(true);
         ItemAdd.getInstance().emptyItemFields();
@@ -2478,8 +2435,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void saveBtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_saveBtnKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            newBtn.setEnabled(true);
-            saveUser();  
+            
+            AddCustomer.getInstance().saveUser();  
             newBtn.requestFocusInWindow();
            
         }
@@ -2488,16 +2445,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void newBtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_newBtnKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             newBtn.setEnabled(false);
-            changeStateAddUser(true);
+            AddCustomer.getInstance().changeStateAddUser(true);
             newBtn.setEnabled(false);
-            emptyUserFields();
-            String ID = generateUserID();
-            userIDTxt.setText(ID);
-            userIDTxt.setEditable(false);
-            
-            designationCombo.requestFocus();
-            designationCombo.getAccessibleContext();
-            
+            AddCustomer.getInstance().emptyUserFields();
+            String ID = generateUserID();                     
            
         }
     }//GEN-LAST:event_newBtnKeyPressed
@@ -2540,7 +2491,10 @@ public class MainFrame extends javax.swing.JFrame {
         sales_discount_txt.setEditable(true);
         sales_grand_txt.setEditable(true);
         
+        sales_halfPay_check.setSelected(false);
+        sales_halfPay_panel.setVisible(false);
         
+        sales_CID_combo.setSelectedItem("1");
         ViewManipulation.emptyTable(sales_item_table);
         
         
@@ -2871,54 +2825,24 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_update_cost_txtFocusGained
 
     private void sales_print_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_print_btnActionPerformed
+        InvoicePrint print = new InvoicePrint(report_folder_path, sales_InvoiceID_txt, sales_CID_combo, sales_item_table, connector);
+        
+        ArrayList<String> list = new ArrayList<String>();
+        
+        list.add(String.valueOf(sales_InvoiceID_txt.getText()));        
+        list.add(String.valueOf(sales_total_txt.getText()));
+        list.add(String.valueOf(sales_discount_txt.getText()));
+        list.add(String.valueOf(sales_grand_txt.getText()));
+        
+        print.setMetaArrayList(list);
+        
         if(sales_InvoiceID_txt.getText().equals("1")){
-            cashPrint();
+            print.cashPrint();
         }else{
-            creditPrint();
+            print.creditPrint();
         }        
     }//GEN-LAST:event_sales_print_btnActionPerformed
 
-    public void creditPrint(){
-        
-        Printsupport ps = new Printsupport();
-        PrintData pd = new PrintData();
-        Object printitem[][] = ps.getTableData(sales_item_table);
-        ps.setItems(printitem);
-
-        PrinterJob pj = PrinterJob.getPrinterJob();
-
-        pj.setPrintable(new MyPrintable(), ps.getPageFormat(pj));
-        try {
-            pj.print();
-
-        } catch (PrinterException ex) {
-            ex.printStackTrace();
-        }
-    }
-    
-    public void cashPrint(){
-        String path = report_folder_path + "\\SalesInvoice\\sales_invoice.jrxml*";
-
-        HashMap hm = new HashMap();
-        hm.put("userID", String.valueOf(sales_CID_combo.getSelectedItem()));
-        hm.put("invoiceID", String.valueOf(sales_InvoiceID_txt.getText()));
-        String folder = report_folder_path + "\\SalesInvoice\\";
-        System.out.println("FOlder path :" + folder);
-        hm.put("SUBREPORT_DIR", folder);
-
-        JasperReport jr;
-        try {
-            jr = JasperCompileManager.compileReport(path);
-            JasperPrint jp = JasperFillManager.fillReport(jr, hm, connector.startConnection());
-            JasperViewer jw = new JasperViewer(jp, false);
-            jw.viewReport(jp, false);
-        } catch (JRException ex) {
-            JOptionPane.showMessageDialog(null, "ERROR in Reporting all items...");
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
     private void sales_remove_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_remove_btnActionPerformed
         DefaultTableModel model = (DefaultTableModel) sales_item_table.getModel();
@@ -2990,13 +2914,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_reports_customer_btn2ActionPerformed
 
     private void AddUserLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddUserLabelMouseClicked
-       MainChangeFrame.removeAll();
-        MainChangeFrame.repaint();
-        MainChangeFrame.revalidate();
-
-        MainChangeFrame.add(AddUserPannel);
-        MainChangeFrame.repaint();
-        MainChangeFrame.revalidate();
+        ViewManipulation.changePanel(MainChangeFrame, AddUserPannel);
+        AddCustomer.getInstance().setFields( NameTxt, AddressTxt,AddressTxt1, TelephoneTxt,newBtn,connector);
+        AddCustomer.getInstance().changeStateAddUser(false);
+        newBtn.requestFocusInWindow();
         
         
     }//GEN-LAST:event_AddUserLabelMouseClicked
@@ -3011,7 +2932,7 @@ public class MainFrame extends javax.swing.JFrame {
         bill_currentDate.setSelected(true);
         
         bill_paymentPane.setVisible(false);
-        bill_datePicker.setEnabled(false);
+        bill_cash_datePicker.setEnabled(false);
         
         BillPay.getInstance().setFields(bill_userID_combo, bill_name_combo, bill_InvoiceID_combo,bill_paying_txt,Bill_table, connector);
         BillPay.getInstance().fillDataToCombo();
@@ -3031,18 +2952,25 @@ public class MainFrame extends javax.swing.JFrame {
             String invoiceID = String.valueOf(model.getValueAt(row, 0));
             bill_paymentPane.setVisible(true);
             bill_InvoiceID_combo.setSelectedItem(invoiceID);
-            BillPay.getInstance().setBillPaymentFields(bill_invoiceValue_txt, Bill_date_txt,bill_payable_txt, bill_paymentPane);
+            BillPay.getInstance().setBillPaymentFields(bill_invoiceValue_txt, Bill_date_txt,bill_payable_txt,bill_return_label, bill_paymentPane);
             BillPay.getInstance().filLBillPay();
         }
     }//GEN-LAST:event_Bill_tableMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if(!bill_payable_txt.getText().equals("0.0")){
+            BillPay.getInstance().setCashPayFields(bill_currentDate, bill_chooseDate, bill_cash_datePicker);
+            BillPay.getInstance().cashPay();
+
+            Bill_table.setVisible(false);
+            bill_paymentPane.setVisible(false);
+            bill_invoiceValue_txt.setText("");
+            Bill_date_txt.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "This does not have any payable amount");
+                    
+        }
         
-        
-        Bill_table.setVisible(false);
-        bill_paymentPane.setVisible(false);
-        bill_invoiceValue_txt.setText("");
-        Bill_date_txt.setText("");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     public boolean validationChequePanel(){
@@ -3055,11 +2983,11 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void bill_chooseDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bill_chooseDateActionPerformed
-       bill_datePicker.setEnabled(true);
+       bill_cash_datePicker.setEnabled(true);
     }//GEN-LAST:event_bill_chooseDateActionPerformed
 
     private void bill_currentDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bill_currentDateActionPerformed
-        bill_datePicker.setEnabled(false);
+        bill_cash_datePicker.setEnabled(false);
     }//GEN-LAST:event_bill_currentDateActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -3089,7 +3017,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void bill_pay_select_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bill_pay_select_btnActionPerformed
-        BillPay.getInstance().setBillPaymentFields(bill_invoiceValue_txt, Bill_date_txt,bill_payable_txt, bill_paymentPane);
+        BillPay.getInstance().setBillPaymentFields(bill_invoiceValue_txt, Bill_date_txt,bill_payable_txt,bill_return_label, bill_paymentPane);
         BillPay.getInstance().filLBillPay();
     }//GEN-LAST:event_bill_pay_select_btnActionPerformed
 
@@ -3650,6 +3578,18 @@ public class MainFrame extends javax.swing.JFrame {
         String customer_id = connector.getRelavantRecord("customers", "customer_code", "name", name);
         return_userID_combo.setSelectedItem(customer_id);        
     }//GEN-LAST:event_return_userName_comboActionPerformed
+
+    private void NameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NameTxtActionPerformed
+
+    private void AddressTxt1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_AddressTxt1FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddressTxt1FocusGained
+
+    private void AddressTxt1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AddressTxt1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddressTxt1KeyPressed
     
        
     public void FillBill(String invoiceID){
@@ -3718,13 +3658,7 @@ public class MainFrame extends javax.swing.JFrame {
         return "U"+idFormatted;
     }
 
-    public void changeStateAddUser(Boolean b){
-        userIDTxt.setEditable(b);
-        NameTxt.setEditable(b);
-        AddressTxt.setEditable(b);
-        TelephoneTxt.setEditable(b);
-        
-    }
+    
                     
     public void makeAllSalesComponents(boolean b){
         sales_CID_combo.setEnabled(b);
@@ -3747,7 +3681,7 @@ public class MainFrame extends javax.swing.JFrame {
         TableModel model = sales_item_table.getModel();
         double total = 0 ;
         for (int i = 0; i < model.getRowCount(); i++) {
-            String t1 = String.valueOf(model.getValueAt(i, 4));
+            String t1 = String.valueOf(model.getValueAt(i, 5));
             total+=Double.parseDouble(t1);
                      
         }
@@ -3828,6 +3762,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel AddUserLabel;
     private javax.swing.JPanel AddUserPannel;
     private javax.swing.JTextField AddressTxt;
+    private javax.swing.JTextField AddressTxt1;
     private javax.swing.JTextField Bill_date_txt;
     private javax.swing.JTable Bill_table;
     private javax.swing.JPanel MainChangeFrame;
@@ -3862,12 +3797,12 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField add_item_vehicle_txt;
     private javax.swing.JComboBox<String> bill_InvoiceID_combo;
     private javax.swing.JComboBox<String> bill_bank_comnbo;
+    private com.toedter.calendar.JDateChooser bill_cash_datePicker;
     private com.toedter.calendar.JDateChooser bill_chequeDatePicker;
     private javax.swing.JTextField bill_chequeNo_txt;
     private javax.swing.JPanel bill_cheque_number;
     private javax.swing.JRadioButton bill_chooseDate;
     private javax.swing.JRadioButton bill_currentDate;
-    private com.toedter.calendar.JDateChooser bill_datePicker;
     private javax.swing.JTextField bill_invoiceValue_txt;
     private javax.swing.JComboBox<String> bill_name_combo;
     private javax.swing.JPanel bill_pay_panel;
@@ -3875,11 +3810,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField bill_payable_txt;
     private javax.swing.JTextField bill_paying_txt;
     private javax.swing.JTabbedPane bill_paymentPane;
+    private javax.swing.JLabel bill_return_label;
     private javax.swing.JComboBox<String> bill_userID_combo;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JLabel clock_txt;
     private javax.swing.JLabel date_txt;
-    private javax.swing.JComboBox<String> designationCombo;
     private javax.swing.JButton editBtn;
     private javax.swing.JButton itemCancelBtn1;
     private javax.swing.JButton item_add_edit_btn;
@@ -3913,7 +3848,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -4040,7 +3974,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField update_qty_txt;
     private javax.swing.JButton update_save_btn;
     private javax.swing.JTextField update_selling_txt;
-    private javax.swing.JTextField userIDTxt;
     private javax.swing.JLabel user_date1_label;
     private com.toedter.calendar.JDateChooser user_date1_picker;
     private javax.swing.JLabel user_date2_label;

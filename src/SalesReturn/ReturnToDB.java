@@ -105,7 +105,14 @@ public class ReturnToDB {
                         } else if (return_type.equals("Damaged Replacing")) {
                             damageReplaceAction(qty, itemNo);
                         }
+                    }else{
+                        if (return_type.equals("Not Suitable")) {
+                            uncompatibleAction(qty, itemNo);
+                        } else if (return_type.equals("Damaged Replacing")) {
+                            damageReplaceAction(qty, itemNo);
+                        }
                     }
+                    
 
                 }
             }
