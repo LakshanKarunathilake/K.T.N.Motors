@@ -157,16 +157,20 @@ public class InvoiceToDB {
         record.add(grandTotal);
         record.add(timeStamp);
         record.add(userID);
+        
         if (userID.equals("1")) {
             record.add("1");
+            record.add(grandTotal);
         } else {
             record.add("0");
+            if(checkbox.isSelected()){
+                record.add(cash_txt.getText());
+            }else{
+                record.add("0");
+            }
+            
         }
-        if(checkbox.isSelected()){
-            record.add(cash_txt.getText());
-        }else{
-            record.add(grandTotal);
-        }
+        
         record.add("0");
 
         if (!connector.insertRecord("invoices", record)) {

@@ -9,6 +9,7 @@ import DBController.DataBaseConnector;
 import DataManipulation.DataManipulation;
 import DataManipulation.Rounding;
 import ItemAdding.ItemAdd;
+import Payments.BillPay;
 import Printing.PrintData;
 import Printing.Printsupport;
 import Printing.Printsupport.MyPrintable;
@@ -344,13 +345,19 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         Bill_table = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        bill_pay_select_btn = new javax.swing.JButton();
         jLabel36 = new javax.swing.JLabel();
         Bill_date_txt = new javax.swing.JTextField();
         jLabel37 = new javax.swing.JLabel();
         bill_invoiceValue_txt = new javax.swing.JTextField();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
+        jLabel64 = new javax.swing.JLabel();
+        bill_paying_txt = new javax.swing.JTextField();
+        jLabel65 = new javax.swing.JLabel();
+        bill_payable_txt = new javax.swing.JTextField();
+        jLabel66 = new javax.swing.JLabel();
+        jLabel67 = new javax.swing.JLabel();
         TitlePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         clock_txt = new javax.swing.JLabel();
@@ -2025,14 +2032,14 @@ public class MainFrame extends javax.swing.JFrame {
         });
         bill_pay_panel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 40, 120, 50));
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton2.setText("Select Bill");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        bill_pay_select_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        bill_pay_select_btn.setText("Select Bill");
+        bill_pay_select_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bill_pay_select_btnActionPerformed(evt);
             }
         });
-        bill_pay_panel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 120, 50));
+        bill_pay_panel.add(bill_pay_select_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 120, 50));
 
         jLabel36.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel36.setText("Bill ID :");
@@ -2040,23 +2047,47 @@ public class MainFrame extends javax.swing.JFrame {
 
         Bill_date_txt.setEditable(false);
         Bill_date_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        bill_pay_panel.add(Bill_date_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, 180, 40));
+        bill_pay_panel.add(Bill_date_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 570, 180, 40));
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel37.setText("Invoice Value:");
-        bill_pay_panel.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, 50));
+        bill_pay_panel.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, 50));
 
         bill_invoiceValue_txt.setEditable(false);
         bill_invoiceValue_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        bill_pay_panel.add(bill_invoiceValue_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, 180, 40));
+        bill_pay_panel.add(bill_invoiceValue_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, 180, 40));
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel38.setText("User ID : ");
         bill_pay_panel.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 38, -1, 50));
 
         jLabel39.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel39.setText("Invoice Date: ");
-        bill_pay_panel.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, -1, 50));
+        jLabel39.setText("Returns : ");
+        bill_pay_panel.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, -1, 50));
+
+        jLabel64.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel64.setText("Paying = ");
+        bill_pay_panel.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 690, -1, 50));
+
+        bill_paying_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        bill_paying_txt.setForeground(new java.awt.Color(255, 51, 51));
+        bill_pay_panel.add(bill_paying_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 700, 180, 40));
+
+        jLabel65.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel65.setText("Invoice Date: ");
+        bill_pay_panel.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 500, -1, 50));
+
+        bill_payable_txt.setEditable(false);
+        bill_payable_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        bill_pay_panel.add(bill_payable_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, 180, 40));
+
+        jLabel66.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel66.setText("Should Pay");
+        bill_pay_panel.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, -1, 50));
+
+        jLabel67.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel67.setText("0");
+        bill_pay_panel.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 320, 130, 40));
 
         MainChangeFrame.add(bill_pay_panel, "card8");
 
@@ -2971,14 +3002,9 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_AddUserLabelMouseClicked
 
     private void payBillsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_payBillsLabelMouseClicked
-        MainChangeFrame.removeAll();
-        MainChangeFrame.repaint();
-        MainChangeFrame.revalidate();
-
-        MainChangeFrame.add(bill_pay_panel);
-        MainChangeFrame.repaint();
-        MainChangeFrame.revalidate();
         
+        ViewManipulation.changePanel(MainChangeFrame, bill_pay_panel);
+                
         ButtonGroup group = new ButtonGroup();
         group.add(bill_chooseDate);
         group.add(bill_currentDate);
@@ -2987,30 +3013,13 @@ public class MainFrame extends javax.swing.JFrame {
         bill_paymentPane.setVisible(false);
         bill_datePicker.setEnabled(false);
         
-        
-        newBillPay();
+        BillPay.getInstance().setFields(bill_userID_combo, bill_name_combo, bill_InvoiceID_combo,bill_paying_txt,Bill_table, connector);
+        BillPay.getInstance().fillDataToCombo();
+//        newBillPay();
     }//GEN-LAST:event_payBillsLabelMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ArrayList list = connector.retreveDataColoumnWithTwoCondition("orders", "orderID", "userID", String.valueOf(bill_userID_combo.getSelectedItem()),"status","0");
-        System.out.println("ArrayList Size : "+list.size());
-        DefaultTableModel model = (DefaultTableModel) Bill_table.getModel();
-        for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-        Object ob[] = new Object[1];
-        
-        if(list.size() >0){
-            for (int i = 0; i < list.size(); i++) {
-                ob[0] = list.get(i);
-                model.addRow(ob);
-            } 
-            Bill_table.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "This user do not have unpaid bills!....");
-        }
-        
-        
+         BillPay.getInstance().checkForBills();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void Bill_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Bill_tableMouseClicked
@@ -3021,49 +3030,14 @@ public class MainFrame extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) Bill_table.getModel();
             String invoiceID = String.valueOf(model.getValueAt(row, 0));
             bill_paymentPane.setVisible(true);
-            FillBill(invoiceID);
+            bill_InvoiceID_combo.setSelectedItem(invoiceID);
+            BillPay.getInstance().setBillPaymentFields(bill_invoiceValue_txt, Bill_date_txt,bill_payable_txt, bill_paymentPane);
+            BillPay.getInstance().filLBillPay();
         }
     }//GEN-LAST:event_Bill_tableMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        String orderID =String.valueOf(bill_InvoiceID_combo.getSelectedItem());
         
-        if(bill_currentDate.isSelected()){
-            
-            Timestamp now = new Timestamp(System.currentTimeMillis());
-            String timeStamp = String.valueOf(now);
-            
-            ArrayList data = new ArrayList();
-            data.add(String.valueOf(bill_InvoiceID_combo.getSelectedItem()));
-            data.add(timeStamp);
-            data.add("CASH");
-           
-            ArrayList coloumns = new ArrayList();
-            coloumns.add("OrderID");
-            coloumns.add("PaidDate");
-            coloumns.add("Type");
-            
-            connector.insertRecordColoumnCount("order_payment", data, coloumns);
-            connector.editRecordInTable("orders", "orderID", "status", "1", orderID);
-            
-        }else if(bill_chooseDate.isSelected()){
-            
-            Timestamp now = new Timestamp(bill_datePicker.getDate().getTime());
-            String timeStamp = String.valueOf(now);
-            
-            ArrayList data = new ArrayList();
-            data.add(String.valueOf(bill_InvoiceID_combo.getSelectedItem()));
-            data.add(timeStamp);
-            data.add("CASH");
-           
-            ArrayList coloumns = new ArrayList();
-            coloumns.add("OrderID");
-            coloumns.add("PaidDate");
-            coloumns.add("Type");
-            
-            connector.insertRecordColoumnCount("order_payment", data, coloumns);
-            connector.editRecordInTable("orders", "orderID", "status", "1", orderID);
-        }
         
         Bill_table.setVisible(false);
         bill_paymentPane.setVisible(false);
@@ -3114,29 +3088,22 @@ public class MainFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton12ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       String invoiceID = String.valueOf(bill_InvoiceID_combo.getSelectedItem());
-       String userID = connector.getRelavantRecord("orders", "userID", "orderID", invoiceID);
-       String name = connector.getRelavantRecord("users", "name", "userID", userID);
-       
-       bill_userID_combo.setSelectedItem(userID);
-       bill_name_combo.setSelectedItem(name);
-       
-       bill_paymentPane.setVisible(true);
-       FillBill(invoiceID);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void bill_pay_select_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bill_pay_select_btnActionPerformed
+        BillPay.getInstance().setBillPaymentFields(bill_invoiceValue_txt, Bill_date_txt,bill_payable_txt, bill_paymentPane);
+        BillPay.getInstance().filLBillPay();
+    }//GEN-LAST:event_bill_pay_select_btnActionPerformed
 
     private void bill_userID_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bill_userID_comboActionPerformed
         String userID = String.valueOf(bill_userID_combo.getSelectedItem());
         
-        String name = connector.getRelavantRecord("users", "name", "userID", userID);
+        String name = connector.getRelavantRecord("customers", "name", "customer_code", userID);
         bill_name_combo.setSelectedItem(name);
     }//GEN-LAST:event_bill_userID_comboActionPerformed
 
     private void bill_name_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bill_name_comboActionPerformed
         String name = String.valueOf(bill_name_combo.getSelectedItem());
         
-        String userID = connector.getRelavantRecord("users","userID","name", name);
+        String userID = connector.getRelavantRecord("customers","customer_code","name", name);
         bill_userID_combo.setSelectedItem(userID);
     }//GEN-LAST:event_bill_name_comboActionPerformed
 
@@ -3848,11 +3815,9 @@ public class MainFrame extends javax.swing.JFrame {
         bill_name_combo.removeAllItems();
         bill_InvoiceID_combo.removeAllItems();
         
-        manipulation.getRecords("users","userID",bill_userID_combo);
-        manipulation.getRecords("users","name",bill_name_combo);
-        manipulation.getRecordsWithCondtion("orders","orderID","status","0",bill_InvoiceID_combo);
-        
-        
+        manipulation.getRecords("customers","customer_code",bill_userID_combo);
+        manipulation.getRecords("customers","name",bill_name_combo);
+        manipulation.getRecordsWithCondtion("invoices","invoice_id","status","0",bill_InvoiceID_combo);
         
     }
     
@@ -3906,6 +3871,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField bill_invoiceValue_txt;
     private javax.swing.JComboBox<String> bill_name_combo;
     private javax.swing.JPanel bill_pay_panel;
+    private javax.swing.JButton bill_pay_select_btn;
+    private javax.swing.JTextField bill_payable_txt;
+    private javax.swing.JTextField bill_paying_txt;
     private javax.swing.JTabbedPane bill_paymentPane;
     private javax.swing.JComboBox<String> bill_userID_combo;
     private javax.swing.JButton cancelBtn;
@@ -3927,7 +3895,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -3995,6 +3962,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
+    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
