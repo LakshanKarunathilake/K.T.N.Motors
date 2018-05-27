@@ -12,6 +12,7 @@ package DataManipulation;
  */
 
 import DBController.DataBaseConnector;
+import Purchaising.Purchaise;
 import java.awt.Component;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -113,6 +114,18 @@ public class MyCombo {
             }            
             });   
         
+    }
+    
+    
+    public void populateTextBox(final JComboBox combo,DataBaseConnector connector){
+        txt = (JTextField) combo.getEditor().getEditorComponent();
+        txt.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt) {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    Purchaise.populateFields();
+                }
+            }
+        });
     }
     
     public void populateAJTable(final JComboBox combo,final JTable table,final DataBaseConnector connector){

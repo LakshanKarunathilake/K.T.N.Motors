@@ -2683,14 +2683,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sales_qty_TxtFocusGained
 
     private void updateQtylblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateQtylblMouseClicked
-        MainChangeFrame.removeAll();
-        MainChangeFrame.repaint();
-        MainChangeFrame.revalidate();
-
-        MainChangeFrame.add(UpdateQtyPanel);
-        MainChangeFrame.repaint();
-        MainChangeFrame.revalidate();
-
+        ViewManipulation.changePanel(MainChangeFrame, UpdateQtyPanel);
+        
         update_qty_txt.setText("0");
         update_itemNo_combo.removeAllItems();
         manipulation.getRecords("item", "itemNo",update_itemNo_combo);
