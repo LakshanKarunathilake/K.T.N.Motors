@@ -264,8 +264,8 @@ public class Printsupport {
                     g2d.setFont(font);
                     g2d.drawString("discount:", 100, y += 10);
                     g2d.setFont(font_bold);
-                    String discount = list.get(2);
-                    discount = String.format("%-6s", discount);
+                    String discount = list.get(2)+"%";
+                    discount = String.format("%8s", discount);
                     g2d.drawString(discount,160,y);
                     
                     g2d.drawLine(160, y +=5, 200, y );
