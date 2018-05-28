@@ -171,11 +171,11 @@ public class MyCombo {
         txt.addKeyListener(new KeyAdapter() {
             public void keyReleased(KeyEvent evt) {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                    focusCount++;
+                   
                     if(txt.isFocusOwner()){
-                        System.out.println("TRue : "+focusCount);
+                        
                         comp.requestFocusInWindow();
-                        focusCount = 0;
+                        
                     }
                     
                 }

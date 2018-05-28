@@ -42,7 +42,7 @@ public class Purchaise {
         return purchaise;
     }
     
-    public void 
+    
     
    public static void setFields(JComboBox itemNo_combo,JTextField description_txt,JTextField cost_txt,JTextField selling_txt,JLabel available_lbl,DataBaseConnector connector){
        Purchaise.itemNo_combo = itemNo_combo;

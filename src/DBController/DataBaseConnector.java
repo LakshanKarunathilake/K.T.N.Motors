@@ -126,9 +126,9 @@ public class DataBaseConnector {
         }
         
         for(int counter = 0;counter<list.size();counter++){
-            values2+="\"";
+            values2+="\'";
             values2+=list.get(counter);
-            values2+="\"";
+            values2+="\'";
             if(counter <list.size()-1){
                 values2+=",";
             }
@@ -250,9 +250,9 @@ public class DataBaseConnector {
         }
         String sql = "UPDATE " + tableName + "\n"
                 + "SET " + value+ "\n"
-                + "WHERE " + coloumnName + " like " + "\"" + condition + "\"";
+                + "WHERE " + coloumnName + " like " + "'" + condition + "'";
 
-        
+        System.out.println("SQL : "+sql);
         try {
             statement.executeUpdate(sql);
             return true;
