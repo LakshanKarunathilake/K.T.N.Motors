@@ -9,6 +9,9 @@ import DBController.DataBaseConnector;
 import DataManipulation.DataManipulation;
 import DataManipulation.MyCombo;
 import DataManipulation.Rounding;
+import java.awt.Component;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.swing.JCheckBox;
@@ -17,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
@@ -28,20 +32,31 @@ public class Stock {
     JTextField qty_txt;
     JTextField selling_txt;
     JLabel selling_lbl;
+    JLabel description_lbl;
     DataBaseConnector connector;
+    
+    private JTextField txt;
     
         
     
-    public Stock(JComboBox itemNo_combo,JTextField qty_txt,JTextField selling_txt,JLabel selling_lbl,DataBaseConnector connector){
+    public Stock(JComboBox itemNo_combo,JTextField qty_txt,JTextField selling_txt,JLabel selling_lbl,JLabel description_lbl,DataBaseConnector connector){
         this.itemNo_combo = itemNo_combo;
         this.qty_txt = qty_txt;
         this.selling_lbl = selling_lbl;
         this.selling_txt = selling_txt;
-        this.connector = connector;  
+        this.connector = connector; 
+        
+        this.description_lbl = description_lbl;
         
         
         
         fillCombo();
+    }
+    
+    public void fillDescription(){
+        String item_no = String.valueOf(itemNo_combo.getSelectedItem());
+        String description = connector.getRelavantRecord("items", "description", "item_code", item_no);
+        description_lbl.setText(description);
     }
 
     
@@ -53,13 +68,22 @@ public class Stock {
         
     }
     
-    private void fillCombo(){
+    public void fillCombo(){
+        AutoCompleteDecorator.decorate(itemNo_combo);
         DataManipulation dm = new DataManipulation(connector);
         dm.getRecords("items", "item_code", itemNo_combo);
         
-        autoFillCombo();
+        moveFocusToNext(itemNo_combo, qty_txt);
         
     }
+    
+//    public void fillCombo(){
+//        DataManipulation dm = new DataManipulation(connector);
+//        dm.getRecords("items", "item_code", itemNo_combo);
+//        
+//        autoFillCombo();
+//        
+//    }
     
     public void update(){
         String item_no = String.valueOf(itemNo_combo.getSelectedItem());
@@ -161,5 +185,22 @@ public class Stock {
         double cost = selling -(selling*0.15);
         
         return Rounding.roundCommon(cost, 0);
+    }
+    
+    public void moveFocusToNext(final JComboBox combo,final Component comp){
+        txt = (JTextField) combo.getEditor().getEditorComponent();
+        txt.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt) {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                   
+                    if(txt.isFocusOwner()){
+                        
+                        comp.requestFocusInWindow();
+                        
+                    }
+                    
+                }
+            }
+        });
     }
 }

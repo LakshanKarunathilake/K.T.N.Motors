@@ -133,7 +133,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         sales_halfPay_panel.setVisible(false);
         
-        stock = new Stock(stock_item_combo, stock_qty_txt, stock_selling_txt, stock_selling_lbl, connector);
+        stock = new Stock(stock_item_combo, stock_qty_txt, stock_selling_txt, stock_selling_lbl,stock_description_lbl, connector);
          
     }
 
@@ -166,6 +166,8 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel70 = new javax.swing.JLabel();
         stock_update_btn = new javax.swing.JButton();
         jLabel71 = new javax.swing.JLabel();
+        stock_description_lbl = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         SalesPanel = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -555,6 +557,13 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel71.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel71.setText("With code->");
         stock_count_panel.add(jLabel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
+
+        stock_description_lbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        stock_count_panel.add(stock_description_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 750, 60));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setText("Description :");
+        stock_count_panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, -1));
 
         MainChangeFrame.add(stock_count_panel, "card10");
 
@@ -2386,8 +2395,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void item_add_new_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_add_new_btnActionPerformed
         ItemAdd.getInstance().changeStateAddItem(true);
         ItemAdd.getInstance().emptyItemFields();
+        editable = false;
         add_item_save_btn.setEnabled(true);
-//        add_itemNo_txt.setFocusable(true);
+        add_itemNo_txt.setFocusable(true);
+        add_itemNo_txt.setEditable(true);
         add_itemNo_txt.requestFocusInWindow();
         
     }//GEN-LAST:event_item_add_new_btnActionPerformed
@@ -3693,7 +3704,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
                 
         ViewManipulation.changePanel(MainChangeFrame, stock_count_panel);
-        
+        stock.fillCombo();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void stock_selling_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stock_selling_txtFocusLost
@@ -3726,6 +3737,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_stock_selling_txtKeyPressed
 
     private void stock_qty_txtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stock_qty_txtFocusGained
+        stock.fillDescription();
         stock_qty_txt.selectAll();
     }//GEN-LAST:event_stock_qty_txtFocusGained
 
@@ -3736,6 +3748,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void stock_update_btnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stock_update_btnKeyPressed
        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
            stock.update();
+           stock_item_combo.getEditor().selectAll();
+           
            
        }
     }//GEN-LAST:event_stock_update_btnKeyPressed
@@ -4014,6 +4028,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -4136,6 +4151,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton saveBtn;
     private javax.swing.JToggleButton selectAll_button;
     private javax.swing.JPanel stock_count_panel;
+    private javax.swing.JLabel stock_description_lbl;
     private javax.swing.JComboBox<String> stock_item_combo;
     private javax.swing.JTextField stock_qty_txt;
     private javax.swing.JLabel stock_selling_lbl;
