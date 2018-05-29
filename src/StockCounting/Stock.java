@@ -69,6 +69,7 @@ public class Stock {
     }
     
     public void fillCombo(){
+        itemNo_combo.removeAllItems();
         AutoCompleteDecorator.decorate(itemNo_combo);
         DataManipulation dm = new DataManipulation(connector);
         dm.getRecords("items", "item_code", itemNo_combo);
