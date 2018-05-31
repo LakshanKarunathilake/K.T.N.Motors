@@ -19,17 +19,25 @@ import javax.swing.JOptionPane;
 public class DataBaseConnector {
     private static DataBaseConnector connector= null;
     
-    private static final String USERNAME = "lakshan";
+    private static final String USERNAME = "root";
 //    private static final String PASSWORD = "root";
-    private static final String PASSWORD = "123";
+    private static final String PASSWORD = "";
 //    private static final String PASSWORD = "Manual@123";
 //    private static final String CONN_STRING = "jdbc:mysql://localhost:3333/sales_inventory";  
-    private static final String CONN_STRING = "jdbc:mysql://192.168.8.101/prototype";  
+    private static final String CONN_STRING = "jdbc:mysql://localhost/prototype";  
 //    private static final String CONN_STRING = "jdbc:mysql://35.198.253.207/prototype";  
     Connection conn = null;
     Statement statement = null;
     ResultSet rst = null;
     PreparedStatement pst = null;
+    
+    private DataBaseConnector(){}
+    
+    public static DataBaseConnector getInstance(){
+        if(connector == null)
+            connector = new DataBaseConnector();
+        return connector;
+    }
        
     public Connection startConnection() throws SQLException{
             conn = DriverManager.getConnection(CONN_STRING,USERNAME,PASSWORD);            

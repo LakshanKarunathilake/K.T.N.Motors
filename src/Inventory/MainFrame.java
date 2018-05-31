@@ -69,7 +69,7 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  *
  * @author manual-pc
  */
-public class MainFrame extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame{
 
     /**
      * Creates new form MainFrame
@@ -88,7 +88,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     public MainFrame() {
         
-        connector = new DataBaseConnector();
+        connector = DataBaseConnector.getInstance();
         manipulation = new DataManipulation(connector);
         
         initComponents();
@@ -134,7 +134,13 @@ public class MainFrame extends javax.swing.JFrame {
         sales_halfPay_panel.setVisible(false);
         
         stock = new Stock(stock_item_combo, stock_qty_txt, stock_selling_txt, stock_selling_lbl,stock_description_lbl, connector);
+        // this.setVisible(true);
+         //j.notify();
+         System.out.println("main frame finished");
          
+         setSize(1024, 768);
+         
+         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -383,8 +389,8 @@ public class MainFrame extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1280, 1024));
-        setPreferredSize(new java.awt.Dimension(1280, 1024));
+        setMinimumSize(new java.awt.Dimension(1024, 768));
+        setPreferredSize(new java.awt.Dimension(1024, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         MenuBar.setBackground(new java.awt.Color(51, 102, 255));
@@ -400,7 +406,7 @@ public class MainFrame extends javax.swing.JFrame {
                 AddProductLabelMouseClicked(evt);
             }
         });
-        MenuBar.add(AddProductLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 200, 120));
+        MenuBar.add(AddProductLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 200, 80));
 
         SalesLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         SalesLabel.setText("      Sales");
@@ -411,7 +417,7 @@ public class MainFrame extends javax.swing.JFrame {
                 SalesLabelMouseClicked(evt);
             }
         });
-        MenuBar.add(SalesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 530, 200, 110));
+        MenuBar.add(SalesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 200, 80));
 
         ReportLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         ReportLabel.setText("     Reports");
@@ -422,7 +428,7 @@ public class MainFrame extends javax.swing.JFrame {
                 ReportLabelMouseClicked(evt);
             }
         });
-        MenuBar.add(ReportLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 770, 200, 110));
+        MenuBar.add(ReportLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 200, 80));
 
         updateQtylbl.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         updateQtylbl.setText(" Update Qty");
@@ -433,7 +439,7 @@ public class MainFrame extends javax.swing.JFrame {
                 updateQtylblMouseClicked(evt);
             }
         });
-        MenuBar.add(updateQtylbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 200, 110));
+        MenuBar.add(updateQtylbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 200, 80));
 
         AddUserLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         AddUserLabel.setText("   Add User");
@@ -445,7 +451,7 @@ public class MainFrame extends javax.swing.JFrame {
                 AddUserLabelMouseClicked(evt);
             }
         });
-        MenuBar.add(AddUserLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 200, 110));
+        MenuBar.add(AddUserLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 200, 70));
 
         payBillsLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         payBillsLabel.setText("    Pay Bills");
@@ -456,7 +462,7 @@ public class MainFrame extends javax.swing.JFrame {
                 payBillsLabelMouseClicked(evt);
             }
         });
-        MenuBar.add(payBillsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 200, 100));
+        MenuBar.add(payBillsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 200, 80));
 
         Return_label.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         Return_label.setText("     Returns");
@@ -470,11 +476,13 @@ public class MainFrame extends javax.swing.JFrame {
                 Return_labelMouseEntered(evt);
             }
         });
-        MenuBar.add(Return_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 200, 110));
+        MenuBar.add(Return_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 200, 80));
 
-        getContentPane().add(MenuBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 1020));
+        getContentPane().add(MenuBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 770));
 
         MainChangeFrame.setBackground(new java.awt.Color(255, 204, 204));
+        MainChangeFrame.setMinimumSize(new java.awt.Dimension(814, 850));
+        MainChangeFrame.setPreferredSize(new java.awt.Dimension(814, 850));
         MainChangeFrame.setLayout(new java.awt.CardLayout());
 
         stock_count_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -572,13 +580,13 @@ public class MainFrame extends javax.swing.JFrame {
         SalesPanel.setPreferredSize(new java.awt.Dimension(1366, 768));
         SalesPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel14.setFont(new java.awt.Font("SF New Republic SC", 0, 24)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("SF New Republic SC", 0, 18)); // NOI18N
         jLabel14.setText("Customer ID: ");
-        SalesPanel.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        SalesPanel.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
-        jLabel15.setFont(new java.awt.Font("SF New Republic SC", 0, 24)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("SF New Republic SC", 0, 18)); // NOI18N
         jLabel15.setText("Name:");
-        SalesPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, -1, -1));
+        SalesPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, 20));
 
         sales_search_user_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         sales_search_user_btn.setText("Search User");
@@ -588,7 +596,7 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_search_user_btnActionPerformed(evt);
             }
         });
-        SalesPanel.add(sales_search_user_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, 280, 50));
+        SalesPanel.add(sales_search_user_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 170, 40));
 
         sales_itemno_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         sales_itemno_combo.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -621,7 +629,7 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_itemno_comboKeyTyped(evt);
             }
         });
-        SalesPanel.add(sales_itemno_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 250, 50));
+        SalesPanel.add(sales_itemno_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 210, 40));
 
         jButton14.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jButton14.setText("Search Item");
@@ -631,11 +639,11 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton14ActionPerformed(evt);
             }
         });
-        SalesPanel.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 310, 50));
+        SalesPanel.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 180, 40));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel16.setText("Part Number");
-        SalesPanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 120, 20));
+        SalesPanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 120, 20));
 
         sales_item_name_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         sales_item_name_combo.addActionListener(new java.awt.event.ActionListener() {
@@ -643,11 +651,11 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_item_name_comboActionPerformed(evt);
             }
         });
-        SalesPanel.add(sales_item_name_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 260, 50));
+        SalesPanel.add(sales_item_name_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 260, 40));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel17.setText("Category");
-        SalesPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 120, 20));
+        SalesPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 120, 20));
 
         sales_qty_Txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         sales_qty_Txt.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -668,16 +676,16 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_qty_TxtKeyTyped(evt);
             }
         });
-        SalesPanel.add(sales_qty_Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 90, 50));
+        SalesPanel.add(sales_qty_Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 150, 90, 40));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel18.setText("Unit");
-        SalesPanel.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, -1, -1));
+        SalesPanel.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, -1, -1));
 
         sales_available_qty_txt.setEditable(false);
         sales_available_qty_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         sales_available_qty_txt.setFocusable(false);
-        SalesPanel.add(sales_available_qty_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 240, 90, 50));
+        SalesPanel.add(sales_available_qty_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 150, 80, 40));
 
         jScrollPane1.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
 
@@ -699,25 +707,26 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(sales_item_table);
 
-        SalesPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 850, 300));
+        SalesPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 670, 200));
 
-        jLabel19.setFont(new java.awt.Font("SF New Republic SC", 0, 24)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("SF New Republic SC", 0, 18)); // NOI18N
         jLabel19.setText("Invoice ID: ");
-        SalesPanel.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+        SalesPanel.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         sales_InvoiceID_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        SalesPanel.add(sales_InvoiceID_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 140, 40));
+        SalesPanel.add(sales_InvoiceID_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 140, 30));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sales_new_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         sales_new_btn.setText("New");
+        sales_new_btn.setPreferredSize(new java.awt.Dimension(79, 29));
         sales_new_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sales_new_btnActionPerformed(evt);
             }
         });
-        jPanel1.add(sales_new_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 90));
+        jPanel1.add(sales_new_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 60));
 
         sales_save_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         sales_save_btn.setText("Save");
@@ -727,7 +736,7 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_save_btnActionPerformed(evt);
             }
         });
-        jPanel1.add(sales_save_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 150, 80));
+        jPanel1.add(sales_save_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 90, 50));
 
         sales_print_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         sales_print_btn.setText("Print");
@@ -737,17 +746,20 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_print_btnActionPerformed(evt);
             }
         });
-        jPanel1.add(sales_print_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 150, 80));
+        jPanel1.add(sales_print_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 90, 50));
 
         sales_searchI_btn1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        sales_searchI_btn1.setText("Search Invoice");
+        sales_searchI_btn1.setText("Search ");
         sales_searchI_btn1.setFocusable(false);
+        sales_searchI_btn1.setMaximumSize(new java.awt.Dimension(79, 29));
+        sales_searchI_btn1.setMinimumSize(new java.awt.Dimension(79, 29));
+        sales_searchI_btn1.setPreferredSize(new java.awt.Dimension(79, 29));
         sales_searchI_btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sales_searchI_btn1ActionPerformed(evt);
             }
         });
-        jPanel1.add(sales_searchI_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 150, 80));
+        jPanel1.add(sales_searchI_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 90, 50));
 
         sales_cancel_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         sales_cancel_btn.setText("Cancel");
@@ -757,16 +769,16 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_cancel_btnActionPerformed(evt);
             }
         });
-        jPanel1.add(sales_cancel_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 150, 90));
+        jPanel1.add(sales_cancel_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 90, 60));
 
-        SalesPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 240, 150, 420));
+        SalesPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 90, 270));
 
-        jLabel20.setFont(new java.awt.Font("SF New Republic SC", 0, 24)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("SF New Republic SC", 0, 18)); // NOI18N
         jLabel20.setText("Total");
-        SalesPanel.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 670, -1, -1));
+        SalesPanel.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, -1, -1));
 
         sales_total_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        SalesPanel.add(sales_total_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 670, 130, 40));
+        SalesPanel.add(sales_total_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 420, 120, 30));
 
         sales_discount_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         sales_discount_txt.setText("0");
@@ -778,7 +790,7 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_discount_txtKeyTyped(evt);
             }
         });
-        SalesPanel.add(sales_discount_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 730, 130, 40));
+        SalesPanel.add(sales_discount_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 460, 120, 30));
 
         jLabel21.setFont(new java.awt.Font("Snickers", 0, 24)); // NOI18N
         jLabel21.setText("%");
@@ -790,11 +802,11 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_grand_txtActionPerformed(evt);
             }
         });
-        SalesPanel.add(sales_grand_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 790, 130, 40));
+        SalesPanel.add(sales_grand_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 500, 120, 30));
 
-        jLabel22.setFont(new java.awt.Font("SF New Republic SC", 0, 24)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("SF New Republic SC", 0, 18)); // NOI18N
         jLabel22.setText("Grand Total");
-        SalesPanel.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 790, -1, -1));
+        SalesPanel.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 510, -1, -1));
 
         sales_CName_combo.setEditable(true);
         sales_CName_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -814,7 +826,7 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_CName_comboKeyPressed(evt);
             }
         });
-        SalesPanel.add(sales_CName_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, 280, 40));
+        SalesPanel.add(sales_CName_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 280, 30));
 
         sales_CID_combo.setEditable(true);
         sales_CID_combo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -834,15 +846,15 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_CID_comboKeyReleased(evt);
             }
         });
-        SalesPanel.add(sales_CID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 140, 30));
+        SalesPanel.add(sales_CID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 140, 30));
 
-        jLabel23.setFont(new java.awt.Font("SF New Republic SC", 0, 24)); // NOI18N
+        jLabel23.setFont(new java.awt.Font("SF New Republic SC", 0, 18)); // NOI18N
         jLabel23.setText("Discount");
-        SalesPanel.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 730, -1, -1));
+        SalesPanel.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 470, -1, -1));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel24.setText("Availbale Qty");
-        SalesPanel.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 210, -1, -1));
+        SalesPanel.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, -1, -1));
 
         sales_remove_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         sales_remove_btn.setText("Remove");
@@ -851,7 +863,7 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_remove_btnActionPerformed(evt);
             }
         });
-        SalesPanel.add(sales_remove_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 640, 130, 50));
+        SalesPanel.add(sales_remove_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 130, 40));
 
         sales_unit_Txt.setEditable(false);
         sales_unit_Txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -873,11 +885,11 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_unit_TxtKeyTyped(evt);
             }
         });
-        SalesPanel.add(sales_unit_Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 240, 90, 50));
+        SalesPanel.add(sales_unit_Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 150, 80, 40));
 
         jLabel55.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel55.setText("Qty Need");
-        SalesPanel.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, -1, -1));
+        SalesPanel.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, -1, -1));
 
         sales_halfPay_check.setBackground(new java.awt.Color(255, 255, 255));
         sales_halfPay_check.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -887,10 +899,9 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_halfPay_checkActionPerformed(evt);
             }
         });
-        SalesPanel.add(sales_halfPay_check, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 700, -1, -1));
+        SalesPanel.add(sales_halfPay_check, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, -1, -1));
 
         sales_halfPay_panel.setBackground(new java.awt.Color(255, 255, 255));
-        sales_halfPay_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Half Payment", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
         jLabel46.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel46.setText("Pay In Cash");
@@ -921,11 +932,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(sales_halfPay_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel46)
                     .addComponent(sales_halfPay_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(sales_halfPay_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel56)
                     .addComponent(sales_halfPay_creditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(94, 94, 94))
+                .addGap(102, 102, 102))
         );
         sales_halfPay_panelLayout.setVerticalGroup(
             sales_halfPay_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -938,10 +949,10 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(sales_halfPay_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sales_halfPay_creditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sales_halfPay_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
-        SalesPanel.add(sales_halfPay_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 730, 460, 120));
+        SalesPanel.add(sales_halfPay_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 340, 120));
 
         MainChangeFrame.add(SalesPanel, "card2");
 
@@ -1501,11 +1512,11 @@ public class MainFrame extends javax.swing.JFrame {
         SettingsPanel.setLayout(SettingsPanelLayout);
         SettingsPanelLayout.setHorizontalGroup(
             SettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1060, Short.MAX_VALUE)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         SettingsPanelLayout.setVerticalGroup(
             SettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 890, Short.MAX_VALUE)
+            .addGap(0, 640, Short.MAX_VALUE)
         );
 
         MainChangeFrame.add(SettingsPanel, "card6");
@@ -1776,11 +1787,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel12.setText("Item No : ");
-        UpdateQtyPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 181, 56));
+        UpdateQtyPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 181, 56));
 
         jLabel25.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel25.setText("Description :");
-        UpdateQtyPanel.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 181, 56));
+        UpdateQtyPanel.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 181, 56));
 
         update_description_txt.setEditable(false);
         update_description_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -1797,11 +1808,11 @@ public class MainFrame extends javax.swing.JFrame {
                 update_description_txtKeyPressed(evt);
             }
         });
-        UpdateQtyPanel.add(update_description_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 450, 56));
+        UpdateQtyPanel.add(update_description_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 450, 56));
 
         jLabel26.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel26.setText("Cost :");
-        UpdateQtyPanel.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 181, 56));
+        UpdateQtyPanel.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 181, 56));
 
         update_cost_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         update_cost_txt.setNextFocusableComponent(update_precentage_txt);
@@ -1818,11 +1829,11 @@ public class MainFrame extends javax.swing.JFrame {
                 update_cost_txtKeyTyped(evt);
             }
         });
-        UpdateQtyPanel.add(update_cost_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 450, 56));
+        UpdateQtyPanel.add(update_cost_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, 450, 56));
 
         jLabel27.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel27.setText("Precentage :");
-        UpdateQtyPanel.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, 181, 56));
+        UpdateQtyPanel.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 181, 56));
 
         update_precentage_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         update_precentage_txt.setText("0");
@@ -1848,7 +1859,7 @@ public class MainFrame extends javax.swing.JFrame {
                 update_precentage_txtKeyTyped(evt);
             }
         });
-        UpdateQtyPanel.add(update_precentage_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 390, 450, 56));
+        UpdateQtyPanel.add(update_precentage_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, 450, 56));
 
         itemCancelBtn1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         itemCancelBtn1.setText("Cancel");
@@ -1857,11 +1868,11 @@ public class MainFrame extends javax.swing.JFrame {
                 itemCancelBtn1ActionPerformed(evt);
             }
         });
-        UpdateQtyPanel.add(itemCancelBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 780, 142, 81));
+        UpdateQtyPanel.add(itemCancelBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 550, 142, 81));
 
         jLabel28.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel28.setText("Selling :");
-        UpdateQtyPanel.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, 181, 56));
+        UpdateQtyPanel.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 181, 56));
 
         update_selling_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         update_selling_txt.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1874,7 +1885,7 @@ public class MainFrame extends javax.swing.JFrame {
                 update_selling_txtKeyPressed(evt);
             }
         });
-        UpdateQtyPanel.add(update_selling_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 490, 450, 56));
+        UpdateQtyPanel.add(update_selling_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 450, 56));
 
         UserPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         UpdateQtyPanel.add(UserPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 140, -1, -1));
@@ -1896,7 +1907,7 @@ public class MainFrame extends javax.swing.JFrame {
                 update_save_btnKeyPressed(evt);
             }
         });
-        UpdateQtyPanel.add(update_save_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 780, 134, 81));
+        UpdateQtyPanel.add(update_save_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 550, 134, 81));
 
         update_qty_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         update_qty_txt.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1912,10 +1923,10 @@ public class MainFrame extends javax.swing.JFrame {
                 update_qty_txtKeyTyped(evt);
             }
         });
-        UpdateQtyPanel.add(update_qty_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 580, 119, 56));
+        UpdateQtyPanel.add(update_qty_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 480, 119, 56));
 
         update_availabel_txt.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
-        UpdateQtyPanel.add(update_availabel_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 580, 110, 56));
+        UpdateQtyPanel.add(update_availabel_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 480, 110, 56));
 
         update_itemNo_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         update_itemNo_combo.setNextFocusableComponent(update_cost_txt);
@@ -1927,16 +1938,16 @@ public class MainFrame extends javax.swing.JFrame {
                 update_itemNo_comboFocusLost(evt);
             }
         });
-        UpdateQtyPanel.add(update_itemNo_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 450, 60));
+        UpdateQtyPanel.add(update_itemNo_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 450, 60));
 
         jLabel30.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel30.setText("Update Qty BY  : ");
-        UpdateQtyPanel.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 580, 250, 56));
+        UpdateQtyPanel.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, 250, 56));
 
         jLabel31.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(51, 51, 51));
         jLabel31.setText("Available : ");
-        UpdateQtyPanel.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 580, 160, 56));
+        UpdateQtyPanel.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 480, 160, 56));
 
         MainChangeFrame.add(UpdateQtyPanel, "card5");
 
@@ -2012,7 +2023,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(bill_currentDate)
                         .addGap(99, 99, 99)
                         .addComponent(bill_chooseDate)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2206,7 +2217,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         MainChangeFrame.add(bill_pay_panel, "card8");
 
-        getContentPane().add(MainChangeFrame, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 1060, 890));
+        getContentPane().add(MainChangeFrame, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 800, 640));
 
         TitlePanel.setBackground(new java.awt.Color(51, 51, 51));
         TitlePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -3791,38 +3802,38 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainFrame().setVisible(true);   
-                
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new MainFrame().setVisible(true);   
+//                
+//            }
+//        });
+//    }
     
     public String generateUserID(){
         String lastID = connector.retreveLastRecord("users","userID", "addedDate");

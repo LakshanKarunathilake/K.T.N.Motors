@@ -84,6 +84,7 @@ public class ItemAdd {
     private void autoComplete(){
         MyCombo combo1 = new MyCombo();
         combo1.setSearchableCombo(category_combo, true, "No such Category");
+        combo1.moveFocusToNext(category_combo, vehicle_txt);
     }
     
     private void populateCombo(){
