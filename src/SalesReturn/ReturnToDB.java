@@ -52,21 +52,22 @@ public class ReturnToDB {
         
         for (int i = 0; i < model.getRowCount(); i++) {
             String itemNo = String.valueOf(model.getValueAt(i, 0));
-            String qty = String.valueOf(model.getValueAt(i, 3));
+            String bought_qty = String.valueOf(model.getValueAt(i, 4));
+            String return_qty = String.valueOf(model.getValueAt(i, 3));
 
             Timestamp now = new Timestamp(System.currentTimeMillis());
             String timeStamp = String.valueOf(now);
             
             double total_sold = Double.parseDouble(getSoldPrice(itemNo));
-            double selling_price = total_sold/2;
+            double selling_price = total_sold/Double.parseDouble(bought_qty);
             
-            double returnAmount = Double.parseDouble(qty)* selling_price;
+            double returnAmount = Double.parseDouble(return_qty)* selling_price;
             
 
             ArrayList list = new ArrayList();
             list.add(invoiceID);
             list.add(itemNo);
-            list.add(qty);
+            list.add(return_qty);
             list.add(timeStamp);
             list.add(return_type);
             list.add(Rounding.RoundTo5(returnAmount, true));
@@ -80,36 +81,36 @@ public class ReturnToDB {
             columns.add("amount");
             
             
-            if((model.getValueAt(i, 5)!= null) && (!qty.equals("0"))){
+            if((model.getValueAt(i, 5)!= null) && (!return_qty.equals("0"))){
                 connector.insertRecordColoumnCount("sales_return", list, columns);
 
                 ArrayList temp = connector.retreveDataColoumnWithTwoCondition("invoiceitems", "returnable_qty", "invoice_id", invoiceID, "item_code", itemNo);
                 String ta = String.valueOf(temp.get(0));
                 int current_returnable = Integer.valueOf(ta);
-                current_returnable -= Integer.valueOf(qty);
+                current_returnable -= Integer.valueOf(return_qty);
                 changeReturnableQty(itemNo, current_returnable);
 
                 if (isCustomerCash()) {
                     if (return_type.equals("Not Suitable")) {
-                        uncompatibleAction(qty, itemNo);
+                        uncompatibleAction(return_qty, itemNo);
                     } else if (return_type.equals("Damaged Replacing")) {
-                        damageReplaceAction(qty, itemNo);
+                        damageReplaceAction(return_qty, itemNo);
                     }
                 } else {
                     //Creit user invoice and its not paid
                     String paidOrNot = connector.getRelavantRecord("invoices", "status", "invoice_id", invoiceID);
                     if (paidOrNot.equals("0")) {
                         if (return_type.equals("Not Suitable")) {
-                            uncompatibleAction(qty, itemNo);
+                            uncompatibleAction(return_qty, itemNo);
 
                         } else if (return_type.equals("Damaged Replacing")) {
-                            damageReplaceAction(qty, itemNo);
+                            damageReplaceAction(return_qty, itemNo);
                         }
                     }else{
                         if (return_type.equals("Not Suitable")) {
-                            uncompatibleAction(qty, itemNo);
+                            uncompatibleAction(return_qty, itemNo);
                         } else if (return_type.equals("Damaged Replacing")) {
-                            damageReplaceAction(qty, itemNo);
+                            damageReplaceAction(return_qty, itemNo);
                         }
                     }
                     

@@ -54,13 +54,15 @@ public class InvoicePrint {
         this.list = list;
     }
     
-    public void cashPrint() {
-        String path = report_folder_path + "\\SalesInvoice\\sales_invoice.jrxml*";
+    public void creditPrint() {
+        String workingDir = System.getProperty("user.dir");        
+        String path = workingDir+ "\\src\\reports\\SalesInvoice\\sales_invoice.jrxml";
+        System.out.println("Path :"+path);
 
         HashMap hm = new HashMap();
         hm.put("userID", String.valueOf(customerID_combo.getSelectedItem()));
         hm.put("invoiceID", String.valueOf(invoiceID_txt.getText()));
-        String folder = report_folder_path + "\\SalesInvoice\\";
+        String folder = workingDir + "\\src\\reports\\SalesInvoice\\";
         System.out.println("FOlder path :" + folder);
         hm.put("SUBREPORT_DIR", folder);
 
@@ -78,7 +80,7 @@ public class InvoicePrint {
         }
     }
     
-    public void creditPrint() {
+    public void cashPrint() {
 
         Printsupport ps = new Printsupport();
         PrintData pd = new PrintData();

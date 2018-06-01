@@ -19,7 +19,9 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
@@ -33,21 +35,26 @@ public class Stock {
     JTextField selling_txt;
     JLabel selling_lbl;
     JLabel description_lbl;
+    JLabel availableQty_lbl;
+    
     DataBaseConnector connector;
+    
+    JTable table;
     
     private JTextField txt;
     
         
     
-    public Stock(JComboBox itemNo_combo,JTextField qty_txt,JTextField selling_txt,JLabel selling_lbl,JLabel description_lbl,DataBaseConnector connector){
+    public Stock(JComboBox itemNo_combo,JTextField qty_txt,JTextField selling_txt,JLabel selling_lbl,JLabel description_lbl,JLabel availableQty_lbl,JTable table,DataBaseConnector connector){
         this.itemNo_combo = itemNo_combo;
         this.qty_txt = qty_txt;
         this.selling_lbl = selling_lbl;
+        this.availableQty_lbl = availableQty_lbl;
         this.selling_txt = selling_txt;
         this.connector = connector; 
         
         this.description_lbl = description_lbl;
-        
+        this.table = table;
         
         
         fillCombo();
@@ -56,7 +63,9 @@ public class Stock {
     public void fillDescription(){
         String item_no = String.valueOf(itemNo_combo.getSelectedItem());
         String description = connector.getRelavantRecord("items", "description", "item_code", item_no);
+        String qty = connector.getRelavantRecord("items", "stock", "item_code", item_no);
         description_lbl.setText(description);
+        availableQty_lbl.setText(qty);
     }
 
     
@@ -129,6 +138,7 @@ public class Stock {
         
         if(connector.editRecordWithColoumns("items", "item_code", item_no, data, columns)){
              connector.insertRecordColoumnCount("stock_count", data1, columns1);
+             toTable(data1);
              JOptionPane.showMessageDialog(null, "Added Successfully....");
                           
         }else{
@@ -139,6 +149,12 @@ public class Stock {
         selling_lbl.setText(String.valueOf(selling));
         
         
+    }
+    
+    private void toTable(ArrayList data){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        Object[] rowData = data.toArray();
+        model.addRow(rowData); 
     }
     
     public String parseToNumbers(String text){

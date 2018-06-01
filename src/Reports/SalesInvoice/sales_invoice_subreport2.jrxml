@@ -5,24 +5,24 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="userID" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select * from users where users.userID like $P{userID}]]>
+		<![CDATA[select * from customers where customers.customer_code like $P{userID}]]>
 	</queryString>
-	<field name="userID" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="designation" class="java.lang.String">
+	<field name="customer_code" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="name" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="address" class="java.lang.String">
+	<field name="Address1" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="telNo" class="java.lang.String">
+	<field name="Address2" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="addedDate" class="java.sql.Timestamp">
+	<field name="State" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Telephone" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -44,23 +44,19 @@
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{userID}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{customer_code}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="15" width="16" height="20" uuid="cdebd8d6-ea9f-47e3-a06c-ee8c96c54a66"/>
-				<textFieldExpression><![CDATA[$F{designation}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="16" y="15" width="100" height="20" uuid="f83aeb68-c292-4ef7-8787-f4532e8aaa5a"/>
+				<reportElement x="0" y="15" width="116" height="20" uuid="f83aeb68-c292-4ef7-8787-f4532e8aaa5a"/>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="30" width="100" height="20" uuid="44e59f33-e67e-4fe6-9520-f78d435ab537"/>
-				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+				<reportElement x="0" y="30" width="129" height="20" uuid="44e59f33-e67e-4fe6-9520-f78d435ab537"/>
+				<textFieldExpression><![CDATA[$F{Address1}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="45" width="100" height="20" uuid="e1f64174-8be8-442f-84a0-dad54b62bc38"/>
-				<textFieldExpression><![CDATA[$F{telNo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Telephone}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
