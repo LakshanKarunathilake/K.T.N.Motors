@@ -6,6 +6,7 @@
 package Inventory;
 
 
+import Backup.DoBackup;
 import Customers.AddCustomer;
 import DBController.DataBaseConnector;
 import DataManipulation.DataManipulation;
@@ -15,6 +16,8 @@ import Payments.BillPay;
 import Printing.PrintData;
 import Printing.Printsupport;
 import Printing.Printsupport.MyPrintable;
+import Purchaising.Purchaise;
+import Purchaising.Retailer;
 import Sales.Invoice;
 import Sales.InvoicePrint;
 import Sales.InvoiceSearch;
@@ -33,6 +36,7 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Connection;
@@ -50,6 +54,7 @@ import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -84,6 +89,8 @@ public class MainFrame extends javax.swing.JFrame{
     
     String report_folder_path = "C:\\kade-1.0\\src\\Reports";
     String report_folder_path_sub = "\"E:\\\\kade-1.0\\\\src\\\\Reports";
+    
+    String backup_path = "";
     Connection conn = null;
     
     public MainFrame() {
@@ -134,13 +141,8 @@ public class MainFrame extends javax.swing.JFrame{
         sales_halfPay_panel.setVisible(false);
         
         stock = new Stock(stock_item_combo, stock_qty_txt, stock_selling_txt, stock_selling_lbl,stock_description_lbl, connector);
-        // this.setVisible(true);
-         //j.notify();
-         System.out.println("main frame finished");
+        
          
-         setSize(1024, 768);
-         
-         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -161,6 +163,7 @@ public class MainFrame extends javax.swing.JFrame{
         AddUserLabel = new javax.swing.JLabel();
         payBillsLabel = new javax.swing.JLabel();
         Return_label = new javax.swing.JLabel();
+        jButton18 = new javax.swing.JButton();
         MainChangeFrame = new javax.swing.JPanel();
         stock_count_panel = new javax.swing.JPanel();
         stock_item_combo = new javax.swing.JComboBox<>();
@@ -310,8 +313,8 @@ public class MainFrame extends javax.swing.JFrame{
         jLabel11 = new javax.swing.JLabel();
         add_item_selling_txt = new javax.swing.JTextField();
         UserPanel1 = new javax.swing.JPanel();
-        item_add_new_btn = new javax.swing.JButton();
         item_add_edit_btn = new javax.swing.JButton();
+        item_add_new_btn = new javax.swing.JButton();
         add_item_save_btn = new javax.swing.JButton();
         jLabel57 = new javax.swing.JLabel();
         add_item_category_combo = new javax.swing.JComboBox<>();
@@ -328,24 +331,44 @@ public class MainFrame extends javax.swing.JFrame{
         jLabel63 = new javax.swing.JLabel();
         add_item_location_txt = new javax.swing.JTextField();
         add_item_unit_combo = new javax.swing.JComboBox<>();
-        UpdateQtyPanel = new javax.swing.JPanel();
+        Purchaising_base_panel = new javax.swing.JPanel();
+        purchaising_main_panel = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         update_description_txt = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
-        update_cost_txt = new javax.swing.JTextField();
+        update_billPrice_txt = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
-        update_precentage_txt = new javax.swing.JTextField();
+        update_costP_txt = new javax.swing.JTextField();
         itemCancelBtn1 = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
-        update_selling_txt = new javax.swing.JTextField();
         UserPanel2 = new javax.swing.JPanel();
         update_save_btn = new javax.swing.JButton();
         update_qty_txt = new javax.swing.JTextField();
-        update_availabel_txt = new javax.swing.JLabel();
+        update_available_lbl = new javax.swing.JLabel();
         update_itemNo_combo = new javax.swing.JComboBox<>();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
+        jLabel72 = new javax.swing.JLabel();
+        update_cost_lbl = new javax.swing.JLabel();
+        update_sellingP_txt = new javax.swing.JTextField();
+        jLabel74 = new javax.swing.JLabel();
+        update_selling_lbl = new javax.swing.JLabel();
+        jLabel73 = new javax.swing.JLabel();
+        purchaise_retailer_combo = new javax.swing.JComboBox<>();
+        jLabel75 = new javax.swing.JLabel();
+        purchaise_invoiceno_txt = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        retailer_panel = new javax.swing.JPanel();
+        jLabel76 = new javax.swing.JLabel();
+        retailer_name_txt = new javax.swing.JTextField();
+        jLabel77 = new javax.swing.JLabel();
+        retailer_address_txt = new javax.swing.JTextField();
+        jLabel78 = new javax.swing.JLabel();
+        retailer_contact_txt = new javax.swing.JTextField();
+        jButton15 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
         bill_pay_panel = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         bill_name_combo = new javax.swing.JComboBox<>();
@@ -431,7 +454,7 @@ public class MainFrame extends javax.swing.JFrame{
         MenuBar.add(ReportLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 200, 80));
 
         updateQtylbl.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        updateQtylbl.setText(" Update Qty");
+        updateQtylbl.setText("  Purchaising");
         updateQtylbl.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         updateQtylbl.setOpaque(true);
         updateQtylbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -477,6 +500,16 @@ public class MainFrame extends javax.swing.JFrame{
             }
         });
         MenuBar.add(Return_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 200, 80));
+
+        jButton18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton18.setForeground(new java.awt.Color(204, 0, 0));
+        jButton18.setText("Backup");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
+        MenuBar.add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 650, 180, 50));
 
         getContentPane().add(MenuBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 770));
 
@@ -961,7 +994,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         jLabel3.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel3.setText("Name :");
-        AddUserPannel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 181, 56));
+        AddUserPannel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 181, 56));
 
         NameTxt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         NameTxt.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -979,11 +1012,11 @@ public class MainFrame extends javax.swing.JFrame{
                 NameTxtKeyPressed(evt);
             }
         });
-        AddUserPannel.add(NameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 450, 56));
+        AddUserPannel.add(NameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 450, 56));
 
         jLabel4.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel4.setText("Address 1 : ");
-        AddUserPannel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 181, 56));
+        AddUserPannel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 181, 56));
 
         AddressTxt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         AddressTxt.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -996,11 +1029,11 @@ public class MainFrame extends javax.swing.JFrame{
                 AddressTxtKeyPressed(evt);
             }
         });
-        AddUserPannel.add(AddressTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 450, 56));
+        AddUserPannel.add(AddressTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 450, 56));
 
         jLabel5.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel5.setText("Telephone No : ");
-        AddUserPannel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 230, 56));
+        AddUserPannel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 230, 56));
 
         TelephoneTxt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         TelephoneTxt.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1008,16 +1041,16 @@ public class MainFrame extends javax.swing.JFrame{
                 TelephoneTxtKeyPressed(evt);
             }
         });
-        AddUserPannel.add(TelephoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 450, 56));
+        AddUserPannel.add(TelephoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 450, 56));
 
-        cancelBtn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        cancelBtn.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         cancelBtn.setText("Cancel");
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelBtnActionPerformed(evt);
             }
         });
-        AddUserPannel.add(cancelBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 540, 142, 81));
+        AddUserPannel.add(cancelBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 380, 142, 81));
 
         UserPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1048,7 +1081,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         AddUserPannel.add(UserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 70, -1, -1));
 
-        saveBtn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        saveBtn.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         saveBtn.setText("Save");
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1060,11 +1093,11 @@ public class MainFrame extends javax.swing.JFrame{
                 saveBtnKeyPressed(evt);
             }
         });
-        AddUserPannel.add(saveBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 540, 134, 81));
+        AddUserPannel.add(saveBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 380, 134, 81));
 
         jLabel67.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel67.setText("Address 2 : ");
-        AddUserPannel.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 181, 56));
+        AddUserPannel.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 181, 56));
 
         AddressTxt1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         AddressTxt1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1077,7 +1110,7 @@ public class MainFrame extends javax.swing.JFrame{
                 AddressTxt1KeyPressed(evt);
             }
         });
-        AddUserPannel.add(AddressTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 450, 56));
+        AddUserPannel.add(AddressTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 450, 56));
 
         MainChangeFrame.add(AddUserPannel, "card5");
 
@@ -1086,7 +1119,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         jLabel45.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel45.setText("User Name");
-        SalesReturnPanel.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, -1, -1));
+        SalesReturnPanel.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, -1, -1));
 
         return_userName_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         return_userName_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
@@ -1095,19 +1128,19 @@ public class MainFrame extends javax.swing.JFrame{
                 return_userName_comboActionPerformed(evt);
             }
         });
-        SalesReturnPanel.add(return_userName_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 480, 40));
+        SalesReturnPanel.add(return_userName_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 300, 40));
 
         return_total_txt.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         return_total_txt.setText("0");
-        SalesReturnPanel.add(return_total_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 730, -1, -1));
+        SalesReturnPanel.add(return_total_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 550, -1, -1));
 
         return_reason_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         return_reason_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Not Suitable", "Damaged ", "Damaged Replacing" }));
-        SalesReturnPanel.add(return_reason_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 650, 270, 40));
+        SalesReturnPanel.add(return_reason_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, 190, 40));
 
         jLabel47.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel47.setText("User ID");
-        SalesReturnPanel.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, -1, -1));
+        SalesReturnPanel.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, -1, -1));
 
         return_userID_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         return_userID_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
@@ -1121,48 +1154,48 @@ public class MainFrame extends javax.swing.JFrame{
                 return_userID_comboKeyPressed(evt);
             }
         });
-        SalesReturnPanel.add(return_userID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 200, 40));
+        SalesReturnPanel.add(return_userID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 80, 40));
 
-        jLabel49.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel49.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel49.setText("Returned Cash");
-        SalesReturnPanel.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 610, -1, -1));
+        SalesReturnPanel.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 470, -1, -1));
 
-        selectAll_button.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        selectAll_button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         selectAll_button.setText("Select All");
         selectAll_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectAll_buttonActionPerformed(evt);
             }
         });
-        SalesReturnPanel.add(selectAll_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 590, 120, 70));
+        SalesReturnPanel.add(selectAll_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 470, 90, 40));
 
         jLabel50.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel50.setText("Total Return Amount :");
-        SalesReturnPanel.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 730, -1, -1));
+        SalesReturnPanel.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, -1, -1));
 
         jLabel51.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel51.setText("Reason:");
-        SalesReturnPanel.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 620, -1, -1));
+        SalesReturnPanel.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 480, -1, -1));
 
         return_no.setBackground(new java.awt.Color(255, 255, 255));
-        return_no.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        return_no.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         return_no.setText("No");
         return_no.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 return_noActionPerformed(evt);
             }
         });
-        SalesReturnPanel.add(return_no, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 650, -1, -1));
+        SalesReturnPanel.add(return_no, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 500, -1, -1));
 
         return_yes.setBackground(new java.awt.Color(255, 255, 255));
-        return_yes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        return_yes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         return_yes.setText("Yes");
         return_yes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 return_yesActionPerformed(evt);
             }
         });
-        SalesReturnPanel.add(return_yes, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 650, -1, -1));
+        SalesReturnPanel.add(return_yes, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 500, -1, -1));
 
         return_calculation_btn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         return_calculation_btn.setText("Calculate");
@@ -1171,7 +1204,7 @@ public class MainFrame extends javax.swing.JFrame{
                 return_calculation_btnActionPerformed(evt);
             }
         });
-        SalesReturnPanel.add(return_calculation_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 600, 190, 100));
+        SalesReturnPanel.add(return_calculation_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 190, 40));
 
         return_cancel_btn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         return_cancel_btn.setText("Cancel");
@@ -1180,7 +1213,7 @@ public class MainFrame extends javax.swing.JFrame{
                 return_cancel_btnActionPerformed(evt);
             }
         });
-        SalesReturnPanel.add(return_cancel_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 150, 120, 50));
+        SalesReturnPanel.add(return_cancel_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 120, 50));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton4.setText("Select Invoice");
@@ -1189,7 +1222,7 @@ public class MainFrame extends javax.swing.JFrame{
                 jButton4ActionPerformed(evt);
             }
         });
-        SalesReturnPanel.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 210, 50));
+        SalesReturnPanel.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, 50));
 
         sales_return_subPanel.setLayout(new java.awt.CardLayout());
 
@@ -1230,21 +1263,21 @@ public class MainFrame extends javax.swing.JFrame{
                 return_search_item_comboActionPerformed(evt);
             }
         });
-        returns_search_panel.add(return_search_item_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 280, 40));
+        returns_search_panel.add(return_search_item_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 190, 40));
 
         jLabel48.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel48.setText("From");
-        returns_search_panel.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, -1, -1));
+        returns_search_panel.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
 
         return_from_picker.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        returns_search_panel.add(return_from_picker, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, 230, 50));
+        returns_search_panel.add(return_from_picker, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 170, 40));
 
         jLabel53.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel53.setText("To");
-        returns_search_panel.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, -1, -1));
+        returns_search_panel.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, -1, -1));
 
         return_to_picker.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        returns_search_panel.add(return_to_picker, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 50, 230, 50));
+        returns_search_panel.add(return_to_picker, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, 170, 40));
 
         return_invoiceSearch_table.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         return_invoiceSearch_table.setModel(new javax.swing.table.DefaultTableModel(
@@ -1265,7 +1298,7 @@ public class MainFrame extends javax.swing.JFrame{
         });
         jScrollPane4.setViewportView(return_invoiceSearch_table);
 
-        returns_search_panel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 910, 210));
+        returns_search_panel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 750, 170));
 
         jLabel52.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel52.setText("Item No");
@@ -1273,7 +1306,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         sales_return_subPanel.add(returns_search_panel, "card3");
 
-        SalesReturnPanel.add(sales_return_subPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 970, 360));
+        SalesReturnPanel.add(sales_return_subPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 760, 250));
 
         return_invoiceID_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         return_invoiceID_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
@@ -1282,7 +1315,7 @@ public class MainFrame extends javax.swing.JFrame{
                 return_invoiceID_comboActionPerformed(evt);
             }
         });
-        SalesReturnPanel.add(return_invoiceID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 200, 40));
+        SalesReturnPanel.add(return_invoiceID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 160, 40));
 
         return_search_invoice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         return_search_invoice.setText("Search Invoice");
@@ -1291,7 +1324,7 @@ public class MainFrame extends javax.swing.JFrame{
                 return_search_invoiceActionPerformed(evt);
             }
         });
-        SalesReturnPanel.add(return_search_invoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 210, 50));
+        SalesReturnPanel.add(return_search_invoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 210, 50));
 
         jLabel54.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel54.setText("Invoice No");
@@ -1304,7 +1337,7 @@ public class MainFrame extends javax.swing.JFrame{
                 return_button1ActionPerformed(evt);
             }
         });
-        SalesReturnPanel.add(return_button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 750, 190, 100));
+        SalesReturnPanel.add(return_button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 530, 170, 60));
 
         MainChangeFrame.add(SalesReturnPanel, "card9");
 
@@ -1526,7 +1559,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         jLabel7.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel7.setText("Item No : ");
-        AddItemPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 181, 56));
+        AddItemPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 181, 30));
 
         add_itemNo_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         add_itemNo_txt.setNextFocusableComponent(add_item_category_combo);
@@ -1548,27 +1581,37 @@ public class MainFrame extends javax.swing.JFrame{
                 add_itemNo_txtKeyPressed(evt);
             }
         });
-        AddItemPanel.add(add_itemNo_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 37, 450, 56));
+        AddItemPanel.add(add_itemNo_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 37, 380, 40));
 
         jLabel8.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel8.setText("Category :");
-        AddItemPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 181, 56));
+        AddItemPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 181, 40));
 
         add_item_vehicle_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         add_item_vehicle_txt.setNextFocusableComponent(add_item_brand_txt);
+        add_item_vehicle_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_item_vehicle_txtActionPerformed(evt);
+            }
+        });
         add_item_vehicle_txt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 add_item_vehicle_txtKeyPressed(evt);
             }
         });
-        AddItemPanel.add(add_item_vehicle_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 450, 56));
+        AddItemPanel.add(add_item_vehicle_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 380, 40));
 
         jLabel9.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel9.setText("Description");
-        AddItemPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 181, 56));
+        AddItemPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 181, 40));
 
         add_item_desc_txt.setEditable(false);
         add_item_desc_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add_item_desc_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_item_desc_txtActionPerformed(evt);
+            }
+        });
         add_item_desc_txt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 add_item_desc_txtKeyPressed(evt);
@@ -1577,17 +1620,22 @@ public class MainFrame extends javax.swing.JFrame{
                 add_item_desc_txtKeyTyped(evt);
             }
         });
-        AddItemPanel.add(add_item_desc_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 450, 56));
+        AddItemPanel.add(add_item_desc_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 380, 40));
 
         jLabel10.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel10.setText("Bill Price");
-        AddItemPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 181, 56));
+        AddItemPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 181, 30));
 
         add_item_billPrice_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         add_item_billPrice_txt.setNextFocusableComponent(add_item_costP_txt);
         add_item_billPrice_txt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 add_item_billPrice_txtFocusGained(evt);
+            }
+        });
+        add_item_billPrice_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_item_billPrice_txtActionPerformed(evt);
             }
         });
         add_item_billPrice_txt.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1598,7 +1646,7 @@ public class MainFrame extends javax.swing.JFrame{
                 add_item_billPrice_txtKeyTyped(evt);
             }
         });
-        AddItemPanel.add(add_item_billPrice_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 230, 56));
+        AddItemPanel.add(add_item_billPrice_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 120, 40));
 
         add_item_cancel_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         add_item_cancel_btn.setText("Cancel");
@@ -1607,22 +1655,36 @@ public class MainFrame extends javax.swing.JFrame{
                 add_item_cancel_btnActionPerformed(evt);
             }
         });
-        AddItemPanel.add(add_item_cancel_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 600, 142, 81));
+        AddItemPanel.add(add_item_cancel_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 490, 90, 60));
 
         jLabel11.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel11.setText("Unit :");
-        AddItemPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 670, 181, 56));
+        AddItemPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 181, 30));
 
         add_item_selling_txt.setEditable(false);
         add_item_selling_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add_item_selling_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_item_selling_txtActionPerformed(evt);
+            }
+        });
         add_item_selling_txt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 add_item_selling_txtKeyPressed(evt);
             }
         });
-        AddItemPanel.add(add_item_selling_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 220, 56));
+        AddItemPanel.add(add_item_selling_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, 150, 40));
 
         UserPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        item_add_edit_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        item_add_edit_btn.setText("Edit");
+        item_add_edit_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_add_edit_btnActionPerformed(evt);
+            }
+        });
+        UserPanel1.add(item_add_edit_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 96, 120, 84));
 
         item_add_new_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         item_add_new_btn.setText("New");
@@ -1643,18 +1705,9 @@ public class MainFrame extends javax.swing.JFrame{
                 item_add_new_btnKeyPressed(evt);
             }
         });
-        UserPanel1.add(item_add_new_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 89));
+        UserPanel1.add(item_add_new_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 89));
 
-        item_add_edit_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        item_add_edit_btn.setText("Edit");
-        item_add_edit_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                item_add_edit_btnActionPerformed(evt);
-            }
-        });
-        UserPanel1.add(item_add_edit_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 96, 170, 84));
-
-        AddItemPanel.add(UserPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 140, -1, -1));
+        AddItemPanel.add(UserPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 130, -1, 180));
 
         add_item_save_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         add_item_save_btn.setText("Save");
@@ -1673,20 +1726,25 @@ public class MainFrame extends javax.swing.JFrame{
                 add_item_save_btnKeyPressed(evt);
             }
         });
-        AddItemPanel.add(add_item_save_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 600, 134, 81));
+        AddItemPanel.add(add_item_save_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 490, 90, 60));
 
         jLabel57.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel57.setText("Vehicle");
-        AddItemPanel.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 181, 56));
+        AddItemPanel.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 181, 30));
 
         add_item_category_combo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         add_item_category_combo.setNextFocusableComponent(add_item_vehicle_txt);
         add_item_category_combo.setOpaque(false);
-        AddItemPanel.add(add_item_category_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 450, 60));
+        add_item_category_combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_item_category_comboActionPerformed(evt);
+            }
+        });
+        AddItemPanel.add(add_item_category_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 380, 40));
 
         jLabel58.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel58.setText("Brand");
-        AddItemPanel.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 181, 56));
+        AddItemPanel.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 181, 30));
 
         add_item_brand_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         add_item_brand_txt.setNextFocusableComponent(add_item_billPrice_txt);
@@ -1698,7 +1756,7 @@ public class MainFrame extends javax.swing.JFrame{
                 add_item_brand_txtKeyTyped(evt);
             }
         });
-        AddItemPanel.add(add_item_brand_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 450, 56));
+        AddItemPanel.add(add_item_brand_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 380, 40));
 
         add_item_sellingP_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         add_item_sellingP_txt.setNextFocusableComponent(add_item_location_txt);
@@ -1715,11 +1773,11 @@ public class MainFrame extends javax.swing.JFrame{
                 add_item_sellingP_txtKeyTyped(evt);
             }
         });
-        AddItemPanel.add(add_item_sellingP_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 540, 120, 56));
+        AddItemPanel.add(add_item_sellingP_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 120, 40));
 
         jLabel59.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel59.setText("%");
-        AddItemPanel.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 530, 30, 56));
+        AddItemPanel.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 400, 30, -1));
 
         add_item_costP_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         add_item_costP_txt.setNextFocusableComponent(add_item_sellingP_txt);
@@ -1736,7 +1794,7 @@ public class MainFrame extends javax.swing.JFrame{
                 add_item_costP_txtKeyTyped(evt);
             }
         });
-        AddItemPanel.add(add_item_costP_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, 120, 56));
+        AddItemPanel.add(add_item_costP_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 120, 40));
 
         add_item_cost_txt.setEditable(false);
         add_item_cost_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -1745,27 +1803,27 @@ public class MainFrame extends javax.swing.JFrame{
                 add_item_cost_txtKeyPressed(evt);
             }
         });
-        AddItemPanel.add(add_item_cost_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 470, 220, 56));
+        AddItemPanel.add(add_item_cost_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 150, 40));
 
         jLabel60.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel60.setText("Cost - %");
-        AddItemPanel.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 181, 56));
+        AddItemPanel.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 181, 30));
 
         jLabel61.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel61.setText("Cost - %");
-        AddItemPanel.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 181, 56));
+        AddItemPanel.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 181, 30));
 
         jLabel62.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel62.setText("%");
-        AddItemPanel.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 470, 30, 56));
+        AddItemPanel.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, 30, 30));
 
         jLabel13.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel13.setText("Selling + %");
-        AddItemPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 181, 56));
+        AddItemPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 181, -1));
 
         jLabel63.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel63.setText("Location");
-        AddItemPanel.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 610, 181, 56));
+        AddItemPanel.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 181, 30));
 
         add_item_location_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         add_item_location_txt.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1773,30 +1831,37 @@ public class MainFrame extends javax.swing.JFrame{
                 add_item_location_txtKeyPressed(evt);
             }
         });
-        AddItemPanel.add(add_item_location_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 610, 230, 56));
+        AddItemPanel.add(add_item_location_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 450, 120, 40));
 
         add_item_unit_combo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         add_item_unit_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Set", "Feet", "Meter" }));
         add_item_unit_combo.setNextFocusableComponent(add_item_save_btn);
-        AddItemPanel.add(add_item_unit_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 680, 230, 50));
+        add_item_unit_combo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                add_item_unit_comboKeyPressed(evt);
+            }
+        });
+        AddItemPanel.add(add_item_unit_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 510, 120, 30));
 
         MainChangeFrame.add(AddItemPanel, "card5");
 
-        UpdateQtyPanel.setBackground(new java.awt.Color(255, 255, 255));
-        UpdateQtyPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Purchaising_base_panel.setBackground(new java.awt.Color(255, 255, 255));
+        Purchaising_base_panel.setLayout(new java.awt.CardLayout());
+
+        purchaising_main_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel12.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel12.setText("Item No : ");
-        UpdateQtyPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 181, 56));
+        purchaising_main_panel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 181, 40));
 
         jLabel25.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel25.setText("Description :");
-        UpdateQtyPanel.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 181, 56));
+        purchaising_main_panel.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 181, 40));
 
         update_description_txt.setEditable(false);
-        update_description_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        update_description_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         update_description_txt.setFocusable(false);
-        update_description_txt.setNextFocusableComponent(update_cost_txt);
+        update_description_txt.setNextFocusableComponent(update_billPrice_txt);
         update_description_txt.setRequestFocusEnabled(false);
         update_description_txt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -1808,89 +1873,75 @@ public class MainFrame extends javax.swing.JFrame{
                 update_description_txtKeyPressed(evt);
             }
         });
-        UpdateQtyPanel.add(update_description_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 450, 56));
+        purchaising_main_panel.add(update_description_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 450, 40));
 
         jLabel26.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
-        jLabel26.setText("Cost :");
-        UpdateQtyPanel.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 181, 56));
+        jLabel26.setText("Bill Price");
+        purchaising_main_panel.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 181, 40));
 
-        update_cost_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        update_cost_txt.setNextFocusableComponent(update_precentage_txt);
-        update_cost_txt.addFocusListener(new java.awt.event.FocusAdapter() {
+        update_billPrice_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        update_billPrice_txt.setNextFocusableComponent(update_costP_txt);
+        update_billPrice_txt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                update_cost_txtFocusGained(evt);
+                update_billPrice_txtFocusGained(evt);
             }
         });
-        update_cost_txt.addKeyListener(new java.awt.event.KeyAdapter() {
+        update_billPrice_txt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                update_cost_txtKeyPressed(evt);
+                update_billPrice_txtKeyPressed(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                update_cost_txtKeyTyped(evt);
+                update_billPrice_txtKeyTyped(evt);
             }
         });
-        UpdateQtyPanel.add(update_cost_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, 450, 56));
+        purchaising_main_panel.add(update_billPrice_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 130, 40));
 
         jLabel27.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
-        jLabel27.setText("Precentage :");
-        UpdateQtyPanel.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 181, 56));
+        jLabel27.setText("Cost");
+        purchaising_main_panel.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 181, 40));
 
-        update_precentage_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        update_precentage_txt.setText("0");
-        update_precentage_txt.setNextFocusableComponent(update_selling_txt);
-        update_precentage_txt.addFocusListener(new java.awt.event.FocusAdapter() {
+        update_costP_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        update_costP_txt.setText("0");
+        update_costP_txt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                update_precentage_txtFocusGained(evt);
+                update_costP_txtFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                update_precentage_txtFocusLost(evt);
+                update_costP_txtFocusLost(evt);
             }
         });
-        update_precentage_txt.addActionListener(new java.awt.event.ActionListener() {
+        update_costP_txt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                update_precentage_txtActionPerformed(evt);
+                update_costP_txtActionPerformed(evt);
             }
         });
-        update_precentage_txt.addKeyListener(new java.awt.event.KeyAdapter() {
+        update_costP_txt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                update_precentage_txtKeyPressed(evt);
+                update_costP_txtKeyPressed(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                update_precentage_txtKeyTyped(evt);
+                update_costP_txtKeyTyped(evt);
             }
         });
-        UpdateQtyPanel.add(update_precentage_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, 450, 56));
+        purchaising_main_panel.add(update_costP_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, 60, 40));
 
-        itemCancelBtn1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        itemCancelBtn1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         itemCancelBtn1.setText("Cancel");
         itemCancelBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemCancelBtn1ActionPerformed(evt);
             }
         });
-        UpdateQtyPanel.add(itemCancelBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 550, 142, 81));
+        purchaising_main_panel.add(itemCancelBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 520, 142, 60));
 
         jLabel28.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel28.setText("Selling :");
-        UpdateQtyPanel.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 181, 56));
-
-        update_selling_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        update_selling_txt.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                update_selling_txtFocusGained(evt);
-            }
-        });
-        update_selling_txt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                update_selling_txtKeyPressed(evt);
-            }
-        });
-        UpdateQtyPanel.add(update_selling_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 450, 56));
+        purchaising_main_panel.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 181, 40));
 
         UserPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        UpdateQtyPanel.add(UserPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 140, -1, -1));
+        purchaising_main_panel.add(UserPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 140, -1, -1));
 
-        update_save_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        update_save_btn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         update_save_btn.setText("Save");
         update_save_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1907,9 +1958,9 @@ public class MainFrame extends javax.swing.JFrame{
                 update_save_btnKeyPressed(evt);
             }
         });
-        UpdateQtyPanel.add(update_save_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 550, 134, 81));
+        purchaising_main_panel.add(update_save_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 520, 134, 60));
 
-        update_qty_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        update_qty_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         update_qty_txt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 update_qty_txtFocusGained(evt);
@@ -1923,13 +1974,13 @@ public class MainFrame extends javax.swing.JFrame{
                 update_qty_txtKeyTyped(evt);
             }
         });
-        UpdateQtyPanel.add(update_qty_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 480, 119, 56));
+        purchaising_main_panel.add(update_qty_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, 119, 40));
 
-        update_availabel_txt.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
-        UpdateQtyPanel.add(update_availabel_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 480, 110, 56));
+        update_available_lbl.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
+        purchaising_main_panel.add(update_available_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 460, 110, 40));
 
-        update_itemNo_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        update_itemNo_combo.setNextFocusableComponent(update_cost_txt);
+        update_itemNo_combo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        update_itemNo_combo.setNextFocusableComponent(update_billPrice_txt);
         update_itemNo_combo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 update_itemNo_comboFocusGained(evt);
@@ -1938,25 +1989,157 @@ public class MainFrame extends javax.swing.JFrame{
                 update_itemNo_comboFocusLost(evt);
             }
         });
-        UpdateQtyPanel.add(update_itemNo_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 450, 60));
+        update_itemNo_combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_itemNo_comboActionPerformed(evt);
+            }
+        });
+        purchaising_main_panel.add(update_itemNo_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 450, 40));
 
         jLabel30.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel30.setText("Update Qty BY  : ");
-        UpdateQtyPanel.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, 250, 56));
+        purchaising_main_panel.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 250, 40));
 
         jLabel31.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(51, 51, 51));
         jLabel31.setText("Available : ");
-        UpdateQtyPanel.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 480, 160, 56));
+        purchaising_main_panel.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 460, 110, 40));
 
-        MainChangeFrame.add(UpdateQtyPanel, "card5");
+        jLabel72.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel72.setText("%");
+        purchaising_main_panel.add(jLabel72, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, -1, 40));
+
+        update_cost_lbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        purchaising_main_panel.add(update_cost_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 140, 40));
+
+        update_sellingP_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        update_sellingP_txt.setText("0");
+        update_sellingP_txt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                update_sellingP_txtFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                update_sellingP_txtFocusLost(evt);
+            }
+        });
+        update_sellingP_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_sellingP_txtActionPerformed(evt);
+            }
+        });
+        update_sellingP_txt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                update_sellingP_txtKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                update_sellingP_txtKeyTyped(evt);
+            }
+        });
+        purchaising_main_panel.add(update_sellingP_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, 60, 40));
+
+        jLabel74.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel74.setText("%");
+        purchaising_main_panel.add(jLabel74, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, -1, 40));
+
+        update_selling_lbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        purchaising_main_panel.add(update_selling_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 410, 140, 40));
+
+        jLabel73.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel73.setText("Invoice No");
+        purchaising_main_panel.add(jLabel73, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, -1, -1));
+
+        purchaise_retailer_combo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        purchaising_main_panel.add(purchaise_retailer_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 250, 40));
+
+        jLabel75.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel75.setText("Retailer");
+        purchaising_main_panel.add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        purchaise_invoiceno_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        purchaise_invoiceno_txt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                purchaise_invoiceno_txtKeyPressed(evt);
+            }
+        });
+        purchaising_main_panel.add(purchaise_invoiceno_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 160, 40));
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton2.setText("Add Retailer");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        purchaising_main_panel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 150, 50));
+
+        Purchaising_base_panel.add(purchaising_main_panel, "card2");
+
+        retailer_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel76.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel76.setText("Name");
+        retailer_panel.add(jLabel76, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 70, 30));
+
+        retailer_name_txt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                retailer_name_txtKeyPressed(evt);
+            }
+        });
+        retailer_panel.add(retailer_name_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 600, 40));
+
+        jLabel77.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel77.setText("Address");
+        retailer_panel.add(jLabel77, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 90, 30));
+
+        retailer_address_txt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                retailer_address_txtKeyPressed(evt);
+            }
+        });
+        retailer_panel.add(retailer_address_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 600, 40));
+
+        jLabel78.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel78.setText("Contact");
+        retailer_panel.add(jLabel78, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 90, 30));
+        retailer_panel.add(retailer_contact_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 600, 40));
+
+        jButton15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton15.setText("Cancel");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+        retailer_panel.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, 140, 60));
+
+        jButton16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton16.setText("Save");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
+        retailer_panel.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 140, 60));
+
+        jButton17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton17.setText("Back");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
+        retailer_panel.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 110, 60));
+
+        Purchaising_base_panel.add(retailer_panel, "card3");
+
+        MainChangeFrame.add(Purchaising_base_panel, "card5");
 
         bill_pay_panel.setBackground(new java.awt.Color(255, 255, 255));
         bill_pay_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel33.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel33.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel33.setText("User Name:");
-        bill_pay_panel.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, -1, 50));
+        bill_pay_panel.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, -1, 50));
 
         bill_name_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         bill_name_combo.addActionListener(new java.awt.event.ActionListener() {
@@ -1964,10 +2147,10 @@ public class MainFrame extends javax.swing.JFrame{
                 bill_name_comboActionPerformed(evt);
             }
         });
-        bill_pay_panel.add(bill_name_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 299, 50));
+        bill_pay_panel.add(bill_name_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, 220, 50));
 
         bill_InvoiceID_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        bill_pay_panel.add(bill_InvoiceID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 151, 50));
+        bill_pay_panel.add(bill_InvoiceID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 151, 50));
 
         bill_userID_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         bill_userID_combo.addActionListener(new java.awt.event.ActionListener() {
@@ -1975,7 +2158,7 @@ public class MainFrame extends javax.swing.JFrame{
                 bill_userID_comboActionPerformed(evt);
             }
         });
-        bill_pay_panel.add(bill_userID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 151, 50));
+        bill_pay_panel.add(bill_userID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 151, 50));
 
         bill_paymentPane.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
@@ -2010,35 +2193,33 @@ public class MainFrame extends javax.swing.JFrame{
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel35)
+                    .addComponent(bill_currentDate)
+                    .addComponent(bill_cash_datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bill_chooseDate))
+                .addContainerGap(13, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(bill_cash_datePicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel35)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(bill_currentDate)
-                        .addGap(99, 99, 99)
-                        .addComponent(bill_chooseDate)))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addContainerGap()
                 .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bill_currentDate)
-                    .addComponent(bill_chooseDate))
-                .addGap(68, 68, 68)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bill_currentDate)
+                .addGap(4, 4, 4)
+                .addComponent(bill_chooseDate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bill_cash_datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 260, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addGap(18, 18, 18)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         bill_paymentPane.addTab("CASH", jPanel4);
@@ -2050,10 +2231,10 @@ public class MainFrame extends javax.swing.JFrame{
         bill_chequeNo_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
         jLabel34.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel34.setText("Cheque Date - ");
+        jLabel34.setText("Cheque Date  ");
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel40.setText("Cheque Number - ");
+        jLabel40.setText("Cheque Number ");
 
         jButton12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton12.setText("Pay");
@@ -2067,41 +2248,52 @@ public class MainFrame extends javax.swing.JFrame{
         bill_cheque_number.setLayout(bill_cheque_numberLayout);
         bill_cheque_numberLayout.setHorizontalGroup(
             bill_cheque_numberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bill_cheque_numberLayout.createSequentialGroup()
-                .addContainerGap(84, Short.MAX_VALUE)
-                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83))
             .addGroup(bill_cheque_numberLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(bill_cheque_numberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(bill_chequeDatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
-                    .addComponent(jLabel40)
-                    .addComponent(jLabel34)
-                    .addComponent(bill_chequeNo_txt)
-                    .addComponent(bill_bank_comnbo, 0, 376, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(bill_cheque_numberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bill_cheque_numberLayout.createSequentialGroup()
+                        .addGroup(bill_cheque_numberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(bill_cheque_numberLayout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(jLabel40))
+                            .addGroup(bill_cheque_numberLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(bill_chequeDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(bill_cheque_numberLayout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bill_cheque_numberLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(bill_cheque_numberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(bill_chequeNo_txt)
+                            .addComponent(bill_bank_comnbo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bill_cheque_numberLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel34)
+                .addGap(57, 57, 57))
         );
         bill_cheque_numberLayout.setVerticalGroup(
             bill_cheque_numberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bill_cheque_numberLayout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
                 .addComponent(bill_bank_comnbo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
-                .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bill_chequeNo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(1, 1, 1)
+                .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bill_chequeDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93)
-                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         bill_paymentPane.addTab("CHEQUE", bill_cheque_number);
 
-        bill_pay_panel.add(bill_paymentPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 150, 450, 690));
+        bill_pay_panel.add(bill_paymentPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 250, 400));
 
         Bill_table.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Bill_table.setModel(new javax.swing.table.DefaultTableModel(
@@ -2136,18 +2328,18 @@ public class MainFrame extends javax.swing.JFrame{
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(289, 289, 289))
         );
 
-        bill_pay_panel.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, 660));
+        bill_pay_panel.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 180, 380));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jButton1.setText("Select User");
@@ -2156,7 +2348,7 @@ public class MainFrame extends javax.swing.JFrame{
                 jButton1ActionPerformed(evt);
             }
         });
-        bill_pay_panel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 40, 120, 50));
+        bill_pay_panel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 110, 50));
 
         bill_pay_select_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         bill_pay_select_btn.setText("Select Bill");
@@ -2165,55 +2357,55 @@ public class MainFrame extends javax.swing.JFrame{
                 bill_pay_select_btnActionPerformed(evt);
             }
         });
-        bill_pay_panel.add(bill_pay_select_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 120, 50));
+        bill_pay_panel.add(bill_pay_select_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, 120, 50));
 
-        jLabel36.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel36.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel36.setText("Bill ID :");
         bill_pay_panel.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, 50));
 
         Bill_date_txt.setEditable(false);
         Bill_date_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        bill_pay_panel.add(Bill_date_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 570, 180, 40));
+        bill_pay_panel.add(Bill_date_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, 140, 40));
 
-        jLabel37.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel37.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel37.setText("Invoice Value:");
-        bill_pay_panel.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, 50));
+        bill_pay_panel.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, -1, 50));
 
         bill_invoiceValue_txt.setEditable(false);
         bill_invoiceValue_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        bill_pay_panel.add(bill_invoiceValue_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, 180, 40));
+        bill_pay_panel.add(bill_invoiceValue_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 180, 40));
 
-        jLabel38.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel38.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel38.setText("User ID : ");
         bill_pay_panel.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 38, -1, 50));
 
-        jLabel39.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel39.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel39.setText("Returns : ");
-        bill_pay_panel.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, -1, 50));
+        bill_pay_panel.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, 50));
 
-        jLabel64.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel64.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel64.setText("Paying = ");
-        bill_pay_panel.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 690, -1, 50));
+        bill_pay_panel.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 430, -1, 50));
 
         bill_paying_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         bill_paying_txt.setForeground(new java.awt.Color(255, 51, 51));
-        bill_pay_panel.add(bill_paying_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 700, 180, 40));
+        bill_pay_panel.add(bill_paying_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 140, 40));
 
-        jLabel65.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel65.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel65.setText("Invoice Date: ");
-        bill_pay_panel.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 500, -1, 50));
+        bill_pay_panel.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, -1, 50));
 
         bill_payable_txt.setEditable(false);
         bill_payable_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        bill_pay_panel.add(bill_payable_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, 180, 40));
+        bill_pay_panel.add(bill_payable_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 140, 40));
 
-        jLabel66.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel66.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel66.setText("Should Pay");
-        bill_pay_panel.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, -1, 50));
+        bill_pay_panel.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, -1, 50));
 
         bill_return_label.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         bill_return_label.setText("0");
-        bill_pay_panel.add(bill_return_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 320, 130, 40));
+        bill_pay_panel.add(bill_return_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 130, 40));
 
         MainChangeFrame.add(bill_pay_panel, "card8");
 
@@ -2225,19 +2417,19 @@ public class MainFrame extends javax.swing.JFrame{
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("K.T.N. Motors");
-        TitlePanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, -1, 60));
+        TitlePanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, 60));
 
-        clock_txt.setFont(new java.awt.Font("Digital-7", 1, 36)); // NOI18N
+        clock_txt.setFont(new java.awt.Font("Digital-7", 1, 24)); // NOI18N
         clock_txt.setForeground(new java.awt.Color(0, 165, 255));
         clock_txt.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         clock_txt.setText("jLabel42");
-        TitlePanel.add(clock_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, 320, 40));
+        TitlePanel.add(clock_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 70, 160, 40));
 
-        date_txt.setFont(new java.awt.Font("Digital-7", 1, 36)); // NOI18N
+        date_txt.setFont(new java.awt.Font("Digital-7", 1, 24)); // NOI18N
         date_txt.setForeground(new java.awt.Color(0, 165, 255));
         date_txt.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         date_txt.setText("jLabel42");
-        TitlePanel.add(date_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 50, 320, 40));
+        TitlePanel.add(date_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 30, 160, 40));
 
         jButton3.setText("Stock Count");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -2245,9 +2437,9 @@ public class MainFrame extends javax.swing.JFrame{
                 jButton3ActionPerformed(evt);
             }
         });
-        TitlePanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 180, 60));
+        TitlePanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 100, 60));
 
-        getContentPane().add(TitlePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 1060, 130));
+        getContentPane().add(TitlePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 810, 130));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -2360,12 +2552,7 @@ public class MainFrame extends javax.swing.JFrame{
         ViewManipulation.changePanel(MainChangeFrame, SalesPanel);
         
         sales_new_btn.requestFocusInWindow();
-        sales_InvoiceID_txt.setEditable(false);
-        sales_CID_combo.setEnabled(false);
-        sales_CName_combo.setEnabled(false);
-        sales_itemno_combo.setEnabled(false);
-        sales_item_name_combo.setEnabled(false);
-        
+                
     }//GEN-LAST:event_SalesLabelMouseClicked
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
@@ -2810,110 +2997,89 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_sales_qty_TxtFocusGained
 
     private void updateQtylblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateQtylblMouseClicked
-        ViewManipulation.changePanel(MainChangeFrame, UpdateQtyPanel);
-        
-        update_qty_txt.setText("0");
         update_itemNo_combo.removeAllItems();
-        manipulation.getRecords("item", "itemNo",update_itemNo_combo);
-        update_itemNo_combo.requestFocusInWindow();
+        ViewManipulation.changePanel(MainChangeFrame, Purchaising_base_panel);        
+        Purchaise.getInstance().setFields(update_itemNo_combo,purchaise_retailer_combo,purchaise_invoiceno_txt,update_description_txt,update_billPrice_txt,update_costP_txt,update_cost_lbl,update_sellingP_txt,update_selling_lbl,update_available_lbl,update_qty_txt,connector);
+        Purchaise.getInstance().autoFill();
     }//GEN-LAST:event_updateQtylblMouseClicked
 
     private void update_description_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_description_txtKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_update_description_txtKeyPressed
 
-    private void update_cost_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_cost_txtKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_update_cost_txtKeyPressed
+    private void update_billPrice_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_billPrice_txtKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            update_costP_txt.selectAll();
+            update_costP_txt.requestFocusInWindow();
+            
+        }
+                
+    }//GEN-LAST:event_update_billPrice_txtKeyPressed
 
-    private void update_cost_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_cost_txtKeyTyped
+    private void update_billPrice_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_billPrice_txtKeyTyped
         char c = evt.getKeyChar();
         if (Character.isLetter(c) && !evt.isAltDown()) {
             evt.consume();
         }
-    }//GEN-LAST:event_update_cost_txtKeyTyped
+    }//GEN-LAST:event_update_billPrice_txtKeyTyped
 
-    private void update_precentage_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_precentage_txtKeyPressed
+    private void update_costP_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_costP_txtKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            double cost  = Double.parseDouble(update_cost_txt.getText());
-            double discount  = Double.parseDouble(update_precentage_txt.getText());
-            double selling = cost+(discount/100);
-            
-            update_selling_txt.setText(String.valueOf(selling));
-            update_qty_txt.requestFocusInWindow();
+            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                update_sellingP_txt.selectAll();
+                update_sellingP_txt.requestFocusInWindow();
+                String cost = Purchaise.getInstance().calculateCost();
+                if(!cost.isEmpty()){
+                    update_cost_lbl.setText(cost);
+                }
+                
+            }
             
         }
-    }//GEN-LAST:event_update_precentage_txtKeyPressed
+    }//GEN-LAST:event_update_costP_txtKeyPressed
 
-    private void update_precentage_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_precentage_txtKeyTyped
+    private void update_costP_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_costP_txtKeyTyped
          char c = evt.getKeyChar();
            if(Character.isLetter(c) && !evt.isAltDown()){
                evt.consume();              
            }
-    }//GEN-LAST:event_update_precentage_txtKeyTyped
+    }//GEN-LAST:event_update_costP_txtKeyTyped
 
     private void itemCancelBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCancelBtn1ActionPerformed
-        updateClearFields();
+        Purchaise.getInstance().updateClearFields();
     }//GEN-LAST:event_itemCancelBtn1ActionPerformed
-
-    private void update_selling_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_selling_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            double selling = Double.parseDouble(update_selling_txt.getText());
-            double discount = Double.parseDouble(update_precentage_txt.getText());
-            double cost  = selling - (selling*(discount/100));
-            
-            update_cost_txt.setText(String.valueOf(cost));
-        }
-    }//GEN-LAST:event_update_selling_txtKeyPressed
 
     private void update_save_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_update_save_btnMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_update_save_btnMouseClicked
 
     private void update_save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_save_btnActionPerformed
-       if(updateQty_save()){
-           JOptionPane.showMessageDialog(null, "Qty is successfully Updated...");
-           update_itemNo_combo.requestFocusInWindow();
-        }
+       if((!purchaise_invoiceno_txt.getText().equals("")) || (!update_qty_txt.getText().equals(""))){
+           if(Purchaise.getInstance().comparePrices()){
+               if (Purchaise.getInstance().updateQty_save()) {
+                   JOptionPane.showMessageDialog(null, "Qty is successfully Updated...");
+                   update_itemNo_combo.requestFocusInWindow();
+               } 
+           }
+           
+       }else{
+           JOptionPane.showMessageDialog(null, "Please fill the necessary fields before saving");
+       }
+        
     }//GEN-LAST:event_update_save_btnActionPerformed
 
-    public boolean updateQty_save(){
-        int updateQty = Integer.parseInt(update_qty_txt.getText());
-        int avilableQty = Integer.parseInt(update_availabel_txt.getText());
-        int nowQty = updateQty + avilableQty;
-
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        String timeStamp = String.valueOf(now);
-
-        ArrayList list = new ArrayList();
-        list.add(String.valueOf(update_itemNo_combo.getSelectedItem()));
-        list.add(updateQty);
-        list.add(timeStamp);
-        try {
-             if (updateQty > 0) {
-                connector.editRecordInTable("item", "itemNo", "qty", String.valueOf(nowQty), (String) update_itemNo_combo.getSelectedItem());
-                connector.editRecordInTable("item", "itemNo", "cost", String.valueOf(update_cost_txt.getText()), (String) update_itemNo_combo.getSelectedItem());
-                connector.editRecordInTable("item", "itemNo", "selling", String.valueOf(update_selling_txt.getText()), (String) update_itemNo_combo.getSelectedItem());
-                connector.insertRecord("qtyupdate", list);
-                updateClearFields();
-                return true;
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error in Qty updating" + e.getMessage());
-            return false;
-        }
-        return false;
-    }
-    
-    
-    
     private void update_save_btnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_save_btnKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-               if (updateQty_save()) {
-                JOptionPane.showMessageDialog(null, "Qty is successfully Updated...");
-                update_itemNo_combo.requestFocusInWindow();
-            }
-        }
+         if((!purchaise_invoiceno_txt.getText().equals("")) || (!update_qty_txt.getText().equals(""))){
+           if(Purchaise.getInstance().comparePrices()){
+               if (Purchaise.getInstance().updateQty_save()) {
+                   JOptionPane.showMessageDialog(null, "Qty is successfully Updated...");
+                   update_itemNo_combo.requestFocusInWindow();
+               } 
+           }
+           
+       }else{
+           JOptionPane.showMessageDialog(null, "Please fill the necessary fields before saving");
+       }
        
     }//GEN-LAST:event_update_save_btnKeyPressed
 
@@ -2939,11 +3105,9 @@ public class MainFrame extends javax.swing.JFrame{
        
     }//GEN-LAST:event_update_description_txtFocusGained
 
-    private void update_cost_txtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_cost_txtFocusGained
-        updateQTyPanel();
-        update_qty_txt.setText("0");
-        update_cost_txt.selectAll();
-    }//GEN-LAST:event_update_cost_txtFocusGained
+    private void update_billPrice_txtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_billPrice_txtFocusGained
+        
+    }//GEN-LAST:event_update_billPrice_txtFocusGained
 
     private void sales_print_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_print_btnActionPerformed
         InvoicePrint print = new InvoicePrint(report_folder_path, sales_InvoiceID_txt, sales_CID_combo, sales_item_table, connector);
@@ -3164,9 +3328,9 @@ public class MainFrame extends javax.swing.JFrame{
         AddressTxt.selectAll();
     }//GEN-LAST:event_AddressTxtFocusGained
 
-    private void update_precentage_txtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_precentage_txtFocusGained
-        update_precentage_txt.selectAll();
-    }//GEN-LAST:event_update_precentage_txtFocusGained
+    private void update_costP_txtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_costP_txtFocusGained
+        update_costP_txt.selectAll();
+    }//GEN-LAST:event_update_costP_txtFocusGained
 
     private void update_qty_txtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_qty_txtFocusGained
  
@@ -3251,13 +3415,9 @@ public class MainFrame extends javax.swing.JFrame{
         
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void update_selling_txtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_selling_txtFocusGained
-       update_selling_txt.selectAll();
-    }//GEN-LAST:event_update_selling_txtFocusGained
-
-    private void update_precentage_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_precentage_txtFocusLost
+    private void update_costP_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_costP_txtFocusLost
         
-    }//GEN-LAST:event_update_precentage_txtFocusLost
+    }//GEN-LAST:event_update_costP_txtFocusLost
 
     private void update_itemNo_comboFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_itemNo_comboFocusLost
         
@@ -3310,9 +3470,9 @@ public class MainFrame extends javax.swing.JFrame{
         
     }//GEN-LAST:event_add_itemNo_txtFocusGained
 
-    private void update_precentage_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_precentage_txtActionPerformed
+    private void update_costP_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_costP_txtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_update_precentage_txtActionPerformed
+    }//GEN-LAST:event_update_costP_txtActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         
@@ -3780,22 +3940,155 @@ public class MainFrame extends javax.swing.JFrame{
     private void stock_item_comboFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stock_item_comboFocusGained
         stock_item_combo.getEditor().selectAll();
     }//GEN-LAST:event_stock_item_comboFocusGained
+
+    private void add_item_category_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_item_category_comboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_add_item_category_comboActionPerformed
+
+    private void add_item_vehicle_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_item_vehicle_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_add_item_vehicle_txtActionPerformed
+
+    private void add_item_desc_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_item_desc_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_add_item_desc_txtActionPerformed
+
+    private void add_item_selling_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_item_selling_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_add_item_selling_txtActionPerformed
+
+    private void add_item_billPrice_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_item_billPrice_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_add_item_billPrice_txtActionPerformed
+
+    private void add_item_unit_comboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_unit_comboKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            add_item_save_btn.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_add_item_unit_comboKeyPressed
+
+    private void update_sellingP_txtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_sellingP_txtFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_update_sellingP_txtFocusGained
+
+    private void update_sellingP_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_sellingP_txtFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_update_sellingP_txtFocusLost
+
+    private void update_sellingP_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_sellingP_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_update_sellingP_txtActionPerformed
+
+    private void update_sellingP_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_sellingP_txtKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            update_qty_txt.requestFocusInWindow();
+            update_qty_txt.selectAll();
+            update_selling_lbl.setText(Purchaise.getInstance().calculateSelling());
+        }
+    }//GEN-LAST:event_update_sellingP_txtKeyPressed
+
+    private void update_sellingP_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_sellingP_txtKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_update_sellingP_txtKeyTyped
+
+    private void update_itemNo_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_itemNo_comboActionPerformed
+        
+        String itemNo = String.valueOf(update_itemNo_combo.getSelectedItem());        
+        
+        ArrayList list = connector.readRow("items", "item_code", itemNo);
+        if(list.size() != 0){
+            String description = String.valueOf(list.get(4));
+            String cost = String.valueOf(list.get(6));
+            String selling = String.valueOf(list.get(7));
+            String available_qty = String.valueOf(list.get(5));
+
+            update_description_txt.setText(description);
+            update_cost_lbl.setText(cost);
+            update_selling_lbl.setText(selling);
+            update_available_lbl.setText(available_qty); 
+        }
+        
+          
+        
+    }//GEN-LAST:event_update_itemNo_comboActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ViewManipulation.changePanel(Purchaising_base_panel, retailer_panel);
+        Retailer.getInstance().setFields(retailer_name_txt, retailer_address_txt, retailer_contact_txt, connector);
+        retailer_name_txt.requestFocusInWindow();
+        retailer_name_txt.selectAll();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        Retailer.getInstance().saveRetailer();
+        
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        Retailer.getInstance().emptyFields();
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void retailer_name_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_retailer_name_txtKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            retailer_address_txt.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_retailer_name_txtKeyPressed
+
+    private void retailer_address_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_retailer_address_txtKeyPressed
+         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            retailer_contact_txt.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_retailer_address_txtKeyPressed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        ViewManipulation.changePanel(Purchaising_base_panel, purchaising_main_panel);
+        Purchaise.getInstance().retailerAutoFill();
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void purchaise_invoiceno_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_purchaise_invoiceno_txtKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            update_itemNo_combo.getEditor().getEditorComponent().requestFocusInWindow();
+        }
+    }//GEN-LAST:event_purchaise_invoiceno_txtKeyPressed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        JFileChooser jf = new JFileChooser();
+        jf.showOpenDialog(this);
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        
+        String dbName = "prototype";
+        String dbUser = "root";
+        String dbPass = "";
+        
+        try {
+            File f = jf.getSelectedFile();
+            backup_path = f.getAbsolutePath();
+            backup_path = backup_path.replace('\\', '/');
+            backup_path = backup_path+"_"+date+".sql";
+            
+            String executeCmd = "";
+            executeCmd = "C:/wamp64/bin/mysql/mysql5.7.19/bin/mysqldump.exe -u lakshan -p123 --add-drop-database -B prototype -r"+backup_path;
+            System.out.println("execute : "+executeCmd);
+            Process runtimeProcess =Runtime.getRuntime().exec(executeCmd);
+            int processComplete = runtimeProcess.waitFor();
+            
+            
+            if(processComplete ==0){
+                JOptionPane.showMessageDialog(null, "Backup Created Successfully....");
+            }else{
+                 JOptionPane.showMessageDialog(null, "Backup Created Failure....");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "error "+e.getMessage());
+        }
+//        DoBackup.Backupdbtosql();
+    }//GEN-LAST:event_jButton18ActionPerformed
     
        
     public void FillBill(String invoiceID){
        ArrayList list =  connector.readRow("orders", "orderID", invoiceID);
        bill_invoiceValue_txt.setText(String.valueOf(list.get(3)));
        Bill_date_txt.setText(String.valueOf(list.get(4)));
-        
-    }
-    
-    public void updateQTyPanel(){
-        ArrayList list = connector.readRow("item", "itemNo", (String) update_itemNo_combo.getSelectedItem());
-        
-        update_description_txt.setText(String.valueOf(list.get(1)));
-        update_cost_txt.setText(String.valueOf(list.get(2)));
-        update_selling_txt.setText(String.valueOf(list.get(3)));
-        update_availabel_txt.setText(String.valueOf(list.get(4)));
         
     }
     
@@ -3919,15 +4212,7 @@ public class MainFrame extends javax.swing.JFrame{
         
     }
     
-    public void updateClearFields() {
-        update_cost_txt.setText("");
-        update_description_txt.setText("");
-        update_precentage_txt.setText("");
-        update_availabel_txt.setText("");
-        update_qty_txt.setText("");
-        update_selling_txt.setText("0");
-        
-    }
+    
     
       
     public void newBillPay(){
@@ -3958,6 +4243,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JPanel MainChangeFrame;
     private javax.swing.JPanel MenuBar;
     private javax.swing.JTextField NameTxt;
+    private javax.swing.JPanel Purchaising_base_panel;
     private javax.swing.JLabel ReportLabel;
     private javax.swing.JPanel ReportPanel;
     private javax.swing.JLabel Return_label;
@@ -3967,7 +4253,6 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JPanel SettingsPanel;
     private javax.swing.JTextField TelephoneTxt;
     private javax.swing.JPanel TitlePanel;
-    private javax.swing.JPanel UpdateQtyPanel;
     private javax.swing.JPanel UserPanel;
     private javax.swing.JPanel UserPanel1;
     private javax.swing.JPanel UserPanel2;
@@ -4020,6 +4305,11 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -4097,6 +4387,13 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel70;
     private javax.swing.JLabel jLabel71;
+    private javax.swing.JLabel jLabel72;
+    private javax.swing.JLabel jLabel73;
+    private javax.swing.JLabel jLabel74;
+    private javax.swing.JLabel jLabel75;
+    private javax.swing.JLabel jLabel76;
+    private javax.swing.JLabel jLabel77;
+    private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -4110,6 +4407,9 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton newBtn;
     private javax.swing.JLabel payBillsLabel;
+    private javax.swing.JTextField purchaise_invoiceno_txt;
+    private javax.swing.JComboBox<String> purchaise_retailer_combo;
+    private javax.swing.JPanel purchaising_main_panel;
     private javax.swing.JComboBox<String> report_item_combo;
     private javax.swing.JButton report_items_btn;
     private javax.swing.JComboBox<String> report_name_combo;
@@ -4117,6 +4417,10 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JButton reports_customer_btn;
     private javax.swing.JButton reports_customer_btn1;
     private javax.swing.JButton reports_customer_btn2;
+    private javax.swing.JTextField retailer_address_txt;
+    private javax.swing.JTextField retailer_contact_txt;
+    private javax.swing.JTextField retailer_name_txt;
+    private javax.swing.JPanel retailer_panel;
     private javax.swing.JButton return_button1;
     private javax.swing.JButton return_calculation_btn;
     private javax.swing.JButton return_cancel_btn;
@@ -4169,14 +4473,16 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JTextField stock_selling_txt;
     private javax.swing.JButton stock_update_btn;
     private javax.swing.JLabel updateQtylbl;
-    private javax.swing.JLabel update_availabel_txt;
-    private javax.swing.JTextField update_cost_txt;
+    private javax.swing.JLabel update_available_lbl;
+    private javax.swing.JTextField update_billPrice_txt;
+    private javax.swing.JTextField update_costP_txt;
+    private javax.swing.JLabel update_cost_lbl;
     private javax.swing.JTextField update_description_txt;
     private javax.swing.JComboBox<String> update_itemNo_combo;
-    private javax.swing.JTextField update_precentage_txt;
     private javax.swing.JTextField update_qty_txt;
     private javax.swing.JButton update_save_btn;
-    private javax.swing.JTextField update_selling_txt;
+    private javax.swing.JTextField update_sellingP_txt;
+    private javax.swing.JLabel update_selling_lbl;
     private javax.swing.JLabel user_date1_label;
     private com.toedter.calendar.JDateChooser user_date1_picker;
     private javax.swing.JLabel user_date2_label;

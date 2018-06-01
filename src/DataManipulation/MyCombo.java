@@ -19,6 +19,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -117,16 +118,16 @@ public class MyCombo {
     }
     
     
-    public void populateTextBox(final JComboBox combo,DataBaseConnector connector){
-        txt = (JTextField) combo.getEditor().getEditorComponent();
-        txt.addKeyListener(new KeyAdapter() {
-            public void keyReleased(KeyEvent evt) {
-                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                    Purchaise.populateFields();
-                }
-            }
-        });
-    }
+//    public void populateTextBox(final JComboBox combo,DataBaseConnector connector){
+//        txt = (JTextField) combo.getEditor().getEditorComponent();
+//        txt.addKeyListener(new KeyAdapter() {
+//            public void keyReleased(KeyEvent evt) {
+//                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//                    Purchaise.populateFields();
+//                }
+//            }
+//        });
+//    }
     
     public void populateAJTable(final JComboBox combo,final JTable table,final DataBaseConnector connector){
         txt = (JTextField) combo.getEditor().getEditorComponent();
@@ -145,20 +146,26 @@ public class MyCombo {
                     
                     ArrayList<String[]> list = connector.retreveLargeDataSet(conditionCols,conditionVals,"invoiceitems");
                     
-                    DefaultTableModel model = (DefaultTableModel) table.getModel();                    
-                    
-                    for (int i = 0; i < list.size(); i++) {
-                        String [] row = list.get(i);
-                        Object [] rowData = new Object[5];
-                        rowData[0] = row[1];                        
-                        rowData[1] = connector.getRelavantRecord("invoices", "orderDate", "invoice_id", row[1]);
-                        rowData[2] = row[2];
-                        rowData[3] = row[3];
-                        rowData[4] = row[4];
-                        System.out.println("Row 4 :"+ row[4]);
-                        
-                        model.addRow(rowData);                        
+                    if(list.size()==0){
+                        JOptionPane.showMessageDialog(null, "This has no records....");
+                    }else{
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+                        for (int i = 0; i < list.size(); i++) {
+                            String[] row = list.get(i);
+                            Object[] rowData = new Object[5];
+                            rowData[0] = row[1];
+                            rowData[1] = connector.getRelavantRecord("invoices", "orderDate", "invoice_id", row[1]);
+                            rowData[2] = row[2];
+                            rowData[3] = row[3];
+                            rowData[4] = row[4];
+                            System.out.println("Row 4 :" + row[4]);
+
+                            model.addRow(rowData);
+                        } 
                     }
+                    
+                   
                 }
             }
         });

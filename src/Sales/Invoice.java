@@ -69,6 +69,7 @@ public class Invoice {
         catList1.add("category");
 
         autoCombo2.populateSecondCombo(category, itemNo, connector, catList1, null, false);
+        autoCombo2.moveFocusToNext(itemNo, qtyText);
         
         catList2.add(0, "customers");
         catList2.add(1, "name");

@@ -70,6 +70,7 @@ public class Splash extends javax.swing.JFrame {
         jLabel2.setText("Login Form");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -105,7 +106,6 @@ public class Splash extends javax.swing.JFrame {
         login_panel.add(user_name_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 107, 183, 42));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
-        jLabel5.setPreferredSize(new java.awt.Dimension(32, 32));
         login_panel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 117, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/key.png"))); // NOI18N
@@ -160,7 +160,6 @@ public class Splash extends javax.swing.JFrame {
         loading_panel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 64, 282, 93));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/image_1208871.gif"))); // NOI18N
-        jLabel9.setPreferredSize(new java.awt.Dimension(100, 100));
         loading_panel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 164, -1, -1));
 
         base_panel.add(loading_panel, "card3");

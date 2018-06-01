@@ -6,6 +6,8 @@
 package ViewManipulation;
 
 import java.awt.Component;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -56,5 +58,22 @@ public class ViewManipulation {
             text.setText("");
             
         }
+    }
+    
+    public static void moveFocusToNext(final JComboBox combo,final Component comp){
+        final JTextField txt = (JTextField) combo.getEditor().getEditorComponent();
+        txt.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt) {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                   
+                    if(txt.isFocusOwner()){
+                        
+                        comp.requestFocusInWindow();
+                        
+                    }
+                    
+                }
+            }
+        });
     }
 }

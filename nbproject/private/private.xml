@@ -3,8 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/K:/DAD/Front%20Inventory/update%201/K.T.N.Motors/src/StockCounting/Stock.java</file>
-            <file>file:/K:/DAD/Front%20Inventory/update%201/K.T.N.Motors/src/DBController/DataBaseConnector.java</file>
+            <file>file:/K:/DAD/Front%20Inventory/update%201/K.T.N.Motors/src/Purchaising/Purchaise.java</file>
+            <file>file:/K:/DAD/Front%20Inventory/update%201/K.T.N.Motors/src/ViewManipulation/ViewManipulation.java</file>
+            <file>file:/K:/DAD/Front%20Inventory/update%201/K.T.N.Motors/src/Purchaising/Retailer.java</file>
+            <file>file:/K:/DAD/Front%20Inventory/update%201/K.T.N.Motors/src/Inventory/MainFrame.java</file>
+            <file>file:/K:/DAD/Front%20Inventory/update%201/K.T.N.Motors/src/DataManipulation/MyCombo.java</file>
+            <file>file:/K:/DAD/Front%20Inventory/update%201/K.T.N.Motors/src/SalesReturn/ReturnToDB.java</file>
+            <file>file:/K:/DAD/Front%20Inventory/update%201/K.T.N.Motors/src/Inventory/Splash.java</file>
+            <file>file:/K:/DAD/Front%20Inventory/update%201/K.T.N.Motors/src/Backup/DoBackup.java</file>
         </group>
     </open-files>
 </project-private>

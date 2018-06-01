@@ -20,7 +20,8 @@ public class DataManipulation {
     public DataManipulation(DataBaseConnector connector){
         this.connector = connector;
     }
-    
+
+   
     public ArrayList getRecords(String tableName,String coloumn,JComboBox combo){
         if(connector == null){
             System.out.println("Connector eerror");

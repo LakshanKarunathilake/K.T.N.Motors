@@ -121,23 +121,23 @@ public class DataBaseConnector {
         }        
     }
     
-    public boolean insertRecordColoumnCount(String tableName,ArrayList list,ArrayList list2){
+    public boolean insertRecordColoumnCount(String tableName,ArrayList data,ArrayList columns){
         String values2 = "" ;
         String values1 = "";
         
-        for (int i = 0; i < list2.size(); i++) {
-            values1+=list2.get(i);
-            if(i <list2.size()-1){
+        for (int i = 0; i < columns.size(); i++) {
+            values1+=columns.get(i);
+            if(i <columns.size()-1){
                 values1+=",";
             }
             
         }
         
-        for(int counter = 0;counter<list.size();counter++){
+        for(int counter = 0;counter<data.size();counter++){
             values2+="\'";
-            values2+=list.get(counter);
+            values2+=data.get(counter);
             values2+="\'";
-            if(counter <list.size()-1){
+            if(counter <data.size()-1){
                 values2+=",";
             }
         }
@@ -146,7 +146,7 @@ public class DataBaseConnector {
         
         
         String sql = "INSERT INTO "+tableName+"("+values1+") values("+values2+")";
-        
+        System.out.println("SQL : "+sql);
         try {
             statement.executeUpdate(sql);
             return true;

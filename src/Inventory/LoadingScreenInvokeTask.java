@@ -18,6 +18,7 @@ public class LoadingScreenInvokeTask implements Runnable{
     @Override
     public void run() {
        j= new LoadingScreen();
+       j.setLocationRelativeTo(null);
        j.setVisible(true);
         
     }
