@@ -4101,24 +4101,44 @@ public class MainFrame extends javax.swing.JFrame{
         String dbUser = "root";
         String dbPass = "";
         
+        String default_backup = System.getProperty("user.dir");   
+        default_backup+= "/backups/"+date+".sql";
+        default_backup = default_backup.replace("\\", "/");
+        
+        
         try {
             File f = jf.getSelectedFile();
             backup_path = f.getAbsolutePath();
             backup_path = backup_path.replace('\\', '/');
             backup_path = backup_path+"_"+date+".sql";
             
-            String executeCmd = "";
-            executeCmd = "C:/wamp64/bin/mysql/mysql5.7.19/bin/mysqldump.exe -u lakshan -p123 --add-drop-database -B prototype -r"+backup_path;
+            String executeCmd = "C:/wamp64/bin/mysql/mysql5.7.19/bin/mysqldump.exe -u lakshan -p123 --add-drop-database -B prototype -r";
+            executeCmd = executeCmd+backup_path;
             System.out.println("execute : "+executeCmd);
             Process runtimeProcess =Runtime.getRuntime().exec(executeCmd);
+            
             int processComplete = runtimeProcess.waitFor();
             
             
+            
             if(processComplete ==0){
-                JOptionPane.showMessageDialog(null, "Backup Created Successfully....");
+                 JOptionPane.showMessageDialog(null, "Backup Created Successfully....");             
             }else{
                  JOptionPane.showMessageDialog(null, "Backup Created Failure....");
             }
+            
+            String executeCmd2 = "C:/wamp64/bin/mysql/mysql5.7.19/bin/mysqldump.exe -u lakshan -p123 --add-drop-database -B prototype -r";
+            executeCmd2+=default_backup;
+            System.out.println("Auto backup :"+executeCmd2);
+            Process runtimeProcess2 =Runtime.getRuntime().exec(executeCmd2);
+            int processComplete2 = runtimeProcess2.waitFor();
+            
+            if(processComplete2 == 0){
+                JOptionPane.showMessageDialog(null, "Auto Backup Created Successfully....");
+            }else{
+                JOptionPane.showMessageDialog(null, "Auto backup failure...");
+            } 
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error "+e.getMessage());
         }

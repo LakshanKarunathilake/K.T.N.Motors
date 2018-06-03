@@ -83,7 +83,7 @@ public class InvoicePrint {
     public void cashPrint() {
 
         Printsupport ps = new Printsupport();
-        PrintData pd = new PrintData();
+//        PrintData pd = new PrintData();
         Object printitem[][] = ps.getTableData(table);
         ps.setItems(printitem);
         ps.setMetaData(list);

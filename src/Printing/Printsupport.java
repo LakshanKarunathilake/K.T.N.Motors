@@ -211,13 +211,13 @@ public class Printsupport {
                     Font subheading = new Font("Arial",Font.PLAIN,8);
                     g2d.setFont(subheading);
                     g2d.drawString("No-152,Aluthgama Road,Mathugama", 30, y+=10);
-                    g2d.drawString("Tel:0344939958,0342248844", 35, y +=10);                 //shift a line by adding 10 to y value
+                    g2d.drawString("Tel:0344939958,0342248844", 45, y +=10);                 //shift a line by adding 10 to y value
                     g2d.setFont(font);
-                    g2d.drawString(now(), 10, y += 10);                                //print date
-                    g2d.drawString("Invoice :", 10, y += 10);
+                    g2d.drawString(now(), 0, y += 10);                                //print date
+                    g2d.drawString("Invoice :", 0, y += 10);
                     g2d.drawString(list.get(0), 55, y);
-                    g2d.drawString("Customer :", 10, y += 10);
-                    g2d.drawString("Cash",65,y);
+                    g2d.drawString("Customer :", 120,y );
+                    g2d.drawString("Cash",175,y);
 
                     /*Draw Colums*/
                     
@@ -281,7 +281,74 @@ public class Printsupport {
                     
                     font = new Font("Arial", Font.BOLD, 12);                  //changed font size
                     g2d.setFont(font);
-                    g2d.drawString("Thank You Come Again", 10,y += 20);
+                    g2d.drawString("Thank You Come Again", 35,y += 15);
+                    
+                    
+                    //end of the reciept
+                } catch (Exception r) {
+                    r.printStackTrace();
+                }
+
+                result = PAGE_EXISTS;
+            }
+            return result;
+        }
+    }
+    
+    public static class DayEndPrintable implements Printable {
+
+        @Override
+        public int print(Graphics graphics, PageFormat pageFormat,
+                int pageIndex) throws PrinterException {
+            int result = NO_SUCH_PAGE;
+            if (pageIndex == 0) {
+                Graphics2D g2d = (Graphics2D) graphics;
+
+                double width = pageFormat.getImageableWidth();
+                double height = pageFormat.getImageableHeight();
+                g2d.translate((int) pageFormat.getImageableX(), (int) pageFormat.getImageableY());
+                Font font = new Font("Monospaced", Font.PLAIN, 8);
+                Font font_bold = new Font("Monospaced", Font.BOLD, 9);
+                g2d.setFont(font);
+
+//                try {
+//                    /*
+//                         * Draw Image*
+//                           assume that printing reciept has logo on top 
+//                         * that logo image is in .gif format .png also support
+//                         * image resolution is width 100px and height 50px
+//                         * image located in root--->image folder 
+//                     */
+//                    int x = 100;                                        //print start at 100 on x axies
+//                    int y = 10;                                          //print start at 10 on y axies
+//                    int imagewidth = 100;
+//                    int imageheight = 50;
+//                    BufferedImage read = ImageIO.read(getClass().getResource("/image/logo.png"));
+//                    g2d.drawImage(read, x, y, imagewidth, imageheight, null);         //draw image
+//                    g2d.drawLine(10, y + 60, 180, y + 60);                          //draw line
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+                try {
+                    /*Draw Header*/
+                    int y = 20;
+                    Font heading = new Font("Arial",Font.BOLD,15);
+                    g2d.setFont(heading);
+                    g2d.drawString("K.T.N.Motors", 60, y);
+                   
+                    Font subheading = new Font("Arial",Font.PLAIN,8);
+                    g2d.setFont(subheading);
+                    g2d.drawString("No-152,Aluthgama Road,Mathugama", 30, y+=10);
+                    g2d.drawString("Tel:0344939958,0342248844", 45, y +=10);                 //shift a line by adding 10 to y value
+                    g2d.setFont(font);
+                    g2d.drawString("Day End Report :", 0, y += 10); 
+                    g2d.drawString(now(), 80, y += 10);                                //print date
+                                      
+
+                    /*Draw Colums*/
+                    
+                    g2d.drawLine(0, y += 5, 200, y);
+                   
                     
                     
                     //end of the reciept
