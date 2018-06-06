@@ -513,7 +513,7 @@ public class MainFrame extends javax.swing.JFrame{
                 jButton18ActionPerformed(evt);
             }
         });
-        MenuBar.add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 650, 180, 50));
+        MenuBar.add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 660, 180, 50));
 
         getContentPane().add(MenuBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 770));
 
@@ -2661,6 +2661,7 @@ public class MainFrame extends javax.swing.JFrame{
             itemNo = String.valueOf(edit_combo.getSelectedItem());
             ItemAdd.getInstance().fillEdit(itemNo);
             editable=true;
+            add_item_save_btn.setEnabled(true);
         } else {
             System.out.println("User canceled / closed the dialog, result = " + result);
         }
@@ -4112,7 +4113,7 @@ public class MainFrame extends javax.swing.JFrame{
             backup_path = backup_path.replace('\\', '/');
             backup_path = backup_path+"_"+date+".sql";
             
-            String executeCmd = "C:/wamp64/bin/mysql/mysql5.7.19/bin/mysqldump.exe -u lakshan -p123 --add-drop-database -B prototype -r";
+            String executeCmd = "C:/wamp/bin/mysql/mysql5.7.21/bin/mysqldump.exe -u lakshan -p123 --add-drop-database -B prototype -r";
             executeCmd = executeCmd+backup_path;
             System.out.println("execute : "+executeCmd);
             Process runtimeProcess =Runtime.getRuntime().exec(executeCmd);
@@ -4127,7 +4128,7 @@ public class MainFrame extends javax.swing.JFrame{
                  JOptionPane.showMessageDialog(null, "Backup Created Failure....");
             }
             
-            String executeCmd2 = "C:/wamp64/bin/mysql/mysql5.7.19/bin/mysqldump.exe -u lakshan -p123 --add-drop-database -B prototype -r";
+            String executeCmd2 = "C:/wamp/bin/mysql/mysql5.7.21/bin/mysqldump.exe -u lakshan -p123 --add-drop-database -B prototype -r";
             executeCmd2+=default_backup;
             System.out.println("Auto backup :"+executeCmd2);
             Process runtimeProcess2 =Runtime.getRuntime().exec(executeCmd2);

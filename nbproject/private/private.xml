@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/lakshan/Documents/GitHub/update3/K.T.N.Motors/src/Inventory/MainFrame.java</file>
-            <file>file:/C:/Users/lakshan/Documents/GitHub/update3/K.T.N.Motors/src/Sales/InvoicePrint.java</file>
-            <file>file:/C:/Users/lakshan/Documents/GitHub/update3/K.T.N.Motors/src/Printing/PrintData.java</file>
-            <file>file:/C:/Users/lakshan/Documents/GitHub/update3/K.T.N.Motors/src/Printing/Printsupport.java</file>
-            <file>file:/C:/Users/lakshan/Documents/GitHub/update3/K.T.N.Motors/src/Statistics/DayEndReport.java</file>
-            <file>file:/C:/Users/lakshan/Documents/GitHub/update3/K.T.N.Motors/src/DBController/DataBaseConnector.java</file>
+            <file>file:/E:/K.T.N.Motors/src/DBController/DataBaseConnector.java</file>
+            <file>file:/E:/K.T.N.Motors/src/Inventory/MainFrame.java</file>
+            <file>file:/E:/K.T.N.Motors/src/Sales/InvoicePrint.java</file>
         </group>
     </open-files>
 </project-private>

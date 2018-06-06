@@ -204,7 +204,7 @@ public class DataBaseConnector {
     }
     
     public ArrayList readRow(String tableName,String coloumn,String condition){
-        String sql = "Select * from "+tableName+" where "+coloumn+" like "+"\""+condition+"\"";
+        String sql = "Select * from "+tableName+" where "+coloumn+" like "+"'"+condition+"'";
         
         
         ArrayList list = new ArrayList();
