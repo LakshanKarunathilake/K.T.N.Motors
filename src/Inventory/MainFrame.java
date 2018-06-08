@@ -57,6 +57,7 @@ import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -181,6 +182,7 @@ public class MainFrame extends javax.swing.JFrame{
         jLabel80 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         stock_item_table = new javax.swing.JTable();
+        jButton19 = new javax.swing.JButton();
         SalesPanel = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -645,6 +647,14 @@ public class MainFrame extends javax.swing.JFrame{
         jScrollPane3.setViewportView(stock_item_table);
 
         stock_count_panel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 740, 270));
+
+        jButton19.setText("Qty Only Update");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
+        stock_count_panel.add(jButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 120, 50));
 
         MainChangeFrame.add(stock_count_panel, "card10");
 
@@ -4145,6 +4155,39 @@ public class MainFrame extends javax.swing.JFrame{
         }
 //        DoBackup.Backupdbtosql();
     }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        JComboBox combo = new JComboBox();
+        AutoCompleteDecorator.decorate(combo);
+
+        JTextField text = new JTextField();
+        manipulation.getRecords("items", "item_code", combo);
+        String item_code="";
+
+        final JComponent[] inputs = new JComponent[]{
+            new JLabel("Item ID"),
+            combo,
+            new JLabel("Qty to be added"),
+            text
+
+        };
+        int result = JOptionPane.showConfirmDialog(null, inputs, "My custom dialog", JOptionPane.PLAIN_MESSAGE);
+        if (result == JOptionPane.OK_OPTION) {
+            item_code= String.valueOf(combo.getSelectedItem());
+            int qty = Integer.parseInt(text.getText());
+            String available_qty = connector.getRelavantRecord("items", "stock", "item_code", item_code);
+            System.out.println("Available :"+available_qty);
+            qty+=Integer.valueOf(available_qty);
+            if(connector.editRecordInTable("items", "item_code", "stock", String.valueOf(qty), item_code)){
+                JOptionPane.showMessageDialog(null, "Item qty added scuccessfully \n Item_code : "+item_code+" previous qty : "+available_qty+" after_update :  "+qty);
+            }else{
+                JOptionPane.showMessageDialog(null, "Qty Update failure");
+            }
+
+        } else {
+            System.out.println("User canceled / closed the dialog, result = " + result);
+        }
+    }//GEN-LAST:event_jButton19ActionPerformed
     
        
     public void FillBill(String invoiceID){
@@ -4371,6 +4414,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
