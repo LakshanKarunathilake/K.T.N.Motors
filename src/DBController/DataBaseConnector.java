@@ -231,7 +231,7 @@ public class DataBaseConnector {
     public boolean editRecordInTable(String tableName,String coloumnName,String coloumn2,String value,String condition){
         String sql = "UPDATE "+tableName+"\n"
                 + "SET "+coloumn2+"='"+value+"'\n"
-                + "WHERE "+coloumnName+" like "+"\""+condition+"\"";
+                + "WHERE "+coloumnName+" like "+"'"+condition+"'";
         
         
         try {
