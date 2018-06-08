@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/K.T.N.Motors/src/DBController/DataBaseConnector.java</file>
-            <file>file:/E:/K.T.N.Motors/src/Inventory/MainFrame.java</file>
-            <file>file:/E:/K.T.N.Motors/src/Sales/InvoicePrint.java</file>
+            <file>file:/K:/DAD/Front%20Inventory/KTN%20Update%201.0/K.T.N.Motors/src/Inventory/MainFrame.java</file>
+            <file>file:/K:/DAD/Front%20Inventory/KTN%20Update%201.0/K.T.N.Motors/src/Purchaising/Purchaise.java</file>
+            <file>file:/K:/DAD/Front%20Inventory/KTN%20Update%201.0/K.T.N.Motors/src/Settings/EditQty.java</file>
+            <file>file:/K:/DAD/Front%20Inventory/KTN%20Update%201.0/K.T.N.Motors/src/Inventory/Splash.java</file>
         </group>
     </open-files>
 </project-private>

@@ -166,23 +166,6 @@ public class MainFrame extends javax.swing.JFrame{
         Return_label = new javax.swing.JLabel();
         jButton18 = new javax.swing.JButton();
         MainChangeFrame = new javax.swing.JPanel();
-        stock_count_panel = new javax.swing.JPanel();
-        stock_update_btn = new javax.swing.JButton();
-        stock_item_combo = new javax.swing.JComboBox<>();
-        stock_selling_lbl = new javax.swing.JLabel();
-        jLabel68 = new javax.swing.JLabel();
-        jLabel69 = new javax.swing.JLabel();
-        stock_qty_txt = new javax.swing.JTextField();
-        stock_selling_txt = new javax.swing.JTextField();
-        jLabel70 = new javax.swing.JLabel();
-        jLabel71 = new javax.swing.JLabel();
-        stock_description_lbl = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        stock_availableQty_lbl = new javax.swing.JLabel();
-        jLabel80 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        stock_item_table = new javax.swing.JTable();
-        jButton19 = new javax.swing.JButton();
         SalesPanel = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -224,6 +207,36 @@ public class MainFrame extends javax.swing.JFrame{
         sales_halfPay_creditTxt = new javax.swing.JTextField();
         sales_halfPay_txt = new javax.swing.JTextField();
         jLabel56 = new javax.swing.JLabel();
+        settings_panel = new javax.swing.JPanel();
+        jButton20 = new javax.swing.JButton();
+        settings_sub_panel = new javax.swing.JPanel();
+        settings_sub_edit_panel = new javax.swing.JPanel();
+        settings_qty_edit_qty_lbl = new javax.swing.JLabel();
+        settings_qty_edit_itemNo_combo = new javax.swing.JComboBox<>();
+        jLabel82 = new javax.swing.JLabel();
+        jLabel83 = new javax.swing.JLabel();
+        jLabel84 = new javax.swing.JLabel();
+        settings_qty_edit_desctiption_lbl = new javax.swing.JLabel();
+        jLabel85 = new javax.swing.JLabel();
+        settings_qty_edit_qty_txt = new javax.swing.JTextField();
+        jButton21 = new javax.swing.JButton();
+        stock_count_panel = new javax.swing.JPanel();
+        stock_update_btn = new javax.swing.JButton();
+        stock_item_combo = new javax.swing.JComboBox<>();
+        stock_selling_lbl = new javax.swing.JLabel();
+        jLabel68 = new javax.swing.JLabel();
+        jLabel69 = new javax.swing.JLabel();
+        stock_qty_txt = new javax.swing.JTextField();
+        stock_selling_txt = new javax.swing.JTextField();
+        jLabel70 = new javax.swing.JLabel();
+        jLabel71 = new javax.swing.JLabel();
+        stock_description_lbl = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        stock_availableQty_lbl = new javax.swing.JLabel();
+        jLabel80 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        stock_item_table = new javax.swing.JTable();
+        jButton19 = new javax.swing.JButton();
         AddUserPannel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         NameTxt = new javax.swing.JTextField();
@@ -416,6 +429,7 @@ public class MainFrame extends javax.swing.JFrame{
         clock_txt = new javax.swing.JLabel();
         date_txt = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jLabel79 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 768));
@@ -523,140 +537,6 @@ public class MainFrame extends javax.swing.JFrame{
         MainChangeFrame.setMinimumSize(new java.awt.Dimension(814, 850));
         MainChangeFrame.setPreferredSize(new java.awt.Dimension(814, 850));
         MainChangeFrame.setLayout(new java.awt.CardLayout());
-
-        stock_count_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        stock_update_btn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        stock_update_btn.setText("ADD");
-        stock_update_btn.setName(""); // NOI18N
-        stock_update_btn.setNextFocusableComponent(stock_item_combo);
-        stock_update_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stock_update_btnActionPerformed(evt);
-            }
-        });
-        stock_update_btn.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                stock_update_btnKeyPressed(evt);
-            }
-        });
-        stock_count_panel.add(stock_update_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, 130, 50));
-
-        stock_item_combo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        stock_item_combo.setNextFocusableComponent(stock_qty_txt);
-        stock_item_combo.setOpaque(false);
-        stock_item_combo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                stock_item_comboFocusGained(evt);
-            }
-        });
-        stock_count_panel.add(stock_item_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 260, 50));
-
-        stock_selling_lbl.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        stock_selling_lbl.setText("0.00");
-        stock_count_panel.add(stock_selling_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, -1, -1));
-
-        jLabel68.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel68.setText("Item Code");
-        stock_count_panel.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-
-        jLabel69.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel69.setText("Qty");
-        stock_count_panel.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, -1, -1));
-
-        stock_qty_txt.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        stock_qty_txt.setNextFocusableComponent(stock_selling_txt);
-        stock_qty_txt.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                stock_qty_txtFocusGained(evt);
-            }
-        });
-        stock_qty_txt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                stock_qty_txtKeyPressed(evt);
-            }
-        });
-        stock_count_panel.add(stock_qty_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 100, 50));
-
-        stock_selling_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        stock_selling_txt.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                stock_selling_txtFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                stock_selling_txtFocusLost(evt);
-            }
-        });
-        stock_selling_txt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                stock_selling_txtKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                stock_selling_txtKeyTyped(evt);
-            }
-        });
-        stock_count_panel.add(stock_selling_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 170, 50));
-
-        jLabel70.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel70.setText("Selling ");
-        stock_count_panel.add(jLabel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, -1, -1));
-
-        jLabel71.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel71.setText("With code->");
-        stock_count_panel.add(jLabel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
-
-        stock_description_lbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        stock_count_panel.add(stock_description_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 510, 40));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel2.setText("Description :");
-        stock_count_panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, -1));
-
-        stock_availableQty_lbl.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        stock_availableQty_lbl.setText("0");
-        stock_count_panel.add(stock_availableQty_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 60, 40));
-
-        jLabel80.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel80.setText("Current stock-");
-        stock_count_panel.add(jLabel80, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
-
-        stock_item_table.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        stock_item_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Item Number", "qty", "Cost", "Selling", "Time"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(stock_item_table);
-
-        stock_count_panel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 740, 270));
-
-        jButton19.setText("Qty Only Update");
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19ActionPerformed(evt);
-            }
-        });
-        stock_count_panel.add(jButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 120, 50));
-
-        MainChangeFrame.add(stock_count_panel, "card10");
 
         SalesPanel.setBackground(new java.awt.Color(255, 255, 255));
         SalesPanel.setMinimumSize(new java.awt.Dimension(1366, 768));
@@ -1038,6 +918,226 @@ public class MainFrame extends javax.swing.JFrame{
         SalesPanel.add(sales_halfPay_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 340, 120));
 
         MainChangeFrame.add(SalesPanel, "card2");
+
+        jButton20.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton20.setText("Edit Qty");
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
+
+        settings_sub_panel.setLayout(new java.awt.CardLayout());
+
+        settings_sub_edit_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        settings_qty_edit_qty_lbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        settings_sub_edit_panel.add(settings_qty_edit_qty_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 530, 30));
+
+        settings_qty_edit_itemNo_combo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        settings_qty_edit_itemNo_combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settings_qty_edit_itemNo_comboActionPerformed(evt);
+            }
+        });
+        settings_sub_edit_panel.add(settings_qty_edit_itemNo_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 260, 50));
+
+        jLabel82.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel82.setText("Item number");
+        settings_sub_edit_panel.add(jLabel82, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+
+        jLabel83.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel83.setText("Change Qty To :");
+        settings_sub_edit_panel.add(jLabel83, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
+
+        jLabel84.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel84.setText("Description  : ");
+        settings_sub_edit_panel.add(jLabel84, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+
+        settings_qty_edit_desctiption_lbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        settings_sub_edit_panel.add(settings_qty_edit_desctiption_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 530, 30));
+
+        jLabel85.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel85.setText("Available Qty :");
+        settings_sub_edit_panel.add(jLabel85, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+
+        settings_qty_edit_qty_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        settings_qty_edit_qty_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settings_qty_edit_qty_txtActionPerformed(evt);
+            }
+        });
+        settings_sub_edit_panel.add(settings_qty_edit_qty_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 140, -1));
+
+        jButton21.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton21.setText("Save");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
+        settings_sub_edit_panel.add(jButton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 380, 210, 70));
+
+        settings_sub_panel.add(settings_sub_edit_panel, "card2");
+
+        javax.swing.GroupLayout settings_panelLayout = new javax.swing.GroupLayout(settings_panel);
+        settings_panel.setLayout(settings_panelLayout);
+        settings_panelLayout.setHorizontalGroup(
+            settings_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(settings_panelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(settings_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(settings_sub_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        settings_panelLayout.setVerticalGroup(
+            settings_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(settings_panelLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(settings_sub_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        MainChangeFrame.add(settings_panel, "card11");
+
+        stock_count_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        stock_update_btn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        stock_update_btn.setText("ADD");
+        stock_update_btn.setName(""); // NOI18N
+        stock_update_btn.setNextFocusableComponent(stock_item_combo);
+        stock_update_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stock_update_btnActionPerformed(evt);
+            }
+        });
+        stock_update_btn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                stock_update_btnKeyPressed(evt);
+            }
+        });
+        stock_count_panel.add(stock_update_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, 130, 50));
+
+        stock_item_combo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        stock_item_combo.setNextFocusableComponent(stock_qty_txt);
+        stock_item_combo.setOpaque(false);
+        stock_item_combo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                stock_item_comboFocusGained(evt);
+            }
+        });
+        stock_count_panel.add(stock_item_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 260, 50));
+
+        stock_selling_lbl.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        stock_selling_lbl.setText("0.00");
+        stock_count_panel.add(stock_selling_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, -1, -1));
+
+        jLabel68.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel68.setText("Item Code");
+        stock_count_panel.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        jLabel69.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel69.setText("Qty");
+        stock_count_panel.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, -1, -1));
+
+        stock_qty_txt.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        stock_qty_txt.setNextFocusableComponent(stock_selling_txt);
+        stock_qty_txt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                stock_qty_txtFocusGained(evt);
+            }
+        });
+        stock_qty_txt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                stock_qty_txtKeyPressed(evt);
+            }
+        });
+        stock_count_panel.add(stock_qty_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 100, 50));
+
+        stock_selling_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        stock_selling_txt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                stock_selling_txtFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                stock_selling_txtFocusLost(evt);
+            }
+        });
+        stock_selling_txt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                stock_selling_txtKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                stock_selling_txtKeyTyped(evt);
+            }
+        });
+        stock_count_panel.add(stock_selling_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 170, 50));
+
+        jLabel70.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel70.setText("Selling ");
+        stock_count_panel.add(jLabel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, -1, -1));
+
+        jLabel71.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel71.setText("With code->");
+        stock_count_panel.add(jLabel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
+
+        stock_description_lbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        stock_count_panel.add(stock_description_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 510, 40));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setText("Description :");
+        stock_count_panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, -1));
+
+        stock_availableQty_lbl.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        stock_availableQty_lbl.setText("0");
+        stock_count_panel.add(stock_availableQty_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 60, 40));
+
+        jLabel80.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel80.setText("Current stock-");
+        stock_count_panel.add(jLabel80, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
+
+        stock_item_table.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        stock_item_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Item Number", "qty", "Cost", "Selling", "Time"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(stock_item_table);
+
+        stock_count_panel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 740, 270));
+
+        jButton19.setText("Qty Only Update");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
+        stock_count_panel.add(jButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 120, 50));
+
+        MainChangeFrame.add(stock_count_panel, "card10");
 
         AddUserPannel.setBackground(new java.awt.Color(255, 255, 255));
         AddUserPannel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1595,7 +1695,7 @@ public class MainFrame extends javax.swing.JFrame{
         SettingsPanel.setLayout(SettingsPanelLayout);
         SettingsPanelLayout.setHorizontalGroup(
             SettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
+            .addGap(0, 810, Short.MAX_VALUE)
         );
         SettingsPanelLayout.setVerticalGroup(
             SettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2311,7 +2411,7 @@ public class MainFrame extends javax.swing.JFrame{
                             .addGroup(bill_cheque_numberLayout.createSequentialGroup()
                                 .addGap(30, 30, 30)
                                 .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 1, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bill_cheque_numberLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(bill_cheque_numberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -2459,7 +2559,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         MainChangeFrame.add(bill_pay_panel, "card8");
 
-        getContentPane().add(MainChangeFrame, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 1090, 640));
+        getContentPane().add(MainChangeFrame, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 810, 640));
 
         TitlePanel.setBackground(new java.awt.Color(51, 51, 51));
         TitlePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2487,7 +2587,17 @@ public class MainFrame extends javax.swing.JFrame{
                 jButton3ActionPerformed(evt);
             }
         });
-        TitlePanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 100, 60));
+        TitlePanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 100, 60));
+
+        jLabel79.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Services_52px.png"))); // NOI18N
+        jLabel79.setPreferredSize(new java.awt.Dimension(50, 50));
+        jLabel79.setRequestFocusEnabled(false);
+        jLabel79.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel79MouseClicked(evt);
+            }
+        });
+        TitlePanel.add(jLabel79, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
 
         getContentPane().add(TitlePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 810, 130));
 
@@ -4188,6 +4298,43 @@ public class MainFrame extends javax.swing.JFrame{
             System.out.println("User canceled / closed the dialog, result = " + result);
         }
     }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jLabel79MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel79MouseClicked
+        ViewManipulation.changePanel(MainChangeFrame, settings_panel);
+        
+    }//GEN-LAST:event_jLabel79MouseClicked
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        settings_qty_edit_itemNo_combo.removeAllItems(); 
+        ViewManipulation.changePanel(settings_sub_panel, settings_sub_edit_panel);               
+        DataManipulation dm = new DataManipulation(connector);
+        dm.getRecords("items", "item_code", settings_qty_edit_itemNo_combo);
+        AutoCompleteDecorator.decorate(settings_qty_edit_itemNo_combo);
+        
+    }//GEN-LAST:event_jButton20ActionPerformed
+
+    private void settings_qty_edit_qty_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settings_qty_edit_qty_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_settings_qty_edit_qty_txtActionPerformed
+
+    private void settings_qty_edit_itemNo_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settings_qty_edit_itemNo_comboActionPerformed
+        String item_no = String.valueOf(settings_qty_edit_itemNo_combo.getSelectedItem());
+        if(item_no != null){
+            String description = connector.getRelavantRecord("items", "description", "item_code", item_no);
+            String stock = connector.getRelavantRecord("items", "stock", "item_code", item_no);
+            settings_qty_edit_desctiption_lbl.setText(description);
+            settings_qty_edit_qty_lbl.setText(stock);
+        }
+    }//GEN-LAST:event_settings_qty_edit_itemNo_comboActionPerformed
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        String qty = settings_qty_edit_qty_txt.getText();
+        if(connector.editRecordInTable("items", "item_code", "stock", qty, String.valueOf(settings_qty_edit_itemNo_combo.getSelectedItem()))){
+            JOptionPane.showMessageDialog(null, "Qty Edited Successfully");
+        }else{
+            JOptionPane.showMessageDialog(null, "Qty Edit Failure");
+        }
+    }//GEN-LAST:event_jButton21ActionPerformed
     
        
     public void FillBill(String invoiceID){
@@ -4416,6 +4563,8 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton20;
+    private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -4500,8 +4649,13 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel78;
+    private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel80;
+    private javax.swing.JLabel jLabel82;
+    private javax.swing.JLabel jLabel83;
+    private javax.swing.JLabel jLabel84;
+    private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -4573,6 +4727,13 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JTextField sales_unit_Txt;
     private javax.swing.JButton saveBtn;
     private javax.swing.JToggleButton selectAll_button;
+    private javax.swing.JPanel settings_panel;
+    private javax.swing.JLabel settings_qty_edit_desctiption_lbl;
+    private javax.swing.JComboBox<String> settings_qty_edit_itemNo_combo;
+    private javax.swing.JLabel settings_qty_edit_qty_lbl;
+    private javax.swing.JTextField settings_qty_edit_qty_txt;
+    private javax.swing.JPanel settings_sub_edit_panel;
+    private javax.swing.JPanel settings_sub_panel;
     private javax.swing.JLabel stock_availableQty_lbl;
     private javax.swing.JPanel stock_count_panel;
     private javax.swing.JLabel stock_description_lbl;
