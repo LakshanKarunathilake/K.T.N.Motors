@@ -25,6 +25,7 @@ import Sales.InvoiceToDB;
 import Sales.ItemToTable;
 import SalesReturn.ReturnToDB;
 import SalesReturn.SalesReturn;
+import Settings.EditQty;
 import StockCounting.Stock;
 
 
@@ -85,7 +86,7 @@ public class MainFrame extends javax.swing.JFrame{
     SalesReturn sales_return;
     Invoice item_sale;
     ArrayList[] invoiceData;
-    Stock stock;
+    
     
     
     String report_folder_path = "C:\\kade-1.0\\src\\Reports";
@@ -141,8 +142,8 @@ public class MainFrame extends javax.swing.JFrame{
         
         sales_halfPay_panel.setVisible(false);
         
-        stock = new Stock(stock_item_combo, stock_qty_txt, stock_selling_txt, stock_selling_lbl,stock_description_lbl,stock_availableQty_lbl,stock_item_table, connector);
         
+     
          
     }
 
@@ -4037,11 +4038,12 @@ public class MainFrame extends javax.swing.JFrame{
         String workingDir = System.getProperty("user.dir");
         System.out.println("Current :"+workingDir);
         ViewManipulation.changePanel(MainChangeFrame, stock_count_panel);
-        stock.fillCombo();
+        Stock.getInstance().setFields(stock_item_combo, stock_qty_txt, stock_selling_txt, stock_selling_lbl,stock_description_lbl,stock_availableQty_lbl,stock_item_table, connector);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void stock_selling_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stock_selling_txtFocusLost
         if(!stock_selling_txt.getText().isEmpty()){
+             Stock stock = Stock.getInstance();
             String selling = stock_selling_txt.getText();            
             stock_selling_txt.setText(selling.toUpperCase());
             double selling_val = Double.valueOf(stock.parseToNumbers(selling));
@@ -4057,6 +4059,7 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void stock_selling_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stock_selling_txtKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            Stock stock = Stock.getInstance();
             if (!stock_selling_txt.getText().equals("")) {
                 String selling = stock_selling_txt.getText();
                 stock_selling_txt.setText(selling.toUpperCase());
@@ -4070,16 +4073,19 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_stock_selling_txtKeyPressed
 
     private void stock_qty_txtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stock_qty_txtFocusGained
+         Stock stock = Stock.getInstance();
         stock.fillDescription();
         stock_qty_txt.selectAll();
     }//GEN-LAST:event_stock_qty_txtFocusGained
 
     private void stock_update_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stock_update_btnActionPerformed
+         Stock stock = Stock.getInstance();
         stock.update();
     }//GEN-LAST:event_stock_update_btnActionPerformed
 
     private void stock_update_btnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stock_update_btnKeyPressed
        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+           Stock stock = Stock.getInstance();
            stock.update();
            stock_item_combo.getEditor().selectAll();
            
@@ -4305,11 +4311,14 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_jLabel79MouseClicked
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        settings_qty_edit_itemNo_combo.removeAllItems(); 
-        ViewManipulation.changePanel(settings_sub_panel, settings_sub_edit_panel);               
-        DataManipulation dm = new DataManipulation(connector);
-        dm.getRecords("items", "item_code", settings_qty_edit_itemNo_combo);
-        AutoCompleteDecorator.decorate(settings_qty_edit_itemNo_combo);
+//        settings_qty_edit_itemNo_combo.removeAllItems(); 
+//        ViewManipulation.changePanel(settings_sub_panel, settings_sub_edit_panel);               
+//        DataManipulation dm = new DataManipulation(connector);
+//        dm.getRecords("items", "item_code", settings_qty_edit_itemNo_combo);
+//        AutoCompleteDecorator.decorate(settings_qty_edit_itemNo_combo);
+        
+        ViewManipulation.changePanel(settings_sub_panel, settings_sub_edit_panel);
+        EditQty.getInstance().setFields(settings_qty_edit_itemNo_combo, settings_qty_edit_desctiption_lbl, settings_qty_edit_qty_lbl, settings_qty_edit_qty_txt, connector);
         
     }//GEN-LAST:event_jButton20ActionPerformed
 
@@ -4318,13 +4327,13 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_settings_qty_edit_qty_txtActionPerformed
 
     private void settings_qty_edit_itemNo_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settings_qty_edit_itemNo_comboActionPerformed
-        String item_no = String.valueOf(settings_qty_edit_itemNo_combo.getSelectedItem());
-        if(item_no != null){
-            String description = connector.getRelavantRecord("items", "description", "item_code", item_no);
-            String stock = connector.getRelavantRecord("items", "stock", "item_code", item_no);
-            settings_qty_edit_desctiption_lbl.setText(description);
-            settings_qty_edit_qty_lbl.setText(stock);
-        }
+//        String item_no = String.valueOf(settings_qty_edit_itemNo_combo.getSelectedItem());
+//        if(item_no != null){
+//            String description = connector.getRelavantRecord("items", "description", "item_code", item_no);
+//            String stock = connector.getRelavantRecord("items", "stock", "item_code", item_no);
+//            settings_qty_edit_desctiption_lbl.setText(description);
+//            settings_qty_edit_qty_lbl.setText(stock);
+//        }
     }//GEN-LAST:event_settings_qty_edit_itemNo_comboActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed

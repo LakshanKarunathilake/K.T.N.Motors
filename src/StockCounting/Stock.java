@@ -43,9 +43,23 @@ public class Stock {
     
     private JTextField txt;
     
+    boolean condition = true;
+    
+    private static Stock stock;
+    
+    private Stock(){
+        
+    }
+    
+    public static Stock getInstance(){
+        if(stock==null)
+            stock = new Stock();
+        return stock;
+    }
+    
         
     
-    public Stock(JComboBox itemNo_combo,JTextField qty_txt,JTextField selling_txt,JLabel selling_lbl,JLabel description_lbl,JLabel availableQty_lbl,JTable table,DataBaseConnector connector){
+    public void setFields(JComboBox itemNo_combo,JTextField qty_txt,JTextField selling_txt,JLabel selling_lbl,JLabel description_lbl,JLabel availableQty_lbl,JTable table,DataBaseConnector connector){
         this.itemNo_combo = itemNo_combo;
         this.qty_txt = qty_txt;
         this.selling_lbl = selling_lbl;
@@ -56,8 +70,11 @@ public class Stock {
         this.description_lbl = description_lbl;
         this.table = table;
         
+        if(condition){
+            fillCombo();
+            condition = false;
+        }
         
-        fillCombo();
     }
     
     public void fillDescription(){
