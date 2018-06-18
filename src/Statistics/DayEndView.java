@@ -278,7 +278,7 @@ public class DayEndView extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel20)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(returns_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(returns_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(credit_returns_lbl)
                     .addComponent(jLabel21))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -291,7 +291,6 @@ public class DayEndView extends javax.swing.JFrame {
         datepicker.setDateFormatString("yyyy-MM-dd");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-refresh-filled-50.png"))); // NOI18N
-        jLabel2.setPreferredSize(new java.awt.Dimension(50, 50));
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
@@ -313,7 +312,7 @@ public class DayEndView extends javax.swing.JFrame {
                                 .addGap(96, 96, 96)
                                 .addComponent(jLabel1)))
                         .addGap(29, 29, 29)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -437,8 +436,15 @@ public class DayEndView extends javax.swing.JFrame {
             credit_returns_lbl.setText("0.00");
         }
         
-        double t_returns = Double.valueOf(cash_retunrs)+ Double.valueOf(credit_retunrs);
+        double t_returns = Double.valueOf(cash_retunrs)+ Double.valueOf(credit_returns_lbl.getText());
         total_returns_lbl.setText(Rounding.decimalFormatiing(t_returns));
+        
+        String part_payments = report.getPartPayments();
+        if(!part_payments.equals("null")){
+            partpayments_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(part_payments)));
+        }else{
+            partpayments_lbl.setText("0.00");
+        }
         
     }
 

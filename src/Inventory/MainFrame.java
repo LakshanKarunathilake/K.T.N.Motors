@@ -90,7 +90,9 @@ public class MainFrame extends javax.swing.JFrame{
     
     
     
-    String report_folder_path = "C:\\kade-1.0\\src\\Reports";
+//    String report_folder_path = "E:\\K.T.N.Motors\\src\\reports";
+    String report_folder_path = "C:\\Users\\lakshan\\Documents\\GitHub\\K.T.N.Motors\\src\\Reports";
+    
     String report_folder_path_sub = "\"E:\\\\kade-1.0\\\\src\\\\Reports";
     
     String backup_path = "";
@@ -2492,7 +2494,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         Bill_date_txt.setEditable(false);
         Bill_date_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        bill_pay_panel.add(Bill_date_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, 140, 40));
+        bill_pay_panel.add(Bill_date_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 420, 270, 40));
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel37.setText("Invoice Value:");
@@ -2512,11 +2514,11 @@ public class MainFrame extends javax.swing.JFrame{
 
         jLabel64.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel64.setText("Paying = ");
-        bill_pay_panel.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 430, -1, 50));
+        bill_pay_panel.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 470, -1, 50));
 
         bill_paying_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         bill_paying_txt.setForeground(new java.awt.Color(255, 51, 51));
-        bill_pay_panel.add(bill_paying_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 140, 40));
+        bill_pay_panel.add(bill_paying_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 470, 140, 40));
 
         jLabel65.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel65.setText("Invoice Date: ");
@@ -2532,7 +2534,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         bill_return_label.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         bill_return_label.setText("0");
-        bill_pay_panel.add(bill_return_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 130, 40));
+        bill_pay_panel.add(bill_return_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 130, 30));
 
         MainChangeFrame.add(bill_pay_panel, "card8");
 
@@ -3516,8 +3518,9 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         String path = report_folder_path+"\\SalesInvoice\\sales_invoice.jrxml";
+        System.out.println("Path :"+path);
         String userID = String.valueOf(report_userID_combo.getSelectedItem());        
-        String sql = "select orders.orderID,orders.orderDate FROM orders WHERE orders.userID like '"+userID+"' ORDER BY orders.orderDate DESC LIMIT 1 ";
+        String sql = "select invoiceID,orderDate FROM invoices WHERE customer_code like ? ORDER BY orderDate DESC LIMIT 1 ";
         ArrayList list = new ArrayList();
         list.add("invoice_id");
         String invoiceID = connector.sqlExecution(sql,"invoice_id",list);

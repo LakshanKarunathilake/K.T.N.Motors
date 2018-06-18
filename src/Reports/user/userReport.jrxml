@@ -4,25 +4,18 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[Select * from users
-]]>
+		<![CDATA[SELECT Concat(customers.Address1,",",customers.Address2) as address,customer_code,Telephone,name FROM `customers` ]]>
 	</queryString>
-	<field name="userID" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="designation" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="name" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<field name="address" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="telNo" class="java.lang.String">
+	<field name="customer_code" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="addedDate" class="java.sql.Timestamp">
+	<field name="Telephone" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -45,7 +38,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="37" splitType="Stretch">
+		<band height="38" splitType="Stretch">
 			<line>
 				<reportElement x="0" y="0" width="555" height="2" uuid="a1419e99-0f33-4452-a06d-5777e3f2a273"/>
 			</line>
@@ -75,66 +68,49 @@
 				<text><![CDATA[userID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="69" y="2" width="119" height="20" uuid="1b40d7d5-a5b8-4da3-9ad3-7409ad6f6bec"/>
+				<reportElement x="40" y="2" width="148" height="20" uuid="1b40d7d5-a5b8-4da3-9ad3-7409ad6f6bec"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="188" y="2" width="148" height="20" uuid="6dabf7ad-a538-4ded-853a-81fd29f456c5"/>
+				<reportElement x="188" y="2" width="266" height="20" uuid="6dabf7ad-a538-4ded-853a-81fd29f456c5"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Address]]></text>
 			</staticText>
+			<line>
+				<reportElement x="0" y="26" width="555" height="2" uuid="33cf5847-4a1b-459c-a2d9-8e011989b02b"/>
+			</line>
 			<staticText>
-				<reportElement x="336" y="2" width="138" height="20" uuid="fbbb3fef-0a18-4ee2-9d85-066749e1d9f9"/>
+				<reportElement x="453" y="2" width="100" height="20" uuid="fbbb3fef-0a18-4ee2-9d85-066749e1d9f9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Telephone]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="474" y="2" width="79" height="20" uuid="344bd819-aa43-4901-ab33-2b1c125f84f7"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[addedDate]]></text>
-			</staticText>
-			<line>
-				<reportElement x="0" y="26" width="555" height="2" uuid="33cf5847-4a1b-459c-a2d9-8e011989b02b"/>
-			</line>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="25" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="40" height="20" uuid="08120214-c6f5-4ac9-9315-e617015d9c1e"/>
-				<textFieldExpression><![CDATA[$F{userID}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="40" y="0" width="29" height="20" uuid="4f0ba10c-a0e8-41af-9e8a-0f85cce7e94d"/>
-				<textFieldExpression><![CDATA[$F{designation}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="69" y="0" width="119" height="20" uuid="d7bb2f35-33ef-4b07-99bc-31dea213ae7d"/>
-				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="188" y="0" width="148" height="20" uuid="a77f059c-0e35-4ca3-9de3-36366c5ea41f"/>
+				<reportElement x="188" y="0" width="266" height="20" uuid="a77f059c-0e35-4ca3-9de3-36366c5ea41f"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="336" y="0" width="138" height="20" uuid="521b7ddd-4d2d-4f1b-bd61-957d09ed9428"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{telNo}]]></textFieldExpression>
+				<reportElement x="0" y="0" width="40" height="20" uuid="8811bb36-e511-47d5-80db-66b465e92fd1"/>
+				<textFieldExpression><![CDATA[$F{customer_code}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="474" y="0" width="79" height="20" uuid="245dee4a-78da-4200-9cd6-b8d8ad8383b9"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{addedDate}]]></textFieldExpression>
+				<reportElement x="40" y="0" width="148" height="20" uuid="c8f75e5c-8f1c-4274-aa79-02a837cc7602"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="454" y="0" width="100" height="20" uuid="dfe36179-f554-4e9e-a19d-ce031a54d2f4"/>
+				<textFieldExpression><![CDATA[$F{Telephone}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

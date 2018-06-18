@@ -27,7 +27,7 @@ public class ReturnToDB {
     JTable table;
     
     String userID;
-    double invoiceTotalReturn
+    double invoiceTotalReturn;
     
     public ReturnToDB(JComboBox invoiceID_combo,JComboBox type_combo,JTable table,DataBaseConnector connector){
         invoiceID = String.valueOf(invoiceID_combo.getSelectedItem());
@@ -116,12 +116,8 @@ public class ReturnToDB {
                             damageReplaceAction(return_qty, itemNo);
                         }
                     }
-                    
-
                 }
             }
-
-            
 
         }
         updateTotalReturn();
@@ -148,7 +144,6 @@ public class ReturnToDB {
             double total = Double.valueOf(t);
             invoiceTotalReturn+=total;
         }
-        
         String status = connector.getRelavantRecord("invoices", "status", "invoice_id", invoiceID);
         
         if(status.equals("0")){
@@ -164,8 +159,6 @@ public class ReturnToDB {
         }else{
             JOptionPane.showMessageDialog(null, "YOu have to pay to the customer Rs."+Rounding.decimalFormatiing(invoiceTotalReturn));
         }
-
-        
         connector.editRecordInTable("invoices", "invoice_id", "returned", Rounding.RoundTo5(invoiceTotalReturn, true), invoiceID);
         
     }
@@ -219,8 +212,14 @@ public class ReturnToDB {
     
     private void paymentUpdate(){
         String status = connector.getRelavantRecord("invoices", "status", "invoice_id", invoiceID);
-        double paid_amount = Double.valueOf(connector.getRelavantRecord("invoices", "cash_paid", "invoice_id", invoiceID));
+        double returned = Double.valueOf(connector.getRelavantRecord("invoices", "returned", "invoice_id", invoiceID));
+        double cash_paid = Double.valueOf(connector.getRelavantRecord("invoices", "cash_paid", "invoice_id", invoiceID));
         double invoice_amount = Double.valueOf(connector.getRelavantRecord("invoices", "grandTotal", "invoice_id", invoiceID));
+        
+        if((returned+cash_paid) >= invoice_amount){
+            connector.editRecordInTable("invoices", "invoice_id", "status", "1", invoiceID);
+        }
+        
         
     }
     

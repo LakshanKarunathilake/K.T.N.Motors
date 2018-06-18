@@ -71,6 +71,11 @@ public class DayEndReport {
         return returningVal(sql);
     }
     
+    public String getPartPayments(){
+        String sql = "SELECT sum(credit_payments.amount) as val FROM credit_payments WHERE credit_payments.paid_date BETWEEN '"+date_begin+"' AND '"+date_end+"'";
+        return  returningVal(sql);
+    }
+    
    
     
     public String returningVal(String sql){
