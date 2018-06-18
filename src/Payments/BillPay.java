@@ -180,6 +180,7 @@ public class BillPay {
        String name = connector.getRelavantRecord("customers", "name", "customer_code", userID);
        
        String returned_amount = connector.getRelavantRecord("invoices", "returned", "invoice_id", invoiceID);
+       String grandTotal = connector.getRelavantRecord("invoices", "grandTotal", "invoice_id", invoiceID);
        
        invoiceID_combo.setSelectedItem(userID);
        customerName_combo.setSelectedItem(name);
@@ -187,7 +188,12 @@ public class BillPay {
        return_txt.setText(returned_amount);
        
        pane.setVisible(true);
-       FillBill(invoiceID);
+       if(returned_amount.equals(grandTotal)){
+           JOptionPane.showMessageDialog(null, "Sorry this bill is fully returned ");
+       }else{
+           FillBill(invoiceID);
+       }
+       
     }
     
     private void FillBill(String invoiceID){

@@ -27,6 +27,7 @@ public class ReturnToDB {
     JTable table;
     
     String userID;
+    double invoiceTotalReturn
     
     public ReturnToDB(JComboBox invoiceID_combo,JComboBox type_combo,JTable table,DataBaseConnector connector){
         invoiceID = String.valueOf(invoiceID_combo.getSelectedItem());
@@ -99,6 +100,7 @@ public class ReturnToDB {
                 } else {
                     //Creit user invoice and its not paid
                     String paidOrNot = connector.getRelavantRecord("invoices", "status", "invoice_id", invoiceID);
+                    
                     if (paidOrNot.equals("0")) {
                         if (return_type.equals("Not Suitable")) {
                             uncompatibleAction(return_qty, itemNo);
@@ -107,6 +109,7 @@ public class ReturnToDB {
                             damageReplaceAction(return_qty, itemNo);
                         }
                     }else{
+                        
                         if (return_type.equals("Not Suitable")) {
                             uncompatibleAction(return_qty, itemNo);
                         } else if (return_type.equals("Damaged Replacing")) {
@@ -122,6 +125,7 @@ public class ReturnToDB {
 
         }
         updateTotalReturn();
+        paymentUpdate();
         JOptionPane.showMessageDialog(null, "Item return recorded successfully..");
         
     }
@@ -138,12 +142,29 @@ public class ReturnToDB {
     
     private void updateTotalReturn(){
         ArrayList list = connector.retreveDataColoumnWithCondition("sales_return", "amount", "invoice_id", invoiceID);
-        double invoiceTotalReturn=0;
+        invoiceTotalReturn=0;
         for (int i = 0; i < list.size(); i++) {
             String t = String.valueOf(list.get(i));
             double total = Double.valueOf(t);
             invoiceTotalReturn+=total;
         }
+        
+        String status = connector.getRelavantRecord("invoices", "status", "invoice_id", invoiceID);
+        
+        if(status.equals("0")){
+            double paid_amount = Double.valueOf(connector.getRelavantRecord("invoices", "cash_paid", "invoice_id", invoiceID));
+            double invoice_amount = Double.valueOf(connector.getRelavantRecord("invoices", "grandTotal", "invoice_id", invoiceID));
+
+            double returned = invoice_amount-paid_amount-invoiceTotalReturn;
+            if(returned < 0){
+                JOptionPane.showMessageDialog(null, "You have to pay to the custoemr Rs."+Rounding.decimalFormatiing(returned));
+            }else{
+                JOptionPane.showMessageDialog(null, "The customer need to pay you Rs."+Rounding.decimalFormatiing(returned));
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "YOu have to pay to the customer Rs."+Rounding.decimalFormatiing(invoiceTotalReturn));
+        }
+
         
         connector.editRecordInTable("invoices", "invoice_id", "returned", Rounding.RoundTo5(invoiceTotalReturn, true), invoiceID);
         
@@ -194,6 +215,13 @@ public class ReturnToDB {
             }
         }
         return true;
+    }
+    
+    private void paymentUpdate(){
+        String status = connector.getRelavantRecord("invoices", "status", "invoice_id", invoiceID);
+        double paid_amount = Double.valueOf(connector.getRelavantRecord("invoices", "cash_paid", "invoice_id", invoiceID));
+        double invoice_amount = Double.valueOf(connector.getRelavantRecord("invoices", "grandTotal", "invoice_id", invoiceID));
+        
     }
     
     

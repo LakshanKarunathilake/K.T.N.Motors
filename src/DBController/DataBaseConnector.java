@@ -423,6 +423,22 @@ public class DataBaseConnector {
          return records;
      }
      
+     public boolean sqlPlainExecution(String sql){
+        try {
+            statement = conn.createStatement();
+            rst = statement.executeQuery(sql);
+            
+            while(rst.next()){
+//                ArrayList<String> list = list.add(rst)
+            }
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnector.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error in plain SQL execution");
+            return false;
+        }
+     }
+     
      
     
 }

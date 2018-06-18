@@ -26,6 +26,7 @@ import Sales.ItemToTable;
 import SalesReturn.ReturnToDB;
 import SalesReturn.SalesReturn;
 import Settings.EditQty;
+import Statistics.DayEndView;
 import StockCounting.Stock;
 
 
@@ -285,24 +286,12 @@ public class MainFrame extends javax.swing.JFrame{
         jLabel54 = new javax.swing.JLabel();
         return_button1 = new javax.swing.JButton();
         ReportPanel = new javax.swing.JPanel();
-        reports_customer_btn = new javax.swing.JButton();
+        reports_dayEnd_btn = new javax.swing.JButton();
         report_items_btn = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         reports_customer_btn1 = new javax.swing.JButton();
         reports_customer_btn2 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
-        report_item_combo = new javax.swing.JComboBox<>();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        item_date2_label = new javax.swing.JLabel();
-        item_date2_picker = new com.toedter.calendar.JDateChooser();
-        item_date1_label = new javax.swing.JLabel();
-        item_date1_picker = new com.toedter.calendar.JDateChooser();
-        item_report_checkBox = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
@@ -312,13 +301,20 @@ public class MainFrame extends javax.swing.JFrame{
         report_userID_combo = new javax.swing.JComboBox<>();
         jLabel32 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
-        user_date2_label = new javax.swing.JLabel();
-        user_date2_picker = new com.toedter.calendar.JDateChooser();
-        user_date1_label = new javax.swing.JLabel();
-        user_date1_picker = new com.toedter.calendar.JDateChooser();
-        user_report_checkBox = new javax.swing.JCheckBox();
         jLabel44 = new javax.swing.JLabel();
         jButton13 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        report_item_combo = new javax.swing.JComboBox<>();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        item_report_checkBox = new javax.swing.JCheckBox();
+        reports_date1_picker = new com.toedter.calendar.JDateChooser();
+        reports_date2_picker = new com.toedter.calendar.JDateChooser();
+        item_date1_label = new javax.swing.JLabel();
+        item_date2_label = new javax.swing.JLabel();
         SettingsPanel = new javax.swing.JPanel();
         AddItemPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -1495,14 +1491,14 @@ public class MainFrame extends javax.swing.JFrame{
         ReportPanel.setBackground(new java.awt.Color(255, 255, 255));
         ReportPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        reports_customer_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        reports_customer_btn.setText("Customer Rport");
-        reports_customer_btn.addActionListener(new java.awt.event.ActionListener() {
+        reports_dayEnd_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        reports_dayEnd_btn.setText("Day End Report");
+        reports_dayEnd_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reports_customer_btnActionPerformed(evt);
+                reports_dayEnd_btnActionPerformed(evt);
             }
         });
-        ReportPanel.add(reports_customer_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 60, 177, 142));
+        ReportPanel.add(reports_dayEnd_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(577, 70, 160, 70));
 
         report_items_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         report_items_btn.setText("Item Rport");
@@ -1511,11 +1507,11 @@ public class MainFrame extends javax.swing.JFrame{
                 report_items_btnActionPerformed(evt);
             }
         });
-        ReportPanel.add(report_items_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 57, 177, 142));
+        ReportPanel.add(report_items_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 110, 70));
 
         jLabel6.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel6.setText("Total Reports");
-        ReportPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 180, 30));
+        ReportPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 180, 30));
 
         reports_customer_btn1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         reports_customer_btn1.setText("Customer Rport");
@@ -1524,7 +1520,7 @@ public class MainFrame extends javax.swing.JFrame{
                 reports_customer_btn1ActionPerformed(evt);
             }
         });
-        ReportPanel.add(reports_customer_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 58, 177, 142));
+        ReportPanel.add(reports_customer_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 150, 70));
 
         reports_customer_btn2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         reports_customer_btn2.setText("Monthly Selling");
@@ -1533,74 +1529,9 @@ public class MainFrame extends javax.swing.JFrame{
                 reports_customer_btn2ActionPerformed(evt);
             }
         });
-        ReportPanel.add(reports_customer_btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 177, 142));
+        ReportPanel.add(reports_customer_btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 150, 70));
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        report_item_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jPanel2.add(report_item_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(447, 20, 370, 50));
-
-        jButton9.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton9.setText("Empty Stock");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 160, 35));
-
-        jButton10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton10.setText("Restocking History");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, 35));
-
-        jButton11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton11.setText("Selling History");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 160, 35));
-
-        jLabel41.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel41.setText("Complete Item Report Reports");
-        jPanel2.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
-
-        jLabel42.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel42.setText("Select Part Number");
-        jPanel2.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, -1, -1));
-
-        item_date2_label.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        item_date2_label.setText("End :");
-        jPanel2.add(item_date2_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 240, -1, 40));
-
-        item_date2_picker.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jPanel2.add(item_date2_picker, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 240, 180, 50));
-
-        item_date1_label.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        item_date1_label.setText("Start : ");
-        jPanel2.add(item_date1_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, -1, 20));
-
-        item_date1_picker.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jPanel2.add(item_date1_picker, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, 180, 50));
-
-        item_report_checkBox.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        item_report_checkBox.setText("Date Range");
-        item_report_checkBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                item_report_checkBoxActionPerformed(evt);
-            }
-        });
-        jPanel2.add(item_report_checkBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, -1, -1));
-
-        jTabbedPane1.addTab("Item Wise", jPanel2);
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1610,7 +1541,7 @@ public class MainFrame extends javax.swing.JFrame{
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 160, 35));
+        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 160, 35));
 
         jButton7.setText("All Selling");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -1618,28 +1549,30 @@ public class MainFrame extends javax.swing.JFrame{
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 160, 35));
+        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 160, 35));
 
         jButton8.setText("Bill Information");
-        jPanel3.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 140, 160, 35));
+        jPanel3.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, 160, 35));
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel29.setText("UserID :");
-        jPanel3.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+        jPanel3.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
 
+        report_name_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         report_name_combo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 report_name_comboActionPerformed(evt);
             }
         });
-        jPanel3.add(report_name_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 299, 36));
+        jPanel3.add(report_name_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 299, 36));
 
+        report_userID_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         report_userID_combo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 report_userID_comboActionPerformed(evt);
             }
         });
-        jPanel3.add(report_userID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 75, 36));
+        jPanel3.add(report_userID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 75, 36));
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel32.setText("Select user");
@@ -1647,34 +1580,11 @@ public class MainFrame extends javax.swing.JFrame{
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel43.setText("All Users Reports");
-        jPanel3.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
-
-        user_date2_label.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        user_date2_label.setText("End :");
-        jPanel3.add(user_date2_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, -1, 40));
-
-        user_date2_picker.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jPanel3.add(user_date2_picker, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 170, 180, 50));
-
-        user_date1_label.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        user_date1_label.setText("Start : ");
-        jPanel3.add(user_date1_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, -1, 20));
-
-        user_date1_picker.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jPanel3.add(user_date1_picker, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 100, 180, 50));
-
-        user_report_checkBox.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        user_report_checkBox.setText("Date Range");
-        user_report_checkBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                user_report_checkBoxActionPerformed(evt);
-            }
-        });
-        jPanel3.add(user_report_checkBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 60, -1, -1));
+        jPanel3.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, -1, -1));
 
         jLabel44.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel44.setText("Name :");
-        jPanel3.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, -1, -1));
+        jPanel3.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, -1));
 
         jButton13.setText("Bill History");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
@@ -1682,11 +1592,77 @@ public class MainFrame extends javax.swing.JFrame{
                 jButton13ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 160, 30));
+        jPanel3.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 160, 30));
 
         jTabbedPane1.addTab("User Wise", jPanel3);
 
-        ReportPanel.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 1010, 440));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        report_item_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jPanel2.add(report_item_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 370, 50));
+
+        jButton9.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButton9.setText("Empty Stock");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 160, 35));
+
+        jButton10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButton10.setText("Restocking History");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, -1, 35));
+
+        jButton11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButton11.setText("Selling History");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 160, 40));
+
+        jLabel41.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel41.setText("Complete Item Report Reports");
+        jPanel2.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+
+        jLabel42.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel42.setText("Part Number");
+        jPanel2.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        jTabbedPane1.addTab("Item Wise", jPanel2);
+
+        ReportPanel.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 730, 340));
+
+        item_report_checkBox.setBackground(new java.awt.Color(255, 255, 255));
+        item_report_checkBox.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        item_report_checkBox.setText("Date Range");
+        item_report_checkBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_report_checkBoxActionPerformed(evt);
+            }
+        });
+        ReportPanel.add(item_report_checkBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+
+        reports_date1_picker.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        ReportPanel.add(reports_date1_picker, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 180, 50));
+
+        reports_date2_picker.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        ReportPanel.add(reports_date2_picker, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, 180, 50));
+
+        item_date1_label.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        item_date1_label.setText("Start : ");
+        ReportPanel.add(item_date1_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, -1, -1));
+
+        item_date2_label.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        item_date2_label.setText("End :");
+        ReportPanel.add(item_date2_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, -1, 40));
 
         MainChangeFrame.add(ReportPanel, "card3");
 
@@ -2658,16 +2634,13 @@ public class MainFrame extends javax.swing.JFrame{
        
         item_date1_label.setVisible(false);
         item_date2_label.setVisible(false);
-        item_date2_picker.setVisible(false);
-        item_date1_picker.setVisible(false);
+        reports_date2_picker.setVisible(false);
+        reports_date1_picker.setVisible(false);
         
-        user_date1_label.setVisible(false);
-        user_date2_label.setVisible(false);
-        user_date2_picker.setVisible(false);
-        user_date1_picker.setVisible(false);
         
-        setDefaultDateRange(item_date2_picker,item_date1_picker,12);
-        setDefaultDateRange(user_date2_picker,user_date1_picker,12);
+        
+        setDefaultDateRange(reports_date2_picker,reports_date1_picker,12);
+        
         
         populateWiseReportPanel();
     }//GEN-LAST:event_ReportLabelMouseClicked
@@ -2684,17 +2657,22 @@ public class MainFrame extends javax.swing.JFrame{
         
     }
     
+    boolean once = true;
     public void populateWiseReportPanel(){
-        AutoCompleteDecorator.decorate(report_item_combo);
-        AutoCompleteDecorator.decorate(report_name_combo);
-        AutoCompleteDecorator.decorate(report_userID_combo);
+        if(once){
+            AutoCompleteDecorator.decorate(report_item_combo);
+            AutoCompleteDecorator.decorate(report_name_combo);
+            AutoCompleteDecorator.decorate(report_userID_combo);
+            once = false;
+        }
+        
         
         report_item_combo.removeAllItems();
         report_name_combo.removeAllItems();
         report_userID_combo.removeAllItems();
-        manipulation.getRecords("item", "itemNo", report_item_combo);
-        manipulation.getRecords("users", "userID", report_userID_combo);
-        manipulation.getRecords("users", "name", report_name_combo);
+        manipulation.getRecords("items", "item_code", report_item_combo);
+        manipulation.getRecords("customers", "customer_code", report_userID_combo);
+        manipulation.getRecords("customers", "name", report_name_combo);
         
     }
     
@@ -3304,22 +3282,10 @@ public class MainFrame extends javax.swing.JFrame{
         }
     }//GEN-LAST:event_sales_remove_btnActionPerformed
 
-    private void reports_customer_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reports_customer_btnActionPerformed
-        String path = report_folder_path+"userReport.jrxml";
-        
-        JasperReport jr;
-        try {
-            jr = JasperCompileManager.compileReport(path);
-            JasperPrint jp = JasperFillManager.fillReport(jr, null, connector.startConnection());
-            JasperViewer jw = new JasperViewer(jp, false);
-            jw.viewReport(jp, false);
-        } catch (JRException ex) {
-            JOptionPane.showMessageDialog(null, "ERROR in Reporting all items...");
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_reports_customer_btnActionPerformed
+    private void reports_dayEnd_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reports_dayEnd_btnActionPerformed
+        DayEndView view = new DayEndView();
+        view.setVisible(true);
+    }//GEN-LAST:event_reports_dayEnd_btnActionPerformed
 
     private void report_items_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_items_btnActionPerformed
         String path = report_folder_path+"\\item\\items.jrxml";
@@ -3502,14 +3468,14 @@ public class MainFrame extends javax.swing.JFrame{
     private void report_userID_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_userID_comboActionPerformed
         String userID = String.valueOf(report_userID_combo.getSelectedItem());
         
-        String name = connector.getRelavantRecord("users", "name", "userID", userID);
+        String name = connector.getRelavantRecord("customers", "name", "customer_code", userID);
         report_name_combo.setSelectedItem(name);
     }//GEN-LAST:event_report_userID_comboActionPerformed
 
     private void report_name_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_name_comboActionPerformed
          String name = String.valueOf(report_name_combo.getSelectedItem());
         
-        String userID = connector.getRelavantRecord("users", "userID", "name", name);
+        String userID = connector.getRelavantRecord("customers", "customer_code", "name", name);
         report_userID_combo.setSelectedItem(userID);
     }//GEN-LAST:event_report_name_comboActionPerformed
 
@@ -3662,29 +3628,15 @@ public class MainFrame extends javax.swing.JFrame{
         if(item_report_checkBox.isSelected()){
             item_date1_label.setVisible(true);
             item_date2_label.setVisible(true);
-            item_date2_picker.setVisible(true);
-            item_date1_picker.setVisible(true);
+            reports_date2_picker.setVisible(true);
+            reports_date1_picker.setVisible(true);
         }else{
             item_date1_label.setVisible(false);
             item_date2_label.setVisible(false);
-            item_date2_picker.setVisible(false);
-            item_date1_picker.setVisible(false);
+            reports_date2_picker.setVisible(false);
+            reports_date1_picker.setVisible(false);
         }
     }//GEN-LAST:event_item_report_checkBoxActionPerformed
-
-    private void user_report_checkBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_user_report_checkBoxActionPerformed
-        if(user_report_checkBox.isSelected()){
-            user_date1_label.setVisible(true);
-            user_date2_label.setVisible(true);
-            user_date2_picker.setVisible(true);
-            user_date1_picker.setVisible(true);
-        }else{
-            user_date1_label.setVisible(false);
-            user_date2_label.setVisible(false);
-            user_date2_picker.setVisible(false);
-            user_date1_picker.setVisible(false);
-        }
-    }//GEN-LAST:event_user_report_checkBoxActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         String path = report_folder_path+"\\user\\all_selling.jrxml";
@@ -4556,9 +4508,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JButton item_add_edit_btn;
     private javax.swing.JButton item_add_new_btn;
     private javax.swing.JLabel item_date1_label;
-    private com.toedter.calendar.JDateChooser item_date1_picker;
     private javax.swing.JLabel item_date2_label;
-    private com.toedter.calendar.JDateChooser item_date2_picker;
     private javax.swing.JCheckBox item_report_checkBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -4685,9 +4635,11 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JButton report_items_btn;
     private javax.swing.JComboBox<String> report_name_combo;
     private javax.swing.JComboBox<String> report_userID_combo;
-    private javax.swing.JButton reports_customer_btn;
     private javax.swing.JButton reports_customer_btn1;
     private javax.swing.JButton reports_customer_btn2;
+    private com.toedter.calendar.JDateChooser reports_date1_picker;
+    private com.toedter.calendar.JDateChooser reports_date2_picker;
+    private javax.swing.JButton reports_dayEnd_btn;
     private javax.swing.JTextField retailer_address_txt;
     private javax.swing.JTextField retailer_contact_txt;
     private javax.swing.JTextField retailer_name_txt;
@@ -4763,11 +4715,6 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JButton update_save_btn;
     private javax.swing.JTextField update_sellingP_txt;
     private javax.swing.JLabel update_selling_lbl;
-    private javax.swing.JLabel user_date1_label;
-    private com.toedter.calendar.JDateChooser user_date1_picker;
-    private javax.swing.JLabel user_date2_label;
-    private com.toedter.calendar.JDateChooser user_date2_picker;
-    private javax.swing.JCheckBox user_report_checkBox;
     // End of variables declaration//GEN-END:variables
 
     
