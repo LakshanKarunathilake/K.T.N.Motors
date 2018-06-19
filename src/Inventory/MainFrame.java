@@ -3520,15 +3520,18 @@ public class MainFrame extends javax.swing.JFrame{
         String path = report_folder_path+"\\SalesInvoice\\sales_invoice.jrxml";
         System.out.println("Path :"+path);
         String userID = String.valueOf(report_userID_combo.getSelectedItem());        
-        String sql = "select invoiceID,orderDate FROM invoices WHERE customer_code like ? ORDER BY orderDate DESC LIMIT 1 ";
+        String sql = "select invoice_id,orderDate FROM invoices WHERE customer_code like ? ORDER BY orderDate DESC LIMIT 1 ";
         ArrayList list = new ArrayList();
-        list.add("invoice_id");
+        list.add(userID);
         String invoiceID = connector.sqlExecution(sql,"invoice_id",list);
         System.out.println("Invoice ID : "+invoiceID);
+        String sub_report_directory = report_folder_path+"\\SalesInvoice\\";
+        System.out.println("Sub report "+sub_report_directory );
         if(invoiceID != null){
             HashMap hm = new HashMap();
             hm.put("userID", userID);
             hm.put("invoiceID", invoiceID);
+            hm.put("subReport", sub_report_directory);
 
             try {
                 JasperReport jr = JasperCompileManager.compileReport(path);
@@ -3677,15 +3680,15 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         String path = report_folder_path+"\\user\\all_selling.jrxml";
-//        Date fromDate = user_date1_picker.getDate();
-//        Date toDate = user_date2_picker.getDate();        
+        Date fromDate = reports_date1_picker.getDate();
+        Date toDate = reports_date2_picker.getDate();        
 //        String fromDateString = new SimpleDateFormat("yyyy-MM-dd").format(fromDate);        
 //        String toDateString = new SimpleDateFormat("yyyy-MM-dd").format(toDate);
         
-        Calendar c = Calendar.getInstance();
-        Timestamp toDate = new Timestamp(c.getTimeInMillis());
-        c.add(Calendar.YEAR,-1);
-        Timestamp fromDate = new Timestamp(c.getTimeInMillis());
+//        Calendar c = Calendar.getInstance();
+////        Timestamp toDate = new Timestamp(c.getTimeInMillis());
+//        c.add(Calendar.YEAR,-1);
+//        Timestamp fromDate = new Timestamp(c.getTimeInMillis());
         String fromDateString = String.valueOf(fromDate);
         String toDateString = String.valueOf(toDate);
         

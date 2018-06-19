@@ -436,8 +436,13 @@ public class DayEndView extends javax.swing.JFrame {
             credit_returns_lbl.setText("0.00");
         }
         
-        double t_returns = Double.valueOf(cash_retunrs)+ Double.valueOf(credit_returns_lbl.getText());
-        total_returns_lbl.setText(Rounding.decimalFormatiing(t_returns));
+        double t_returns = Double.valueOf(cash_returns_lbl.getText())+ Double.valueOf(credit_returns_lbl.getText());
+        if(t_returns != 0.00){
+            total_returns_lbl.setText(Rounding.decimalFormatiing(t_returns));
+        }else{
+            total_returns_lbl.setText("0.00");
+        }
+       
         
         String part_payments = report.getPartPayments();
         if(!part_payments.equals("null")){
