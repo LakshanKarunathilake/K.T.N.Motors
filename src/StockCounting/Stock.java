@@ -36,6 +36,7 @@ public class Stock {
     JLabel selling_lbl;
     JLabel description_lbl;
     JLabel availableQty_lbl;
+    JLabel currentSelling_lbl;
     
     DataBaseConnector connector;
     
@@ -59,12 +60,13 @@ public class Stock {
     
         
     
-    public void setFields(JComboBox itemNo_combo,JTextField qty_txt,JTextField selling_txt,JLabel selling_lbl,JLabel description_lbl,JLabel availableQty_lbl,JTable table,DataBaseConnector connector){
+    public void setFields(JComboBox itemNo_combo,JTextField qty_txt,JTextField selling_txt,JLabel selling_lbl,JLabel description_lbl,JLabel availableQty_lbl,JLabel currentSelling_lbl,JTable table,DataBaseConnector connector){
         this.itemNo_combo = itemNo_combo;
         this.qty_txt = qty_txt;
         this.selling_lbl = selling_lbl;
         this.availableQty_lbl = availableQty_lbl;
         this.selling_txt = selling_txt;
+        this.currentSelling_lbl= currentSelling_lbl;
         this.connector = connector; 
         
         this.description_lbl = description_lbl;
@@ -81,9 +83,13 @@ public class Stock {
         String item_no = String.valueOf(itemNo_combo.getSelectedItem());
         String description = connector.getRelavantRecord("items", "description", "item_code", item_no);
         String qty = connector.getRelavantRecord("items", "stock", "item_code", item_no);
+        String selling = connector.getRelavantRecord("items", "selling", "item_code", item_no);
         description_lbl.setText(description);
         availableQty_lbl.setText(qty);
+        currentSelling_lbl.setText(selling);
     }
+    
+    
 
     
     
