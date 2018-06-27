@@ -2822,7 +2822,11 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void add_itemNo_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_itemNo_txtKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){           
-           ItemAdd.getInstance().CheckAvailability();
+            boolean CheckAvailability = ItemAdd.getInstance().CheckAvailability();
+            if(CheckAvailability){
+                add_item_category_combo.getEditor().getEditorComponent().requestFocusInWindow();   
+            }
+           
         }
     }//GEN-LAST:event_add_itemNo_txtKeyPressed
 
