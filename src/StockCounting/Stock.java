@@ -72,10 +72,7 @@ public class Stock {
         this.description_lbl = description_lbl;
         this.table = table;
         
-        if(condition){
-            fillCombo();
-            condition = false;
-        }
+        fillCombo();
         
     }
     
@@ -102,7 +99,11 @@ public class Stock {
     
     public void fillCombo(){
         itemNo_combo.removeAllItems();
-        AutoCompleteDecorator.decorate(itemNo_combo);
+        if(condition){
+            AutoCompleteDecorator.decorate(itemNo_combo);
+            condition = false;
+        }
+        
         DataManipulation dm = new DataManipulation(connector);
         dm.getRecords("items", "item_code", itemNo_combo);
         
@@ -124,13 +125,23 @@ public class Stock {
         String selling_abc = selling_txt.getText();
         
         double selling = Double.parseDouble(parseToNumbers(selling_abc));
-        double cost = calculateCost(selling);
+        
         
         String available_qty = connector.getRelavantRecord("items", "stock", "item_code", item_no);
         int total_qty = Integer.valueOf(available_qty)+Integer.valueOf(qty);
         
         Timestamp now = new Timestamp(System.currentTimeMillis());
         String timeStamp = String.valueOf(now);
+        
+        double current_price = Double.valueOf(connector.getRelavantRecord("items", "selling", "item_code", item_no));
+        if(current_price > selling){
+            int showConfirmDialog = JOptionPane.showConfirmDialog(null, "Current price is > than the price you are trying to enter +\n Click yes to save the large price click no to save the new selling price","Price matter",JOptionPane.YES_NO_OPTION);
+            if(showConfirmDialog == JOptionPane.YES_OPTION){
+                selling = current_price;
+            }
+        }
+            
+        double cost = calculateCost(selling);
         
         ArrayList data = new ArrayList();
         ArrayList data1 = new ArrayList();

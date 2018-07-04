@@ -6,16 +6,13 @@
 package Inventory;
 
 
-import Backup.DoBackup;
+
 import Customers.AddCustomer;
 import DBController.DataBaseConnector;
 import DataManipulation.DataManipulation;
 import DataManipulation.Rounding;
 import ItemAdding.ItemAdd;
 import Payments.BillPay;
-import Printing.PrintData;
-import Printing.Printsupport;
-import Printing.Printsupport.MyPrintable;
 import Purchaising.Purchaise;
 import Purchaising.Retailer;
 import Sales.Invoice;
@@ -36,8 +33,6 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -91,7 +86,8 @@ public class MainFrame extends javax.swing.JFrame{
     
     
 //    String report_folder_path = "E:\\K.T.N.Motors\\src\\reports";
-    String report_folder_path = "C:\\Users\\lakshan\\Documents\\GitHub\\K.T.N.Motors\\src\\Reports";
+//    String report_folder_path = "C:\\Users\\lakshan\\Documents\\GitHub\\K.T.N.Motors\\src\\Reports";
+    String report_folder_path = "K:\\DAD\\Front Inventory\\version-2\\K.T.N.Motors\\src\\Reports";
     
     String report_folder_path_sub = "\"E:\\\\kade-1.0\\\\src\\\\Reports";
     
@@ -569,12 +565,12 @@ public class MainFrame extends javax.swing.JFrame{
             }
         });
         sales_itemno_combo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
-            }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
                 sales_itemno_comboPopupMenuWillBecomeVisible(evt);
+            }
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         sales_itemno_combo.addActionListener(new java.awt.event.ActionListener() {
@@ -3770,7 +3766,7 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void return_cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_cancel_btnActionPerformed
         return_cancel_btn.setEnabled(false);
-        return_search_invoice.setEnabled(false);
+        return_search_invoice.setEnabled(true);
         
         ViewManipulation.changePanel(sales_return_subPanel, returns_item_table);
                 
