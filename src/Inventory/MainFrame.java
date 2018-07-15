@@ -23,6 +23,7 @@ import Sales.ItemToTable;
 import SalesReturn.ReturnToDB;
 import SalesReturn.SalesReturn;
 import Settings.EditQty;
+import Settings.PartNumberChange;
 import Statistics.DayEndView;
 import StockCounting.Stock;
 
@@ -220,6 +221,13 @@ public class MainFrame extends javax.swing.JFrame{
         jLabel85 = new javax.swing.JLabel();
         settings_qty_edit_qty_txt = new javax.swing.JTextField();
         jButton21 = new javax.swing.JButton();
+        part_number_change_panel = new javax.swing.JPanel();
+        jLabel80 = new javax.swing.JLabel();
+        change_item_combo = new javax.swing.JComboBox<>();
+        jLabel87 = new javax.swing.JLabel();
+        jButton22 = new javax.swing.JButton();
+        changed_item_txt = new javax.swing.JTextField();
+        jButton23 = new javax.swing.JButton();
         stock_count_panel = new javax.swing.JPanel();
         stock_update_btn = new javax.swing.JButton();
         stock_item_combo = new javax.swing.JComboBox<>();
@@ -565,12 +573,12 @@ public class MainFrame extends javax.swing.JFrame{
             }
         });
         sales_itemno_combo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
                 sales_itemno_comboPopupMenuWillBecomeVisible(evt);
-            }
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         sales_itemno_combo.addActionListener(new java.awt.event.ActionListener() {
@@ -973,9 +981,70 @@ public class MainFrame extends javax.swing.JFrame{
                 jButton21ActionPerformed(evt);
             }
         });
-        settings_sub_edit_panel.add(jButton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 380, 210, 70));
+        settings_sub_edit_panel.add(jButton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, 210, 70));
 
         settings_sub_panel.add(settings_sub_edit_panel, "card2");
+
+        jLabel80.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel80.setText("Change Item Number to");
+
+        change_item_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+
+        jLabel87.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel87.setText("Previous Item Number");
+
+        jButton22.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton22.setText("Save");
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
+
+        changed_item_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+
+        javax.swing.GroupLayout part_number_change_panelLayout = new javax.swing.GroupLayout(part_number_change_panel);
+        part_number_change_panel.setLayout(part_number_change_panelLayout);
+        part_number_change_panelLayout.setHorizontalGroup(
+            part_number_change_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, part_number_change_panelLayout.createSequentialGroup()
+                .addContainerGap(525, Short.MAX_VALUE)
+                .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
+            .addGroup(part_number_change_panelLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(part_number_change_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel87)
+                    .addComponent(jLabel80)
+                    .addComponent(change_item_combo, 0, 336, Short.MAX_VALUE)
+                    .addComponent(changed_item_txt))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        part_number_change_panelLayout.setVerticalGroup(
+            part_number_change_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(part_number_change_panelLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel87)
+                .addGap(18, 18, 18)
+                .addComponent(change_item_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel80)
+                .addGap(18, 18, 18)
+                .addComponent(changed_item_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                .addGap(101, 101, 101))
+        );
+
+        settings_sub_panel.add(part_number_change_panel, "card3");
+
+        jButton23.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton23.setText("Change Number");
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout settings_panelLayout = new javax.swing.GroupLayout(settings_panel);
         settings_panel.setLayout(settings_panelLayout);
@@ -984,18 +1053,22 @@ public class MainFrame extends javax.swing.JFrame{
             .addGroup(settings_panelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(settings_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(settings_sub_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
+                .addComponent(settings_sub_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         settings_panelLayout.setVerticalGroup(
             settings_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settings_panelLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(settings_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                    .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
                 .addComponent(settings_sub_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -4321,7 +4394,16 @@ public class MainFrame extends javax.swing.JFrame{
     private void stock_item_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stock_item_comboActionPerformed
         Stock.getInstance().fillDescription();
     }//GEN-LAST:event_stock_item_comboActionPerformed
-    
+
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        PartNumberChange.getInstance().changeItemNumber();
+    }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        ViewManipulation.changePanel(settings_sub_panel, part_number_change_panel);
+        PartNumberChange.getInstance().setFields(change_item_combo, changed_item_txt, connector);
+    }//GEN-LAST:event_jButton23ActionPerformed
+  
        
     public void FillBill(String invoiceID){
        ArrayList list =  connector.readRow("orders", "orderID", invoiceID);
@@ -4526,6 +4608,8 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JLabel bill_return_label;
     private javax.swing.JComboBox<String> bill_userID_combo;
     private javax.swing.JButton cancelBtn;
+    private javax.swing.JComboBox<String> change_item_combo;
+    private javax.swing.JTextField changed_item_txt;
     private javax.swing.JLabel clock_txt;
     private javax.swing.JLabel date_txt;
     private javax.swing.JButton editBtn;
@@ -4549,6 +4633,8 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
+    private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -4635,12 +4721,14 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
     private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
+    private javax.swing.JLabel jLabel87;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -4653,6 +4741,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton newBtn;
+    private javax.swing.JPanel part_number_change_panel;
     private javax.swing.JLabel payBillsLabel;
     private javax.swing.JTextField purchaise_invoiceno_txt;
     private javax.swing.JComboBox<String> purchaise_retailer_combo;
