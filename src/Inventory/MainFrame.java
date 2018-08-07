@@ -3902,6 +3902,7 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         ViewManipulation.emptyTable(return_item_table);
+        ViewManipulation.changePanel(sales_return_subPanel, returns_item_table);
         String invoiceNo = String.valueOf(return_invoiceID_combo.getSelectedItem());
         sales_return.getInvoiceRecords(invoiceNo, return_item_table, connector);
     }//GEN-LAST:event_jButton4ActionPerformed

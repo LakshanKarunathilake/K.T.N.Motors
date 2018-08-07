@@ -22,7 +22,7 @@ public class DataBaseConnector {
     private static final String USERNAME = "root";
 //    private static final String USERNAME = "Lakshan";
     private static final String PASSWORD = "";
-//    private static final String PASSWORD = "1234";
+//    private static final String PASSWORD = "123";
 //    private static final String CONN_STRING = "jdbc:mysql://localhost:3333/sales_inventory";  
     private static final String CONN_STRING = "jdbc:mysql://localhost/prototype";  
 //    private static final String CONN_STRING = "jdbc:mysql://192.168.1.2/prototype";  

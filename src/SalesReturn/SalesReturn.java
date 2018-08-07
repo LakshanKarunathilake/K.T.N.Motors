@@ -235,6 +235,7 @@ public class SalesReturn {
     
     private void salesInvoiceSelection(String invoiceNo,JTable item_table){
         invoice_no.setSelectedItem(invoiceNo);
+        ViewManipulation.emptyTable(item_table);
         ViewManipulation.changePanel(panel1, panel2);
         getInvoiceRecords(invoiceNo, item_table, connector);
     }
