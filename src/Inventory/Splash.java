@@ -34,6 +34,7 @@ public class Splash extends javax.swing.JFrame {
             connector.startConnection();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error in Connecting to database contact admin"+ex.getMessage());
+            System.exit(0);
             Logger.getLogger(Splash.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

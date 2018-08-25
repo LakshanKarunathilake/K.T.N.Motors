@@ -10,6 +10,7 @@ package Inventory;
 import Customers.AddCustomer;
 import DBController.DataBaseConnector;
 import DataManipulation.DataManipulation;
+import DataManipulation.JSONReading;
 import DataManipulation.Rounding;
 import ItemAdding.ItemAdd;
 import Payments.BillPay;
@@ -33,6 +34,7 @@ import ViewManipulation.ViewManipulation;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.math.BigDecimal;
@@ -88,7 +90,7 @@ public class MainFrame extends javax.swing.JFrame{
     
 //    String report_folder_path = "E:\\K.T.N.Motors\\src\\reports";
 //    String report_folder_path = "C:\\Users\\lakshan\\Documents\\GitHub\\K.T.N.Motors\\src\\Reports";
-    String report_folder_path = "K:\\DAD\\Front Inventory\\version-2\\K.T.N.Motors\\src\\Reports";
+    String report_folder_path = JSONReading.getInstance().getReportLocation();
     
     String report_folder_path_sub = "\"E:\\\\kade-1.0\\\\src\\\\Reports";
     
@@ -96,6 +98,7 @@ public class MainFrame extends javax.swing.JFrame{
     Connection conn = null;
     
     public MainFrame() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("feature.png")));
         
         connector = DataBaseConnector.getInstance();
         manipulation = new DataManipulation(connector);
@@ -2725,7 +2728,7 @@ public class MainFrame extends javax.swing.JFrame{
         
         
         
-        setDefaultDateRange(reports_date2_picker,reports_date1_picker,12);
+        setDefaultDateRange(reports_date1_picker,reports_date2_picker,12);
         
         
         populateWiseReportPanel();
@@ -3770,20 +3773,22 @@ public class MainFrame extends javax.swing.JFrame{
         String path = report_folder_path+"\\user\\all_selling.jrxml";
         Date fromDate = reports_date1_picker.getDate();
         Date toDate = reports_date2_picker.getDate();        
-//        String fromDateString = new SimpleDateFormat("yyyy-MM-dd").format(fromDate);        
-//        String toDateString = new SimpleDateFormat("yyyy-MM-dd").format(toDate);
+        String fromDateString = new SimpleDateFormat("yyyy-MM-dd").format(fromDate);        
+        String toDateString = new SimpleDateFormat("yyyy-MM-dd").format(toDate);
         
 //        Calendar c = Calendar.getInstance();
 ////        Timestamp toDate = new Timestamp(c.getTimeInMillis());
 //        c.add(Calendar.YEAR,-1);
 //        Timestamp fromDate = new Timestamp(c.getTimeInMillis());
-        String fromDateString = String.valueOf(fromDate);
-        String toDateString = String.valueOf(toDate);
+//        String fromDateString = String.valueOf(fromDate);
+//        String toDateString = String.valueOf(toDate);
+        
+        System.out.println("FRom "+fromDateString+ " To "+toDateString + " id "+String.valueOf(report_userID_combo.getSelectedItem()));
         
         HashMap hm = new HashMap();
         hm.put("FromDate",fromDateString );
         hm.put("ToDate", toDateString); 
-        hm.put("userID",String.valueOf(report_userID_combo.getSelectedItem()));
+        hm.put("customer_code",String.valueOf(report_userID_combo.getSelectedItem()));
         System.out.println("FromDate : "+fromDateString);
         System.out.println("FromDate : "+toDateString);
         
@@ -3792,7 +3797,8 @@ public class MainFrame extends javax.swing.JFrame{
             jr = JasperCompileManager.compileReport(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, hm, connector.startConnection());
             JasperViewer jw = new JasperViewer(jp, false);
-            jw.viewReport(jp, false);
+            jw.viewReport(jp,false);
+            
         } catch (JRException ex) {
             JOptionPane.showMessageDialog(null, "ERROR in Reporting all items...");
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -3908,7 +3914,7 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void sales_search_user_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_search_user_btnActionPerformed
-        // TODO add your handling code here:
+        JSONReading.getInstance().readFile();
     }//GEN-LAST:event_sales_search_user_btnActionPerformed
 
     private void selectAll_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectAll_buttonActionPerformed

@@ -7,9 +7,11 @@ package SalesReturn;
 
 import DBController.DataBaseConnector;
 import DataManipulation.Rounding;
+import java.awt.Font;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -50,7 +52,8 @@ public class ReturnToDB {
     
     public void saveToDB(){
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        
+        ArrayList list = new ArrayList();
+        ArrayList columns = new ArrayList();
         for (int i = 0; i < model.getRowCount(); i++) {
             String itemNo = String.valueOf(model.getValueAt(i, 0));
             String bought_qty = String.valueOf(model.getValueAt(i, 4));
@@ -64,16 +67,15 @@ public class ReturnToDB {
             
             double returnAmount = Double.parseDouble(return_qty)* selling_price;
             
-
-            ArrayList list = new ArrayList();
+            
             list.add(invoiceID);
             list.add(itemNo);
             list.add(return_qty);
             list.add(timeStamp);
             list.add(return_type);
-            list.add(Rounding.RoundTo5(returnAmount, true));
             
-            ArrayList columns = new ArrayList();
+            
+            
             columns.add("invoice_id");
             columns.add("item_code");
             columns.add("qty");
@@ -83,8 +85,7 @@ public class ReturnToDB {
             
             
             if((model.getValueAt(i, 5)!= null) && (!return_qty.equals("0"))){
-                connector.insertRecordColoumnCount("sales_return", list, columns);
-
+                
                 ArrayList temp = connector.retreveDataColoumnWithTwoCondition("invoiceitems", "returnable_qty", "invoice_id", invoiceID, "item_code", itemNo);
                 String ta = String.valueOf(temp.get(0));
                 int current_returnable = Integer.valueOf(ta);
@@ -98,9 +99,9 @@ public class ReturnToDB {
                         damageReplaceAction(return_qty, itemNo);
                     }
                 } else {
-                    //Creit user invoice and its not paid
-                    String paidOrNot = connector.getRelavantRecord("invoices", "status", "invoice_id", invoiceID);
                     
+                    String paidOrNot = connector.getRelavantRecord("invoices", "status", "invoice_id", invoiceID);
+                    //Creit user invoice and its not paid
                     if (paidOrNot.equals("0")) {
                         if (return_type.equals("Not Suitable")) {
                             uncompatibleAction(return_qty, itemNo);
@@ -109,7 +110,7 @@ public class ReturnToDB {
                             damageReplaceAction(return_qty, itemNo);
                         }
                     }else{
-                        
+                        //Creit user invoice and its paid
                         if (return_type.equals("Not Suitable")) {
                             uncompatibleAction(return_qty, itemNo);
                         } else if (return_type.equals("Damaged Replacing")) {
@@ -120,7 +121,12 @@ public class ReturnToDB {
             }
 
         }
-        updateTotalReturn();
+        //Updating the salesreturn table with actual cash returns
+        double updateTotalReturn = updateTotalReturn();
+        list.add(Rounding.RoundTo5(updateTotalReturn, true));
+        connector.insertRecordColoumnCount("sales_return", list, columns);
+        
+        
         paymentUpdate();
         JOptionPane.showMessageDialog(null, "Item return recorded successfully..");
         
@@ -136,7 +142,7 @@ public class ReturnToDB {
         return connector.sqlExecution(sql, "total", list);
     }
     
-    private void updateTotalReturn(){
+    private double updateTotalReturn(){
         ArrayList list = connector.retreveDataColoumnWithCondition("sales_return", "amount", "invoice_id", invoiceID);
         invoiceTotalReturn=0;
         for (int i = 0; i < list.size(); i++) {
@@ -145,22 +151,33 @@ public class ReturnToDB {
             invoiceTotalReturn+=total;
         }
         String status = connector.getRelavantRecord("invoices", "status", "invoice_id", invoiceID);
-        
+        double returned = 0;
+        JLabel label;
         if(status.equals("0")){
+            System.out.println("Not paid bill return");
             double paid_amount = Double.valueOf(connector.getRelavantRecord("invoices", "cash_paid", "invoice_id", invoiceID));
             double invoice_amount = Double.valueOf(connector.getRelavantRecord("invoices", "grandTotal", "invoice_id", invoiceID));
 
-            double returned = invoice_amount-paid_amount-invoiceTotalReturn;
+            returned = invoice_amount-paid_amount-invoiceTotalReturn;
             if(returned < 0){
-                JOptionPane.showMessageDialog(null, "You have to pay to the custoemr Rs."+Rounding.decimalFormatiing(returned));
+                label = new JLabel("You have to pay to the customer Rs."+Rounding.decimalFormatiing(returned));
+                
+//              JOptionPane.showMessageDialog(null, "You have to pay to the customer Rs."+Rounding.decimalFormatiing(returned));
             }else{
-                JOptionPane.showMessageDialog(null, "The customer need to pay you Rs."+Rounding.decimalFormatiing(returned));
+                label = new JLabel("The customer need to pay you Rs." + Rounding.decimalFormatiing(returned));
+                
+//                JOptionPane.showMessageDialog(null, "The customer need to pay you Rs."+Rounding.decimalFormatiing(returned));
             }
         }else{
-            JOptionPane.showMessageDialog(null, "YOu have to pay to the customer Rs."+Rounding.decimalFormatiing(invoiceTotalReturn));
+            returned = invoiceTotalReturn;
+            label = new JLabel("You have to pay to the customer Rs." + Rounding.decimalFormatiing(returned));
+//            JOptionPane.showMessageDialog(null, "YOu have to pay to the customer Rs."+Rounding.decimalFormatiing(invoiceTotalReturn));
         }
-        connector.editRecordInTable("invoices", "invoice_id", "returned", Rounding.RoundTo5(invoiceTotalReturn, true), invoiceID);
         
+        label.setFont(new Font("Arial", Font.BOLD, 18));
+        JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.WARNING_MESSAGE);
+        connector.editRecordInTable("invoices", "invoice_id", "returned", Rounding.RoundTo5(invoiceTotalReturn, true), invoiceID);
+        return returned;
     }
     
     private void uncompatibleAction(String qty,String itemNo){
