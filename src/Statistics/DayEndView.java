@@ -6,9 +6,13 @@
 package Statistics;
 
 import DataManipulation.Rounding;
+import Printing.Printsupport;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,8 +31,7 @@ public class DayEndView extends javax.swing.JFrame {
         
         generateReport();
 //        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        Date today = new Date();
-        datepicker.setDate(today);
+        
     }
 
     /**
@@ -68,7 +71,8 @@ public class DayEndView extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         datepicker = new com.toedter.calendar.JDateChooser();
-        jLabel2 = new javax.swing.JLabel();
+        refresh_btn = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -90,7 +94,7 @@ public class DayEndView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, partPayments_panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(partpayments_lbl)
                 .addGap(23, 23, 23))
         );
@@ -290,10 +294,18 @@ public class DayEndView extends javax.swing.JFrame {
 
         datepicker.setDateFormatString("yyyy-MM-dd");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-refresh-filled-50.png"))); // NOI18N
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        refresh_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-refresh-filled-50.png"))); // NOI18N
+        refresh_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                refresh_btnMouseClicked(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton1.setText("Print");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -312,18 +324,22 @@ public class DayEndView extends javax.swing.JFrame {
                                 .addGap(96, 96, 96)
                                 .addComponent(jLabel1)))
                         .addGap(29, 29, 29)
-                        .addComponent(jLabel2)
+                        .addComponent(refresh_btn)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(partPayments_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(returns_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(returns_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(partPayments_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(sales_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,29 +349,34 @@ public class DayEndView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(datepicker, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                        .addComponent(sales_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(returns_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(partPayments_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))
+                        .addComponent(datepicker, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(refresh_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(sales_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(returns_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(partPayments_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void refresh_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refresh_btnMouseClicked
         Date date = datepicker.getDate();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         report.setDate(df.format(date));
         generateReport();
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_refresh_btnMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       printReport();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -393,65 +414,107 @@ public class DayEndView extends javax.swing.JFrame {
     }
     
     public void generateReport(){
+        
+        Date today = new Date();
+        datepicker.setDate(today);
+        
+        boolean disposed = false;
         String cash_sale = report.getCashSales();
         if(!cash_sale.equals("null")){
             cash_sales_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(cash_sale)));
         }else{
             JOptionPane.showMessageDialog(null, "Sorry for this day can't prepare the day end report due to no sales");
             this.dispose();
+            disposed = true;
+        }
+        
+        if(!disposed){
+            
+            String credit_sales = report.getCreditSales();
+            if (!credit_sales.equals("null")) {
+                credit_sales_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(credit_sales)));
+            } else {
+                credit_sales_lbl.setText("0.00");
+                credit_sales ="0.00";
+            }
+
+            String half_payments = report.getHalfPayments();
+            if (!half_payments.equals("null")) {
+                halfpayments_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(half_payments)));
+            } else {
+                halfpayments_lbl.setText("0.00");
+                half_payments = "0.00";
+            }
+
+            double t_sales = Double.valueOf(cash_sale) + Double.valueOf(credit_sales);
+            total_sales_lbl.setText(Rounding.decimalFormatiing(t_sales));
+
+            double t_cash_sales = Double.valueOf(cash_sale) + Double.valueOf(half_payments);
+            total_cashSale_lbl.setText(Rounding.decimalFormatiing(t_cash_sales));
+
+            String cash_returns = report.getCashReturns();
+            if (!cash_returns.equals("null")) {
+                cash_returns_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(cash_returns)));
+            } else {
+                cash_returns_lbl.setText("0.00");
+                cash_returns = "0.00";
+            }
+
+            String credit_retunrs = report.getCreditReturns();
+            if (!credit_retunrs.equals("null")) {
+                credit_returns_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(credit_retunrs)));
+            } else {
+                credit_returns_lbl.setText("0.00");
+                credit_retunrs = "0.00";
+            }
+
+            double t_returns = Double.valueOf(cash_returns_lbl.getText()) + Double.valueOf(credit_returns_lbl.getText());
+            if (t_returns != 0.00) {
+                total_returns_lbl.setText(Rounding.decimalFormatiing(t_returns));
+            } else {
+                total_returns_lbl.setText("0.00");
+            }
+
+            String part_payments = report.getPartPayments();
+            if (!part_payments.equals("null")) {
+                partpayments_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(part_payments)));
+            } else {
+                partpayments_lbl.setText("0.00");
+                part_payments = "0.00";
+            } 
         }
         
         
-        String credit_sales = report.getCreditSales();
-        if(!credit_sales.equals("null")){
-            credit_sales_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(credit_sales)));
-        }else{
-            credit_sales_lbl.setText("0.00");
-        }
-        
-        String half_payments = report.getHalfPayments();
-        if(!half_payments.equals("null")){
-            halfpayments_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(half_payments)));
-        }else{
-            halfpayments_lbl.setText("0.00");
-        }
-        
-        double t_sales = Double.valueOf(cash_sale)+ Double.valueOf(credit_sales);
-        total_sales_lbl.setText(Rounding.decimalFormatiing(t_sales));
-        
-        double t_cash_sales = Double.valueOf(cash_sale)+ Double.valueOf(half_payments);
-        total_cashSale_lbl.setText(Rounding.decimalFormatiing(t_cash_sales));
-        
-        String cash_retunrs = report.getCashReturns();
-        if(!cash_retunrs.equals("null")){
-            cash_returns_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(cash_retunrs)));
-        }else{
-            cash_returns_lbl.setText("0.00");
-        }
-        
-        String credit_retunrs = report.getCreditReturns();
-        if(!credit_retunrs.equals("null")){
-            credit_returns_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(credit_retunrs)));
-        }else{
-            credit_returns_lbl.setText("0.00");
-        }
-        
-        double t_returns = Double.valueOf(cash_returns_lbl.getText())+ Double.valueOf(credit_returns_lbl.getText());
-        if(t_returns != 0.00){
-            total_returns_lbl.setText(Rounding.decimalFormatiing(t_returns));
-        }else{
-            total_returns_lbl.setText("0.00");
-        }
-       
-        
-        String part_payments = report.getPartPayments();
-        if(!part_payments.equals("null")){
-            partpayments_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(part_payments)));
-        }else{
-            partpayments_lbl.setText("0.00");
-        }
         
     }
+    
+   public void printReport(){
+       Printsupport ps = new Printsupport();
+       
+       //Data setup to printing Information
+       HashMap hm = new HashMap();
+       hm.put("cash_sales",cash_sales_lbl.getText());
+       hm.put("credit_sales",credit_sales_lbl.getText());
+       hm.put("half_payments",halfpayments_lbl.getText());
+       hm.put("total_sales",total_sales_lbl.getText());
+       hm.put("total_cash_sales",total_cashSale_lbl.getText());
+       hm.put("cash_returns",cash_returns_lbl.getText());
+       hm.put("credit_returns",credit_returns_lbl.getText());
+       hm.put("part_payments",partpayments_lbl.getText());
+       
+       ps.setMetaData(hm);
+       
+       
+       PrinterJob pj = PrinterJob.getPrinterJob();
+
+        pj.setPrintable(new Printsupport.DayEndPrintable(), ps.getPageFormat(pj));
+        try {
+            pj.print();
+
+        } catch (PrinterException ex) {
+            ex.printStackTrace();
+        }
+   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cash_returns_lbl;
@@ -460,6 +523,7 @@ public class DayEndView extends javax.swing.JFrame {
     private javax.swing.JLabel credit_sales_lbl;
     private com.toedter.calendar.JDateChooser datepicker;
     private javax.swing.JLabel halfpayments_lbl;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel15;
@@ -467,7 +531,6 @@ public class DayEndView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -478,6 +541,7 @@ public class DayEndView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JPanel partPayments_panel;
     private javax.swing.JLabel partpayments_lbl;
+    private javax.swing.JLabel refresh_btn;
     private javax.swing.JPanel returns_panel;
     private javax.swing.JPanel sales_panel;
     private javax.swing.JLabel total_cashSale_lbl;

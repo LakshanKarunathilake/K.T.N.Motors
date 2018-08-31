@@ -3663,11 +3663,11 @@ public class MainFrame extends javax.swing.JFrame{
         
        
         final JComponent[] inputs = new JComponent[]{
-            new JLabel("UserID"),
+            new JLabel("Invoice ID"),
             search_invoiceID
             
         };
-        int result = JOptionPane.showConfirmDialog(null, inputs, "My custom dialog", JOptionPane.PLAIN_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(null, inputs, "Select Invoice number", JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             invoiceID = String.valueOf(search_invoiceID.getSelectedItem());
             

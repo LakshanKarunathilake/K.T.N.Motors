@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -59,6 +61,7 @@ public class Printsupport {
     public static String title[] = new String[]{"Item", "Rate","Qty", "Total"};
     
     public static ArrayList<String> list = new ArrayList<>();
+    public static HashMap<String,String> hashmap;
 
     public static void setItems(Object[][] printitem) {
         Object data[][] = printitem;
@@ -125,6 +128,10 @@ public class Printsupport {
     
     public void setMetaData(ArrayList<String> list){
         this.list = list;
+    }
+    
+    public void setMetaData(HashMap hashmap){
+        this.hashmap = hashmap;
     }
     
 
@@ -342,15 +349,48 @@ public class Printsupport {
                     g2d.drawString("Tel:0344939958,0342248844", 45, y +=10);                 //shift a line by adding 10 to y value
                     g2d.setFont(font);
                     g2d.drawString("Day End Report :", 0, y += 10); 
-                    g2d.drawString(now(), 80, y += 10);                                //print date
+                    g2d.drawString(now(), 80, y);                                //print date
                                       
 
                     /*Draw Colums*/
                     
                     g2d.drawLine(0, y += 5, 200, y);
+                    
+                   /*Start of Description*/
+                   g2d.setFont(subheading);
+                   g2d.drawString("Sales",0,y+=10);
+                   g2d.setFont(font);
+                   g2d.drawString("Cash Sales", 10, y+=10);
+                   g2d.drawString(String.format("%8s", hashmap.get("cash_sales")), 150, y);
+                   g2d.drawString("Credit Sales", 10, y+=10);
+                   g2d.drawString(String.format("%8s",hashmap.get("credit_sales")), 150, y);
+                   g2d.drawString("(Half Payments)", 20, y+=10);
+                   g2d.drawString(String.format("%8s",hashmap.get("half_payments")), 150, y);
+                   g2d.drawLine(140, y += 5, 200, y);                
+                   g2d.drawString("Total Sales", 10, y+=10);
+                   g2d.setFont(font_bold);
+                   g2d.drawString(String.format("%8s",hashmap.get("total_sales")), 150, y);
+                   g2d.drawLine(140, y += 2, 200, y);
+                   g2d.drawLine(140, y += 2, 200, y);
+                   g2d.setFont(font);
+                   g2d.drawString("Total Cash Sales", 10, y+=10);
+                   g2d.drawString(String.format("%8s",hashmap.get("total_cash_sales")), 150, y);
                    
-                    
-                    
+                   g2d.setFont(subheading);
+                   g2d.drawString("Sales Returns",0,y+=15);
+                   g2d.setFont(font);
+                   g2d.drawString("Cash Returns", 10, y+=10);
+                   g2d.drawString(String.format("%8s", hashmap.get("cash_returns")), 150, y);
+                   g2d.drawString("Credit Returns", 10, y+=10);
+                   g2d.drawString(String.format("%8s", hashmap.get("credit_returns")), 150, y);
+                   
+                   g2d.setFont(subheading);
+                   g2d.drawString("Part Payments",0,y+=15);
+                   g2d.setFont(font);
+                   g2d.drawString("Part Payments", 10, y+=10);
+                   g2d.drawString(String.format("%8s", hashmap.get("part_payments")), 150, y);
+                  
+                   g2d.drawLine(0, y += 5, 200, y); 
                     //end of the reciept
                 } catch (Exception r) {
                     r.printStackTrace();
