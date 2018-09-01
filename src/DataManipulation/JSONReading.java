@@ -32,7 +32,8 @@ public class JSONReading {
         try{
 //            FileReader fr = new FileReader("K:\\DAD\\Front Inventory\\2018-07-15\\K.T.N.Motors\\data.json");
             
-            Object obj = parser.parse(new FileReader("K:\\DAD\\Front Inventory\\2018-07-15\\K.T.N.Motors\\data.json"));
+//            Object obj = parser.parse(new FileReader("K:\\DAD\\Front Inventory\\2018-07-15\\K.T.N.Motors\\data.json"));
+            Object obj = parser.parse(new FileReader("C:\\Inventory Data\\data.json"));
             JSONObject jsonObject = (JSONObject) obj;
             String name = (String) jsonObject.get("ReportReference");
 //            JOptionPane.showMessageDialog(null, "The read value is : "+name);
