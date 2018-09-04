@@ -1309,6 +1309,7 @@ public class MainFrame extends javax.swing.JFrame{
         AddUserPannel.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 100, 30));
 
         AddressTxt1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        AddressTxt1.setNextFocusableComponent(AddressTxt1);
         AddressTxt1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 AddressTxt1FocusGained(evt);
