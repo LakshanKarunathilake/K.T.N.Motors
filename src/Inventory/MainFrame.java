@@ -259,11 +259,11 @@ public class MainFrame extends javax.swing.JFrame{
         TelephoneTxt = new javax.swing.JTextField();
         cancelBtn = new javax.swing.JButton();
         UserPanel = new javax.swing.JPanel();
-        newBtn = new javax.swing.JButton();
-        editBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
         jLabel67 = new javax.swing.JLabel();
         AddressTxt1 = new javax.swing.JTextField();
+        newBtn = new javax.swing.JButton();
+        editBtn = new javax.swing.JButton();
         SalesReturnPanel = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
         return_userName_combo = new javax.swing.JComboBox<>();
@@ -441,7 +441,6 @@ public class MainFrame extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 768));
-        setPreferredSize(new java.awt.Dimension(1024, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         MenuBar.setBackground(new java.awt.Color(51, 102, 255));
@@ -1228,9 +1227,9 @@ public class MainFrame extends javax.swing.JFrame{
         AddUserPannel.setBackground(new java.awt.Color(255, 255, 255));
         AddUserPannel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Slimaniabold", 1, 16)); // NOI18N
         jLabel3.setText("Name :");
-        AddUserPannel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 181, 56));
+        AddUserPannel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 181, 40));
 
         NameTxt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         NameTxt.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1248,11 +1247,11 @@ public class MainFrame extends javax.swing.JFrame{
                 NameTxtKeyPressed(evt);
             }
         });
-        AddUserPannel.add(NameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 450, 56));
+        AddUserPannel.add(NameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 320, 30));
 
-        jLabel4.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Slimaniabold", 1, 16)); // NOI18N
         jLabel4.setText("Address 1 : ");
-        AddUserPannel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 181, 56));
+        AddUserPannel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 181, 56));
 
         AddressTxt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         AddressTxt.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1265,11 +1264,11 @@ public class MainFrame extends javax.swing.JFrame{
                 AddressTxtKeyPressed(evt);
             }
         });
-        AddUserPannel.add(AddressTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 450, 56));
+        AddUserPannel.add(AddressTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 320, 30));
 
-        jLabel5.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Slimaniabold", 1, 16)); // NOI18N
         jLabel5.setText("Telephone No : ");
-        AddUserPannel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 230, 56));
+        AddUserPannel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 130, 30));
 
         TelephoneTxt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         TelephoneTxt.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1277,7 +1276,7 @@ public class MainFrame extends javax.swing.JFrame{
                 TelephoneTxtKeyPressed(evt);
             }
         });
-        AddUserPannel.add(TelephoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 450, 56));
+        AddUserPannel.add(TelephoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 320, 30));
 
         cancelBtn.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         cancelBtn.setText("Cancel");
@@ -1286,35 +1285,9 @@ public class MainFrame extends javax.swing.JFrame{
                 cancelBtnActionPerformed(evt);
             }
         });
-        AddUserPannel.add(cancelBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 380, 142, 81));
+        AddUserPannel.add(cancelBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 142, 81));
 
         UserPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        newBtn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        newBtn.setText("New");
-        newBtn.setAlignmentY(0.0F);
-        newBtn.setBorder(null);
-        newBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newBtnActionPerformed(evt);
-            }
-        });
-        newBtn.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                newBtnKeyPressed(evt);
-            }
-        });
-        UserPanel.add(newBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 89));
-
-        editBtn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        editBtn.setText("Edit");
-        editBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtnActionPerformed(evt);
-            }
-        });
-        UserPanel.add(editBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 96, 170, 84));
-
         AddUserPannel.add(UserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 70, -1, -1));
 
         saveBtn.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -1329,11 +1302,11 @@ public class MainFrame extends javax.swing.JFrame{
                 saveBtnKeyPressed(evt);
             }
         });
-        AddUserPannel.add(saveBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 380, 134, 81));
+        AddUserPannel.add(saveBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 134, 81));
 
-        jLabel67.setFont(new java.awt.Font("Slimaniabold", 1, 28)); // NOI18N
+        jLabel67.setFont(new java.awt.Font("Slimaniabold", 1, 16)); // NOI18N
         jLabel67.setText("Address 2 : ");
-        AddUserPannel.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 181, 56));
+        AddUserPannel.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 100, 30));
 
         AddressTxt1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         AddressTxt1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1346,7 +1319,33 @@ public class MainFrame extends javax.swing.JFrame{
                 AddressTxt1KeyPressed(evt);
             }
         });
-        AddUserPannel.add(AddressTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 450, 56));
+        AddUserPannel.add(AddressTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 320, 30));
+
+        newBtn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        newBtn.setText("New");
+        newBtn.setAlignmentY(0.0F);
+        newBtn.setBorder(null);
+        newBtn.setNextFocusableComponent(NameTxt);
+        newBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newBtnActionPerformed(evt);
+            }
+        });
+        newBtn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                newBtnKeyPressed(evt);
+            }
+        });
+        AddUserPannel.add(newBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 80, 50));
+
+        editBtn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        editBtn.setText("Edit");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtnActionPerformed(evt);
+            }
+        });
+        AddUserPannel.add(editBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 80, 50));
 
         MainChangeFrame.add(AddUserPannel, "card5");
 
@@ -3704,9 +3703,11 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        String path = report_folder_path+"\\item\\selling_history.jrxml";
+        String path = report_folder_path+"\\item\\empty_stock.jrxml";
+        String sub_path = report_folder_path+"\\item\\emptyStock_subreport1.jrxml";
         HashMap hm  =  new HashMap();
         hm.put("itemNo", String.valueOf(report_item_combo.getSelectedItem()));
+        hm.put("SUBREPORT_DIR",sub_path);
         JasperReport jr;
         try {
             jr = JasperCompileManager.compileReport(path);

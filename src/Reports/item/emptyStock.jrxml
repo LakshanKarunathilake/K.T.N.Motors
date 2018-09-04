@@ -2,29 +2,48 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="emptyStock" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="50d2862f-32a4-4313-8dd3-ae35b9689bc2">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="78"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\user\\Documents\\NetBeansProjects\\SalesInventory1\\src\\Reports\\item\\"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="sub_dir" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select * from item where qty like '0']]>
+		<![CDATA[select * from items where stock like '0']]>
 	</queryString>
-	<field name="itemNo" class="java.lang.String">
+	<field name="Item_code" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="category" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Vehicle" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="brand" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="description" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="cost" class="java.math.BigDecimal">
+	<field name="stock" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="selling" class="java.math.BigDecimal">
+	<field name="cost" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="qty" class="java.lang.Integer">
+	<field name="selling" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="addedDate" class="java.sql.Timestamp">
+	<field name="Loctn" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Unit" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="added_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="last_edit_date" class="java.sql.Timestamp">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -123,7 +142,7 @@
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true" isItalic="true" isUnderline="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{itemNo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Item_code}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="85" y="0" width="172" height="20" uuid="86125f19-ec9d-4e1d-829d-6f17d10fb1ca"/>
@@ -131,13 +150,6 @@
 					<font size="12" isBold="true" isItalic="true" isUnderline="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="257" y="0" width="82" height="20" uuid="275718f3-20b3-4567-bad6-bf3afc665381"/>
-				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true" isItalic="true" isUnderline="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{addedDate}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="339" y="0" width="92" height="20" uuid="92615245-b0e9-468a-9018-e2858a8c5e9a"/>
@@ -153,20 +165,13 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cost}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="523" y="0" width="29" height="20" uuid="14c76b3e-7641-4921-a318-aec1bfc7f635"/>
-				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true" isItalic="true" isUnderline="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
-			</textField>
 			<subreport>
-				<reportElement x="0" y="41" width="200" height="25" uuid="3122de55-f871-4770-b66b-d740fa0acf44"/>
+				<reportElement x="1" y="35" width="200" height="25" uuid="3122de55-f871-4770-b66b-d740fa0acf44"/>
 				<subreportParameter name="itemNo">
-					<subreportParameterExpression><![CDATA[$F{itemNo}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{Item_code}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "emptyStock_subreport1.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{sub_dir}]]></subreportExpression>
 			</subreport>
 			<line>
 				<reportElement x="0" y="20" width="552" height="1" uuid="aef20603-5b47-4bc6-af40-5dd93b26fdaf"/>
@@ -178,6 +183,20 @@
 				</textElement>
 				<text><![CDATA[Last Restock Details]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="523" y="1" width="29" height="20" uuid="0b0dd747-f546-4e24-9998-a393383187da"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="257" y="1" width="82" height="20" uuid="ce373ee1-187a-46df-a323-8d71494b0c8b"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{added_date}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
