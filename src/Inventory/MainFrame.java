@@ -127,15 +127,14 @@ public class MainFrame extends javax.swing.JFrame{
         sales_save_btn.setEnabled(false);
         sales_print_btn.setEnabled(false);
         
-        
-        ArrayList<JComboBox> emptyCombos = new ArrayList<JComboBox>();
+        ArrayList emptyCombos = new ArrayList<JComboBox>();
         emptyCombos.add(sales_CID_combo);
         emptyCombos.add(sales_CName_combo);
         emptyCombos.add(sales_item_name_combo);
         emptyCombos.add(sales_itemno_combo);
 
         ViewManipulation.emptyComboBoxes(emptyCombos);
-        
+
         Invoice.changeTableView(sales_item_table);
         
         item_sale = new Invoice(sales_itemno_combo, sales_item_name_combo, sales_CID_combo, sales_CName_combo,sales_qty_Txt, connector);
@@ -144,6 +143,7 @@ public class MainFrame extends javax.swing.JFrame{
         Invoice.setSaleID(sales_InvoiceID_txt, connector);
         
         sales_halfPay_panel.setVisible(false);
+        
         
         
      
@@ -2767,8 +2767,9 @@ public class MainFrame extends javax.swing.JFrame{
     
     private void newBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBtnActionPerformed
         AddCustomer.getInstance().changeStateAddUser(true);
-        newBtn.setEnabled(false);
+        
         AddCustomer.getInstance().emptyUserFields();
+        newBtn.setEnabled(false);
         
         
         
@@ -3044,6 +3045,7 @@ public class MainFrame extends javax.swing.JFrame{
         sales_CID_combo.setSelectedItem("1");
         ViewManipulation.emptyTable(sales_item_table);
         
+       item_sale.decoratingCustomers();
         
     }//GEN-LAST:event_sales_new_btnActionPerformed
 

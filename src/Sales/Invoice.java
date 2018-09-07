@@ -17,6 +17,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import ViewManipulation.ViewManipulation;
 
 /**
  *
@@ -35,8 +37,10 @@ public class Invoice {
     
     MyCombo autoCombo1 = new MyCombo();
     MyCombo autoCombo2 = new MyCombo();
-    MyCombo autoCombo3 = new MyCombo();
-    MyCombo autoCombo4 = new MyCombo();
+//    MyCombo autoCombo3 = new MyCombo();
+//    MyCombo autoCombo4 = new MyCombo();
+    
+    boolean isNotDecorated = true;
     
     public Invoice(JComboBox itemNo,JComboBox category,JComboBox customerID,JComboBox customerName,JTextField qtyText,DataBaseConnector connector){
         this.itemNo = itemNo;
@@ -50,9 +54,28 @@ public class Invoice {
     public void salesAutoCombo(){
         autoCombo1.setSearchableCombo(this.itemNo, true, "No Result Found");
         autoCombo2.setSearchableCombo(this.category, true, "No Result Found");
-        autoCombo3.setSearchableCombo(this.customerID, true, "No Result Found");
-        autoCombo4.setSearchableCombo(this.customerName, true, "No Result Found");
+        
+//        autoCombo3.setSearchableCombo(this.customerID, true, "No Result Found");
+//        autoCombo4.setSearchableCombo(this.customerName, true, "No Result Found");
     }
+    
+    public void decoratingCustomers(){
+        if(isNotDecorated){
+            AutoCompleteDecorator.decorate(customerID);
+            AutoCompleteDecorator.decorate(customerName);
+            isNotDecorated = false;            
+        }
+        DataManipulation manipulation = new DataManipulation(connector);
+        
+        manipulation.getRecords("customers", "customer_code", customerID);
+        manipulation.getRecords("customers", "name", customerName);
+        
+        ViewManipulation.moveFocusToNext(customerID, itemNo);
+        ViewManipulation.moveFocusToNext(customerName, itemNo);
+        
+        
+    }
+   
     
     private void autoCompleteCombo() {
        
@@ -71,19 +94,32 @@ public class Invoice {
         autoCombo2.populateSecondCombo(category, itemNo, connector, catList1, null, false);
         autoCombo2.moveFocusToNext(itemNo, qtyText);
         
-        catList2.add(0, "customers");
-        catList2.add(1, "name");
-        catList2.add(2, "customer_code");
-        autoCombo3.populateSecondCombo(customerID, customerName, connector, catList2, null, false);
         
-        catList3.add(0, "customers");
-        catList3.add(1, "customer_code");
-        catList3.add(2, "name");
-        autoCombo4.populateSecondCombo(customerName, customerID, connector, catList3, null, false);
+//        catList2.add(0, "customers");
+//        catList2.add(1, "name");
+//        catList2.add(2, "customer_code");
+//        autoCombo3.populateSecondCombo(customerID, customerName, connector, catList2, null, false);
+//        
+//        catList3.add(0, "customers");
+//        catList3.add(1, "customer_code");
+//        catList3.add(2, "name");
+//        autoCombo4.populateSecondCombo(customerName, customerID, connector, catList3, null, false);
         
 //        autoCombo1.moveFocusToNext(itemNo, qtyText);
    
     }
+    
+//    private void autoCompleteComboDecorate(){
+//        MyCombo autoCombo1 = new MyCombo();
+//        MyCombo autoCombo2 = new MyCombo();
+//        MyCombo autoCombo3 = new MyCombo();
+//        
+//        autoCombo1.setSearchableCombo(itemNo, true, noReultsText);
+//        autoCombo1.setSearchableCombo(category, true, noReultsText);
+//        autoCombo1.setSearchableCombo(customerID, true, noReultsText);
+//        autoCombo1.setSearchableCombo(customerName, true, noReultsText);
+//        autoCombo1.setSearchableCombo(itemNo, true, noReultsText);
+//    }
     
     public ArrayList[]  fillDataToCombo() {
         
@@ -93,11 +129,10 @@ public class Invoice {
         
         lists[0] = manipulation.getRecords("items", "item_code", itemNo);
         lists[1] = manipulation.getRecords("items", "category", category);
-        manipulation.getRecords("customers", "customer_code", customerID);
-        manipulation.getRecords("customers", "name", customerName);
         
         
         
+        decoratingCustomers();
         autoCompleteCombo();
         return lists;
     }
@@ -128,7 +163,7 @@ public class Invoice {
     }
     
     public void makeSalesComponents(boolean b,ArrayList<Component> comps){
-        ViewManipulation.ViewManipulation.makeAllComponents(comps, b);
+        ViewManipulation.makeAllComponents(comps, b);
     }
     
     public static void changeTableView(JTable table){

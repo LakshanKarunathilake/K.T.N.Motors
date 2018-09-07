@@ -39,6 +39,8 @@ public class SalesReturn {
     JScrollPane panel2;
     JLabel total_lbl;
     
+    boolean isDecorated = false;
+    
    
     
     public SalesReturn(JComboBox invoice_no,JComboBox customer_no,JComboBox customer_name,JLabel total_lbl,DataBaseConnector connector){
