@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="restocking_history" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0032687a-9dfa-4816-8f6a-7ee8fab14e3d">
+	<property name="ireport.zoom" value="2.357947691000002"/>
+	<property name="ireport.x" value="51"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="itemNo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[Select * from purchaising, retailers where purchaising.retailer_id = retailers.retailer_id and purchaising.Item_code like $P{itemNo}]]>
+	</queryString>
+	<field name="Item_code" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qty" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="bill_price" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="retailer_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="invoice_id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="address" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telephone" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="65" splitType="Stretch">
+			<staticText>
+				<reportElement x="114" y="0" width="312" height="45" uuid="538ac7b5-72d3-42cd-9d43-665b9001b112"/>
+				<textElement textAlignment="Center">
+					<font size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[K.T.N. Motors (Pvt) Ltd.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="103" y="45" width="340" height="20" uuid="73b4340c-5b06-4577-9a84-a1792d481532"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<text><![CDATA[No-152, Aluthgama Road, Mathugama Tel : 034-4939958 Fax: 034-2248844]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="1" width="555" height="2" uuid="5d0abd45-29fc-4b3a-ae9d-fe36caa7dc83"/>
+			</line>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="455" y="3" width="100" height="20" uuid="50dde861-69b8-455b-bba8-a70a130159c4"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="180" y="1" width="246" height="25" uuid="f6ccaba9-a206-443b-a1af-598452e25e81"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="19"/>
+				</textElement>
+				<text><![CDATA[Re-Stocking History]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-1" y="32" width="552" height="1" uuid="1cb3c167-1b8b-487b-97f5-5ca5d3074686"/>
+			</line>
+			<textField>
+				<reportElement x="80" y="3" width="100" height="20" uuid="70b0dc88-2b2e-4e27-9e9e-5ed119b16404"/>
+				<textFieldExpression><![CDATA[$F{Item_code}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="3" width="68" height="20" uuid="aa862857-b384-4156-9d97-a989f0094af4"/>
+				<text><![CDATA[Item Number:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="48" height="20" uuid="4862b7f2-9ae1-4c7e-8bf4-0474f32894d4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Retailer ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="0" width="44" height="20" uuid="db9ef288-7c00-4dfc-be94-2d552c702e3d"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="426" y="1" width="100" height="20" uuid="ba166ce9-36bf-4df8-9c60-7f7223be150a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Restocked Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="273" y="1" width="127" height="20" uuid="17818cb5-7404-4f11-ba72-61b17d424fe2"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoice ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="48" y="1" width="142" height="20" uuid="e8c02568-e7d9-4fe9-9b4a-e2444d387aa2"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Retailer Name]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="-1" y="0" width="49" height="20" uuid="3e98a24d-93f6-4a53-a16d-ae130a4219d5"/>
+				<textFieldExpression><![CDATA[$F{retailer_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="0" width="44" height="20" uuid="5eddb4ad-ad81-43ee-b0b1-49f642689531"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="426" y="1" width="100" height="20" uuid="e4c503b4-f1c9-4cde-b0f6-f0b42a2d3cf0"/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="273" y="0" width="127" height="20" uuid="b87dffe3-3200-41a8-b426-fff89f4543f0"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{invoice_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="48" y="1" width="142" height="20" uuid="75e3aa31-8c09-4e73-9e64-27cb81a27063"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="22" splitType="Stretch"/>
+	</summary>
+</jasperReport>

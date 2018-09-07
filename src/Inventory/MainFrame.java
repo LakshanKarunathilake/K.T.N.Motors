@@ -1700,7 +1700,7 @@ public class MainFrame extends javax.swing.JFrame{
         jPanel2.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 160, 35));
 
         jButton10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton10.setText("Restocking History");
+        jButton10.setText("Purchaising History");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
@@ -3289,7 +3289,7 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_update_save_btnMouseClicked
 
     private void update_save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_save_btnActionPerformed
-       if((!purchaise_invoiceno_txt.getText().equals("")) || (!update_qty_txt.getText().equals(""))){
+       if((!purchaise_invoiceno_txt.getText().equals("")) && (!update_qty_txt.getText().equals(""))){
            if(Purchaise.getInstance().comparePrices()){
                if (Purchaise.getInstance().updateQty_save()) {
                    JOptionPane.showMessageDialog(null, "Qty is successfully Updated...");
@@ -3304,7 +3304,7 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_update_save_btnActionPerformed
 
     private void update_save_btnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_save_btnKeyPressed
-         if((!purchaise_invoiceno_txt.getText().equals("")) || (!update_qty_txt.getText().equals(""))){
+         if((!purchaise_invoiceno_txt.getText().equals("")) && (!update_qty_txt.getText().equals(""))){
            if(Purchaise.getInstance().comparePrices()){
                if (Purchaise.getInstance().updateQty_save()) {
                    JOptionPane.showMessageDialog(null, "Qty is successfully Updated...");
@@ -3706,11 +3706,11 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        String path = report_folder_path+"\\item\\empty_stock.jrxml";
-        String sub_path = report_folder_path+"\\item\\emptyStock_subreport1.jrxml";
+        String path = report_folder_path+"\\item\\purchaise_history\\purchaise_history.jrxml";
+//        String sub_path = report_folder_path+"\\item\\emptyStock_subreport1.jrxml";
         HashMap hm  =  new HashMap();
         hm.put("itemNo", String.valueOf(report_item_combo.getSelectedItem()));
-        hm.put("SUBREPORT_DIR",sub_path);
+//        hm.put("SUBREPORT_DIR",sub_path);
         JasperReport jr;
         try {
             jr = JasperCompileManager.compileReport(path);

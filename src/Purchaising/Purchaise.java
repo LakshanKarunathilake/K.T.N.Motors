@@ -142,6 +142,7 @@ public class Purchaise {
         ArrayList list = new ArrayList();
         list.add(itemNo);
         list.add(updateQty);
+        list.add(billPrice_txt.getText());
         list.add(timeStamp);
         list.add(retailer_id);
         list.add(invoice_id);
@@ -187,11 +188,13 @@ public class Purchaise {
         String itemno = String.valueOf(itemNo_combo.getSelectedItem());
         double previous_cost = Double.parseDouble(connector.getRelavantRecord("items", "cost", "item_code", itemno));
         if(cost > previous_cost){
-            int showConfirmDialog = JOptionPane.showConfirmDialog(null, "The previous cost is lower than current do you want to proceed","Warning",JOptionPane.YES_NO_OPTION);
-            
-            if(showConfirmDialog == JOptionPane.NO_OPTION){
-                return null;
-            }
+//            int showConfirmDialog = JOptionPane.showConfirmDialog(null, "The previous cost is lower than current do you want to proceed","Warning",JOptionPane.YES_NO_OPTION);
+//            
+//            if(showConfirmDialog == JOptionPane.NO_OPTION){
+//                return null;
+//            }
+
+            JOptionPane.showConfirmDialog(null, "The previous cost is lower than current do you want to proceed", "Warning", JOptionPane.CANCEL_OPTION);
         }
         
         return cost_text; 
@@ -207,10 +210,11 @@ public class Purchaise {
         String item_no = String.valueOf(itemNo_combo.getSelectedItem());
         double previous_selling = Double.parseDouble(connector.getRelavantRecord("items", "selling", "item_code", item_no));
         if(previous_selling<selling){
-            int showConfirmDialog = JOptionPane.showConfirmDialog(null, "Your previous selling value is lower than this do you want to proceed","Warning",JOptionPane.YES_NO_OPTION);
-            if(showConfirmDialog == JOptionPane.NO_OPTION){
-                return null;
-            }
+//            int showConfirmDialog = JOptionPane.showConfirmDialog(null, "Your previous selling value is lower than this do you want to proceed","Warning",JOptionPane.YES_NO_OPTION);
+//            if(showConfirmDialog == JOptionPane.NO_OPTION){
+//                return null;
+//            }
+            JOptionPane.showConfirmDialog(null, "Your previous selling value is lower than this do you want to proceed", "Warning", JOptionPane.CANCEL_OPTION);
         }
         return selling_text;
         
