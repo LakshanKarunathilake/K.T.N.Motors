@@ -106,7 +106,7 @@
 				<text><![CDATA[Restocked Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="273" y="1" width="127" height="20" uuid="17818cb5-7404-4f11-ba72-61b17d424fe2"/>
+				<reportElement x="299" y="0" width="127" height="20" uuid="17818cb5-7404-4f11-ba72-61b17d424fe2"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
@@ -118,6 +118,13 @@
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Retailer Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="234" y="1" width="65" height="20" uuid="5e136070-2634-4366-be2f-e57e917fb517"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bill Price]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -137,13 +144,17 @@
 				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="273" y="0" width="127" height="20" uuid="b87dffe3-3200-41a8-b426-fff89f4543f0"/>
+				<reportElement x="48" y="1" width="142" height="20" uuid="75e3aa31-8c09-4e73-9e64-27cb81a27063"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="299" y="1" width="127" height="20" uuid="b87dffe3-3200-41a8-b426-fff89f4543f0"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{invoice_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="48" y="1" width="142" height="20" uuid="75e3aa31-8c09-4e73-9e64-27cb81a27063"/>
-				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+				<reportElement x="234" y="1" width="65" height="20" uuid="15585bcd-8d3c-47e4-aa09-088363f9cd2b"/>
+				<textFieldExpression><![CDATA[$F{bill_price}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
