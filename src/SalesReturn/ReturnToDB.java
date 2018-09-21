@@ -132,7 +132,7 @@ public class ReturnToDB {
                 paymentUpdate();
                 JOptionPane.showMessageDialog(null, "Item return recorded successfully..");
                 
-            }else{
+            }else if(condition_tick != null){
                 not_violated = false;
                 JOptionPane.showMessageDialog(null, "You are violating rules please check the returnable qty is set to max");
             }
