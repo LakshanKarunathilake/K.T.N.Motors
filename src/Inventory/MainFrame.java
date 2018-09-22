@@ -23,6 +23,7 @@ import Sales.InvoiceToDB;
 import Sales.ItemToTable;
 import SalesReturn.ReturnToDB;
 import SalesReturn.SalesReturn;
+import Settings.EditCustomer;
 import Settings.EditQty;
 import Settings.PartNumberChange;
 import Statistics.DayEndView;
@@ -1034,7 +1035,7 @@ public class MainFrame extends javax.swing.JFrame{
                 .addGap(18, 18, 18)
                 .addComponent(changed_item_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
-                .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
                 .addGap(101, 101, 101))
         );
 
@@ -1060,7 +1061,7 @@ public class MainFrame extends javax.swing.JFrame{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(settings_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(settings_sub_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(settings_sub_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
                 .addContainerGap())
         );
         settings_panelLayout.setVerticalGroup(
@@ -1068,7 +1069,7 @@ public class MainFrame extends javax.swing.JFrame{
             .addGroup(settings_panelLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(settings_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                    .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                     .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(36, 36, 36)
                 .addComponent(settings_sub_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

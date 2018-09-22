@@ -181,6 +181,34 @@ public class DataBaseConnector {
         
     }
     
+    public ArrayList retreveDataColumn2(String tableName, String coloumnName1,String coloumnName2) {
+
+        String sql = "SELECT " + coloumnName1+","+coloumnName2 + " from " + tableName + " ";
+
+        try {
+            statement = conn.createStatement();
+            rst = statement.executeQuery(sql);
+            ArrayList list = new ArrayList();
+            while (rst.next()) {
+                String record[] = new String[2];
+                record[0] = rst.getString(coloumnName1);
+                record[1] = rst.getString(coloumnName2);
+                list.add(record);
+            }
+
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnector.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error in retreveDataColoumn " + tableName + " :" + ex.getMessage());
+        }
+
+        return null;
+
+    }
+    
+    
+    
     public String getRelavantRecord(String tableName,String columnName1,String columnName2,String value){
 
         String sql = "Select "+columnName1+" from "+tableName+" where "+columnName2+"  like ?";
