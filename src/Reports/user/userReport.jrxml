@@ -4,7 +4,7 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[SELECT Concat(customers.Address1,",",customers.Address2) as address,customer_code,Telephone,name FROM `customers` ]]>
+		<![CDATA[SELECT Concat(customers.Address1,",",customers.Address2) as address,customer_code,Telephone,name FROM `customers` order by name ASC]]>
 	</queryString>
 	<field name="address" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -56,7 +56,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="30" splitType="Stretch">
+		<band height="28" splitType="Stretch">
 			<line>
 				<reportElement x="-1" y="0" width="555" height="2" uuid="c100b37c-88c9-4840-bb61-ca045782f2b1"/>
 			</line>
@@ -76,7 +76,7 @@
 			</staticText>
 			<staticText>
 				<reportElement x="188" y="2" width="266" height="20" uuid="6dabf7ad-a538-4ded-853a-81fd29f456c5"/>
-				<textElement textAlignment="Center">
+				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Address]]></text>
@@ -86,7 +86,7 @@
 			</line>
 			<staticText>
 				<reportElement x="453" y="2" width="100" height="20" uuid="fbbb3fef-0a18-4ee2-9d85-066749e1d9f9"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Telephone]]></text>
@@ -94,22 +94,22 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="25" splitType="Stretch">
+		<band height="15" splitType="Stretch">
 			<textField>
-				<reportElement x="188" y="0" width="266" height="20" uuid="a77f059c-0e35-4ca3-9de3-36366c5ea41f"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="188" y="0" width="266" height="15" uuid="a77f059c-0e35-4ca3-9de3-36366c5ea41f"/>
 				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="40" height="20" uuid="8811bb36-e511-47d5-80db-66b465e92fd1"/>
+				<reportElement x="0" y="0" width="40" height="15" uuid="8811bb36-e511-47d5-80db-66b465e92fd1"/>
 				<textFieldExpression><![CDATA[$F{customer_code}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="40" y="0" width="148" height="20" uuid="c8f75e5c-8f1c-4274-aa79-02a837cc7602"/>
+				<reportElement x="40" y="0" width="148" height="15" uuid="c8f75e5c-8f1c-4274-aa79-02a837cc7602"/>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="454" y="0" width="100" height="20" uuid="dfe36179-f554-4e9e-a19d-ce031a54d2f4"/>
+				<reportElement x="454" y="0" width="100" height="15" uuid="dfe36179-f554-4e9e-a19d-ce031a54d2f4"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{Telephone}]]></textFieldExpression>
 			</textField>
 		</band>

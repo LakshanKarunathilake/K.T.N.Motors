@@ -16,6 +16,7 @@ import ItemAdding.ItemAdd;
 import Payments.BillPay;
 import Purchaising.Purchaise;
 import Purchaising.Retailer;
+import Sales.AddPrecentage;
 import Sales.Invoice;
 import Sales.InvoicePrint;
 import Sales.InvoiceSearch;
@@ -212,6 +213,8 @@ public class MainFrame extends javax.swing.JFrame{
         sales_halfPay_creditTxt = new javax.swing.JTextField();
         sales_halfPay_txt = new javax.swing.JTextField();
         jLabel56 = new javax.swing.JLabel();
+        jLabel88 = new javax.swing.JLabel();
+        sales_addPrecent_txt = new javax.swing.JTextField();
         settings_panel = new javax.swing.JPanel();
         jButton20 = new javax.swing.JButton();
         settings_sub_panel = new javax.swing.JPanel();
@@ -665,18 +668,28 @@ public class MainFrame extends javax.swing.JFrame{
 
             },
             new String [] {
-                "Part Number", "Description", "Unit", "UnitPrice", "Qty", "Total"
+                "Part Number", "Description", "Unit", "UnitPrice", "Qty", "Total", "Select"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(sales_item_table);
+        if (sales_item_table.getColumnModel().getColumnCount() > 0) {
+            sales_item_table.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         SalesPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 670, 200));
 
@@ -925,6 +938,19 @@ public class MainFrame extends javax.swing.JFrame{
 
         SalesPanel.add(sales_halfPay_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 340, 120));
 
+        jLabel88.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel88.setText("Add :");
+        SalesPanel.add(jLabel88, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 70, 40));
+
+        sales_addPrecent_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        sales_addPrecent_txt.setText("0");
+        sales_addPrecent_txt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sales_addPrecent_txtKeyPressed(evt);
+            }
+        });
+        SalesPanel.add(sales_addPrecent_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 90, 40));
+
         MainChangeFrame.add(SalesPanel, "card2");
 
         jButton20.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -1061,7 +1087,7 @@ public class MainFrame extends javax.swing.JFrame{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(settings_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(settings_sub_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
+                .addComponent(settings_sub_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         settings_panelLayout.setVerticalGroup(
@@ -4415,6 +4441,17 @@ public class MainFrame extends javax.swing.JFrame{
         ViewManipulation.changePanel(settings_sub_panel, part_number_change_panel);
         PartNumberChange.getInstance().setFields(change_item_combo, changed_item_txt, connector);
     }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void sales_addPrecent_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_addPrecent_txtKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            AddPrecentage addPrecentage = AddPrecentage.getInstance();
+            addPrecentage.setTable(sales_item_table);
+            addPrecentage.setPrecentage(sales_addPrecent_txt.getText());
+            addPrecentage.updateTable();
+            addPrecentage.calculateTotal(sales_total_txt, sales_discount_txt, sales_grand_txt);
+            
+        }
+    }//GEN-LAST:event_sales_addPrecent_txtKeyPressed
   
        
     public void FillBill(String invoiceID){
@@ -4741,6 +4778,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
     private javax.swing.JLabel jLabel87;
+    private javax.swing.JLabel jLabel88;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -4792,6 +4830,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JComboBox<String> sales_CID_combo;
     private javax.swing.JComboBox<String> sales_CName_combo;
     private javax.swing.JTextField sales_InvoiceID_txt;
+    private javax.swing.JTextField sales_addPrecent_txt;
     private javax.swing.JTextField sales_available_qty_txt;
     private javax.swing.JButton sales_cancel_btn;
     private javax.swing.JTextField sales_discount_txt;
