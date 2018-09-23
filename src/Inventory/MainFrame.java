@@ -4312,7 +4312,7 @@ public class MainFrame extends javax.swing.JFrame{
         String dbUser = "root";
         String dbPass = "";
         
-        String default_backup = System.getProperty("user.dir");   
+        String default_backup = "C:/Inventory Data";   
         default_backup+= "/backups/"+date+".sql";
         default_backup = default_backup.replace("\\", "/");
         
