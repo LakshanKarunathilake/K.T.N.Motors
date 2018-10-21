@@ -83,6 +83,7 @@ public class ReturnToDB {
                 one_time_return_total+=returnAmount;
                 
                 //For Entering Records to the sales_return nomatter cash or credit sale
+                list.clear();
                 list.add(invoiceID);
                 list.add(itemNo);
                 list.add(return_qty);
@@ -90,6 +91,8 @@ public class ReturnToDB {
                 list.add(return_type);
                 list.add(returnAmount);
                 
+               
+                columns.clear();
                 columns.add("invoice_id");
                 columns.add("item_code");
                 columns.add("qty");
