@@ -4079,7 +4079,7 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void Return_labelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Return_labelMouseClicked
-        return_cancel_btn.setEnabled(false);
+//        return_cancel_btn.setEnabled(false);
         
         ArrayList<JComboBox> combos = new ArrayList<JComboBox>();
 
@@ -4712,7 +4712,7 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void Clutch_Plate_TabbedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Clutch_Plate_TabbedMouseClicked
         ClutchPlateSearch clutchPlateSearch = ClutchPlateSearch.getInstance();
-        clutchPlateSearch.setFields(clutch_plate_search_grew_combo,clutch_plate_search_inner_combo,clutch_plate_search_outer_combo,connector);
+//        clutchPlateSearch.setFields(clutch_plate_search_grew_combo,clutch_plate_search_inner_combo,clutch_plate_search_outer_combo,connector);
     }//GEN-LAST:event_Clutch_Plate_TabbedMouseClicked
   
        
