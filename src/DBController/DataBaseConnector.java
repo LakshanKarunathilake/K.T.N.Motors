@@ -83,17 +83,8 @@ public class DataBaseConnector {
     }
     
     public boolean insertRecord(String tableName,ArrayList list){
-        String values = "" ;
+        String values = "" ;      
         
-//        for(int counter = 0;counter<list.size();counter++){
-//            values+="\"";
-//            values+=list.get(counter);
-//            values+="\"";
-//            if(counter <list.size()-1){
-//                values+=",";
-//            }
-//        }
-
         for (int i = 0; i < list.size(); i++) {
              
              values+="?";
@@ -209,9 +200,9 @@ public class DataBaseConnector {
     
     
     
-    public String getRelavantRecord(String tableName,String columnName1,String columnName2,String value){
+    public String getRelavantRecord(String tableName,String columnName1,String conditionColoumn,String value){
 
-        String sql = "Select "+columnName1+" from "+tableName+" where "+columnName2+"  like ?";
+        String sql = "Select "+columnName1+" from "+tableName+" where "+conditionColoumn+"  like ?";
         
         String record=null;
         try {
@@ -329,7 +320,7 @@ public class DataBaseConnector {
     }
     
     public ArrayList retreveDataColoumnWithTwoCondition(String tableName,String coloumnName,String coloumn2,String condition1,String coloumn3,String condition2){
-        String sql = "SELECT "+coloumnName+" from "+tableName+" where "+coloumn2+" like " + "\""+condition1+ "\" AND "+coloumn3+" like "+"\""+condition2+ "\"";
+        String sql = "SELECT "+coloumnName+" from "+tableName+" where "+coloumn2+" like " + "'"+condition1+ "' AND "+coloumn3+" like "+"'"+condition2+ "'";
         System.out.println("SQL : "+sql);
         
         try {

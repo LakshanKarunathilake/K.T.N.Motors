@@ -24,6 +24,8 @@ import Sales.InvoiceToDB;
 import Sales.ItemToTable;
 import SalesReturn.ReturnToDB;
 import SalesReturn.SalesReturn;
+import Settings.ClutchPlateSearch.ClutchPlateAdd;
+import Settings.ClutchPlateSearch.ClutchPlateSearch;
 import Settings.EditCustomer;
 import Settings.EditQty;
 import Settings.PartNumberChange;
@@ -218,6 +220,30 @@ public class MainFrame extends javax.swing.JFrame{
         settings_panel = new javax.swing.JPanel();
         jButton20 = new javax.swing.JButton();
         settings_sub_panel = new javax.swing.JPanel();
+        Clutch_Plate_Main = new javax.swing.JPanel();
+        Clutch_Plate_Tabbed = new javax.swing.JTabbedPane();
+        Clutch_Plate_Search = new javax.swing.JPanel();
+        jLabel89 = new javax.swing.JLabel();
+        clutch_plate_search_grew_combo = new javax.swing.JComboBox<>();
+        jLabel90 = new javax.swing.JLabel();
+        clutch_plate_search_inner_combo = new javax.swing.JComboBox<>();
+        jLabel91 = new javax.swing.JLabel();
+        clutch_plate_search_outer_combo = new javax.swing.JComboBox<>();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        Clutch_Plate_Add = new javax.swing.JPanel();
+        jLabel92 = new javax.swing.JLabel();
+        clutch_plate_add_grew_txt = new javax.swing.JTextField();
+        jLabel93 = new javax.swing.JLabel();
+        clutch_plate_add_inner_txt = new javax.swing.JTextField();
+        jLabel94 = new javax.swing.JLabel();
+        clutch_plate_add_outer_txt = new javax.swing.JTextField();
+        jLabel95 = new javax.swing.JLabel();
+        clutch_plate_add_plateNumber_txt = new javax.swing.JTextField();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        clutch_plate_add_table = new javax.swing.JTable();
+        clutch_plate_add_btn = new javax.swing.JButton();
+        Clutch_Plate_Edit = new javax.swing.JPanel();
         settings_sub_edit_panel = new javax.swing.JPanel();
         settings_qty_edit_qty_lbl = new javax.swing.JLabel();
         settings_qty_edit_itemNo_combo = new javax.swing.JComboBox<>();
@@ -235,6 +261,7 @@ public class MainFrame extends javax.swing.JFrame{
         jButton22 = new javax.swing.JButton();
         changed_item_txt = new javax.swing.JTextField();
         jButton23 = new javax.swing.JButton();
+        jButton24 = new javax.swing.JButton();
         stock_count_panel = new javax.swing.JPanel();
         stock_update_btn = new javax.swing.JButton();
         stock_item_combo = new javax.swing.JComboBox<>();
@@ -445,6 +472,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 768));
+        setPreferredSize(new java.awt.Dimension(1024, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         MenuBar.setBackground(new java.awt.Color(51, 102, 255));
@@ -963,6 +991,206 @@ public class MainFrame extends javax.swing.JFrame{
 
         settings_sub_panel.setLayout(new java.awt.CardLayout());
 
+        Clutch_Plate_Tabbed.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Clutch_Plate_TabbedMouseClicked(evt);
+            }
+        });
+
+        jLabel89.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel89.setText("Grew");
+
+        clutch_plate_search_grew_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel90.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel90.setText("Diameter");
+
+        clutch_plate_search_inner_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel91.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel91.setText("Outer");
+
+        clutch_plate_search_outer_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(jTable1);
+
+        javax.swing.GroupLayout Clutch_Plate_SearchLayout = new javax.swing.GroupLayout(Clutch_Plate_Search);
+        Clutch_Plate_Search.setLayout(Clutch_Plate_SearchLayout);
+        Clutch_Plate_SearchLayout.setHorizontalGroup(
+            Clutch_Plate_SearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Clutch_Plate_SearchLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(Clutch_Plate_SearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel89, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clutch_plate_search_grew_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(Clutch_Plate_SearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel90, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clutch_plate_search_inner_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(Clutch_Plate_SearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel91, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clutch_plate_search_outer_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(303, Short.MAX_VALUE))
+            .addGroup(Clutch_Plate_SearchLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5)
+                .addContainerGap())
+        );
+        Clutch_Plate_SearchLayout.setVerticalGroup(
+            Clutch_Plate_SearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Clutch_Plate_SearchLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Clutch_Plate_SearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Clutch_Plate_SearchLayout.createSequentialGroup()
+                        .addComponent(jLabel91, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clutch_plate_search_outer_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Clutch_Plate_SearchLayout.createSequentialGroup()
+                        .addComponent(jLabel90, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clutch_plate_search_inner_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Clutch_Plate_SearchLayout.createSequentialGroup()
+                        .addComponent(jLabel89, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clutch_plate_search_grew_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        Clutch_Plate_Tabbed.addTab("SEARCH", Clutch_Plate_Search);
+
+        jLabel92.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel92.setText("Grew");
+
+        clutch_plate_add_grew_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+
+        jLabel93.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel93.setText("Inner");
+
+        clutch_plate_add_inner_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+
+        jLabel94.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel94.setText("Outer");
+
+        clutch_plate_add_outer_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+
+        jLabel95.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel95.setText("Plate Number");
+
+        clutch_plate_add_plateNumber_txt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+
+        clutch_plate_add_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Plate Number", "Gew", "Inner", "Outer"
+            }
+        ));
+        jScrollPane6.setViewportView(clutch_plate_add_table);
+
+        clutch_plate_add_btn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        clutch_plate_add_btn.setText("Add");
+        clutch_plate_add_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clutch_plate_add_btnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Clutch_Plate_AddLayout = new javax.swing.GroupLayout(Clutch_Plate_Add);
+        Clutch_Plate_Add.setLayout(Clutch_Plate_AddLayout);
+        Clutch_Plate_AddLayout.setHorizontalGroup(
+            Clutch_Plate_AddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Clutch_Plate_AddLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Clutch_Plate_AddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane6)
+                    .addGroup(Clutch_Plate_AddLayout.createSequentialGroup()
+                        .addGroup(Clutch_Plate_AddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel94, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel93, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel92, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel95, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(Clutch_Plate_AddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(clutch_plate_add_outer_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(clutch_plate_add_inner_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(clutch_plate_add_grew_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(Clutch_Plate_AddLayout.createSequentialGroup()
+                                .addComponent(clutch_plate_add_plateNumber_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(99, 99, 99)
+                                .addComponent(clutch_plate_add_btn)))
+                        .addGap(248, 248, 248)))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+        Clutch_Plate_AddLayout.setVerticalGroup(
+            Clutch_Plate_AddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Clutch_Plate_AddLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(Clutch_Plate_AddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel92, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clutch_plate_add_grew_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Clutch_Plate_AddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel93, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clutch_plate_add_inner_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(Clutch_Plate_AddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel94, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clutch_plate_add_outer_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Clutch_Plate_AddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel95, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clutch_plate_add_plateNumber_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clutch_plate_add_btn))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        Clutch_Plate_Tabbed.addTab("ADD", Clutch_Plate_Add);
+
+        javax.swing.GroupLayout Clutch_Plate_EditLayout = new javax.swing.GroupLayout(Clutch_Plate_Edit);
+        Clutch_Plate_Edit.setLayout(Clutch_Plate_EditLayout);
+        Clutch_Plate_EditLayout.setHorizontalGroup(
+            Clutch_Plate_EditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 753, Short.MAX_VALUE)
+        );
+        Clutch_Plate_EditLayout.setVerticalGroup(
+            Clutch_Plate_EditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 459, Short.MAX_VALUE)
+        );
+
+        Clutch_Plate_Tabbed.addTab("EDIT", Clutch_Plate_Edit);
+
+        javax.swing.GroupLayout Clutch_Plate_MainLayout = new javax.swing.GroupLayout(Clutch_Plate_Main);
+        Clutch_Plate_Main.setLayout(Clutch_Plate_MainLayout);
+        Clutch_Plate_MainLayout.setHorizontalGroup(
+            Clutch_Plate_MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Clutch_Plate_Tabbed)
+        );
+        Clutch_Plate_MainLayout.setVerticalGroup(
+            Clutch_Plate_MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Clutch_Plate_MainLayout.createSequentialGroup()
+                .addComponent(Clutch_Plate_Tabbed, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 22, Short.MAX_VALUE))
+        );
+
+        settings_sub_panel.add(Clutch_Plate_Main, "card4");
+
         settings_sub_edit_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         settings_qty_edit_qty_lbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -1037,7 +1265,7 @@ public class MainFrame extends javax.swing.JFrame{
         part_number_change_panelLayout.setHorizontalGroup(
             part_number_change_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, part_number_change_panelLayout.createSequentialGroup()
-                .addContainerGap(525, Short.MAX_VALUE)
+                .addContainerGap(497, Short.MAX_VALUE)
                 .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
             .addGroup(part_number_change_panelLayout.createSequentialGroup()
@@ -1061,7 +1289,7 @@ public class MainFrame extends javax.swing.JFrame{
                 .addGap(18, 18, 18)
                 .addComponent(changed_item_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
-                .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
                 .addGap(101, 101, 101))
         );
 
@@ -1075,30 +1303,42 @@ public class MainFrame extends javax.swing.JFrame{
             }
         });
 
+        jButton24.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton24.setText("Clutch Plate Find");
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout settings_panelLayout = new javax.swing.GroupLayout(settings_panel);
         settings_panel.setLayout(settings_panelLayout);
         settings_panelLayout.setHorizontalGroup(
             settings_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settings_panelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(settings_panelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(settings_sub_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(settings_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(settings_panelLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jButton23)
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(settings_panelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(settings_sub_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 758, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         settings_panelLayout.setVerticalGroup(
             settings_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settings_panelLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(settings_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addGroup(settings_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton23, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                    .addComponent(jButton24, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(36, 36, 36)
-                .addComponent(settings_sub_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(settings_sub_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -2572,7 +2812,7 @@ public class MainFrame extends javax.swing.JFrame{
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4452,6 +4692,28 @@ public class MainFrame extends javax.swing.JFrame{
             
         }
     }//GEN-LAST:event_sales_addPrecent_txtKeyPressed
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        ViewManipulation.changePanel(settings_sub_panel, Clutch_Plate_Main);
+    }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void clutch_plate_add_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clutch_plate_add_btnActionPerformed
+        ClutchPlateAdd clutch_plate = ClutchPlateAdd.getInstance();
+        clutch_plate.setFields(clutch_plate_add_grew_txt,
+                clutch_plate_add_inner_txt,
+                clutch_plate_add_outer_txt,
+                clutch_plate_add_plateNumber_txt,
+                clutch_plate_add_table,
+                connector);
+        clutch_plate.add();
+        
+        
+    }//GEN-LAST:event_clutch_plate_add_btnActionPerformed
+
+    private void Clutch_Plate_TabbedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Clutch_Plate_TabbedMouseClicked
+        ClutchPlateSearch clutchPlateSearch = ClutchPlateSearch.getInstance();
+        clutchPlateSearch.setFields(clutch_plate_search_grew_combo,clutch_plate_search_inner_combo,clutch_plate_search_outer_combo,connector);
+    }//GEN-LAST:event_Clutch_Plate_TabbedMouseClicked
   
        
     public void FillBill(String invoiceID){
@@ -4609,6 +4871,11 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JTextField AddressTxt1;
     private javax.swing.JTextField Bill_date_txt;
     private javax.swing.JTable Bill_table;
+    private javax.swing.JPanel Clutch_Plate_Add;
+    private javax.swing.JPanel Clutch_Plate_Edit;
+    private javax.swing.JPanel Clutch_Plate_Main;
+    private javax.swing.JPanel Clutch_Plate_Search;
+    private javax.swing.JTabbedPane Clutch_Plate_Tabbed;
     private javax.swing.JPanel MainChangeFrame;
     private javax.swing.JPanel MenuBar;
     private javax.swing.JTextField NameTxt;
@@ -4660,6 +4927,15 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JComboBox<String> change_item_combo;
     private javax.swing.JTextField changed_item_txt;
     private javax.swing.JLabel clock_txt;
+    private javax.swing.JButton clutch_plate_add_btn;
+    private javax.swing.JTextField clutch_plate_add_grew_txt;
+    private javax.swing.JTextField clutch_plate_add_inner_txt;
+    private javax.swing.JTextField clutch_plate_add_outer_txt;
+    private javax.swing.JTextField clutch_plate_add_plateNumber_txt;
+    private javax.swing.JTable clutch_plate_add_table;
+    private javax.swing.JComboBox<String> clutch_plate_search_grew_combo;
+    private javax.swing.JComboBox<String> clutch_plate_search_inner_combo;
+    private javax.swing.JComboBox<String> clutch_plate_search_outer_combo;
     private javax.swing.JLabel date_txt;
     private javax.swing.JButton editBtn;
     private javax.swing.JButton itemCancelBtn1;
@@ -4684,6 +4960,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -4779,7 +5056,14 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel86;
     private javax.swing.JLabel jLabel87;
     private javax.swing.JLabel jLabel88;
+    private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel90;
+    private javax.swing.JLabel jLabel91;
+    private javax.swing.JLabel jLabel92;
+    private javax.swing.JLabel jLabel93;
+    private javax.swing.JLabel jLabel94;
+    private javax.swing.JLabel jLabel95;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -4789,7 +5073,10 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton newBtn;
     private javax.swing.JPanel part_number_change_panel;
     private javax.swing.JLabel payBillsLabel;
