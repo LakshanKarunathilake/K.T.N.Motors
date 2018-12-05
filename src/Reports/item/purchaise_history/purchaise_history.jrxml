@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="restocking_history" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0032687a-9dfa-4816-8f6a-7ee8fab14e3d">
 	<property name="ireport.zoom" value="2.357947691000002"/>
-	<property name="ireport.x" value="51"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="itemNo" class="java.lang.String"/>
 	<queryString>
@@ -93,7 +93,7 @@
 			</staticText>
 			<staticText>
 				<reportElement x="190" y="0" width="44" height="20" uuid="db9ef288-7c00-4dfc-be94-2d552c702e3d"/>
-				<textElement textAlignment="Center">
+				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Qty]]></text>
@@ -106,8 +106,8 @@
 				<text><![CDATA[Restocked Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="299" y="0" width="127" height="20" uuid="17818cb5-7404-4f11-ba72-61b17d424fe2"/>
-				<textElement textAlignment="Right">
+				<reportElement x="327" y="0" width="99" height="20" uuid="17818cb5-7404-4f11-ba72-61b17d424fe2"/>
+				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Invoice ID]]></text>
@@ -120,7 +120,7 @@
 				<text><![CDATA[Retailer Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="234" y="1" width="65" height="20" uuid="5e136070-2634-4366-be2f-e57e917fb517"/>
+				<reportElement x="234" y="1" width="93" height="20" uuid="5e136070-2634-4366-be2f-e57e917fb517"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
@@ -136,11 +136,11 @@
 			</textField>
 			<textField>
 				<reportElement x="190" y="0" width="44" height="20" uuid="5eddb4ad-ad81-43ee-b0b1-49f642689531"/>
-				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="426" y="1" width="100" height="20" uuid="e4c503b4-f1c9-4cde-b0f6-f0b42a2d3cf0"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -148,12 +148,12 @@
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="299" y="1" width="127" height="20" uuid="b87dffe3-3200-41a8-b426-fff89f4543f0"/>
-				<textElement textAlignment="Right"/>
+				<reportElement x="327" y="1" width="99" height="20" uuid="b87dffe3-3200-41a8-b426-fff89f4543f0"/>
 				<textFieldExpression><![CDATA[$F{invoice_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="234" y="1" width="65" height="20" uuid="15585bcd-8d3c-47e4-aa09-088363f9cd2b"/>
+				<reportElement x="234" y="1" width="93" height="20" uuid="15585bcd-8d3c-47e4-aa09-088363f9cd2b"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{bill_price}]]></textFieldExpression>
 			</textField>
 		</band>
