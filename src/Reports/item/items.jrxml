@@ -3,25 +3,43 @@
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<queryString language="SQL">
-		<![CDATA[select * from item]]>
+	<queryString>
+		<![CDATA[select * from items]]>
 	</queryString>
-	<field name="itemNo" class="java.lang.String">
+	<field name="Item_code" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="category" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Vehicle" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="brand" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="description" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="cost" class="java.math.BigDecimal">
+	<field name="stock" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="selling" class="java.math.BigDecimal">
+	<field name="cost" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="qty" class="java.lang.Integer">
+	<field name="selling" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="addedDate" class="java.sql.Timestamp">
+	<field name="Loctn" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Unit" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="added_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="last_edit_date" class="java.sql.Timestamp">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -116,10 +134,6 @@
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField>
-				<reportElement x="10" y="0" width="82" height="20" uuid="0c67096e-5f69-420f-b638-277dda65ced7"/>
-				<textFieldExpression><![CDATA[$F{itemNo}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="92" y="0" width="166" height="20" uuid="17d797ab-3a71-45c0-9cc8-9abea57ae924"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
@@ -135,14 +149,18 @@
 				<textFieldExpression><![CDATA[$F{selling}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="388" y="0" width="72" height="20" uuid="5fe2716d-e190-4244-9132-a737fba6fe36"/>
+				<reportElement x="388" y="0" width="72" height="20" uuid="24a7f6ca-85f4-4b5a-bd81-d688f364158b"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="460" y="0" width="92" height="20" uuid="995422e4-0c89-428d-b3f7-4653f441e23a"/>
+				<reportElement x="460" y="1" width="92" height="20" uuid="53f30ca7-49af-4dd3-bc81-273c4d9dac82"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{addedDate}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{added_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="92" height="20" uuid="bbbb337e-bcb2-4daf-bb62-a9f03886242d"/>
+				<textFieldExpression><![CDATA[$F{Item_code}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

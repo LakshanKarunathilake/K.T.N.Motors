@@ -7,9 +7,9 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select * from orders where orderID like $P{invoiceID}]]>
+		<![CDATA[select * from invoices where invoice_id like $P{invoiceID}]]>
 	</queryString>
-	<field name="orderID" class="java.lang.String">
+	<field name="invoice_id" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="total" class="java.math.BigDecimal">
@@ -24,10 +24,16 @@
 	<field name="orderDate" class="java.sql.Timestamp">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="userID" class="java.lang.String">
+	<field name="customer_code" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="Status" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cash_paid" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="returned" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -43,7 +49,7 @@
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="67" splitType="Stretch">
 			<staticText>
 				<reportElement x="408" y="0" width="30" height="20" uuid="144c5186-8150-4d61-a8ad-32128f526288"/>
 				<text><![CDATA[Total : ]]></text>
@@ -92,6 +98,42 @@
 			<staticText>
 				<reportElement x="465" y="20" width="5" height="16" uuid="729aa924-e497-46c3-83f2-42c47654ed34"/>
 				<text><![CDATA[(]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="66" height="22" uuid="c03b277a-4d16-4d7d-b0a7-6f3de8037f57"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cash Paid:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="66" y="20" width="86" height="22" uuid="0338e080-2b8e-457d-80cc-3cc4af33e65a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cash_paid}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="42" width="66" height="22" uuid="1a640b1e-bb8b-445c-a2de-ea7f426e0dd8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payable:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="66" y="42" width="86" height="20" uuid="bd03ca4f-773c-40d2-a7fd-266a62dde6af"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grandTotal} - $F{cash_paid}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="213" y="42" width="100" height="1" uuid="ba5c2bfd-17ca-410c-b9da-9fe9233e0340"/>
+			</line>
+			<staticText>
+				<reportElement x="230" y="42" width="63" height="14" uuid="ac434d11-f45b-4165-b7be-76d1f1d8d0bb"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Receiver]]></text>
 			</staticText>
 		</band>
 	</detail>

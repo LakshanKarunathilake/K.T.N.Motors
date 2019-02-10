@@ -20,14 +20,24 @@ public class DataBaseConnector {
     private static DataBaseConnector connector= null;
     
     private static final String USERNAME = "root";
-//    private static final String PASSWORD = "root";
+//    private static final String USERNAME = "Lakshan";
     private static final String PASSWORD = "";
+//    private static final String PASSWORD = "123";
 //    private static final String CONN_STRING = "jdbc:mysql://localhost:3333/sales_inventory";  
-    private static final String CONN_STRING = "jdbc:mysql://localhost/salesinventory";  
+    private static final String CONN_STRING = "jdbc:mysql://localhost/prototype";  
+//    private static final String CONN_STRING = "jdbc:mysql://192.168.1.2/prototype";  
     Connection conn = null;
     Statement statement = null;
     ResultSet rst = null;
     PreparedStatement pst = null;
+    
+    private DataBaseConnector(){}
+    
+    public static DataBaseConnector getInstance(){
+        if(connector == null)
+            connector = new DataBaseConnector();
+        return connector;
+    }
        
     public Connection startConnection() throws SQLException{
             conn = DriverManager.getConnection(CONN_STRING,USERNAME,PASSWORD);            
@@ -73,17 +83,8 @@ public class DataBaseConnector {
     }
     
     public boolean insertRecord(String tableName,ArrayList list){
-        String values = "" ;
+        String values = "" ;      
         
-//        for(int counter = 0;counter<list.size();counter++){
-//            values+="\"";
-//            values+=list.get(counter);
-//            values+="\"";
-//            if(counter <list.size()-1){
-//                values+=",";
-//            }
-//        }
-
         for (int i = 0; i < list.size(); i++) {
              
              values+="?";
@@ -94,7 +95,7 @@ public class DataBaseConnector {
         }
         
         String sql = "INSERT INTO "+tableName+" values("+values+")";
-        System.out.println("SQL : "+sql);
+       
         
         try {
             pst = conn.prepareStatement(sql);
@@ -111,23 +112,23 @@ public class DataBaseConnector {
         }        
     }
     
-    public boolean insertRecordColoumnCount(String tableName,ArrayList list,ArrayList list2){
+    public boolean insertRecordColoumnCount(String tableName,ArrayList data,ArrayList columns){
         String values2 = "" ;
         String values1 = "";
         
-        for (int i = 0; i < list2.size(); i++) {
-            values1+=list2.get(i);
-            if(i <list2.size()-1){
+        for (int i = 0; i < columns.size(); i++) {
+            values1+=columns.get(i);
+            if(i <columns.size()-1){
                 values1+=",";
             }
             
         }
         
-        for(int counter = 0;counter<list.size();counter++){
-            values2+="\"";
-            values2+=list.get(counter);
-            values2+="\"";
-            if(counter <list.size()-1){
+        for(int counter = 0;counter<data.size();counter++){
+            values2+="\'";
+            values2+=data.get(counter);
+            values2+="\'";
+            if(counter <data.size()-1){
                 values2+=",";
             }
         }
@@ -171,14 +172,45 @@ public class DataBaseConnector {
         
     }
     
-    public String getRelavantRecord(String tableName,String columnName1,String columnName2,String value){
-        String sql = "Select "+columnName1+" from "+tableName+" where "+columnName2+" like "+"\""+value+"\"";
-        
-        
-        String record=null;
+    public ArrayList retreveDataColumn2(String tableName, String coloumnName1,String coloumnName2) {
+
+        String sql = "SELECT " + coloumnName1+","+coloumnName2 + " from " + tableName + " ";
+
         try {
             statement = conn.createStatement();
             rst = statement.executeQuery(sql);
+            ArrayList list = new ArrayList();
+            while (rst.next()) {
+                String record[] = new String[2];
+                record[0] = rst.getString(coloumnName1);
+                record[1] = rst.getString(coloumnName2);
+                list.add(record);
+            }
+
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnector.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error in retreveDataColoumn " + tableName + " :" + ex.getMessage());
+        }
+
+        return null;
+
+    }
+    
+    
+    
+    public String getRelavantRecord(String tableName,String columnName1,String conditionColoumn,String value){
+
+        String sql = "Select "+columnName1+" from "+tableName+" where "+conditionColoumn+"  like ?";
+        
+        String record=null;
+        try {
+            
+            pst = conn.prepareStatement(sql);            
+            pst.setString(1, value);
+            
+            rst =  pst.executeQuery();      
             
             if(rst.next()){
                 record = rst.getString(columnName1);
@@ -191,7 +223,7 @@ public class DataBaseConnector {
     }
     
     public ArrayList readRow(String tableName,String coloumn,String condition){
-        String sql = "Select * from "+tableName+" where "+coloumn+" like "+"\""+condition+"\"";
+        String sql = "Select * from "+tableName+" where "+coloumn+" like "+"'"+condition+"'";
         
         
         ArrayList list = new ArrayList();
@@ -202,7 +234,7 @@ public class DataBaseConnector {
             if (rst.next()) {
                 ResultSetMetaData meta = rst.getMetaData();
                 
-                for (int i = 1; i<meta.getColumnCount(); i++) {
+                for (int i = 1; i<=meta.getColumnCount(); i++) {
                     list.add(rst.getString(i));
                 }                     
             }
@@ -218,9 +250,9 @@ public class DataBaseConnector {
     public boolean editRecordInTable(String tableName,String coloumnName,String coloumn2,String value,String condition){
         String sql = "UPDATE "+tableName+"\n"
                 + "SET "+coloumn2+"='"+value+"'\n"
-                + "WHERE "+coloumnName+" like "+"\""+condition+"\"";
+                + "WHERE "+coloumnName+" like "+"'"+condition+"'";
         
-        System.out.println("SQL query : "+sql+"\n");
+        
         try {
             statement.executeUpdate(sql);
             return true;
@@ -235,7 +267,7 @@ public class DataBaseConnector {
         
         String value = "";
         for (int i = 0; i < coloumns.size(); i++) {
-            String coloumnData = String.valueOf(data.get(i+1));
+            String coloumnData = String.valueOf(data.get(i));
             String coloumn = String.valueOf(coloumns.get(i));
             value+=(coloumn+"=\""+coloumnData+"\"");
             if((coloumns.size()-1)>i){
@@ -245,9 +277,9 @@ public class DataBaseConnector {
         }
         String sql = "UPDATE " + tableName + "\n"
                 + "SET " + value+ "\n"
-                + "WHERE " + coloumnName + " like " + "\"" + condition + "\"";
+                + "WHERE " + coloumnName + " like " + "'" + condition + "'";
 
-        System.out.println("SQL query : " + sql + "\n");
+        System.out.println("SQL : "+sql);
         try {
             statement.executeUpdate(sql);
             return true;
@@ -259,12 +291,17 @@ public class DataBaseConnector {
     }
     
     public ArrayList retreveDataColoumnWithCondition(String tableName,String coloumnName,String coloumn2,String condition){
-        String sql = "SELECT "+coloumnName+" from "+tableName+" where "+coloumn2+" like " + "\""+condition+ "\"";
-        System.out.println("SQL" + sql);
+        String sql = "SELECT "+coloumnName+" from "+tableName+" where "+coloumn2+" like ?";
+        
         
         try {
-            statement = conn.createStatement();
-            rst = statement.executeQuery(sql);
+            pst = conn.prepareStatement(sql);            
+            pst.setString(1, condition);
+            
+            rst = pst.executeQuery();
+            
+//            statement = conn.createStatement();
+//            rst = statement.executeQuery(sql);
             ArrayList list = new ArrayList();
             while(rst.next()){
                 list.add(rst.getString(coloumnName));                
@@ -283,9 +320,9 @@ public class DataBaseConnector {
     }
     
     public ArrayList retreveDataColoumnWithTwoCondition(String tableName,String coloumnName,String coloumn2,String condition1,String coloumn3,String condition2){
-        String sql = "SELECT "+coloumnName+" from "+tableName+" where "+coloumn2+" like " + "\""+condition1+ "\" AND "+coloumn3+" like "+"\""+condition2+ "\"";
-        
+        String sql = "SELECT "+coloumnName+" from "+tableName+" where "+coloumn2+" like " + "'"+condition1+ "' AND "+coloumn3+" like "+"'"+condition2+ "'";
         System.out.println("SQL : "+sql);
+        
         try {
             statement = conn.createStatement();
             rst = statement.executeQuery(sql);
@@ -306,22 +343,24 @@ public class DataBaseConnector {
         
     }
     
-    public String sqlExecution(String sql,String coloumn){
-        
+    public String sqlExecution(String sql,String column,ArrayList list){       
 
-        String record = null;
         try {
-            statement = conn.createStatement();
-            rst = statement.executeQuery(sql);
-
-            if (rst.next()) {
-                record = rst.getString(coloumn);
+            pst = conn.prepareStatement(sql);
+            for (int i = 0; i < list.size(); i++) {
+                pst.setString(i + 1, String.valueOf(list.get(i)));
             }
-            return record;
+            System.out.println(pst);
+            rst = pst.executeQuery();
+            if(rst.next()){
+                return rst.getString(column); 
+            }
+            return null;        
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error in Selecting custom query" + ex.getMessage());
             Logger.getLogger(DataBaseConnector.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return null;
     }
     
      public ArrayList sqlExecutionaArray(String sql,String coloumn){
@@ -342,9 +381,28 @@ public class DataBaseConnector {
         return null;
     }
      
-     public ArrayList retreveLargeDataSet(ArrayList conditionColoumns,ArrayList conditionVals){
+    public boolean sqlUpdate(String sql,ArrayList list){
+        try {            
+            pst = conn.prepareStatement(sql);
+            for (int i = 0; i < list.size(); i++) {
+                pst.setString(i+1,String.valueOf(list.get(i)));
+            }
+            System.out.println(pst);
+            pst.execute();
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error in editing custom query"+ ex.getMessage());
+            Logger.getLogger(DataBaseConnector.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+     
+     
+     //Used to retreve large table like records. condition coloumns and values according to that are sent in seperate arraylists
+     //And arrayList containing array of row values are returned
+     public ArrayList retreveLargeDataSet(ArrayList conditionColoumns,ArrayList conditionVals,String table){
          
-        ArrayList<String []> records = new ArrayList();
+        ArrayList<String []> records = new ArrayList<>();
         String condition = "";
         
          for (int i = 0; i < conditionColoumns.size(); i++) {
@@ -358,8 +416,8 @@ public class DataBaseConnector {
          }
          
          
-         String sql = "Select * from orderitems where "+condition;
-         System.out.println("SQL : "+sql);
+         String sql = "Select * from "+table+" where "+condition;
+         
          
          try {
             statement = conn.createStatement();
@@ -368,10 +426,11 @@ public class DataBaseConnector {
                         
              while(rst.next()){
                 String[] row = new String[colCount];                 
-                for (int j = 1; j < colCount; j++) {     
+                for (int j = 1; j < colCount+1; j++) {     
                     
                     String columnName = rst.getMetaData().getColumnName(j);                    
-                    row[j-1] = rst.getString(columnName);                   
+                    row[j-1] = rst.getString(columnName); 
+                    
                 }                 
                 records.add(row);
              }         
@@ -381,6 +440,22 @@ public class DataBaseConnector {
             JOptionPane.showMessageDialog(null, "Error in retreveLargeDate :"+ex.getMessage());
         }
          return records;
+     }
+     
+     public boolean sqlPlainExecution(String sql){
+        try {
+            statement = conn.createStatement();
+            rst = statement.executeQuery(sql);
+            
+            while(rst.next()){
+//                ArrayList<String> list = list.add(rst)
+            }
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnector.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error in plain SQL execution");
+            return false;
+        }
      }
      
      

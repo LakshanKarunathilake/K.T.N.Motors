@@ -20,8 +20,9 @@ public class DataManipulation {
     public DataManipulation(DataBaseConnector connector){
         this.connector = connector;
     }
-    
-    public void getRecords(String tableName,String coloumn,JComboBox combo){
+
+   
+    public ArrayList getRecords(String tableName,String coloumn,JComboBox combo){
         if(connector == null){
             System.out.println("Connector eerror");
         }    
@@ -29,6 +30,7 @@ public class DataManipulation {
         for (int i = 0; i < list.size(); i++) {
             combo.addItem(list.get(i));
         }
+        return list;
     }
     
      public void getRecordsWithCondtion(String tableName,String coloumn1,String coloumn2,String condition,JComboBox combo){
