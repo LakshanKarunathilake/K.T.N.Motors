@@ -98,6 +98,7 @@ public class Printsupport {
 
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
         int nRow = dtm.getRowCount(), nCol = dtm.getColumnCount();
+        setTotalItemCount(nRow);
         Object[][] tableData = new Object[nRow][nCol];
         int l = 0;
         if (itemcount == nRow) //check is there any data loss.
@@ -132,6 +133,10 @@ public class Printsupport {
     
     public void setMetaData(HashMap hashmap){
         this.hashmap = hashmap;
+    }
+    
+    public static void setTotalItemCount(int numberOfRows){
+        total_item_count  = numberOfRows;
     }
     
 
