@@ -3663,7 +3663,8 @@ public class MainFrame extends javax.swing.JFrame{
         if(String.valueOf(sales_CID_combo.getSelectedItem()).equals("1") ){
             print.cashPrint();
         }else{
-            print.creditPrint();
+            print.creditPrint2();
+//            print.creditPrint();
         }        
     }//GEN-LAST:event_sales_print_btnActionPerformed
 
