@@ -493,7 +493,7 @@ public class DayEndView extends javax.swing.JFrame {
        
        PrinterJob pj = PrinterJob.getPrinterJob();
 
-        pj.setPrintable(new Printsupport.DayEndPrintable(), ps.getPageFormat(pj));
+        pj.setPrintable(new Printsupport.DayEndPrintable(), ps.getCashPageFormat(pj));
         try {
             pj.print();
 

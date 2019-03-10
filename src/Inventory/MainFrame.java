@@ -217,6 +217,9 @@ public class MainFrame extends javax.swing.JFrame{
         jLabel56 = new javax.swing.JLabel();
         jLabel88 = new javax.swing.JLabel();
         sales_addPrecent_txt = new javax.swing.JTextField();
+        AdditionalTextPannel = new javax.swing.JPanel();
+        jLabel96 = new javax.swing.JLabel();
+        sales_additional_txt = new javax.swing.JTextField();
         settings_panel = new javax.swing.JPanel();
         jButton20 = new javax.swing.JButton();
         settings_sub_panel = new javax.swing.JPanel();
@@ -472,7 +475,6 @@ public class MainFrame extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 768));
-        setPreferredSize(new java.awt.Dimension(1024, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         MenuBar.setBackground(new java.awt.Color(51, 102, 255));
@@ -939,7 +941,7 @@ public class MainFrame extends javax.swing.JFrame{
         sales_halfPay_panel.setLayout(sales_halfPay_panelLayout);
         sales_halfPay_panelLayout.setHorizontalGroup(
             sales_halfPay_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sales_halfPay_panelLayout.createSequentialGroup()
+            .addGroup(sales_halfPay_panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(sales_halfPay_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel46)
@@ -953,7 +955,7 @@ public class MainFrame extends javax.swing.JFrame{
         sales_halfPay_panelLayout.setVerticalGroup(
             sales_halfPay_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sales_halfPay_panelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addGroup(sales_halfPay_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel46)
                     .addComponent(jLabel56))
@@ -961,10 +963,10 @@ public class MainFrame extends javax.swing.JFrame{
                 .addGroup(sales_halfPay_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sales_halfPay_creditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sales_halfPay_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        SalesPanel.add(sales_halfPay_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 340, 120));
+        SalesPanel.add(sales_halfPay_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 340, 60));
 
         jLabel88.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel88.setText("Add :");
@@ -978,6 +980,39 @@ public class MainFrame extends javax.swing.JFrame{
             }
         });
         SalesPanel.add(sales_addPrecent_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 90, 40));
+
+        AdditionalTextPannel.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel96.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel96.setText("Additional Note");
+
+        sales_additional_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sales_additional_txtActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AdditionalTextPannelLayout = new javax.swing.GroupLayout(AdditionalTextPannel);
+        AdditionalTextPannel.setLayout(AdditionalTextPannelLayout);
+        AdditionalTextPannelLayout.setHorizontalGroup(
+            AdditionalTextPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sales_additional_txt)
+            .addGroup(AdditionalTextPannelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel96)
+                .addContainerGap(559, Short.MAX_VALUE))
+        );
+        AdditionalTextPannelLayout.setVerticalGroup(
+            AdditionalTextPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdditionalTextPannelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel96, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sales_additional_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        SalesPanel.add(AdditionalTextPannel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 670, 80));
 
         MainChangeFrame.add(SalesPanel, "card2");
 
@@ -3309,6 +3344,8 @@ public class MainFrame extends javax.swing.JFrame{
         sales_halfPay_check.setSelected(false);
         sales_halfPay_panel.setVisible(false);
         
+        sales_additional_txt.setEditable(true);
+        
         sales_CID_combo.setSelectedItem("1");
         ViewManipulation.emptyTable(sales_item_table);
         
@@ -3453,7 +3490,7 @@ public class MainFrame extends javax.swing.JFrame{
     private void sales_save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_save_btnActionPerformed
         calculateGrandTotal();
         
-        InvoiceToDB toDB = new InvoiceToDB(sales_CID_combo, sales_InvoiceID_txt, sales_item_table, connector);
+        InvoiceToDB toDB = new InvoiceToDB(sales_CID_combo, sales_InvoiceID_txt, sales_item_table,sales_additional_txt, connector);
         toDB.setValuesForInsertOrder(sales_total_txt, sales_discount_txt, sales_grand_txt,sales_halfPay_txt,sales_halfPay_check);
         
         if(toDB.validUserPurchaise()){
@@ -3490,7 +3527,7 @@ public class MainFrame extends javax.swing.JFrame{
        
          if (sales_available_qty_txt.getText().equals("0") && (focus_counter==0)) {
                 focus_counter++;
-                JOptionPane.showConfirmDialog(null, "Sorry qty finished","Qty Finished", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Sorry qty finished","Qty Finished", JOptionPane.WARNING_MESSAGE);
                 sales_itemno_combo.requestFocusInWindow();
         }
         
@@ -3626,7 +3663,8 @@ public class MainFrame extends javax.swing.JFrame{
         if(String.valueOf(sales_CID_combo.getSelectedItem()).equals("1") ){
             print.cashPrint();
         }else{
-            print.creditPrint();
+            print.creditPrint2();
+//            print.creditPrint();
         }        
     }//GEN-LAST:event_sales_print_btnActionPerformed
 
@@ -3922,7 +3960,7 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_add_itemNo_txtFocusLost
 
     private void sales_searchI_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_searchI_btn1ActionPerformed
-        InvoiceSearch search = new InvoiceSearch(sales_InvoiceID_txt, sales_CID_combo, sales_CName_combo, sales_item_table, sales_total_txt, sales_discount_txt, sales_grand_txt, connector);
+        InvoiceSearch search = new InvoiceSearch(sales_InvoiceID_txt, sales_CID_combo, sales_CName_combo, sales_item_table, sales_total_txt, sales_discount_txt, sales_grand_txt,sales_additional_txt, connector);
         search.setHalfPayComponents(sales_halfPay_check, sales_halfPay_txt, sales_halfPay_creditTxt, sales_halfPay_panel);
         JComboBox search_invoiceID = new JComboBox();       
         AutoCompleteDecorator.decorate(search_invoiceID);
@@ -3947,6 +3985,7 @@ public class MainFrame extends javax.swing.JFrame{
             sales_discount_txt.setEditable(false);
             sales_grand_txt.setEditable(false);
             sales_print_btn.setEnabled(true);
+            sales_additional_txt.setEnabled(false);
         } else {
             System.out.println("User canceled / closed the dialog, result = " + result);
         }
@@ -4714,6 +4753,10 @@ public class MainFrame extends javax.swing.JFrame{
         ClutchPlateSearch clutchPlateSearch = ClutchPlateSearch.getInstance();
 //        clutchPlateSearch.setFields(clutch_plate_search_grew_combo,clutch_plate_search_inner_combo,clutch_plate_search_outer_combo,connector);
     }//GEN-LAST:event_Clutch_Plate_TabbedMouseClicked
+
+    private void sales_additional_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_additional_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sales_additional_txtActionPerformed
   
        
     public void FillBill(String invoiceID){
@@ -4789,6 +4832,7 @@ public class MainFrame extends javax.swing.JFrame{
         sales_halfPay_check.setEnabled(b);
         sales_halfPay_creditTxt.setEnabled(b);
         sales_halfPay_txt.setEnabled(b);
+        sales_additional_txt.setEnabled(b);
     }
     
     public void calculatetotal(){
@@ -4867,6 +4911,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JLabel AddProductLabel;
     private javax.swing.JLabel AddUserLabel;
     private javax.swing.JPanel AddUserPannel;
+    private javax.swing.JPanel AdditionalTextPannel;
     private javax.swing.JTextField AddressTxt;
     private javax.swing.JTextField AddressTxt1;
     private javax.swing.JTextField Bill_date_txt;
@@ -5064,6 +5109,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel93;
     private javax.swing.JLabel jLabel94;
     private javax.swing.JLabel jLabel95;
+    private javax.swing.JLabel jLabel96;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -5118,6 +5164,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JComboBox<String> sales_CName_combo;
     private javax.swing.JTextField sales_InvoiceID_txt;
     private javax.swing.JTextField sales_addPrecent_txt;
+    private javax.swing.JTextField sales_additional_txt;
     private javax.swing.JTextField sales_available_qty_txt;
     private javax.swing.JButton sales_cancel_btn;
     private javax.swing.JTextField sales_discount_txt;

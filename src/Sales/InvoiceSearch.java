@@ -29,6 +29,7 @@ public class InvoiceSearch {
     JTextField totalTxt;
     JTextField discountTxt;
     JTextField grandTxt;
+    JTextField additionalNoteTxt;
     
     DataBaseConnector connector;
     
@@ -37,7 +38,7 @@ public class InvoiceSearch {
     JTextField credit_txt;
     JPanel halfpay;
     
-    public InvoiceSearch(JTextField invoice_txt,JComboBox customerID_combo,JComboBox customerName_combo,JTable table,JTextField totalTxt,JTextField discountTxt,JTextField grandTxt,DataBaseConnector connector){
+    public InvoiceSearch(JTextField invoice_txt,JComboBox customerID_combo,JComboBox customerName_combo,JTable table,JTextField totalTxt,JTextField discountTxt,JTextField grandTxt,JTextField additionalNoteTxt,DataBaseConnector connector){
         this.invoice_txt = invoice_txt;
         this.customerID_combo = customerID_combo;
         this.customerName_combo = customerName_combo;
@@ -46,6 +47,7 @@ public class InvoiceSearch {
         this.discountTxt = discountTxt;
         this.grandTxt = grandTxt;
         this.connector = connector;
+        this.additionalNoteTxt = additionalNoteTxt;
     }
     
     public void setHalfPayComponents(JCheckBox check,JTextField cash_txt,JTextField credit_txt,JPanel halfpay){
@@ -58,6 +60,7 @@ public class InvoiceSearch {
     public void fillInvoice(String invoiceID) {
         invoice_txt.setText(invoiceID);
         String userID = connector.getRelavantRecord("invoices", "customer_code", "invoice_id", invoiceID);
+        String additionalNote = connector.getRelavantRecord("invoices", "additional_note", "invoice_id", invoiceID);
         customerID_combo.setSelectedItem(userID);
         customerName_combo.setSelectedItem(connector.getRelavantRecord("customers", "name", "customer_code", userID));
 
@@ -102,6 +105,7 @@ public class InvoiceSearch {
         totalTxt.setText(connector.getRelavantRecord("invoices", "total", "invoice_id", invoiceID));
         discountTxt.setText(connector.getRelavantRecord("invoices", "discount", "invoice_id", invoiceID));
         grandTxt.setText(connector.getRelavantRecord("invoices", "grandTotal", "invoice_id", invoiceID));
+        additionalNoteTxt.setText(additionalNote);
 
     }
 }

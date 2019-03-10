@@ -33,12 +33,14 @@ public class InvoiceToDB {
     JTextField grandTxt;
     JTextField cash_txt;
     JCheckBox checkbox;
+    JTextField additionalTxt;
     
-    public InvoiceToDB(JComboBox customer_code,JTextField invoiceID_text,JTable table, DataBaseConnector connector){
+    public InvoiceToDB(JComboBox customer_code,JTextField invoiceID_text,JTable table,JTextField additonalTxt, DataBaseConnector connector){
         this.customer_code = customer_code;
         this.connector = connector;
         this.table = table;
         this.invoiceID_text = invoiceID_text;
+        this.additionalTxt = additonalTxt;
     }
     
     public boolean validUserPurchaise() {
@@ -55,7 +57,7 @@ public class InvoiceToDB {
 
         String sql = "Select invoice_id from invoices where customer_code like \"" + userID + "\" And orderDate <= \"" + beforeDate + "\" AND status like '0'";
         System.out.println("SQL :" + sql);
-        ArrayList list = connector.sqlExecutionaArray(sql, "orderID");
+        ArrayList list = connector.sqlExecutionaArray(sql, "invoice_id");
         System.out.println("Lits SIze : " + list.size());
         if (list.size() > 0) {
             String values = "";
@@ -140,12 +142,12 @@ public class InvoiceToDB {
     }
 
     public boolean InsertToOrder() {
-
         String invoiceID = invoiceID_text.getText();
         String userID = String.valueOf(customer_code.getSelectedItem());
         String total = totalTxt.getText();
         String discount = discountTxt.getText();
         String grandTotal = grandTxt.getText();
+        String additionalNote = additionalTxt.getText();
 
         Timestamp now = new Timestamp(System.currentTimeMillis());
         String timeStamp = String.valueOf(now);
@@ -168,11 +170,9 @@ public class InvoiceToDB {
             }else{
                 record.add("0");
             }
-            
         }
-        
         record.add("0");
-
+        record.add(additionalNote);
         if (!connector.insertRecord("invoices", record)) {
             JOptionPane.showMessageDialog(null, "Insertion fails in order ");
             return false;
@@ -187,7 +187,6 @@ public class InvoiceToDB {
             for (int j = 0; j < list.size(); j++) {
                 combo1.addItem(list.get(j));
             }
-            
             list = lists[1];
             for (int j = 0; j < list.size(); j++) {
                 combo2.addItem(list.get(j));

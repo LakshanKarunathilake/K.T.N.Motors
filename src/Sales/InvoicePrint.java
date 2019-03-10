@@ -85,12 +85,29 @@ public class InvoicePrint {
 
         Printsupport ps = new Printsupport();
 //        PrintData pd = new PrintData();
-        Object printitem[][] = ps.getTableData(table);
+        Object printitem[][] = ps.getTableData(table,"cash");
         ps.setItems(printitem);
         ps.setMetaData(list);
         PrinterJob pj = PrinterJob.getPrinterJob();
 
-        pj.setPrintable(new Printsupport.MyPrintable(), ps.getPageFormat(pj));
+        pj.setPrintable(new Printsupport.MyPrintable(), ps.getCashPageFormat(pj));
+        try {
+            pj.print();
+
+        } catch (PrinterException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void creditPrint2(){
+        Printsupport ps = new Printsupport();
+        Object printitem[][] = ps.getTableData(table,"credit");
+        ps.setItems(printitem);
+        ps.setMetaData(list);
+        ps.setUserDetails(connector.readRow("customers","customer_code", customerID_combo.getSelectedItem().toString()));
+        PrinterJob pj = PrinterJob.getPrinterJob();
+
+        pj.setPrintable(new Printsupport.CreditPrintable(), ps.getCreditPageFormat(pj));
         try {
             pj.print();
 
