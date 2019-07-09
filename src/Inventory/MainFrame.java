@@ -139,7 +139,9 @@ public class MainFrame extends javax.swing.JFrame{
 
         ViewManipulation.emptyComboBoxes(emptyCombos);
 
-        Invoice.changeTableView(sales_item_table);
+        int salesTableView[]  = {190,320,55,100,80,100};
+        
+        Invoice.changeTableView(sales_item_table,salesTableView);
         
         item_sale = new Invoice(sales_itemno_combo, sales_item_name_combo, sales_CID_combo, sales_CName_combo,sales_qty_Txt, connector);
         invoiceData = item_sale.fillDataToCombo();
