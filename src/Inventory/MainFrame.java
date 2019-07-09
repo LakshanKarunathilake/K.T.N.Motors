@@ -476,6 +476,10 @@ public class MainFrame extends javax.swing.JFrame{
         jScrollPane7 = new javax.swing.JScrollPane();
         itemSearchTable = new javax.swing.JTable();
         jButton27 = new javax.swing.JButton();
+        jLabel97 = new javax.swing.JLabel();
+        item_search_category_combo = new javax.swing.JComboBox<>();
+        jLabel98 = new javax.swing.JLabel();
+        item_search_combo = new javax.swing.JCheckBox();
         TitlePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         clock_txt = new javax.swing.JLabel();
@@ -2964,33 +2968,62 @@ public class MainFrame extends javax.swing.JFrame{
             }
         });
 
+        jLabel97.setText("Search Value");
+
+        jLabel98.setText("Category");
+
+        item_search_combo.setText("Activate");
+        item_search_combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_search_comboActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ItemSearchPanelLayout = new javax.swing.GroupLayout(ItemSearchPanel);
         ItemSearchPanel.setLayout(ItemSearchPanelLayout);
         ItemSearchPanelLayout.setHorizontalGroup(
             ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ItemSearchPanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane7)
-                    .addGroup(ItemSearchPanelLayout.createSequentialGroup()
-                        .addComponent(item_search_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGroup(ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(ItemSearchPanelLayout.createSequentialGroup()
+                            .addComponent(item_search_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(ItemSearchPanelLayout.createSequentialGroup()
+                            .addComponent(jLabel97)
+                            .addGap(240, 240, 240)
+                            .addComponent(item_search_combo)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel98)
+                            .addGap(18, 18, 18)
+                            .addComponent(item_search_category_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         ItemSearchPanelLayout.setVerticalGroup(
             ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ItemSearchPanelLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ItemSearchPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel97))
+                    .addGroup(ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(item_search_category_combo, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                        .addComponent(jLabel98)
+                        .addComponent(item_search_combo)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(item_search_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(item_search_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81))
         );
 
         MainChangeFrame.add(ItemSearchPanel, "card12");
@@ -5074,6 +5107,8 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JLabel item_date1_label;
     private javax.swing.JLabel item_date2_label;
     private javax.swing.JCheckBox item_report_checkBox;
+    private javax.swing.JComboBox<String> item_search_category_combo;
+    private javax.swing.JCheckBox item_search_combo;
     private javax.swing.JTextField item_search_txt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -5198,6 +5233,8 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel94;
     private javax.swing.JLabel jLabel95;
     private javax.swing.JLabel jLabel96;
+    private javax.swing.JLabel jLabel97;
+    private javax.swing.JLabel jLabel98;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
