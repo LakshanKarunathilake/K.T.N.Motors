@@ -140,8 +140,10 @@ public class MainFrame extends javax.swing.JFrame{
         ViewManipulation.emptyComboBoxes(emptyCombos);
 
         int salesTableView[]  = {190,320,55,100,80,100};
+        int itemSearchTableView[] = {190,190,150,170,55};
         
         Invoice.changeTableView(sales_item_table,salesTableView);
+        Invoice.changeTableView(itemSearchTable,itemSearchTableView);
         
         item_sale = new Invoice(sales_itemno_combo, sales_item_name_combo, sales_CID_combo, sales_CName_combo,sales_qty_Txt, connector);
         invoiceData = item_sale.fillDataToCombo();
@@ -469,10 +471,11 @@ public class MainFrame extends javax.swing.JFrame{
         jLabel66 = new javax.swing.JLabel();
         bill_return_label = new javax.swing.JLabel();
         ItemSearchPanel = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        item_search_txt = new javax.swing.JTextField();
         jButton26 = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        itemSearchTable = new javax.swing.JTable();
+        jButton27 = new javax.swing.JButton();
         TitlePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         clock_txt = new javax.swing.JLabel();
@@ -2929,6 +2932,12 @@ public class MainFrame extends javax.swing.JFrame{
 
         ItemSearchPanel.setForeground(new java.awt.Color(255, 255, 255));
 
+        item_search_txt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                item_search_txtKeyPressed(evt);
+            }
+        });
+
         jButton26.setBackground(new java.awt.Color(255, 255, 255));
         jButton26.setText("Go Back");
         jButton26.addActionListener(new java.awt.event.ActionListener() {
@@ -2937,18 +2946,23 @@ public class MainFrame extends javax.swing.JFrame{
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        itemSearchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ITEM CODE", "VEHICLE", "BRAND", "CATEGORY", "QTY"
             }
         ));
-        jScrollPane7.setViewportView(jTable2);
+        jScrollPane7.setViewportView(itemSearchTable);
+
+        jButton27.setBackground(new java.awt.Color(255, 255, 255));
+        jButton27.setText("Search");
+        jButton27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton27ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ItemSearchPanelLayout = new javax.swing.GroupLayout(ItemSearchPanel);
         ItemSearchPanel.setLayout(ItemSearchPanelLayout);
@@ -2959,8 +2973,10 @@ public class MainFrame extends javax.swing.JFrame{
                 .addGroup(ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane7)
                     .addGroup(ItemSearchPanelLayout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(item_search_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
@@ -2969,8 +2985,9 @@ public class MainFrame extends javax.swing.JFrame{
             .addGroup(ItemSearchPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(item_search_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(64, Short.MAX_VALUE))
@@ -4812,6 +4829,17 @@ public class MainFrame extends javax.swing.JFrame{
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton26ActionPerformed
+
+    private void item_search_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_item_search_txtKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_item_search_txtKeyPressed
+
+    private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
+        String searchPhrase = item_search_txt.getText();
+        if (searchPhrase.equals("")) {
+            JOptionPane.showMessageDialog(null, "You should enter value for search an item");
+        }
+    }//GEN-LAST:event_jButton27ActionPerformed
   
        
     public void FillBill(String invoiceID){
@@ -5040,11 +5068,13 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JLabel date_txt;
     private javax.swing.JButton editBtn;
     private javax.swing.JButton itemCancelBtn1;
+    private javax.swing.JTable itemSearchTable;
     private javax.swing.JButton item_add_edit_btn;
     private javax.swing.JButton item_add_new_btn;
     private javax.swing.JLabel item_date1_label;
     private javax.swing.JLabel item_date2_label;
     private javax.swing.JCheckBox item_report_checkBox;
+    private javax.swing.JTextField item_search_txt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -5063,6 +5093,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton26;
+    private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -5181,8 +5212,6 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton newBtn;
     private javax.swing.JPanel part_number_change_panel;
     private javax.swing.JLabel payBillsLabel;

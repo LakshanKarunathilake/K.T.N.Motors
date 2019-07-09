@@ -5044,8 +5044,10 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jScrollPane7" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="jTextField1" min="-2" pref="613" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="item_search_txt" min="-2" pref="501" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                              <Component id="jButton27" min="-2" pref="112" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jButton26" min="-2" pref="112" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -5058,8 +5060,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField1" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
+                          <Component id="item_search_txt" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
                           <Component id="jButton26" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
+                          <Component id="jButton27" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane7" min="-2" pref="495" max="-2" attributes="0"/>
@@ -5069,7 +5072,10 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="item_search_txt">
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="item_search_txtKeyPressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton26">
               <Properties>
@@ -5089,10 +5095,10 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable2">
+                <Component class="javax.swing.JTable" name="itemSearchTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="4">
+                      <Table columnCount="5" rowCount="0">
                         <Column editable="true" title="ITEM CODE" type="java.lang.Object"/>
                         <Column editable="true" title="VEHICLE" type="java.lang.Object"/>
                         <Column editable="true" title="BRAND" type="java.lang.Object"/>
@@ -5136,6 +5142,17 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="jButton27">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Search"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton27ActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
