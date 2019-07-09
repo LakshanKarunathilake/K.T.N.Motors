@@ -481,7 +481,7 @@ public class MainFrame extends javax.swing.JFrame{
         jLabel97 = new javax.swing.JLabel();
         item_search_category_combo = new javax.swing.JComboBox<>();
         jLabel98 = new javax.swing.JLabel();
-        item_search_combo = new javax.swing.JCheckBox();
+        item_search_checkbox = new javax.swing.JCheckBox();
         TitlePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         clock_txt = new javax.swing.JLabel();
@@ -2974,10 +2974,10 @@ public class MainFrame extends javax.swing.JFrame{
 
         jLabel98.setText("Category");
 
-        item_search_combo.setText("Activate");
-        item_search_combo.addActionListener(new java.awt.event.ActionListener() {
+        item_search_checkbox.setText("Activate");
+        item_search_checkbox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                item_search_comboActionPerformed(evt);
+                item_search_checkboxActionPerformed(evt);
             }
         });
 
@@ -2999,7 +2999,7 @@ public class MainFrame extends javax.swing.JFrame{
                         .addGroup(ItemSearchPanelLayout.createSequentialGroup()
                             .addComponent(jLabel97)
                             .addGap(240, 240, 240)
-                            .addComponent(item_search_combo)
+                            .addComponent(item_search_checkbox)
                             .addGap(18, 18, 18)
                             .addComponent(jLabel98)
                             .addGap(18, 18, 18)
@@ -3017,7 +3017,7 @@ public class MainFrame extends javax.swing.JFrame{
                     .addGroup(ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(item_search_category_combo, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                         .addComponent(jLabel98)
-                        .addComponent(item_search_combo)))
+                        .addComponent(item_search_checkbox)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(item_search_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4880,17 +4880,17 @@ public class MainFrame extends javax.swing.JFrame{
             JOptionPane.showMessageDialog(null, "You should enter value for search an item");
         } else {
             ItemSearch search = ItemSearch.getInstance();
-            search.getSearchResults(connector, itemSearchTable,item_search_category_combo,searchPhrase);
+            search.getSearchResults(connector, itemSearchTable,item_search_category_combo,searchPhrase,item_search_checkbox.isSelected());
         }
     }//GEN-LAST:event_jButton27ActionPerformed
 
-    private void item_search_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_search_comboActionPerformed
-        if(item_search_combo.isSelected()){
+    private void item_search_checkboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_search_checkboxActionPerformed
+        if(item_search_checkbox.isSelected()){
             item_search_category_combo.setEnabled(true);
         }else{
             item_search_category_combo.setEnabled(false);
         }
-    }//GEN-LAST:event_item_search_comboActionPerformed
+    }//GEN-LAST:event_item_search_checkboxActionPerformed
   
        
     public void FillBill(String invoiceID){
@@ -5126,7 +5126,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JLabel item_date2_label;
     private javax.swing.JCheckBox item_report_checkBox;
     private javax.swing.JComboBox<String> item_search_category_combo;
-    private javax.swing.JCheckBox item_search_combo;
+    private javax.swing.JCheckBox item_search_checkbox;
     private javax.swing.JTextField item_search_txt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;

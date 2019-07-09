@@ -5054,7 +5054,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel97" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="240" max="-2" attributes="0"/>
-                                  <Component id="item_search_combo" min="-2" max="-2" attributes="0"/>
+                                  <Component id="item_search_checkbox" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jLabel98" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -5078,7 +5078,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="item_search_category_combo" alignment="3" pref="34" max="32767" attributes="0"/>
                               <Component id="jLabel98" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="item_search_combo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="item_search_checkbox" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -5196,12 +5196,12 @@
                 <Property name="text" type="java.lang.String" value="Category"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="item_search_combo">
+            <Component class="javax.swing.JCheckBox" name="item_search_checkbox">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Activate"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="item_search_comboActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="item_search_checkboxActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
