@@ -446,9 +446,17 @@ public class DataBaseConnector {
         try {
             statement = conn.createStatement();
             rst = statement.executeQuery(sql);
-            
+             ArrayList<String []> records = new ArrayList<>();
             while(rst.next()){
-//                ArrayList<String> list = list.add(rst)
+                String[] row = new String[colCount];                 
+                for (int j = 1; j < colCount+1; j++) {     
+                    
+                    String columnName = rst.getMetaData().getColumnName(j);                    
+                    row[j-1] = rst.getString(columnName); 
+                    
+                }                 
+                records.add(row);
+             }   
             }
             return true;
         } catch (SQLException ex) {
@@ -458,6 +466,6 @@ public class DataBaseConnector {
         }
      }
      
-     
+    
     
 }
