@@ -2955,7 +2955,7 @@ public class MainFrame extends javax.swing.JFrame{
 
             },
             new String [] {
-                "ITEM CODE", "VEHICLE", "BRAND", "CATEGORY", "QTY"
+                "ITEM CODE", "CATEGORY", "VEHICLE", "BRAND", "QTY"
             }
         ));
         jScrollPane7.setViewportView(itemSearchTable);
