@@ -27,4 +27,17 @@ public class ItemSearch {
         
     }
     
+    private void setResultsForTable(ArrayList<String []> results){
+        DefaultTableModel dtm = (DefaultTableModel) resultsTable.getModel();
+        dtm.setRowCount(0);
+        resultsTable.revalidate();
+        for (int i = 0; i < results.size(); i++) {
+            Object rowData[] = new Object[5];
+            String row[] = results.get(i);           
+            for (int j = 0; j < row.length; j++) {
+                rowData[j] = row[j];
+            }
+            dtm.addRow(rowData);
+        }
+    }
 }
