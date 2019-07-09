@@ -166,7 +166,7 @@ public class Invoice {
         ViewManipulation.makeAllComponents(comps, b);
     }
     
-    public static void changeTableView(JTable table){
+    public static void changeTableView(JTable table,int[] columnWidths){
         
         //Changing the font of the table
         Font f = new Font("Arial", Font.BOLD, 15);
@@ -175,12 +175,8 @@ public class Invoice {
         
         //Defining the table lengths
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        table.getColumnModel().getColumn(0).setPreferredWidth(190);
-        table.getColumnModel().getColumn(1).setPreferredWidth(320);
-        table.getColumnModel().getColumn(2).setPreferredWidth(55);
-        table.getColumnModel().getColumn(3).setPreferredWidth(100);
-        table.getColumnModel().getColumn(4).setPreferredWidth(80);
-        table.getColumnModel().getColumn(5).setPreferredWidth(100);
-        
+        for (int i = 0; i < columnWidths.length; i++) {
+            table.getColumnModel().getColumn(i).setPreferredWidth(columnWidths[i]);
+        }
     }
 }
