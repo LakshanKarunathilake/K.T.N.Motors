@@ -467,7 +467,10 @@ public class MainFrame extends javax.swing.JFrame{
         jLabel66 = new javax.swing.JLabel();
         bill_return_label = new javax.swing.JLabel();
         ItemSearchPanel = new javax.swing.JPanel();
-        jButton25 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jButton26 = new javax.swing.JButton();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         TitlePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         clock_txt = new javax.swing.JLabel();
@@ -2922,28 +2925,53 @@ public class MainFrame extends javax.swing.JFrame{
 
         MainChangeFrame.add(bill_pay_panel, "card8");
 
-        jButton25.setText("Go Back");
-        jButton25.addActionListener(new java.awt.event.ActionListener() {
+        ItemSearchPanel.setForeground(new java.awt.Color(255, 255, 255));
+
+        jButton26.setBackground(new java.awt.Color(255, 255, 255));
+        jButton26.setText("Go Back");
+        jButton26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton25ActionPerformed(evt);
+                jButton26ActionPerformed(evt);
             }
         });
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ITEM CODE", "VEHICLE", "BRAND", "CATEGORY", "QTY"
+            }
+        ));
+        jScrollPane7.setViewportView(jTable2);
 
         javax.swing.GroupLayout ItemSearchPanelLayout = new javax.swing.GroupLayout(ItemSearchPanel);
         ItemSearchPanel.setLayout(ItemSearchPanelLayout);
         ItemSearchPanelLayout.setHorizontalGroup(
             ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ItemSearchPanelLayout.createSequentialGroup()
-                .addContainerGap(649, Short.MAX_VALUE)
-                .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+            .addGroup(ItemSearchPanelLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane7)
+                    .addGroup(ItemSearchPanelLayout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         ItemSearchPanelLayout.setVerticalGroup(
             ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ItemSearchPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(577, Short.MAX_VALUE))
+                .addGroup(ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         MainChangeFrame.add(ItemSearchPanel, "card12");
@@ -4779,9 +4807,9 @@ public class MainFrame extends javax.swing.JFrame{
         // TODO add your handling code here:
     }//GEN-LAST:event_sales_additional_txtActionPerformed
 
-    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
-        ViewManipulation.changePanel(MainChangeFrame, SalesPanel);
-    }//GEN-LAST:event_jButton25ActionPerformed
+    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton26ActionPerformed
   
        
     public void FillBill(String invoiceID){
@@ -5032,7 +5060,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton24;
-    private javax.swing.JButton jButton25;
+    private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -5148,8 +5176,11 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton newBtn;
     private javax.swing.JPanel part_number_change_panel;
     private javax.swing.JLabel payBillsLabel;
