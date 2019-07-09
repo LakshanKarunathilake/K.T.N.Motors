@@ -11,6 +11,7 @@ import Customers.AddCustomer;
 import DBController.DataBaseConnector;
 import DataManipulation.DataManipulation;
 import DataManipulation.JSONReading;
+import DataManipulation.MyCombo;
 import DataManipulation.Rounding;
 import ItemAdding.ItemAdd;
 import Payments.BillPay;
@@ -31,6 +32,7 @@ import Settings.EditQty;
 import Settings.PartNumberChange;
 import Statistics.DayEndView;
 import StockCounting.Stock;
+import Utilities.ItemSearch;
 
 
 import Validation.StartUpValidation;
@@ -4110,6 +4112,11 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         ViewManipulation.changePanel(MainChangeFrame, ItemSearchPanel);
+        DataManipulation manipulation = new DataManipulation(connector); 
+        manipulation.getRecords("category", "CatName", item_search_category_combo);
+        MyCombo autoCombo1 = new MyCombo();
+        autoCombo1.setSearchableCombo(item_search_category_combo, true, "No Result Found");
+        item_search_category_combo.setEnabled(false);
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -4871,8 +4878,19 @@ public class MainFrame extends javax.swing.JFrame{
         String searchPhrase = item_search_txt.getText();
         if (searchPhrase.equals("")) {
             JOptionPane.showMessageDialog(null, "You should enter value for search an item");
+        } else {
+            ItemSearch search = ItemSearch.getInstance();
+            search.getSearchResults(connector, itemSearchTable,item_search_category_combo,searchPhrase);
         }
     }//GEN-LAST:event_jButton27ActionPerformed
+
+    private void item_search_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_search_comboActionPerformed
+        if(item_search_combo.isSelected()){
+            item_search_category_combo.setEnabled(true);
+        }else{
+            item_search_category_combo.setEnabled(false);
+        }
+    }//GEN-LAST:event_item_search_comboActionPerformed
   
        
     public void FillBill(String invoiceID){
