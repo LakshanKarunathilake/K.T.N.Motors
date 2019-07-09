@@ -429,32 +429,30 @@ public class DataBaseConnector {
         return records;
     }
 
-    public boolean sqlPlainExecution(String sql) {
+    public ArrayList sqlPlainExecution(String sql) {
+        ArrayList<String[]> records = new ArrayList<>();
+        System.out.println("SQL : "+sql);
         try {
             statement = conn.createStatement();
             rst = statement.executeQuery(sql);
-            ArrayList<String[]> records = new ArrayList<>();
+            int colCount = rst.getMetaData().getColumnCount();
             while (rst.next()) {
                 String[] row = new String[colCount];
                 for (int j = 1; j < colCount + 1; j++) {
 
                     String columnName = rst.getMetaData().getColumnName(j);
                     row[j - 1] = rst.getString(columnName);
-
                 }
                 records.add(row);
             }
-        }
-        return true;
-    }
-    catch (SQLException ex
 
-    
-        ) {
+        } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnector.class.getName()).log(Level.SEVERE, null, ex);
-        JOptionPane.showMessageDialog(null, "Error in plain SQL execution");
-        return false;
+            JOptionPane.showMessageDialog(null, "Error in plain SQL execution");
+
+        } finally {
+            return records;
+        }
     }
-}
 
 }
