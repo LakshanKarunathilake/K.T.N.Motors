@@ -12,7 +12,6 @@ import DataManipulation.Rounding;
 import ViewManipulation.ViewManipulation;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import javafx.scene.control.ComboBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
