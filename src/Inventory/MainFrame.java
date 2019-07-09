@@ -466,6 +466,8 @@ public class MainFrame extends javax.swing.JFrame{
         bill_payable_txt = new javax.swing.JTextField();
         jLabel66 = new javax.swing.JLabel();
         bill_return_label = new javax.swing.JLabel();
+        ItemSearchPanel = new javax.swing.JPanel();
+        jButton25 = new javax.swing.JButton();
         TitlePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         clock_txt = new javax.swing.JLabel();
@@ -482,7 +484,6 @@ public class MainFrame extends javax.swing.JFrame{
 
         AddProductLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         AddProductLabel.setText(" Add Product");
-        AddProductLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         AddProductLabel.setMinimumSize(new java.awt.Dimension(63, 16));
         AddProductLabel.setOpaque(true);
         AddProductLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -494,7 +495,6 @@ public class MainFrame extends javax.swing.JFrame{
 
         SalesLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         SalesLabel.setText("      Sales");
-        SalesLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         SalesLabel.setOpaque(true);
         SalesLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -505,7 +505,6 @@ public class MainFrame extends javax.swing.JFrame{
 
         ReportLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         ReportLabel.setText("     Reports");
-        ReportLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         ReportLabel.setOpaque(true);
         ReportLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -516,7 +515,6 @@ public class MainFrame extends javax.swing.JFrame{
 
         updateQtylbl.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         updateQtylbl.setText("  Purchaising");
-        updateQtylbl.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         updateQtylbl.setOpaque(true);
         updateQtylbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -527,7 +525,6 @@ public class MainFrame extends javax.swing.JFrame{
 
         AddUserLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         AddUserLabel.setText("   Add User");
-        AddUserLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         AddUserLabel.setOpaque(true);
         AddUserLabel.setPreferredSize(new java.awt.Dimension(63, 16));
         AddUserLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -539,7 +536,6 @@ public class MainFrame extends javax.swing.JFrame{
 
         payBillsLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         payBillsLabel.setText("    Pay Bills");
-        payBillsLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         payBillsLabel.setOpaque(true);
         payBillsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -550,7 +546,6 @@ public class MainFrame extends javax.swing.JFrame{
 
         Return_label.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         Return_label.setText("     Returns");
-        Return_label.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         Return_label.setOpaque(true);
         Return_label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2927,6 +2922,32 @@ public class MainFrame extends javax.swing.JFrame{
 
         MainChangeFrame.add(bill_pay_panel, "card8");
 
+        jButton25.setText("Go Back");
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ItemSearchPanelLayout = new javax.swing.GroupLayout(ItemSearchPanel);
+        ItemSearchPanel.setLayout(ItemSearchPanelLayout);
+        ItemSearchPanelLayout.setHorizontalGroup(
+            ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ItemSearchPanelLayout.createSequentialGroup()
+                .addContainerGap(649, Short.MAX_VALUE)
+                .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
+        );
+        ItemSearchPanelLayout.setVerticalGroup(
+            ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ItemSearchPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(577, Short.MAX_VALUE))
+        );
+
+        MainChangeFrame.add(ItemSearchPanel, "card12");
+
         getContentPane().add(MainChangeFrame, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 810, 640));
 
         TitlePanel.setBackground(new java.awt.Color(51, 51, 51));
@@ -4008,7 +4029,7 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_update_costP_txtActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        
+        ViewManipulation.changePanel(MainChangeFrame, ItemSearchPanel);
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -4757,6 +4778,10 @@ public class MainFrame extends javax.swing.JFrame{
     private void sales_additional_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_additional_txtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sales_additional_txtActionPerformed
+
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        ViewManipulation.changePanel(MainChangeFrame, SalesPanel);
+    }//GEN-LAST:event_jButton25ActionPerformed
   
        
     public void FillBill(String invoiceID){
@@ -4921,6 +4946,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JPanel Clutch_Plate_Main;
     private javax.swing.JPanel Clutch_Plate_Search;
     private javax.swing.JTabbedPane Clutch_Plate_Tabbed;
+    private javax.swing.JPanel ItemSearchPanel;
     private javax.swing.JPanel MainChangeFrame;
     private javax.swing.JPanel MenuBar;
     private javax.swing.JTextField NameTxt;
@@ -5006,6 +5032,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton24;
+    private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
