@@ -4860,7 +4860,7 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_sales_additional_txtActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
-        // TODO add your handling code here:
+        ViewManipulation.changePanel(MainChangeFrame, SalesPanel);
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void item_search_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_item_search_txtKeyPressed
