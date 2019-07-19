@@ -55,7 +55,7 @@ public class InvoiceToDB {
 
         String sql = "Select invoice_id from invoices where customer_code like \"" + userID + "\" And orderDate <= \"" + beforeDate + "\" AND status like '0'";
         System.out.println("SQL :" + sql);
-        ArrayList list = connector.sqlExecutionaArray(sql, "orderID");
+        ArrayList list = connector.sqlExecutionaArray(sql, "invoice_id");
         System.out.println("Lits SIze : " + list.size());
         if (list.size() > 0) {
             String values = "";
