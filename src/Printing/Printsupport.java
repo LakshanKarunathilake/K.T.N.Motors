@@ -393,8 +393,8 @@ public class Printsupport {
 
                 double width = pageFormat.getImageableWidth();
                 double height = pageFormat.getImageableHeight();
-                System.out.println("width"+width);
-                System.out.println("heig"+height);
+                System.out.println("width" + width);
+                System.out.println("heig" + height);
                 g2d.translate((int) pageFormat.getImageableX(), (int) pageFormat.getImageableY());
                 Font font = new Font("Monospaced", Font.PLAIN, 10);
                 Font font_bold = new Font("Monospaced", Font.BOLD, 10);
@@ -426,8 +426,8 @@ public class Printsupport {
                     g2d.setFont(subheading);
                     g2d.drawString(Credit_bill_title[0], 10, y += 15);
                     g2d.drawString(Credit_bill_title[1], 110, y);
-                    g2d.drawString(Credit_bill_title[2], 280, y);
-                    g2d.drawString(Credit_bill_title[3], 300, y);
+                    g2d.drawString(Credit_bill_title[2], 295, y);
+                    g2d.drawString(Credit_bill_title[3], 320, y);
                     g2d.drawString(Credit_bill_title[4], 360, y);
                     g2d.drawLine(10, y += 5, 410, y);
                     g2d.setFont(font);
@@ -440,56 +440,55 @@ public class Printsupport {
                          */
                         System.out.println("row" + mod.getColumnCount());
                         String item = mod.getValueAt(i, 0).toString();
-                        item = String.format("%-20s", item);
+                        item = String.format("%-26s", item);
                         String description = mod.getValueAt(i, 1).toString();
-                        description = String.format("%-6s", description);
-                        String qty = mod.getValueAt(i, 2).toString();
+                        description = String.format("%-40s", description);
+                        String qty = mod.getValueAt(i, 3).toString();
                         qty = String.format("%-3s", qty);
-                        String rate = mod.getValueAt(i, 3).toString();
-                        rate = String.format("%-6s", rate);
-                        String amount = mod.getValueAt(i, 3).toString();
-                        amount = String.format("%-6s", amount);
+                        String rate = mod.getValueAt(i, 2).toString();
+                        rate = String.format("%8s", rate);
+                        String amount = mod.getValueAt(i, 4).toString();
+                        amount = String.format("%8s", amount);
 
                         cH = (y + 10) + (10 * i);                             //shifting drawing line
 
                         g2d.drawString(item, 10, cH);
                         g2d.drawString(description, 110, cH);
-                        g2d.drawString(qty, 320, cH);
-                        g2d.drawString(rate, 350, cH);
-                        g2d.drawString(amount, 390, cH);
+                        g2d.drawString(qty, 295, cH);
+                        g2d.drawString(rate, 310, cH);
+                        g2d.drawString(amount, 360, cH);
 
                     }
                     y = cH;
                     /*Footer*/
-                    g2d.drawLine(0, y += 5, 200, y);
-                    System.out.println("y:" + y);
-                    g2d.drawString("Total:", 100, y += 10);
+                    g2d.drawLine(0, y += 5, 410, y);
+                    g2d.drawString("Total:", 300, y += 10);
                     g2d.setFont(font_bold);
                     String total = list.get(1);
                     total = String.format("%-6s", total);
-                    g2d.drawString(total, 160, y);
+                    g2d.drawString(total, 350, y);
 
                     g2d.setFont(font);
-                    g2d.drawString("discount:", 100, y += 10);
+                    g2d.drawString("discount:", 300, y += 10);
                     g2d.setFont(font_bold);
                     String discount = list.get(2) + "%";
                     discount = String.format("%8s", discount);
-                    g2d.drawString(discount, 160, y);
+                    g2d.drawString(discount, 350, y);
 
-                    g2d.drawLine(160, y += 5, 200, y);
+                    g2d.drawLine(160, y += 5, 410, y);
 
                     g2d.setFont(font);
-                    g2d.drawString("Grand Total:", 100, y += 10);
+                    g2d.drawString("Grand Total:", 300, y += 10);
                     String grand = list.get(3);
                     g2d.setFont(font_bold);
                     grand = String.format("%-6s", grand);
-                    g2d.drawString(grand, 160, y);
+                    g2d.drawString(grand, 350, y);
 
-                    g2d.drawLine(0, y += 5, 200, y);
+                    g2d.drawLine(0, y += 5, 410, y);
 
                     font = new Font("Arial", Font.BOLD, 12);                  //changed font size
                     g2d.setFont(font);
-                    g2d.drawString("Thank You Come Again", 35, y += 15);
+                    g2d.drawString("Thank You Come Again",190, y += 15);
 
                     //end of the reciept
                 } catch (Exception r) {
