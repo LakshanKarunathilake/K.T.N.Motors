@@ -54,7 +54,7 @@ public class Printsupport {
     public static int total_item_count = 0;
     public static final String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss a";
     public static String title[] = new String[]{"Item", "Rate", "Qty", "Total"};
-    public static String Credit_bill_title[] = new String[]{"Part Number", "Description", "Qty", "Rating", "Total"};
+    public static String Credit_bill_title[] = new String[]{"Part Number", "Description", "Qty", "Rating", "Amount"};
 
     public static ArrayList<String> list = new ArrayList<>();
     public static HashMap<String, String> hashmap;
