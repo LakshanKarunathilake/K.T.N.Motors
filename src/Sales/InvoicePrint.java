@@ -87,7 +87,7 @@ public class InvoicePrint {
         Printsupport ps = new Printsupport();
 //        PrintData pd = new PrintData();
         Object printitem[][] = ps.getTableData(table, "cash");
-        ps.setItems(printitem);
+        ps.setItems(printitem,"cash");
         ps.setMetaData(list);
         PrinterJob pj = PrinterJob.getPrinterJob();
 
@@ -104,7 +104,7 @@ public class InvoicePrint {
         String printerName = "Microsoft Print to PDF";
         Printsupport ps = new Printsupport();
         Object printitem[][] = ps.getTableData(table, "credit");
-        ps.setItems(printitem);
+        ps.setItems(printitem,"credit");
         ps.setMetaData(list);
         ps.setUserDetails(connector.readRow("customers", "customer_code", customerID_combo.getSelectedItem().toString()));
         PrinterJob pj = PrinterJob.getPrinterJob();
