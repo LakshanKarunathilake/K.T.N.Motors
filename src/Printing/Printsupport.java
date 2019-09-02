@@ -62,9 +62,9 @@ public class Printsupport {
 
     public static void setItems(Object[][] printitem) {
         Object data[][] = printitem;
-        System.out.println("data" + data);
         DefaultTableModel model = new DefaultTableModel();
         //assume jtable has 4 columns.
+        
         model.addColumn(title[0]);
         model.addColumn(title[1]);
         model.addColumn(title[2]);
@@ -87,13 +87,10 @@ public class Printsupport {
             addtomodel(model, data, rowcount);
         }
 
-        System.out.println("Check Passed.");
     }
 
     public Object[][] getTableData(JTable table, String type) {
         int itemcount = table.getRowCount();
-        System.out.println("Item Count:" + itemcount);
-
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
         int nRow = dtm.getRowCount(), nCol = dtm.getColumnCount();
         setTotalItemCount(nRow);
@@ -107,14 +104,12 @@ public class Printsupport {
                     if (j != 2 && !(j == 1 && type == "cash")) {
                         tableData[i][l] = dtm.getValueAt(i, j);
                         l++;//pass data into object array.
-                        System.out.println("I value :" + i + " J val: " + j + " l val: " + l);
                     }
                 }
             }
             if (tableData.length != itemcount) {                      //check for data losses in object array
                 getTableData(table, type);                                  //recursively call method back to collect data
             }
-            System.out.println("Data check passed");
         } else {
             //collecting data again because of data loss.
             getTableData(table, type);
