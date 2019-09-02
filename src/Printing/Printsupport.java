@@ -60,15 +60,23 @@ public class Printsupport {
     public static HashMap<String, String> hashmap;
     private static ArrayList<String> UserDetails;
 
-    public static void setItems(Object[][] printitem) {
+    public static void setItems(Object[][] printitem, String type) {
         Object data[][] = printitem;
         DefaultTableModel model = new DefaultTableModel();
         //assume jtable has 4 columns.
-        
-        model.addColumn(title[0]);
-        model.addColumn(title[1]);
-        model.addColumn(title[2]);
-        model.addColumn(title[3]);
+        if (type.equals("cash")) {
+            for (int i = 0; i < title.length; i++) {
+                model.addColumn(title[i]);
+            }
+        }else{
+            for (int i = 0; i < Credit_bill_title.length; i++) {
+                model.addColumn(Credit_bill_title[i]);
+            }
+        }
+//        model.addColumn(title[0]);
+//        model.addColumn(title[1]);
+//        model.addColumn(title[2]);
+//        model.addColumn(title[3]);
 
         int rowcount = printitem.length;
 
