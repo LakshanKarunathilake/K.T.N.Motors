@@ -460,7 +460,7 @@ public class Printsupport {
                         g2d.drawString(amount, 530, cH);
 
                     }
-                    y = cH;
+                    y = cH+200;
                     /*Footer*/
                     g2d.drawLine(0, y += 5, 580, y);
                     g2d.drawString("Total:", 450, y += 10);
