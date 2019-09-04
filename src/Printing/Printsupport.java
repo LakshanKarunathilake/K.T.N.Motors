@@ -367,8 +367,8 @@ public class Printsupport {
     public static PageFormat getCreditPageFormat(PrinterJob pj) {
         PageFormat pf = pj.defaultPage();
         Paper paper = pf.getPaper();
-        double width = convert_CM_To_PPI(21);      //printer know only point per inch.default value is 72ppi
-        double height = convert_CM_To_PPI(14.8);
+        double width = convert_CM_To_PPI(14.8);      //printer know only point per inch.default value is 72ppi
+        double height = convert_CM_To_PPI(21);
         paper.setSize(width, height);
         paper.setImageableArea(
                 convert_CM_To_PPI(0.25),
