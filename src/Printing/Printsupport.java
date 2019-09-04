@@ -373,8 +373,8 @@ public class Printsupport {
         double height = convert_CM_To_PPI(21);
         paper.setSize(width, height);
         paper.setImageableArea(
-                convert_CM_To_PPI(0.25),
-                convert_CM_To_PPI(0.5),
+                convert_CM_To_PPI(0),
+                convert_CM_To_PPI(0),
                 width,
                 height);   //define boarder size    after that print area width is about 180 points
 
