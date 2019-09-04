@@ -482,12 +482,21 @@ public class Printsupport {
                     g2d.drawString(cashPaid, 80, y + 30);
                     g2d.drawString("Balance:", 10, y + 42);
                     g2d.drawString(creditingAmount, 80, y + 42);
+                    
+                    /*Printing signatures*/
+                    g2d.drawString(".................................", 150, y + 35);
+                    g2d.drawString("Checked by", 170, y + 50);
+                    g2d.drawString(".................................", 330, y + 35);
+                    g2d.drawString("Received by", 355, y + 50);
+
+                    
                     /*Footer*/
+                    g2d.setFont(font);
                     g2d.drawLine(10, y += 5, 580, y);
                     g2d.drawString("Total:", 450, y += 10);
                     g2d.setFont(font_bold);
                     String total = list.get(1);
-                    total = String.format("%-6s", total);
+                    total = String.format("%8s", total);
                     g2d.drawString(total, 530, y);
 
                     g2d.setFont(font);
