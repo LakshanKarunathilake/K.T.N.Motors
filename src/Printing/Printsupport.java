@@ -416,8 +416,10 @@ public class Printsupport {
                     
                     /* Printing the invoice Id and the time*/
                     g2d.drawString("Invoice ID :", 450, y+10);
-                    g2d.drawString(list.get(0), 550, y+10);
-                    g2d.drawString(String.format("%-20s", now()), 450, y + 20);
+                    g2d.setFont(font_bold);
+                    g2d.drawString(list.get(0), 530, y+10);
+                    g2d.setFont(font);
+                    g2d.drawString(String.format("%-20s", now()), 430, y + 20);
                     
                     ArrayList<String> userDetails = getUserDetails();
                     for (int i = 0; i < userDetails.size(); i++) {
