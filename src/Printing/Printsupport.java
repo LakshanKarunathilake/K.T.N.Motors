@@ -404,15 +404,18 @@ public class Printsupport {
                     int y = 20;
                     Font heading = new Font("Arial", Font.BOLD, 17);
                     g2d.setFont(heading);
-                    g2d.drawString("K.T.N. Motors", 240, y);
-                    Font subheading = new Font("Arial", Font.PLAIN, 10);
+                    g2d.drawString("K.T.N. Motors", 260, y);
+                    Font subheading = new Font("Arial", Font.PLAIN, 8);
                     g2d.setFont(subheading);
-                    g2d.drawString("No-152,Aluthgama Road,Mathugama", 190, y += 15);
-                    g2d.drawString("Tel: 0344939958,0342248844 Email : ktn.motos.office@gmail.com", 150, y += 15);                 //shift a line by adding 10 to y value
+                    g2d.drawString("No-152,Aluthgama Road,Mathugama", 240, y += 10);
+                    g2d.drawString("Tel: 0344939958,0342248844 Email: ktn.motos.office@gmail.com", 200, y += 10);                 //shift a line by adding 10 to y value
                     g2d.setFont(font);
-                    g2d.drawString("Invoice ID :", 450, y);
-                    g2d.drawString(list.get(0), 550, y);
-                    g2d.drawString(String.format("%-20s", now()), 450, y + 10);
+                    
+                    /* Printing the invoice Id and the time*/
+                    g2d.drawString("Invoice ID :", 450, y+10);
+                    g2d.drawString(list.get(0), 550, y+10);
+                    g2d.drawString(String.format("%-20s", now()), 450, y + 20);
+                    
                     ArrayList<String> userDetails = getUserDetails();
                     for (int i = 0; i < userDetails.size(); i++) {
                         System.out.println("val" + userDetails.get(i));
@@ -427,9 +430,9 @@ public class Printsupport {
                     g2d.setFont(subheading);
                     g2d.drawString(Credit_bill_title[0], 10, y += 15);
                     g2d.drawString(Credit_bill_title[1], 110, y);
-                    g2d.drawString(Credit_bill_title[2], 425, y);
-                    g2d.drawString(Credit_bill_title[3], 460, y);
-                    g2d.drawString(Credit_bill_title[4], 530, y);
+                    g2d.drawString(Credit_bill_title[2], 455, y);
+                    g2d.drawString(Credit_bill_title[3], 495, y);
+                    g2d.drawString(Credit_bill_title[4], 540, y);
                     g2d.drawLine(10, y += 5, 580, y);
                     g2d.setFont(font);
                     int cH = 0;
@@ -455,14 +458,14 @@ public class Printsupport {
 
                         g2d.drawString(item, 10, cH);
                         g2d.drawString(description, 110, cH);
-                        g2d.drawString(qty, 425, cH);
-                        g2d.drawString(rate, 460, cH);
+                        g2d.drawString(qty, 465, cH);
+                        g2d.drawString(rate, 480, cH);
                         g2d.drawString(amount, 530, cH);
 
                     }
                     y = cH+200;
                     /*Footer*/
-                    g2d.drawLine(0, y += 5, 580, y);
+                    g2d.drawLine(10, y += 5, 580, y);
                     g2d.drawString("Total:", 450, y += 10);
                     g2d.setFont(font_bold);
                     String total = list.get(1);
@@ -476,7 +479,7 @@ public class Printsupport {
                     discount = String.format("%8s", discount);
                     g2d.drawString(discount, 530, y);
 
-                    g2d.drawLine(160, y += 5, 580, y);
+                    g2d.drawLine(450, y += 5, 580, y);
 
                     g2d.setFont(font);
                     g2d.drawString("Grand Total:", 450, y += 10);
@@ -485,7 +488,7 @@ public class Printsupport {
                     grand = String.format("%-6s", grand);
                     g2d.drawString(grand, 530, y);
 
-                    g2d.drawLine(0, y += 5, 580, y);
+                    g2d.drawLine(10, y += 5, 580, y);
 
                     font = new Font("Arial", Font.BOLD, 12);                  //changed font size
                     g2d.setFont(font);
