@@ -475,6 +475,13 @@ public class Printsupport {
                     double balance = Double.valueOf(grand)- Double.valueOf(cashPaid);
                     String creditingAmount = Rounding.decimalFormatiing(balance);
                     creditingAmount = String.format("%8s", creditingAmount);
+
+                    /*Printing part payment*/
+                    g2d.setFont(columnHeading);
+                    g2d.drawString("Cash paid:", 10, y + 30);
+                    g2d.drawString(cashPaid, 80, y + 30);
+                    g2d.drawString("Balance:", 10, y + 42);
+                    g2d.drawString(creditingAmount, 80, y + 42);
                     /*Footer*/
                     g2d.drawLine(10, y += 5, 580, y);
                     g2d.drawString("Total:", 450, y += 10);
