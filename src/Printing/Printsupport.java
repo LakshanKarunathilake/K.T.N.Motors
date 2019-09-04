@@ -10,6 +10,7 @@ package Printing;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import DataManipulation.Rounding;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
