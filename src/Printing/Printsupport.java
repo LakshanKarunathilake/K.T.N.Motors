@@ -59,6 +59,7 @@ public class Printsupport {
     public static ArrayList<String> list = new ArrayList<>();
     public static HashMap<String, String> hashmap;
     private static ArrayList<String> UserDetails;
+    private static ArrayList<String> invoiceDetails;
 
     public static void setItems(Object[][] printitem, String type) {
         Object data[][] = printitem;
@@ -518,6 +519,21 @@ public class Printsupport {
      */
     public static void setUserDetails(ArrayList<String> aUserDetails) {
         UserDetails = aUserDetails;
+    }
+    
+    /**
+     * Setting invoice payment information
+     * @param invoiceDetails 
+     */
+    public static void setPaymentDetails(ArrayList<String> invoice){
+        invoiceDetails = invoice;
+    }
+    
+     /**
+     * @return the invoiceDeatils
+     */
+    public static ArrayList<String> getUserDetails() {
+        return invoiceDetails;
     }
 }
 /*
