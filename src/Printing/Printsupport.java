@@ -406,6 +406,7 @@ public class Printsupport {
                     g2d.setFont(heading);
                     g2d.drawString("K.T.N. Motors", 260, y);
                     Font subheading = new Font("Arial", Font.PLAIN, 8);
+                    Font columnHeading = new Font("Arial", Font.PLAIN, 10);
                     g2d.setFont(subheading);
                     g2d.drawString("No-152,Aluthgama Road,Mathugama", 240, y += 10);
                     g2d.drawString("Tel: 0344939958,0342248844 Email: ktn.motos.office@gmail.com", 200, y += 10);                 //shift a line by adding 10 to y value
@@ -427,7 +428,7 @@ public class Printsupport {
 
                     /*Draw Colums*/
                     g2d.drawLine(10, y += 10, 580, y);
-                    g2d.setFont(subheading);
+                    g2d.setFont(columnHeading);
                     g2d.drawString(Credit_bill_title[0], 10, y += 15);
                     g2d.drawString(Credit_bill_title[1], 110, y);
                     g2d.drawString(Credit_bill_title[2], 455, y);
