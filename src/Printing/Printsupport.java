@@ -376,7 +376,7 @@ public class Printsupport {
                 width,
                 height);   //define boarder size    after that print area width is about 180 points
 
-        pf.setOrientation(PageFormat.PORTRAIT);           //select orientation portrait or landscape but for this time portrait
+        pf.setOrientation(PageFormat.LANDSCAPE);           //select orientation portrait or landscape but for this time portrait
         pf.setPaper(paper);
 
         return pf;
