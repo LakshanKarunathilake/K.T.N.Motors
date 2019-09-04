@@ -435,14 +435,16 @@ public class Printsupport {
                     g2d.setFont(columnHeading);
                     g2d.drawString(Credit_bill_title[0], 10, y += 15);
                     g2d.drawString(Credit_bill_title[1], 110, y);
-                    g2d.drawString(Credit_bill_title[2], 455, y);
-                    g2d.drawString(Credit_bill_title[3], 495, y);
-                    g2d.drawString(Credit_bill_title[4], 540, y);
+                    g2d.drawString(Credit_bill_title[2], 460, y);
+                    g2d.drawString(Credit_bill_title[3], 480, y);
+                    g2d.drawString(Credit_bill_title[4], 530, y);
                     g2d.drawLine(10, y += 5, 580, y);
                     g2d.setFont(font);
                     int cH = 0;
                     TableModel mod = itemsTable.getModel();
-
+                    
+                        
+                    
                     for (int i = 0; i < mod.getRowCount(); i++) {
                         /*Assume that all parameters are in string data type for this situation
                                  * All other premetive data types are accepted.
@@ -460,15 +462,19 @@ public class Printsupport {
                         amount = String.format("%8s", amount);
 
                         cH = (y + 10) + (10 * i);                             //shifting drawing line
-
+                        for (int j = 0; j < 23; j++) {
                         g2d.drawString(item, 10, cH);
                         g2d.drawString(description, 110, cH);
                         g2d.drawString(qty, 465, cH);
                         g2d.drawString(rate, 480, cH);
                         g2d.drawString(amount, 530, cH);
+                        cH += 10;
+                        }
+                        
 
                     }
-                    y = cH+200;
+                    y = 340;
+
                     /*Obtaining invoice details and calculating the amount to be paid*/
                     ArrayList<String> invoiceDetials = getInvoiceDetails();
                     String cashPaid = invoiceDetials.get(7);
@@ -512,17 +518,11 @@ public class Printsupport {
 
                     g2d.setFont(font);
                     g2d.drawString("Grand Total:", 450, y += 10);
-                    String grand = list.get(3);
                     g2d.setFont(font_bold);
-                    grand = String.format("%-6s", grand);
+                    grand = String.format("%8s", grand);
                     g2d.drawString(grand, 530, y);
 
-                    g2d.drawLine(10, y += 5, 580, y);
-
-                    font = new Font("Arial", Font.BOLD, 12);                  //changed font size
-                    g2d.setFont(font);
-                    g2d.drawString("Thank You Come Again",190, y += 15);
-
+                    g2d.drawLine(10, y += 15, 580, y);
                     //end of the reciept
                 } catch (Exception r) {
                     r.printStackTrace();
@@ -559,7 +559,7 @@ public class Printsupport {
      /**
      * @return the invoiceDeatils
      */
-    public static ArrayList<String> getUserDetails() {
+    public static ArrayList<String> getInvoiceDetails() {
         return invoiceDetails;
     }
 }
