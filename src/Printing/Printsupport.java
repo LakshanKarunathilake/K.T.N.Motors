@@ -435,7 +435,7 @@ public class Printsupport {
                     g2d.setFont(columnHeading);
                     g2d.drawString(Credit_bill_title[0], 10, y += 15);
                     g2d.drawString(Credit_bill_title[1], 110, y);
-                    g2d.drawString(Credit_bill_title[2], 460, y);
+                    g2d.drawString(Credit_bill_title[2], 445, y);
                     g2d.drawString(Credit_bill_title[3], 480, y);
                     g2d.drawString(Credit_bill_title[4], 530, y);
                     g2d.drawLine(10, y += 5, 580, y);
@@ -462,12 +462,12 @@ public class Printsupport {
                         amount = String.format("%8s", amount);
 
                         cH = (y + 10) + (10 * i);                             //shifting drawing line
-                        for (int j = 0; j < 23; j++) {
+                        for (int j = 0; j < 21; j++) {
                         g2d.drawString(item, 10, cH);
                         g2d.drawString(description, 110, cH);
-                        g2d.drawString(qty, 465, cH);
-                        g2d.drawString(rate, 480, cH);
-                        g2d.drawString(amount, 530, cH);
+                        g2d.drawString(qty, 450, cH);
+                        g2d.drawString(rate, 465, cH);
+                        g2d.drawString(amount, 520, cH);
                         cH += 10;
                         }
                         
@@ -505,14 +505,14 @@ public class Printsupport {
                     g2d.setFont(font_bold);
                     String total = list.get(1);
                     total = String.format("%8s", total);
-                    g2d.drawString(total, 530, y);
+                    g2d.drawString(total, 520, y);
 
                     g2d.setFont(font);
                     g2d.drawString("discount:", 450, y += 10);
                     g2d.setFont(font_bold);
                     String discount = list.get(2) + "%";
                     discount = String.format("%8s", discount);
-                    g2d.drawString(discount, 530, y);
+                    g2d.drawString(discount, 520, y);
 
                     g2d.drawLine(450, y += 5, 580, y);
 
@@ -520,8 +520,9 @@ public class Printsupport {
                     g2d.drawString("Grand Total:", 450, y += 10);
                     g2d.setFont(font_bold);
                     grand = String.format("%8s", grand);
-                    g2d.drawString(grand, 530, y);
-
+                    g2d.drawString(grand, 520, y);
+                    g2d.drawLine(450, y += 5, 580, y);
+                    g2d.drawLine(450, y += 5, 580, y);
                     g2d.drawLine(10, y += 15, 580, y);
                     //end of the reciept
                 } catch (Exception r) {
