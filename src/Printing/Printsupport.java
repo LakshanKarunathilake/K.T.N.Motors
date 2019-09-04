@@ -467,6 +467,14 @@ public class Printsupport {
 
                     }
                     y = cH+200;
+                    /*Obtaining invoice details and calculating the amount to be paid*/
+                    ArrayList<String> invoiceDetials = getInvoiceDetails();
+                    String cashPaid = invoiceDetials.get(7);
+                    cashPaid = String.format("%8s", cashPaid);
+                    String grand = list.get(3);
+                    double balance = Double.valueOf(grand)- Double.valueOf(cashPaid);
+                    String creditingAmount = Rounding.decimalFormatiing(balance);
+                    creditingAmount = String.format("%8s", creditingAmount);
                     /*Footer*/
                     g2d.drawLine(10, y += 5, 580, y);
                     g2d.drawString("Total:", 450, y += 10);
