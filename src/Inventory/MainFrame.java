@@ -144,9 +144,11 @@ public class MainFrame extends javax.swing.JFrame{
 
         int salesTableView[]  = {190,320,55,100,80,100};
         int itemSearchTableView[] = {190,190,150,170,55};
+        int userSearchTableView[] = {60,250,750};
         
-        Invoice.changeTableView(sales_item_table,salesTableView);
-        Invoice.changeTableView(itemSearchTable,itemSearchTableView);
+        ViewManipulation.changeTableView(sales_item_table,salesTableView);
+        ViewManipulation.changeTableView(itemSearchTable,itemSearchTableView);
+        ViewManipulation.changeTableView(userSearchTable,userSearchTableView);
         
         item_sale = new Invoice(sales_itemno_combo, sales_item_name_combo, sales_CID_combo, sales_CName_combo,sales_qty_Txt, connector);
         invoiceData = item_sale.fillDataToCombo();
