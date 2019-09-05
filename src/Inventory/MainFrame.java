@@ -3524,26 +3524,26 @@ public class MainFrame extends javax.swing.JFrame{
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             ItemToTable toTable = new ItemToTable(sales_itemno_combo, sales_qty_Txt, sales_available_qty_txt, sales_total_txt, sales_discount_txt, sales_grand_txt, sales_item_table, connector);
             
+            /*
+                Obtain customer code to check whether user is cash
+                Obtain row_count of item table to check whther it's exceeding the row limit
+            */
+            int customer_code = Integer.parseInt(sales_CID_combo.getSelectedItem().toString());
+            int row_count = sales_item_table.getRowCount();
+            
             if(!sales_qty_Txt.getText().equals("")){
                 try {
-                    if (toTable.itemToTable()) {
-                        sales_itemno_combo.requestFocusInWindow();
-                        toTable.calculatetotal();
-                        sales_save_btn.setEnabled(true);
+                    if(customer_code != 1 && row_count < 21){
+                        if (toTable.itemToTable()) {
+                            sales_itemno_combo.requestFocusInWindow();
+                            toTable.calculatetotal();
+                            sales_save_btn.setEnabled(true);
+
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "You are exceeding maximum number of items per invoice for the credit invoice please start a new invoice");
 
                     }
-                    //Removing current items and populating again
-                    
-//                    {
-//                    ArrayList<JComboBox> combos = new ArrayList<>();
-//                    combos.add(sales_itemno_combo);
-//                    combos.add(sales_item_name_combo);
-//                    
-//                    ViewManipulation.emptyComboBoxes(combos);
-//                    
-//                    InvoiceToDB.fillToInvoiceCombos(invoiceData, sales_itemno_combo, sales_item_name_combo);
-//                    }
-                   
                     
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Exception in table adding :" + e.getMessage() + " Error line : ");
