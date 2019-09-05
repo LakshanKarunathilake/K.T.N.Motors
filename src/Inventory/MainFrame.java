@@ -3080,7 +3080,7 @@ public class MainFrame extends javax.swing.JFrame{
 
             },
             new String [] {
-                "Customer ID", "name", "Contact Details"
+                "ID", "Name", "Contact Details"
             }
         ) {
             boolean[] canEdit = new boolean [] {
