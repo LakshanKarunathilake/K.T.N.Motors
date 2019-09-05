@@ -33,6 +33,7 @@ import Settings.PartNumberChange;
 import Statistics.DayEndView;
 import StockCounting.Stock;
 import Utilities.ItemSearch;
+import Utilities.UserSearch;
 
 
 import Validation.StartUpValidation;
@@ -304,6 +305,7 @@ public class MainFrame extends javax.swing.JFrame{
         AddressTxt1 = new javax.swing.JTextField();
         newBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
+        jButton25 = new javax.swing.JButton();
         SalesReturnPanel = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
         return_userName_combo = new javax.swing.JComboBox<>();
@@ -482,6 +484,13 @@ public class MainFrame extends javax.swing.JFrame{
         item_search_category_combo = new javax.swing.JComboBox<>();
         jLabel98 = new javax.swing.JLabel();
         item_search_checkbox = new javax.swing.JCheckBox();
+        UserSearchPanel = new javax.swing.JPanel();
+        user_search_txt = new javax.swing.JTextField();
+        jButton28 = new javax.swing.JButton();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        userSearchTable = new javax.swing.JTable();
+        jButton29 = new javax.swing.JButton();
+        jLabel99 = new javax.swing.JLabel();
         TitlePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         clock_txt = new javax.swing.JLabel();
@@ -498,6 +507,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         AddProductLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         AddProductLabel.setText(" Add Product");
+        AddProductLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         AddProductLabel.setMinimumSize(new java.awt.Dimension(63, 16));
         AddProductLabel.setOpaque(true);
         AddProductLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -509,6 +519,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         SalesLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         SalesLabel.setText("      Sales");
+        SalesLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         SalesLabel.setOpaque(true);
         SalesLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -519,6 +530,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         ReportLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         ReportLabel.setText("     Reports");
+        ReportLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         ReportLabel.setOpaque(true);
         ReportLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -529,6 +541,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         updateQtylbl.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         updateQtylbl.setText("  Purchaising");
+        updateQtylbl.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         updateQtylbl.setOpaque(true);
         updateQtylbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -539,6 +552,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         AddUserLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         AddUserLabel.setText("   Add User");
+        AddUserLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         AddUserLabel.setOpaque(true);
         AddUserLabel.setPreferredSize(new java.awt.Dimension(63, 16));
         AddUserLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -550,6 +564,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         payBillsLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         payBillsLabel.setText("    Pay Bills");
+        payBillsLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         payBillsLabel.setOpaque(true);
         payBillsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -560,6 +575,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         Return_label.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         Return_label.setText("     Returns");
+        Return_label.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         Return_label.setOpaque(true);
         Return_label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1005,23 +1021,22 @@ public class MainFrame extends javax.swing.JFrame{
         AdditionalTextPannel.setLayout(AdditionalTextPannelLayout);
         AdditionalTextPannelLayout.setHorizontalGroup(
             AdditionalTextPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sales_additional_txt)
             .addGroup(AdditionalTextPannelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel96)
-                .addContainerGap(559, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sales_additional_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         AdditionalTextPannelLayout.setVerticalGroup(
             AdditionalTextPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdditionalTextPannelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel96, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sales_additional_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(AdditionalTextPannelLayout.createSequentialGroup()
+                .addGroup(AdditionalTextPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sales_additional_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel96, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
 
-        SalesPanel.add(AdditionalTextPannel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 670, 80));
+        SalesPanel.add(AdditionalTextPannel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 760, 80));
 
         MainChangeFrame.add(SalesPanel, "card2");
 
@@ -1381,7 +1396,7 @@ public class MainFrame extends javax.swing.JFrame{
                     .addComponent(jButton23, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
                     .addComponent(jButton24, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(settings_sub_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1658,6 +1673,14 @@ public class MainFrame extends javax.swing.JFrame{
             }
         });
         AddUserPannel.add(editBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 80, 50));
+
+        jButton25.setText("Search");
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
+            }
+        });
+        AddUserPannel.add(jButton25, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, 80, 60));
 
         MainChangeFrame.add(AddUserPannel, "card5");
 
@@ -2076,7 +2099,7 @@ public class MainFrame extends javax.swing.JFrame{
         );
         SettingsPanelLayout.setVerticalGroup(
             SettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 660, Short.MAX_VALUE)
         );
 
         MainChangeFrame.add(SettingsPanel, "card6");
@@ -2961,6 +2984,10 @@ public class MainFrame extends javax.swing.JFrame{
             }
         ));
         jScrollPane7.setViewportView(itemSearchTable);
+        if (itemSearchTable.getColumnModel().getColumnCount() > 0) {
+            itemSearchTable.getColumnModel().getColumn(3).setHeaderValue("Contact Number");
+            itemSearchTable.getColumnModel().getColumn(4).setHeaderValue("QTY");
+        }
 
         jButton27.setBackground(new java.awt.Color(255, 255, 255));
         jButton27.setText("Search");
@@ -3030,7 +3057,88 @@ public class MainFrame extends javax.swing.JFrame{
 
         MainChangeFrame.add(ItemSearchPanel, "card12");
 
-        getContentPane().add(MainChangeFrame, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 810, 640));
+        UserSearchPanel.setForeground(new java.awt.Color(255, 255, 255));
+
+        user_search_txt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                user_search_txtKeyPressed(evt);
+            }
+        });
+
+        jButton28.setBackground(new java.awt.Color(255, 255, 255));
+        jButton28.setText("Go Back");
+        jButton28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton28ActionPerformed(evt);
+            }
+        });
+
+        userSearchTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Customer ID", "name", "Contact Details"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane8.setViewportView(userSearchTable);
+
+        jButton29.setBackground(new java.awt.Color(255, 255, 255));
+        jButton29.setText("Search");
+        jButton29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton29ActionPerformed(evt);
+            }
+        });
+
+        jLabel99.setText("Search Value");
+
+        javax.swing.GroupLayout UserSearchPanelLayout = new javax.swing.GroupLayout(UserSearchPanel);
+        UserSearchPanel.setLayout(UserSearchPanelLayout);
+        UserSearchPanelLayout.setHorizontalGroup(
+            UserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(UserSearchPanelLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(UserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(UserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(UserSearchPanelLayout.createSequentialGroup()
+                            .addComponent(user_search_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(UserSearchPanelLayout.createSequentialGroup()
+                            .addComponent(jLabel99)
+                            .addGap(653, 653, 653))))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        UserSearchPanelLayout.setVerticalGroup(
+            UserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(UserSearchPanelLayout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addComponent(jLabel99)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(UserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(user_search_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81))
+        );
+
+        MainChangeFrame.add(UserSearchPanel, "card12");
+
+        getContentPane().add(MainChangeFrame, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 810, 660));
 
         TitlePanel.setBackground(new java.awt.Color(51, 51, 51));
         TitlePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -3070,7 +3178,7 @@ public class MainFrame extends javax.swing.JFrame{
         });
         TitlePanel.add(jLabel79, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
 
-        getContentPane().add(TitlePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 810, 130));
+        getContentPane().add(TitlePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 810, 110));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -3190,7 +3298,11 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_SalesLabelMouseClicked
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-          AddCustomer.getInstance().saveUser(); 
+        if(AddCustomer.addOrUpdate.equals("add")){
+            AddCustomer.getInstance().saveUser(); 
+        }else{
+            AddCustomer.getInstance().updateUser();
+        }
           saveBtn.setEnabled(false);
           
     }//GEN-LAST:event_saveBtnActionPerformed
@@ -3246,6 +3358,7 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         AddCustomer.getInstance().emptyUserFields();
+        editBtn.setEnabled(true);
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void item_add_new_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_add_new_btnActionPerformed
@@ -4356,7 +4469,7 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void sales_search_user_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_search_user_btnActionPerformed
-        JSONReading.getInstance().readFile();
+        ViewManipulation.changePanel(MainChangeFrame, UserSearchPanel);
     }//GEN-LAST:event_sales_search_user_btnActionPerformed
 
     private void selectAll_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectAll_buttonActionPerformed
@@ -4915,6 +5028,29 @@ public class MainFrame extends javax.swing.JFrame{
             item_search_category_combo.setEnabled(false);
         }
     }//GEN-LAST:event_item_search_checkboxActionPerformed
+
+    private void user_search_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_user_search_txtKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_user_search_txtKeyPressed
+
+    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
+        ViewManipulation.changePanel(MainChangeFrame, SalesPanel);
+    }//GEN-LAST:event_jButton28ActionPerformed
+
+    private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
+       String searchPhrase = user_search_txt.getText();
+        if (searchPhrase.equals("")) {
+            JOptionPane.showMessageDialog(null, "You should enter value for search an item");
+        } else {
+            UserSearch search = UserSearch.getInstance();
+            search.getSearchResults(connector, userSearchTable,searchPhrase);
+        }
+    }//GEN-LAST:event_jButton29ActionPerformed
+
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        // TODO add your handling code here:
+        ViewManipulation.changePanel(MainChangeFrame, UserSearchPanel);
+    }//GEN-LAST:event_jButton25ActionPerformed
   
        
     public void FillBill(String invoiceID){
@@ -5096,6 +5232,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JPanel UserPanel;
     private javax.swing.JPanel UserPanel1;
     private javax.swing.JPanel UserPanel2;
+    private javax.swing.JPanel UserSearchPanel;
     private javax.swing.JTextField add_itemNo_txt;
     private javax.swing.JTextField add_item_billPrice_txt;
     private javax.swing.JTextField add_item_brand_txt;
@@ -5169,8 +5306,11 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton24;
+    private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton27;
+    private javax.swing.JButton jButton28;
+    private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -5277,6 +5417,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel96;
     private javax.swing.JLabel jLabel97;
     private javax.swing.JLabel jLabel98;
+    private javax.swing.JLabel jLabel99;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -5289,6 +5430,7 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton newBtn;
@@ -5384,6 +5526,8 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JButton update_save_btn;
     private javax.swing.JTextField update_sellingP_txt;
     private javax.swing.JLabel update_selling_lbl;
+    private javax.swing.JTable userSearchTable;
+    private javax.swing.JTextField user_search_txt;
     // End of variables declaration//GEN-END:variables
 
     
