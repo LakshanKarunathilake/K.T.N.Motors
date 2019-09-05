@@ -35,7 +35,7 @@ public class UserSearch {
         this.connector = connector;
         this.resultsTable = resultsTable;
         
-        ArrayList<String[]> results = this.connector.sqlPlainExecution(" SELECT customer_code,name, concat(address1,address2,state) as contactInfo FROM customers WHERE MATCH(name) against ('"+searchPhrase+"');");
+        ArrayList<String[]> results = this.connector.sqlPlainExecution("  SELECT customer_code,name, concat(address1,\" \",address2,\" \",state,\" \",telephone) as contactInfo FROM customers WHERE MATCH(name) against ('"+searchPhrase+"');");
         System.out.println("results" + results.size());
 
         setResultsForTable(results);
