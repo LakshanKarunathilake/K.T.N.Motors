@@ -141,7 +141,7 @@ public class AddCustomer {
         name_txt.setText(user.get(1));
         address_txt.setText(user.get(2));
         address2_txt.setText(user.get(3));
-        telephone_txt.setText(user.get(4));
+        telephone_txt.setText(user.get(5));
     }
     
     
