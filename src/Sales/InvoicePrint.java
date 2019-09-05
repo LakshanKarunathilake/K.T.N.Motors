@@ -108,6 +108,7 @@ public class InvoicePrint {
         ps.setItems(printitem,"credit");
         ps.setMetaData(list);
         ps.setUserDetails(connector.readRow("customers", "customer_code", customerID_combo.getSelectedItem().toString()));
+        ps.setPaymentDetails(connector.readRow("invoices", "invoice_id", invoiceID_txt.getText()));
         PrinterJob pj = PrinterJob.getPrinterJob();
 
         pj.setPrintable(new Printsupport.CreditPrintable(), ps.getCreditPageFormat(pj));
