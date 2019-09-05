@@ -477,18 +477,20 @@ public class Printsupport {
                     /*Obtaining invoice details and calculating the amount to be paid*/
                     ArrayList<String> invoiceDetials = getInvoiceDetails();
                     String cashPaid = invoiceDetials.get(7);
-                    cashPaid = String.format("%8s", cashPaid);
                     String grand = list.get(3);
                     double balance = Double.valueOf(grand)- Double.valueOf(cashPaid);
                     String creditingAmount = Rounding.decimalFormatiing(balance);
                     creditingAmount = String.format("%8s", creditingAmount);
-
                     /*Printing part payment*/
                     g2d.setFont(columnHeading);
-                    g2d.drawString("Cash paid:", 10, y + 30);
-                    g2d.drawString(cashPaid, 80, y + 30);
-                    g2d.drawString("Balance:", 10, y + 42);
-                    g2d.drawString(creditingAmount, 80, y + 42);
+
+                    if(!cashPaid.equals("0.00")){
+                        cashPaid = String.format("%8s", cashPaid);
+                        g2d.drawString("Cash paid:", 10, y + 30);
+                        g2d.drawString(cashPaid, 80, y + 30);
+                        g2d.drawString("Balance:", 10, y + 42);
+                        g2d.drawString(creditingAmount, 80, y + 42);
+                    }
                     
                     /*Printing signatures*/
                     g2d.drawString(".................................", 150, y + 35);
