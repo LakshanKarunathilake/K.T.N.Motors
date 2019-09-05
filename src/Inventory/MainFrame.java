@@ -3172,7 +3172,7 @@ public class MainFrame extends javax.swing.JFrame{
     
     private void newBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBtnActionPerformed
         AddCustomer.getInstance().changeStateAddUser(true);
-        
+        AddCustomer.addOrUpdate = "add";
         AddCustomer.getInstance().emptyUserFields();
         newBtn.setEnabled(false);
         
