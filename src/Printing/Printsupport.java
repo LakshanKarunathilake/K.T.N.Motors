@@ -496,14 +496,14 @@ public class Printsupport {
                     /*Footer*/
                     g2d.setFont(font);
                     g2d.drawLine(10, y += 5, 580, y);
-                    g2d.drawString("Total:", 450, y += 10);
+                    g2d.drawString("Total", 450, y += 10);
                     g2d.setFont(font_bold);
                     String total = list.get(1);
                     total = String.format("%8s", total);
                     g2d.drawString(total, 520, y);
 
                     g2d.setFont(font);
-                    g2d.drawString("discount:", 450, y += 10);
+                    g2d.drawString("discount", 450, y += 10);
                     g2d.setFont(font_bold);
                     String discount = list.get(2) + "%";
                     discount = String.format("%8s", discount);
@@ -512,7 +512,7 @@ public class Printsupport {
                     g2d.drawLine(450, y += 5, 580, y);
 
                     g2d.setFont(font);
-                    g2d.drawString("Grand Total:", 450, y += 10);
+                    g2d.drawString("Grand Total", 450, y += 10);
                     g2d.setFont(font_bold);
                     grand = String.format("%8s", grand);
                     g2d.drawString(grand, 520, y);
