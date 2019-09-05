@@ -70,7 +70,7 @@ public class Printsupport {
             for (int i = 0; i < title.length; i++) {
                 model.addColumn(title[i]);
             }
-        }else{
+        } else {
             for (int i = 0; i < Credit_bill_title.length; i++) {
                 model.addColumn(Credit_bill_title[i]);
             }
@@ -413,21 +413,21 @@ public class Printsupport {
                     g2d.drawString("No-152,Aluthgama Road,Mathugama", 240, y += 10);
                     g2d.drawString("Tel: 0344939958,0342248844 Email: ktn.motos.office@gmail.com", 200, y += 10);                 //shift a line by adding 10 to y value
                     g2d.setFont(font);
-                    
+
                     /* Printing the invoice Id and the time*/
-                    g2d.drawString("Invoice ID :", 450, y+10);
+                    g2d.drawString("Invoice ID :", 450, y + 10);
                     g2d.setFont(font_bold);
-                    g2d.drawString(list.get(0), 530, y+10);
+                    g2d.drawString(list.get(0), 530, y + 10);
                     g2d.setFont(font);
                     g2d.drawString(String.format("%-20s", now()), 430, y + 20);
-                    
+
                     ArrayList<String> userDetails = getUserDetails();
                     for (int i = 0; i < userDetails.size(); i++) {
                         if (!userDetails.get(i).isEmpty()) {
                             g2d.drawString(String.valueOf(userDetails.get(i)), 10, y += 10);
                         }
                     }
-                                                    //print date
+                    //print date
 
                     /*Draw Colums*/
                     g2d.drawLine(10, y += 10, 580, y);
@@ -441,9 +441,7 @@ public class Printsupport {
                     g2d.setFont(font);
                     int cH = 0;
                     TableModel mod = itemsTable.getModel();
-                    
-                        
-                    
+
                     for (int i = 0; i < mod.getRowCount(); i++) {
                         /*Assume that all parameters are in string data type for this situation
                                  * All other premetive data types are accepted.
@@ -475,27 +473,26 @@ public class Printsupport {
                     ArrayList<String> invoiceDetials = getInvoiceDetails();
                     String cashPaid = invoiceDetials.get(7);
                     String grand = list.get(3);
-                    double balance = Double.valueOf(grand)- Double.valueOf(cashPaid);
+                    double balance = Double.valueOf(grand) - Double.valueOf(cashPaid);
                     String creditingAmount = Rounding.decimalFormatiing(balance);
                     creditingAmount = String.format("%8s", creditingAmount);
                     /*Printing part payment*/
                     g2d.setFont(columnHeading);
 
-                    if(!cashPaid.equals("0.00")){
+                    if (!cashPaid.equals("0.00")) {
                         cashPaid = String.format("%8s", cashPaid);
                         g2d.drawString("Cash paid:", 10, y + 30);
                         g2d.drawString(cashPaid, 80, y + 30);
                         g2d.drawString("Balance:", 10, y + 42);
                         g2d.drawString(creditingAmount, 80, y + 42);
                     }
-                    
+
                     /*Printing signatures*/
                     g2d.drawString(".................................", 150, y + 35);
                     g2d.drawString("Checked by", 170, y + 50);
                     g2d.drawString(".................................", 330, y + 35);
                     g2d.drawString("Received by", 355, y + 50);
 
-                    
                     /*Footer*/
                     g2d.setFont(font);
                     g2d.drawLine(10, y += 5, 580, y);
@@ -546,16 +543,17 @@ public class Printsupport {
     public static void setUserDetails(ArrayList<String> aUserDetails) {
         UserDetails = aUserDetails;
     }
-    
+
     /**
      * Setting invoice payment information
-     * @param invoiceDetails 
+     *
+     * @param invoiceDetails
      */
-    public static void setPaymentDetails(ArrayList<String> invoice){
+    public static void setPaymentDetails(ArrayList<String> invoice) {
         invoiceDetails = invoice;
     }
-    
-     /**
+
+    /**
      * @return the invoiceDeatils
      */
     public static ArrayList<String> getInvoiceDetails() {
