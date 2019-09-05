@@ -423,8 +423,7 @@ public class Printsupport {
                     
                     ArrayList<String> userDetails = getUserDetails();
                     for (int i = 0; i < userDetails.size(); i++) {
-                        System.out.println("val" + userDetails.get(i));
-                        if (userDetails.get(i) != "") {
+                        if (!userDetails.get(i).isEmpty()) {
                             g2d.drawString(String.valueOf(userDetails.get(i)), 10, y += 10);
                         }
                     }
