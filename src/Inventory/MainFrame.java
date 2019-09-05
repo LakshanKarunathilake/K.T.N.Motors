@@ -3198,7 +3198,31 @@ public class MainFrame extends javax.swing.JFrame{
     
     
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-       JOptionPane.showMessageDialog(null, "Sorry Under construction contact the developer");
+       AddCustomer.addOrUpdate = "update";
+       editBtn.setEnabled(false);
+       JComboBox edit_combo = new JComboBox();
+        AutoCompleteDecorator.decorate(edit_combo);
+
+        manipulation.getRecords("customers", "customer_code", edit_combo);
+        String userID = null;
+
+        final JComponent[] inputs = new JComponent[]{
+            new JLabel("UserID"),
+            edit_combo
+
+        };
+        int result = JOptionPane.showConfirmDialog(null, inputs, "My custom dialog", JOptionPane.PLAIN_MESSAGE);
+        if (result == JOptionPane.OK_OPTION) {
+            userID = String.valueOf(edit_combo.getSelectedItem());
+            System.out.println("userid"+userID);
+//            ItemAdd.getInstance().fillEdit(userID);
+            AddCustomer.getInstance().updateUserFields(userID);
+//            editable=true;
+            add_item_save_btn.setEnabled(true);
+            AddCustomer.getInstance().changeStateAddUser(true);
+        } else {
+            System.out.println("User canceled / closed the dialog, result = " + result);
+        }
         
     }//GEN-LAST:event_editBtnActionPerformed
 
