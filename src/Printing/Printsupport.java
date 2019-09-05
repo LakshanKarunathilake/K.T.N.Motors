@@ -460,16 +460,13 @@ public class Printsupport {
                         String amount = mod.getValueAt(i, 4).toString();
                         amount = String.format("%8s", amount);
 
-                        cH = (y + 10) + (10 * i);                             //shifting drawing line
-                        for (int j = 0; j < 21; j++) {
+                        cH = (y + 10) + (10 * i);    
+                        //shifting drawing line
                         g2d.drawString(item, 10, cH);
                         g2d.drawString(description, 110, cH);
                         g2d.drawString(qty, 450, cH);
                         g2d.drawString(rate, 465, cH);
                         g2d.drawString(amount, 520, cH);
-                        cH += 10;
-                        }
-                        
 
                     }
                     y = 340;
