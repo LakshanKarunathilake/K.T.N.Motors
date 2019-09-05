@@ -31,6 +31,8 @@ public class AddCustomer {
     DataBaseConnector connector;
     
     JButton new_btn;
+    public static String addOrUpdate = "add";
+    private String customer_code = "";
     
     private AddCustomer(){}
     
@@ -106,4 +108,41 @@ public class AddCustomer {
         telephone_txt.setText("");        
         new_btn.setEnabled(true);
     }
+    
+    public void updateUser(){
+        String name = name_txt.getText();
+        String address = address_txt.getText();
+        String address2 = address2_txt.getText();
+        String telNumber = telephone_txt.getText();
+        
+        ArrayList list = new ArrayList();
+        list.add(name);
+        list.add(address);
+        list.add(address2);
+        list.add(telNumber);
+        
+        ArrayList coloumn = new ArrayList();
+        coloumn.add("name");
+        coloumn.add("Address1");
+        coloumn.add("Address2");
+        coloumn.add("Telephone");
+        
+        if(connector.editRecordWithColoumns("customers","customer_code",this.customer_code,list,coloumn)){
+            JOptionPane.showMessageDialog(null, "User update successfull...","Successful",JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "User update failure...","Failure",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void updateUserFields(String customerID){
+        ArrayList<String> user = this.connector.readRow("customers", "customer_code", customerID);
+        this.customer_code = customerID;
+        System.out.println("user"+user);
+        name_txt.setText(user.get(1));
+        address_txt.setText(user.get(2));
+        address2_txt.setText(user.get(3));
+        telephone_txt.setText(user.get(4));
+    }
+    
+    
 }
