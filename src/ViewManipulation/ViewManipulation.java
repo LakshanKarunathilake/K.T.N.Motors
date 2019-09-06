@@ -6,6 +6,7 @@
 package ViewManipulation;
 
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -75,5 +77,19 @@ public class ViewManipulation {
                 }
             }
         });
+    }
+    
+    public static void changeTableView(JTable table,int[] columnWidths){
+        
+        //Changing the font of the table
+        Font f = new Font("Arial", Font.BOLD, 15);
+        JTableHeader header = table.getTableHeader();
+        header.setFont(f);
+        
+        //Defining the table lengths
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        for (int i = 0; i < columnWidths.length; i++) {
+            table.getColumnModel().getColumn(i).setPreferredWidth(columnWidths[i]);
+        }
     }
 }
