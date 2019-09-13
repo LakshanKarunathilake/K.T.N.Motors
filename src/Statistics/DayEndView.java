@@ -490,9 +490,9 @@ public class DayEndView extends javax.swing.JFrame {
        
        ps.setMetaData(hm);
        
-       
+       Printsupport.setTotalItemCount(10);
        PrinterJob pj = PrinterJob.getPrinterJob();
-
+       
         pj.setPrintable(new Printsupport.DayEndPrintable(), ps.getCashPageFormat(pj));
         try {
             pj.print();
