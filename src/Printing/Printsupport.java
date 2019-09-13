@@ -144,17 +144,17 @@ public class Printsupport {
         Paper paper = pf.getPaper();
 
         double middleHeight = total_item_count * 1.0;  //dynamic----->change with the row count of jtable
-        double headerHeight = 5.5;                  //fixed----->but can be mod
+        double headerHeight = 0.5;                  //fixed----->but can be mod
         double footerHeight = 5.5;                  //fixed----->but can be mod
 
         double width = convert_CM_To_PPI(8);      //printer know only point per inch.default value is 72ppi
         double height = convert_CM_To_PPI(headerHeight + middleHeight + footerHeight);
         paper.setSize(width, height);
         paper.setImageableArea(
-                convert_CM_To_PPI(0.25),
+                convert_CM_To_PPI(0),
                 convert_CM_To_PPI(0.5),
                 width - convert_CM_To_PPI(0.35),
-                height - convert_CM_To_PPI(1));   //define boarder size    after that print area width is about 180 points
+                height - convert_CM_To_PPI(0.5));   //define boarder size    after that print area width is about 180 points
 
         pf.setOrientation(PageFormat.PORTRAIT);           //select orientation portrait or landscape but for this time portrait
         pf.setPaper(paper);
@@ -191,11 +191,11 @@ public class Printsupport {
                 double height = pageFormat.getImageableHeight();
                 g2d.translate((int) pageFormat.getImageableX(), (int) pageFormat.getImageableY());
                 Font font = new Font("Monospaced", Font.PLAIN, 8);
-                Font font_bold = new Font("Monospaced", Font.BOLD, 9);
+                Font font_bold = new Font("Monospaced", Font.BOLD, 8);
                 g2d.setFont(font);
                 try {
                     /*Draw Header*/
-                    int y = 20;
+                    int y = 10;
                     Font heading = new Font("Arial", Font.BOLD, 15);
                     g2d.setFont(heading);
                     g2d.drawString("K.T.N.Motors", 60, y);
@@ -204,7 +204,7 @@ public class Printsupport {
                     g2d.setFont(subheading);
                     g2d.drawString("No-152,Aluthgama Road,Mathugama", 30, y += 10);
                     g2d.drawString("Tel:0344939958,0342248844", 45, y += 10);                 //shift a line by adding 10 to y value
-                    g2d.setFont(font);
+                    g2d.setFont(font_bold);
                     g2d.drawString(now(), 0, y += 10);                                //print date
                     g2d.drawString("Invoice :", 0, y += 10);
                     g2d.drawString(list.get(0), 55, y);
@@ -229,18 +229,18 @@ public class Printsupport {
                         String item = mod.getValueAt(i, 0).toString();
                         item = String.format("%-20s", item);
                         String unit = mod.getValueAt(i, 1).toString();
-                        unit = String.format("%-6s", unit);
+                        unit = String.format("%8s", unit);
                         String qty = mod.getValueAt(i, 2).toString();
                         qty = String.format("%-3s", qty);
                         String total = mod.getValueAt(i, 3).toString();
-                        total = String.format("%-6s", total);
+                        total = String.format("%8s", total);
 
                         cH = (y + 10) + (10 * i);                             //shifting drawing line
 
                         g2d.drawString(item, 0, cH);
-                        g2d.drawString(unit, 105, cH);
+                        g2d.drawString(unit, 100, cH);
                         g2d.drawString(qty, 150, cH);
-                        g2d.drawString(total, 165, cH);
+                        g2d.drawString(total, 160, cH);
 
                     }
                     y = cH;
@@ -252,7 +252,6 @@ public class Printsupport {
                     total = String.format("%-6s", total);
                     g2d.drawString(total, 160, y);
 
-                    g2d.setFont(font);
                     g2d.drawString("discount:", 100, y += 10);
                     g2d.setFont(font_bold);
                     String discount = list.get(2) + "%";
@@ -261,7 +260,6 @@ public class Printsupport {
 
                     g2d.drawLine(160, y += 5, 200, y);
 
-                    g2d.setFont(font);
                     g2d.drawString("Grand Total:", 100, y += 10);
                     String grand = list.get(3);
                     g2d.setFont(font_bold);
@@ -298,7 +296,7 @@ public class Printsupport {
                 double height = pageFormat.getImageableHeight();
                 g2d.translate((int) pageFormat.getImageableX(), (int) pageFormat.getImageableY());
                 Font font = new Font("Monospaced", Font.PLAIN, 8);
-                Font font_bold = new Font("Monospaced", Font.BOLD, 9);
+                Font font_bold = new Font("Monospaced", Font.BOLD, 8);
                 g2d.setFont(font);
 
                 try {
@@ -308,11 +306,11 @@ public class Printsupport {
                     g2d.setFont(heading);
                     g2d.drawString("K.T.N.Motors", 60, y);
 
-                    Font subheading = new Font("Arial", Font.PLAIN, 8);
+                    Font subheading = new Font("Arial", Font.BOLD, 8);
                     g2d.setFont(subheading);
                     g2d.drawString("No-152,Aluthgama Road,Mathugama", 30, y += 10);
                     g2d.drawString("Tel:0344939958,0342248844", 45, y += 10);                 //shift a line by adding 10 to y value
-                    g2d.setFont(font);
+                    g2d.setFont(font_bold);
                     g2d.drawString("Day End Report :", 0, y += 10);
                     g2d.drawString(now(), 80, y);                                //print date
 
@@ -323,7 +321,7 @@ public class Printsupport {
                     /*Start of Description*/
                     g2d.setFont(subheading);
                     g2d.drawString("Sales", 0, y += 10);
-                    g2d.setFont(font);
+                    g2d.setFont(font_bold);
                     g2d.drawString("Cash Sales", 10, y += 10);
                     g2d.drawString(String.format("%8s", hashmap.get("cash_sales")), 150, y);
                     g2d.drawString("Credit Sales", 10, y += 10);
@@ -332,17 +330,15 @@ public class Printsupport {
                     g2d.drawString(String.format("%8s", hashmap.get("half_payments")), 150, y);
                     g2d.drawLine(140, y += 5, 200, y);
                     g2d.drawString("Total Sales", 10, y += 10);
-                    g2d.setFont(font_bold);
                     g2d.drawString(String.format("%8s", hashmap.get("total_sales")), 150, y);
                     g2d.drawLine(140, y += 2, 200, y);
                     g2d.drawLine(140, y += 2, 200, y);
-                    g2d.setFont(font);
                     g2d.drawString("Total Cash Sales", 10, y += 10);
                     g2d.drawString(String.format("%8s", hashmap.get("total_cash_sales")), 150, y);
 
                     g2d.setFont(subheading);
                     g2d.drawString("Sales Returns", 0, y += 15);
-                    g2d.setFont(font);
+                    g2d.setFont(font_bold);
                     g2d.drawString("Cash Returns", 10, y += 10);
                     g2d.drawString(String.format("%8s", hashmap.get("cash_returns")), 150, y);
                     g2d.drawString("Credit Returns", 10, y += 10);
@@ -350,7 +346,7 @@ public class Printsupport {
 
                     g2d.setFont(subheading);
                     g2d.drawString("Part Payments", 0, y += 15);
-                    g2d.setFont(font);
+                    g2d.setFont(font_bold);
                     g2d.drawString("Part Payments", 10, y += 10);
                     g2d.drawString(String.format("%8s", hashmap.get("part_payments")), 150, y);
 
