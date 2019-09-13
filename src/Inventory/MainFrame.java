@@ -3672,7 +3672,7 @@ public class MainFrame extends javax.swing.JFrame{
             
             if(!sales_qty_Txt.getText().equals("")){
                 try {
-                    if(customer_code != 1 && row_count < 21){
+                    if(customer_code == 1 || row_count < 21){
                         if (toTable.itemToTable()) {
                             sales_itemno_combo.requestFocusInWindow();
                             toTable.calculatetotal();
