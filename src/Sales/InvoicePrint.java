@@ -101,8 +101,8 @@ public class InvoicePrint {
     }
 
     public void creditPrint2() {
-//        String printerName = "Microsoft Print to PDF";
-        String printerName = "Canon LBP6030/6040/6018L";
+        String printerName = "Microsoft Print to PDF";
+//        String printerName = "Canon LBP6030/6040/6018L";
         Printsupport ps = new Printsupport();
         Object printitem[][] = ps.getTableData(table, "credit");
         ps.setItems(printitem,"credit");
