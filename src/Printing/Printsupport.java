@@ -531,9 +531,9 @@ public class Printsupport {
                     g2d.drawLine(10, y += 15, 580, y);
                     //end of the reciept
                     
-                    Rectangle2D outline = new Rectangle2D.Double(pageFormat.getImageableX(), pageFormat.getImageableY(), pageFormat
-        .getImageableWidth(), pageFormat.getImageableHeight());
-    g2d.draw(outline);
+//                    Rectangle2D outline = new Rectangle2D.Double(pageFormat.getImageableX(), pageFormat.getImageableY(), pageFormat
+//        .getImageableWidth(), pageFormat.getImageableHeight());
+//    g2d.draw(outline);
                 } catch (Exception r) {
                     r.printStackTrace();
                 }
