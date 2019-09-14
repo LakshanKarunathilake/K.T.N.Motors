@@ -30,6 +30,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
+import javax.print.attribute.Size2DSyntax;
+import javax.print.attribute.standard.MediaSize;
+import javax.print.attribute.standard.MediaSizeName;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -363,19 +366,29 @@ public class Printsupport {
     }
 
     public static PageFormat getCreditPageFormat(PrinterJob pj) {
-        PageFormat pf = pj.defaultPage();
-        Paper paper = pf.getPaper();
-        double width = convert_CM_To_PPI(14.8);      //printer know only point per inch.default value is 72ppi
-        double height = convert_CM_To_PPI(21);
-        paper.setSize(width, height);
-        paper.setImageableArea(
-                convert_CM_To_PPI(0),
-                convert_CM_To_PPI(0),
-                width,
-                height);   //define boarder size    after that print area width is about 180 points
-
-        pf.setOrientation(PageFormat.LANDSCAPE);           //select orientation portrait or landscape but for this time portrait
-        pf.setPaper(paper);
+//        PageFormat pf = pj.defaultPage();
+//        Paper paper = pf.getPaper();
+//        double width = 8.3  * 72d;//printer know only point per inch.default value is 72ppi
+//        double height = 5.8 * 72d;
+//        paper.setSize(width, height);
+//        paper.setImageableArea(
+//                convert_CM_To_PPI(0),
+//                convert_CM_To_PPI(0),
+//                width,
+//                height);   //define boarder size    after that print area width is about 180 points
+//
+//        pf.setOrientation(PageFormat.LANDSCAPE);           //select orientation portrait or landscape but for this time portrait
+//        pf.setPaper(paper);
+//        System.out.println("height"+pf.getHeight());
+//        System.out.println("width"+pf.getWidth());
+          MediaSize isoA5Size = MediaSize.getMediaSizeForName(MediaSizeName.ISO_A5);
+            float[] size = isoA5Size.getSize(Size2DSyntax.INCH);
+            Paper paper = new Paper();
+            paper.setSize(size[0] * 72.0, size[1] * 72.0);
+            paper.setImageableArea(0.0, 0.0, size[0] * 72.0, size[1] * 72.0);
+            PageFormat pf = new PageFormat();
+            pf.setPaper(paper);
+            pf.setOrientation(PageFormat.LANDSCAPE);
 
         return pf;
     }
