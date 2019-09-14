@@ -15,6 +15,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Paper;
@@ -529,6 +530,10 @@ public class Printsupport {
                     g2d.drawLine(450, y += 5, 580, y);
                     g2d.drawLine(10, y += 15, 580, y);
                     //end of the reciept
+                    
+                    Rectangle2D outline = new Rectangle2D.Double(pageFormat.getImageableX(), pageFormat.getImageableY(), pageFormat
+        .getImageableWidth(), pageFormat.getImageableHeight());
+    g2d.draw(outline);
                 } catch (Exception r) {
                     r.printStackTrace();
                 }
