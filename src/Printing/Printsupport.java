@@ -382,15 +382,16 @@ public class Printsupport {
 //        pf.setPaper(paper);
 //        System.out.println("height"+pf.getHeight());
 //        System.out.println("width"+pf.getWidth());
-          MediaSize isoA5Size = MediaSize.getMediaSizeForName(MediaSizeName.ISO_A5);
-            float[] size = isoA5Size.getSize(Size2DSyntax.INCH);
-            Paper paper = new Paper();
-            paper.setSize(size[0] * 72.0, size[1] * 72.0);
-            paper.setImageableArea(0.0, 0.0, size[0] * 72.0, size[1] * 72.0);
-            PageFormat pf = new PageFormat();
-            pf.setPaper(paper);
-            pf.setOrientation(PageFormat.LANDSCAPE);
+//          MediaSize isoA5Size = MediaSize.getMediaSizeForName(MediaSizeName.ISO_A5);
+//            float[] size = isoA5Size.getSize(Size2DSyntax.INCH);
+//            Paper paper = new Paper();
+//            paper.setSize(size[0] * 72.0, size[1] * 72.0);
+//            paper.setImageableArea(0.0, 0.0, size[0] * 72.0, size[1] * 72.0);
+//            PageFormat pf = new PageFormat();
+//            pf.setPaper(paper);
+//            pf.setOrientation(PageFormat.LANDSCAPE);
 
+          PageFormat pf = pj.pageDialog(pj.defaultPage());
         return pf;
     }
 
@@ -456,7 +457,6 @@ public class Printsupport {
                         /*Assume that all parameters are in string data type for this situation
                                  * All other premetive data types are accepted.
                          */
-                        System.out.println("row" + mod.getColumnCount());
                         String item = mod.getValueAt(i, 0).toString();
                         item = String.format("%-26s", item);
                         String description = mod.getValueAt(i, 1).toString();
