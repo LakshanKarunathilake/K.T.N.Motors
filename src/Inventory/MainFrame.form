@@ -3062,6 +3062,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Bill Information"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                           <AbsoluteConstraints x="480" y="110" width="160" height="35"/>
@@ -3164,7 +3167,7 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton13">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Bill History"/>
+                        <Property name="text" type="java.lang.String" value="All Unpaid"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton13ActionPerformed"/>
