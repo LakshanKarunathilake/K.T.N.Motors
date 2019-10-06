@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import javax.print.PrintService;
 import javax.swing.JOptionPane;
 
 /**
@@ -476,7 +477,8 @@ public class DayEndView extends javax.swing.JFrame {
     
    public void printReport(){
        Printsupport ps = new Printsupport();
-       
+       String printerName = "BIXOLON SRP-E302";
+
        //Data setup to printing Information
        HashMap hm = new HashMap();
        hm.put("cash_sales",cash_sales_lbl.getText());
@@ -495,7 +497,15 @@ public class DayEndView extends javax.swing.JFrame {
        
         pj.setPrintable(new Printsupport.DayEndPrintable(), ps.getCashPageFormat(pj));
         try {
-            pj.print();
+            for (PrintService printService : PrinterJob.lookupPrintServices()) {
+                System.out.println("check printer name of service " + printService);
+                if (printerName.equals(printService.getName())) {
+                    System.out.println("correct printer service do print...");
+                    pj.setPrintService(printService);
+                    pj.print();
+                    break;
+                }
+            }
 
         } catch (PrinterException ex) {
             ex.printStackTrace();
