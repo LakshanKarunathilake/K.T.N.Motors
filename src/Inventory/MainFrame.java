@@ -1977,6 +1977,11 @@ public class MainFrame extends javax.swing.JFrame{
         jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 160, 35));
 
         jButton8.setText("Bill Information");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, 160, 35));
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -2011,7 +2016,7 @@ public class MainFrame extends javax.swing.JFrame{
         jLabel44.setText("Name :");
         jPanel3.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, -1));
 
-        jButton13.setText("Bill History");
+        jButton13.setText("All Unpaid");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton13ActionPerformed(evt);
@@ -4293,12 +4298,8 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_item_report_checkBoxActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        String path = report_folder_path+"\\user\\all_selling.jrxml";
-//        Date fromDate = user_date1_picker.getDate();
-//        Date toDate = user_date2_picker.getDate();        
-//        String fromDateString = new SimpleDateFormat("yyyy-MM-dd").format(fromDate);        
-//        String toDateString = new SimpleDateFormat("yyyy-MM-dd").format(toDate);
-        
+        String path = report_folder_path+"\\user\\unpaid-bills.jrxml";
+        System.out.println("path"+path);
         Calendar c = Calendar.getInstance();
         Timestamp toDate = new Timestamp(c.getTimeInMillis());
         c.add(Calendar.YEAR,-1);
@@ -5053,6 +5054,10 @@ public class MainFrame extends javax.swing.JFrame{
         // TODO add your handling code here:
         ViewManipulation.changePanel(MainChangeFrame, UserSearchPanel);
     }//GEN-LAST:event_jButton25ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
   
        
     public void FillBill(String invoiceID){

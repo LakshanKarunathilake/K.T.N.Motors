@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="all_selling" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01d8fd24-35c6-4069-acbc-826f01998357">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="unpaid_bills" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01d8fd24-35c6-4069-acbc-826f01998357">
 	<property name="ireport.zoom" value="2.253944402704733"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="132"/>
+	<property name="ireport.y" value="153"/>
 	<parameter name="FromDate" class="java.lang.String"/>
 	<parameter name="ToDate" class="java.lang.String"/>
-	<parameter name="customer_code" class="java.lang.String">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
 	<queryString>
-		<![CDATA[SELECT * FROM invoices JOIN customers on customers.customer_code like invoices.customer_code AND invoices.orderDate BETWEEN $P{FromDate} AND $P{ToDate} AND invoices.customer_code like $P{customer_code}]]>
+		<![CDATA[SELECT * FROM invoices JOIN customers on customers.customer_code like invoices.customer_code AND invoices.orderDate BETWEEN $P{FromDate} AND $P{ToDate} AND invoices.status = 0]]>
 	</queryString>
 	<field name="invoice_id" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -98,7 +95,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="25"/>
 				</textElement>
-				<text><![CDATA[Selling History Report]]></text>
+				<text><![CDATA[All Unpaid Bills]]></text>
 			</staticText>
 			<line>
 				<reportElement x="-1" y="61" width="555" height="2" uuid="2763e24d-229c-415a-9d69-7cf91d14c60e"/>
