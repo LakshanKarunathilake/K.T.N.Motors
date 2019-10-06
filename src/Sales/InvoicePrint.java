@@ -86,6 +86,8 @@ public class InvoicePrint {
 
         Printsupport ps = new Printsupport();
 //        PrintData pd = new PrintData();
+        String printerName = "BIXOLON SRP-E302";
+
         Object printitem[][] = ps.getTableData(table, "cash");
         ps.setItems(printitem,"cash");
         ps.setMetaData(list);
@@ -93,7 +95,15 @@ public class InvoicePrint {
 
         pj.setPrintable(new Printsupport.MyPrintable(), ps.getCashPageFormat(pj));
         try {
-            pj.print();
+            for (PrintService printService : PrinterJob.lookupPrintServices()) {
+                System.out.println("check printer name of service " + printService);
+                if (printerName.equals(printService.getName())) {
+                    System.out.println("correct printer service do print...");
+                    pj.setPrintService(printService);
+                    pj.print();
+                    break;
+                }
+            }
 
         } catch (PrinterException ex) {
             ex.printStackTrace();
@@ -101,8 +111,8 @@ public class InvoicePrint {
     }
 
     public void creditPrint2() {
-        String printerName = "Microsoft Print to PDF";
-//        String printerName = "Canon LBP6030/6040/6018L";
+//        String printerName = "Microsoft Print to PDF";
+        String printerName = "Canon LBP6030/6040/6018L";
         Printsupport ps = new Printsupport();
         Object printitem[][] = ps.getTableData(table, "credit");
         ps.setItems(printitem,"credit");
@@ -118,10 +128,7 @@ public class InvoicePrint {
                 if (printerName.equals(printService.getName())) {
                     System.out.println("correct printer service do print...");
                     pj.setPrintService(printService);
-//                    pj.pageDialog(pj.defaultPage());
-                    if(pj.printDialog()){
-                        pj.print();
-                    }
+                    pj.print();
                     break;
                 }
             }
