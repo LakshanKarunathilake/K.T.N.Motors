@@ -136,46 +136,53 @@
 				<text><![CDATA[Invoice No]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="370" y="1" width="92" height="20" uuid="cf208d30-8923-4ad6-a4c7-47e7d49b3bc6"/>
+				<reportElement x="387" y="1" width="92" height="20" uuid="cf208d30-8923-4ad6-a4c7-47e7d49b3bc6"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[OrderDate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="462" y="1" width="92" height="20" uuid="e9a8010d-7e35-4544-a04d-eb69b069fbb0"/>
+				<reportElement x="480" y="1" width="74" height="20" uuid="e9a8010d-7e35-4544-a04d-eb69b069fbb0"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Paid = True]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="69" y="1" width="72" height="20" uuid="afebb58b-83d4-4a91-9839-7cffb2369fcf"/>
+				<reportElement x="211" y="1" width="59" height="20" uuid="afebb58b-83d4-4a91-9839-7cffb2369fcf"/>
 				<textElement>
-					<font size="12" isBold="true"/>
+					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Grand Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="141" y="1" width="72" height="20" uuid="38566117-1701-4b0b-8ae5-63650bcbb367"/>
+				<reportElement x="270" y="1" width="43" height="20" uuid="38566117-1701-4b0b-8ae5-63650bcbb367"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Paid]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="214" y="1" width="100" height="20" uuid="a523f1da-620d-4293-817d-92c2a372b2ee"/>
+				<reportElement x="313" y="1" width="72" height="20" uuid="a523f1da-620d-4293-817d-92c2a372b2ee"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Returned]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="67" y="1" width="144" height="20" uuid="1b23a85f-5316-4db4-b8e9-2cff4d3903ac"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Name]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField>
-				<reportElement x="461" y="0" width="92" height="20" uuid="e32c5570-62a3-4056-81f0-848a1826419d"/>
+				<reportElement x="481" y="0" width="72" height="20" uuid="e32c5570-62a3-4056-81f0-848a1826419d"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{Status}]]></textFieldExpression>
 			</textField>
@@ -184,22 +191,26 @@
 				<textFieldExpression><![CDATA[$F{invoice_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="69" y="1" width="71" height="20" uuid="b282adc6-9cf4-4aa2-ba0e-c6fb39c823ed"/>
+				<reportElement x="228" y="1" width="42" height="20" uuid="b282adc6-9cf4-4aa2-ba0e-c6fb39c823ed"/>
 				<textFieldExpression><![CDATA[$F{grandTotal}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="360" y="1" width="100" height="20" uuid="074f0e10-7415-4321-a818-02a72c768e8a"/>
+				<reportElement x="381" y="1" width="100" height="20" uuid="074f0e10-7415-4321-a818-02a72c768e8a"/>
 				<textFieldExpression><![CDATA[$F{orderDate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="142" y="1" width="71" height="20" uuid="9c61e3bf-23a1-4d24-9994-33831f82a3b8"/>
+				<reportElement x="270" y="1" width="43" height="20" uuid="9c61e3bf-23a1-4d24-9994-33831f82a3b8"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{cash_paid}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="213" y="1" width="100" height="20" uuid="b21fe86a-5c0e-49bf-bcfa-df1d11b91bf9"/>
+				<reportElement x="313" y="1" width="70" height="20" uuid="b21fe86a-5c0e-49bf-bcfa-df1d11b91bf9"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{returned}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="1" width="159" height="20" uuid="ea0615e6-536b-4543-9408-70ea1e9b4bab"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
