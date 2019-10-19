@@ -6,7 +6,7 @@
 	<parameter name="FromDate" class="java.lang.String"/>
 	<parameter name="ToDate" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT * FROM invoices JOIN customers on customers.customer_code like invoices.customer_code AND invoices.orderDate BETWEEN $P{FromDate} AND $P{ToDate} AND invoices.status = 0]]>
+		<![CDATA[SELECT * FROM invoices JOIN customers on customers.customer_code like invoices.customer_code AND invoices.orderDate BETWEEN $P{FromDate} AND $P{ToDate} AND invoices.status = 0 order by orderDate]]>
 	</queryString>
 	<field name="invoice_id" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
