@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="unpaid_bills" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01d8fd24-35c6-4069-acbc-826f01998357">
 	<property name="ireport.zoom" value="2.253944402704733"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="153"/>
+	<property name="ireport.x" value="8"/>
+	<property name="ireport.y" value="103"/>
 	<parameter name="FromDate" class="java.lang.String"/>
 	<parameter name="ToDate" class="java.lang.String"/>
 	<queryString>
@@ -82,7 +82,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="63" splitType="Stretch">
+		<band height="48" splitType="Stretch">
 			<line>
 				<reportElement x="0" y="0" width="555" height="2" uuid="4a879e73-4727-47b0-8f25-f5afe982eaaa"/>
 			</line>
@@ -98,7 +98,7 @@
 				<text><![CDATA[All Unpaid Bills]]></text>
 			</staticText>
 			<line>
-				<reportElement x="-1" y="61" width="555" height="2" uuid="2763e24d-229c-415a-9d69-7cf91d14c60e"/>
+				<reportElement x="-1" y="42" width="555" height="2" uuid="2763e24d-229c-415a-9d69-7cf91d14c60e"/>
 			</line>
 			<staticText>
 				<reportElement x="0" y="2" width="41" height="20" uuid="7fa7de73-4568-45b3-8d3e-1f548977ff0f"/>
@@ -115,14 +115,6 @@
 			<textField>
 				<reportElement x="40" y="21" width="100" height="20" uuid="f251050f-55b9-4af2-b32e-d4128f00c071"/>
 				<textFieldExpression><![CDATA[$P{ToDate}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="0" y="43" width="53" height="20" uuid="ff5cc26c-4cb7-4798-aebc-0353112481ea"/>
-				<text><![CDATA[Customer - ]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="53" y="43" width="100" height="20" uuid="36345ede-06d7-4e1c-bf90-f4d7bfcce6d7"/>
-				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
