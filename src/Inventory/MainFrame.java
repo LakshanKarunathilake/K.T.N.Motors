@@ -5,8 +5,6 @@
  */
 package Inventory;
 
-
-
 import Customers.AddCustomer;
 import DBController.DataBaseConnector;
 import DataManipulation.DataManipulation;
@@ -34,7 +32,6 @@ import Statistics.DayEndView;
 import StockCounting.Stock;
 import Utilities.ItemSearch;
 import Utilities.UserSearch;
-
 
 import Validation.StartUpValidation;
 import ViewManipulation.ViewManipulation;
@@ -82,7 +79,7 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  *
  * @author manual-pc
  */
-public class MainFrame extends javax.swing.JFrame{
+public class MainFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MainFrame
@@ -92,48 +89,45 @@ public class MainFrame extends javax.swing.JFrame{
     SalesReturn sales_return;
     Invoice item_sale;
     ArrayList[] invoiceData;
-    
-    
-    
+
 //    String report_folder_path = "E:\\K.T.N.Motors\\src\\reports";
 //    String report_folder_path = "C:\\Users\\lakshan\\Documents\\GitHub\\K.T.N.Motors\\src\\Reports";
     String report_folder_path = JSONReading.getInstance().getReportLocation();
-    
+
     String report_folder_path_sub = "\"E:\\\\kade-1.0\\\\src\\\\Reports";
-    
+
     String backup_path = "";
     Connection conn = null;
-    
+    String admin_pass = "puma";
+
     public MainFrame() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("feature.png")));
-        
+
         connector = DataBaseConnector.getInstance();
         manipulation = new DataManipulation(connector);
-        
+
         initComponents();
         showTime();
         showDate();
-        try{
-        conn = connector.startConnection();
-        }catch(Exception e){
-           int selection=JOptionPane.showConfirmDialog(null, e.getMessage()+" \n\n Contact Administrator for solving","Error in starting",JOptionPane.DEFAULT_OPTION);
-           if(selection==JOptionPane.OK_OPTION){
-               System.exit(0);
-           } 
+        try {
+            conn = connector.startConnection();
+        } catch (Exception e) {
+            int selection = JOptionPane.showConfirmDialog(null, e.getMessage() + " \n\n Contact Administrator for solving", "Error in starting", JOptionPane.DEFAULT_OPTION);
+            if (selection == JOptionPane.OK_OPTION) {
+                System.exit(0);
+            }
         }
-        
+
         StartUpValidation s = new StartUpValidation(conn, connector);
-        if(!s.validateDate()){
+        if (!s.validateDate()) {
             JOptionPane.showMessageDialog(null, "The last date in the db is after than the current date set the time!!");
             System.exit(0);
         }
-        
-       
-        
+
         makeAllSalesComponents(false);
         sales_save_btn.setEnabled(false);
         sales_print_btn.setEnabled(false);
-        
+
         ArrayList emptyCombos = new ArrayList<JComboBox>();
         emptyCombos.add(sales_CID_combo);
         emptyCombos.add(sales_CName_combo);
@@ -142,25 +136,21 @@ public class MainFrame extends javax.swing.JFrame{
 
         ViewManipulation.emptyComboBoxes(emptyCombos);
 
-        int salesTableView[]  = {190,320,55,100,80,100};
-        int itemSearchTableView[] = {190,190,150,170,55};
-        int userSearchTableView[] = {60,250,750};
-        
-        ViewManipulation.changeTableView(sales_item_table,salesTableView);
-        ViewManipulation.changeTableView(itemSearchTable,itemSearchTableView);
-        ViewManipulation.changeTableView(userSearchTable,userSearchTableView);
-        
-        item_sale = new Invoice(sales_itemno_combo, sales_item_name_combo, sales_CID_combo, sales_CName_combo,sales_qty_Txt, connector);
+        int salesTableView[] = {190, 320, 55, 100, 80, 100};
+        int itemSearchTableView[] = {190, 190, 150, 170, 55};
+        int userSearchTableView[] = {60, 250, 750};
+
+        ViewManipulation.changeTableView(sales_item_table, salesTableView);
+        ViewManipulation.changeTableView(itemSearchTable, itemSearchTableView);
+        ViewManipulation.changeTableView(userSearchTable, userSearchTableView);
+
+        item_sale = new Invoice(sales_itemno_combo, sales_item_name_combo, sales_CID_combo, sales_CName_combo, sales_qty_Txt, connector);
         invoiceData = item_sale.fillDataToCombo();
-        
+
         Invoice.setSaleID(sales_InvoiceID_txt, connector);
-        
+
         sales_halfPay_panel.setVisible(false);
-        
-        
-        
-     
-         
+
     }
 
     /**
@@ -3190,7 +3180,7 @@ public class MainFrame extends javax.swing.JFrame{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void showTime(){
+    public void showTime() {
         new Thread() {
             int timeRun = 0;
 
@@ -3215,111 +3205,104 @@ public class MainFrame extends javax.swing.JFrame{
             }
         }.start();
     }
-    
-    void showDate(){
+
+    void showDate() {
         Date d = new Date();
         SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy");
         date_txt.setText(s.format(d));
     }
     private void AddProductLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddProductLabelMouseClicked
-                
+
         ViewManipulation.changePanel(MainChangeFrame, AddItemPanel);
-        
+
         ItemAdd item_add = ItemAdd.getInstance();
-                
-        item_add.setFields(add_itemNo_txt, add_item_vehicle_txt, add_item_brand_txt, add_item_desc_txt,add_item_location_txt, add_item_category_combo,add_item_unit_combo, connector);
+
+        item_add.setFields(add_itemNo_txt, add_item_vehicle_txt, add_item_brand_txt, add_item_desc_txt, add_item_location_txt, add_item_category_combo, add_item_unit_combo, connector);
         item_add.setPriceFields(add_item_billPrice_txt, add_item_costP_txt, add_item_cost_txt, add_item_sellingP_txt, add_item_selling_txt);
-        
+
         item_add.changeStateAddItem(false);
-        
+
         item_add_new_btn.requestFocusInWindow();
         item_add_new_btn.setEnabled(true);
-        
+
     }//GEN-LAST:event_AddProductLabelMouseClicked
 
     private void ReportLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReportLabelMouseClicked
-        
-        ViewManipulation.changePanel(MainChangeFrame, ReportPanel);       
-       
+
+        ViewManipulation.changePanel(MainChangeFrame, ReportPanel);
+
         item_date1_label.setVisible(false);
         item_date2_label.setVisible(false);
         reports_date2_picker.setVisible(false);
         reports_date1_picker.setVisible(false);
-        
-        
-        
-        setDefaultDateRange(reports_date1_picker,reports_date2_picker,12);
-        
-        
+
+        setDefaultDateRange(reports_date1_picker, reports_date2_picker, 12);
+
         populateWiseReportPanel();
     }//GEN-LAST:event_ReportLabelMouseClicked
 
-    public void setDefaultDateRange(JDateChooser from,JDateChooser to,int range){
-        Date d = new Date();        
-        to.setDate(d);        
+    public void setDefaultDateRange(JDateChooser from, JDateChooser to, int range) {
+        Date d = new Date();
+        to.setDate(d);
         Calendar c = Calendar.getInstance();
         c.setTime(d);
-        c.add(Calendar.MONTH,-range);
-        d= c.getTime();  
+        c.add(Calendar.MONTH, -range);
+        d = c.getTime();
         from.setDate(d);
-              
-        
+
     }
-    
+
     boolean once = true;
-    public void populateWiseReportPanel(){
-        if(once){
+
+    public void populateWiseReportPanel() {
+        if (once) {
             AutoCompleteDecorator.decorate(report_item_combo);
             AutoCompleteDecorator.decorate(report_name_combo);
             AutoCompleteDecorator.decorate(report_userID_combo);
             once = false;
         }
-        
-        
+
         report_item_combo.removeAllItems();
         report_name_combo.removeAllItems();
         report_userID_combo.removeAllItems();
         manipulation.getRecords("items", "item_code", report_item_combo);
         manipulation.getRecords("customers", "customer_code", report_userID_combo);
         manipulation.getRecords("customers", "name", report_name_combo);
-        
+
     }
-    
+
     private void newBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBtnActionPerformed
         AddCustomer.getInstance().changeStateAddUser(true);
         AddCustomer.addOrUpdate = "add";
         AddCustomer.getInstance().emptyUserFields();
         newBtn.setEnabled(false);
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_newBtnActionPerformed
 
     private void SalesLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalesLabelMouseClicked
-                
+
         ViewManipulation.changePanel(MainChangeFrame, SalesPanel);
-        
+
         sales_new_btn.requestFocusInWindow();
-                
+
     }//GEN-LAST:event_SalesLabelMouseClicked
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        if(AddCustomer.addOrUpdate.equals("add")){
-            AddCustomer.getInstance().saveUser(); 
-        }else{
+        if (AddCustomer.addOrUpdate.equals("add")) {
+            AddCustomer.getInstance().saveUser();
+        } else {
             AddCustomer.getInstance().updateUser();
         }
-          saveBtn.setEnabled(false);
-          
+        saveBtn.setEnabled(false);
+
     }//GEN-LAST:event_saveBtnActionPerformed
 
-    
-    
+
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-       AddCustomer.addOrUpdate = "update";
-       editBtn.setEnabled(false);
-       JComboBox edit_combo = new JComboBox();
+        AddCustomer.addOrUpdate = "update";
+        editBtn.setEnabled(false);
+        JComboBox edit_combo = new JComboBox();
         AutoCompleteDecorator.decorate(edit_combo);
 
         manipulation.getRecords("customers", "customer_code", edit_combo);
@@ -3333,7 +3316,7 @@ public class MainFrame extends javax.swing.JFrame{
         int result = JOptionPane.showConfirmDialog(null, inputs, "My custom dialog", JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             userID = String.valueOf(edit_combo.getSelectedItem());
-            System.out.println("userid"+userID);
+            System.out.println("userid" + userID);
 //            ItemAdd.getInstance().fillEdit(userID);
             AddCustomer.getInstance().updateUserFields(userID);
 //            editable=true;
@@ -3342,23 +3325,23 @@ public class MainFrame extends javax.swing.JFrame{
         } else {
             System.out.println("User canceled / closed the dialog, result = " + result);
         }
-        
+
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void NameTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NameTxtKeyPressed
-         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-           AddressTxt.requestFocus();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            AddressTxt.requestFocus();
         }
     }//GEN-LAST:event_NameTxtKeyPressed
 
     private void AddressTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AddressTxtKeyPressed
-         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             TelephoneTxt.requestFocus();
         }
     }//GEN-LAST:event_AddressTxtKeyPressed
 
     private void TelephoneTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TelephoneTxtKeyPressed
-         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             saveBtn.requestFocus();
         }
     }//GEN-LAST:event_TelephoneTxtKeyPressed
@@ -3376,11 +3359,11 @@ public class MainFrame extends javax.swing.JFrame{
         add_itemNo_txt.setFocusable(true);
         add_itemNo_txt.setEditable(true);
         add_itemNo_txt.requestFocusInWindow();
-        
+
     }//GEN-LAST:event_item_add_new_btnActionPerformed
 
     boolean editable = false;
-    
+
     private void item_add_edit_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_add_edit_btnActionPerformed
         JComboBox edit_combo = new JComboBox();
 
@@ -3398,19 +3381,19 @@ public class MainFrame extends javax.swing.JFrame{
         if (result == JOptionPane.OK_OPTION) {
             itemNo = String.valueOf(edit_combo.getSelectedItem());
             ItemAdd.getInstance().fillEdit(itemNo);
-            editable=true;
+            editable = true;
             add_item_save_btn.setEnabled(true);
         } else {
             System.out.println("User canceled / closed the dialog, result = " + result);
         }
     }//GEN-LAST:event_item_add_edit_btnActionPerformed
 
-    
+
     private void add_item_save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_item_save_btnActionPerformed
-        if(editable){
+        if (editable) {
             ItemAdd.getInstance().itemSave(editable);
             add_item_save_btn.setEnabled(false);
-        }else{
+        } else {
             if (!ItemAdd.getInstance().CheckAvailability()) {
                 if (ItemAdd.getInstance().itemSave(editable)) {
                     add_item_save_btn.setEnabled(false);
@@ -3421,14 +3404,10 @@ public class MainFrame extends javax.swing.JFrame{
                 ItemAdd.getInstance().changeStateAddItem(false);
             }
         }
-        
-        
-        
-        
-        
+
         item_add_new_btn.setEnabled(true);
-        item_add_new_btn.requestFocusInWindow();      
-       
+        item_add_new_btn.requestFocusInWindow();
+
     }//GEN-LAST:event_add_item_save_btnActionPerformed
 
     private void add_item_cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_item_cancel_btnActionPerformed
@@ -3443,68 +3422,67 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_add_itemNo_txtActionPerformed
 
     private void add_itemNo_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_itemNo_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){           
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             boolean CheckAvailability = ItemAdd.getInstance().CheckAvailability();
-            if(CheckAvailability){
-                add_item_category_combo.getEditor().getEditorComponent().requestFocusInWindow();   
+            if (CheckAvailability) {
+                add_item_category_combo.getEditor().getEditorComponent().requestFocusInWindow();
             }
-           
+
         }
     }//GEN-LAST:event_add_itemNo_txtKeyPressed
 
-    public void checkItemAlreadyInDB(){
-        if(connector.getRelavantRecord("item", "itemNo", "itemNo", add_itemNo_txt.getText()).isEmpty()){
+    public void checkItemAlreadyInDB() {
+        if (connector.getRelavantRecord("item", "itemNo", "itemNo", add_itemNo_txt.getText()).isEmpty()) {
             add_item_vehicle_txt.requestFocus();
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "The item is already added to the database");
         }
     }
-    
+
     private void add_item_vehicle_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_vehicle_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-           add_item_brand_txt.requestFocus();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            add_item_brand_txt.requestFocus();
         }
     }//GEN-LAST:event_add_item_vehicle_txtKeyPressed
 
     private void add_item_desc_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_desc_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-           add_item_billPrice_txt.requestFocus();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            add_item_billPrice_txt.requestFocus();
         }
     }//GEN-LAST:event_add_item_desc_txtKeyPressed
 
     private void add_item_billPrice_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_billPrice_txtKeyPressed
         char c = evt.getKeyChar();
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-           add_item_costP_txt.requestFocusInWindow();
-        }else if(Character.isLetter(c) && !evt.isAltDown()){
-           evt.consume();              
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            add_item_costP_txt.requestFocusInWindow();
+        } else if (Character.isLetter(c) && !evt.isAltDown()) {
+            evt.consume();
         }
-       
+
     }//GEN-LAST:event_add_item_billPrice_txtKeyPressed
 
     private void add_item_selling_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_selling_txtKeyPressed
         char c = evt.getKeyChar();
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             double selling = Double.parseDouble(add_item_selling_txt.getText());
             double precentage = Double.parseDouble(add_item_billPrice_txt.getText());
-            double cost = (selling - (selling * (precentage/100)));
+            double cost = (selling - (selling * (precentage / 100)));
             cost = round(cost, 2);
             add_item_desc_txt.setText(String.valueOf(cost));
-            
-        }else if (Character.isLetter(c) && !evt.isAltDown()) {            
+
+        } else if (Character.isLetter(c) && !evt.isAltDown()) {
             evt.consume();
         }
     }//GEN-LAST:event_add_item_selling_txtKeyPressed
 
     private void add_item_save_btnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_save_btnKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
             ItemAdd.getInstance().itemSave(editable);
             ItemAdd.getInstance().emptyItemFields();
             item_add_new_btn.setEnabled(true);
             item_add_new_btn.requestFocusInWindow();
-            
+
         }
     }//GEN-LAST:event_add_item_save_btnKeyPressed
 
@@ -3512,46 +3490,46 @@ public class MainFrame extends javax.swing.JFrame{
         item_add_new_btn.setEnabled(false);
         add_itemNo_txt.grabFocus();
         add_itemNo_txt.requestFocusInWindow();
-        
+
     }//GEN-LAST:event_item_add_new_btnMouseClicked
 
     private void item_add_new_btnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_item_add_new_btnKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             item_add_new_btn.setEnabled(false);
             add_itemNo_txt.grabFocus();
             add_itemNo_txt.requestFocusInWindow();
             ItemAdd.getInstance().changeStateAddItem(true);
         }
-        
-        
+
+
     }//GEN-LAST:event_item_add_new_btnKeyPressed
 
     private void add_item_save_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_item_save_btnMouseClicked
-       
+
     }//GEN-LAST:event_add_item_save_btnMouseClicked
 
     private void saveBtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_saveBtnKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            
-            AddCustomer.getInstance().saveUser();  
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            AddCustomer.getInstance().saveUser();
             newBtn.requestFocusInWindow();
-           
+
         }
     }//GEN-LAST:event_saveBtnKeyPressed
 
     private void newBtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_newBtnKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             newBtn.setEnabled(false);
             AddCustomer.getInstance().changeStateAddUser(true);
             newBtn.setEnabled(false);
             AddCustomer.getInstance().emptyUserFields();
-            String ID = generateUserID();                     
-           
+            String ID = generateUserID();
+
         }
     }//GEN-LAST:event_newBtnKeyPressed
 
     private void add_item_desc_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_desc_txtKeyTyped
-        
+
     }//GEN-LAST:event_add_item_desc_txtKeyTyped
 
     private void add_item_billPrice_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_billPrice_txtKeyTyped
@@ -3562,58 +3540,56 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_add_item_billPrice_txtKeyTyped
 
     private void sales_new_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_new_btnActionPerformed
-        makeAllSalesComponents(true);        
+        makeAllSalesComponents(true);
         sales_save_btn.setEnabled(true);
         sales_print_btn.setEnabled(true);
-                
+
         sales_InvoiceID_txt.setText(item_sale.generateSaleID(connector));
 
         sales_discount_txt.setText("0");
-        
+
 //        item_sale.salesAutoCombo();
-        
         sales_CID_combo.setEnabled(true);
         sales_CName_combo.setEnabled(true);
         sales_item_name_combo.setEnabled(true);
         sales_itemno_combo.setEnabled(true);
-               
+
         sales_CID_combo.requestFocusInWindow();
         sales_new_btn.setEnabled(false);
         sales_save_btn.setEnabled(false);
         sales_print_btn.setEnabled(false);
-        
+
         sales_save_btn.setEnabled(true);
         sales_remove_btn.setEnabled(true);
         sales_total_txt.setEditable(true);
         sales_discount_txt.setEditable(true);
         sales_grand_txt.setEditable(true);
-        
+
         sales_halfPay_check.setSelected(false);
         sales_halfPay_panel.setVisible(false);
-        
+
         sales_additional_txt.setEditable(true);
-        
+
         sales_CID_combo.setSelectedItem("1");
         ViewManipulation.emptyTable(sales_item_table);
-        
-       item_sale.decoratingCustomers();
-        
+
+        item_sale.decoratingCustomers();
+
     }//GEN-LAST:event_sales_new_btnActionPerformed
 
     private void sales_CID_comboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_CID_comboKeyPressed
-        
+
     }//GEN-LAST:event_sales_CID_comboKeyPressed
 
     private void sales_CID_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_CID_comboActionPerformed
-        
-            
-            String userID = (String) sales_CID_combo.getSelectedItem();
-          
-            String userName = connector.getRelavantRecord("customers", "name", "customer_code", userID);
-            
-            sales_CName_combo.setSelectedItem(userName);
-        
-        
+
+        String userID = (String) sales_CID_combo.getSelectedItem();
+
+        String userName = connector.getRelavantRecord("customers", "name", "customer_code", userID);
+
+        sales_CName_combo.setSelectedItem(userName);
+
+
     }//GEN-LAST:event_sales_CID_comboActionPerformed
 
     private void sales_CID_comboKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_CID_comboKeyReleased
@@ -3628,67 +3604,67 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_sales_CID_comboKeyReleased
 
     private void sales_CName_comboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_CName_comboKeyPressed
-        
+
     }//GEN-LAST:event_sales_CName_comboKeyPressed
 
     private void sales_CName_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_CName_comboActionPerformed
-           
+
         String name = (String) sales_CName_combo.getSelectedItem();
-        
+
         String userID = connector.getRelavantRecord("customers", "customer_code", "name", name);
-       
+
         sales_CID_combo.setSelectedItem(userID);
     }//GEN-LAST:event_sales_CName_comboActionPerformed
-    int focusCounterItemNoCombo=1;
+    int focusCounterItemNoCombo = 1;
     private void sales_itemno_comboFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sales_itemno_comboFocusGained
-        focus_counter = 0;   
-        
+        focus_counter = 0;
+
     }//GEN-LAST:event_sales_itemno_comboFocusGained
 
     private void sales_itemno_comboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_itemno_comboKeyPressed
-        
+
     }//GEN-LAST:event_sales_itemno_comboKeyPressed
 
     private void sales_itemno_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_itemno_comboActionPerformed
         String itemNo = (String) sales_itemno_combo.getSelectedItem();
-        
-        String description = connector.getRelavantRecord("items", "category", "item_code", itemNo); 
+
+        String description = connector.getRelavantRecord("items", "category", "item_code", itemNo);
         sales_item_name_combo.setSelectedItem(description);
-        
+
         //Qty Adding to the text Box
-        String qty = connector.getRelavantRecord("items", "stock", "item_code", itemNo);    
+        String qty = connector.getRelavantRecord("items", "stock", "item_code", itemNo);
         sales_available_qty_txt.setText(qty);
-        
-        String unit = connector.getRelavantRecord("items","unit","item_code",itemNo);
+
+        String unit = connector.getRelavantRecord("items", "unit", "item_code", itemNo);
         sales_unit_Txt.setText(unit);
-        
+
     }//GEN-LAST:event_sales_itemno_comboActionPerformed
 
     private void sales_qty_TxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_qty_TxtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             ItemToTable toTable = new ItemToTable(sales_itemno_combo, sales_qty_Txt, sales_available_qty_txt, sales_total_txt, sales_discount_txt, sales_grand_txt, sales_item_table, connector);
-            
+
             /*
                 Obtain customer code to check whether user is cash
                 Obtain row_count of item table to check whther it's exceeding the row limit
-            */
+             */
             int customer_code = Integer.parseInt(sales_CID_combo.getSelectedItem().toString());
             int row_count = sales_item_table.getRowCount();
-            
-            if(!sales_qty_Txt.getText().equals("")){
+
+            if (!sales_qty_Txt.getText().equals("")) {
                 try {
-                    if(customer_code == 1 || row_count < 21){
+                    if (customer_code == 1 || row_count < 21) {
                         if (toTable.itemToTable()) {
                             sales_itemno_combo.requestFocusInWindow();
                             toTable.calculatetotal();
                             sales_save_btn.setEnabled(true);
 
                         }
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(null, "You are exceeding maximum number of items per invoice for the credit invoice please start a new invoice");
 
                     }
-                    
+
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Exception in table adding :" + e.getMessage() + " Error line : ");
                     Logger.getLogger(DataBaseConnector.class.getName()).log(Level.SEVERE, null, e);
@@ -3696,7 +3672,7 @@ public class MainFrame extends javax.swing.JFrame{
             }
         }
     }//GEN-LAST:event_sales_qty_TxtKeyPressed
-    
+
     private void sales_qty_TxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_qty_TxtKeyTyped
         char c = evt.getKeyChar();
         if (!Character.isDigit(c)) {
@@ -3713,52 +3689,52 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_sales_item_name_comboActionPerformed
 
     private void sales_itemno_comboKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_itemno_comboKeyTyped
-        
+
     }//GEN-LAST:event_sales_itemno_comboKeyTyped
 
     private void sales_itemno_comboKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_itemno_comboKeyReleased
-       
+
     }//GEN-LAST:event_sales_itemno_comboKeyReleased
 
     private void sales_itemno_comboPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_sales_itemno_comboPopupMenuWillBecomeVisible
-              
+
     }//GEN-LAST:event_sales_itemno_comboPopupMenuWillBecomeVisible
 
     private void sales_discount_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_discount_txtKeyTyped
-        
+
     }//GEN-LAST:event_sales_discount_txtKeyTyped
 
     private void sales_discount_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_discount_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             calculateGrandTotal();
         }
     }//GEN-LAST:event_sales_discount_txtKeyPressed
 
     private void sales_save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_save_btnActionPerformed
         calculateGrandTotal();
-        
-        InvoiceToDB toDB = new InvoiceToDB(sales_CID_combo, sales_InvoiceID_txt, sales_item_table,sales_additional_txt, connector);
-        toDB.setValuesForInsertOrder(sales_total_txt, sales_discount_txt, sales_grand_txt,sales_halfPay_txt,sales_halfPay_check);
-        
-        if(toDB.validUserPurchaise()){
+
+        InvoiceToDB toDB = new InvoiceToDB(sales_CID_combo, sales_InvoiceID_txt, sales_item_table, sales_additional_txt, connector);
+        toDB.setValuesForInsertOrder(sales_total_txt, sales_discount_txt, sales_grand_txt, sales_halfPay_txt, sales_halfPay_check);
+
+        if (toDB.validUserPurchaise()) {
             String msg = toDB.TableToDB();
             String error1 = "Enter completed";
             String error2 = "OrderItemsNotDoneButOrderDone";
             String error3 = "Complete failure";
-            
-            if(msg.equals(error1)){
-               JOptionPane.showMessageDialog(null, "The record is added Successfully", "Successful", JOptionPane.INFORMATION_MESSAGE);
+
+            if (msg.equals(error1)) {
+                JOptionPane.showMessageDialog(null, "The record is added Successfully", "Successful", JOptionPane.INFORMATION_MESSAGE);
 
                 makeAllSalesComponents(false);
                 sales_new_btn.setEnabled(true);
                 sales_save_btn.setEnabled(false);
-                sales_print_btn.setEnabled(true); 
-            }else{
-                JOptionPane.showMessageDialog(null, "Error has been occured during : "+msg);
+                sales_print_btn.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error has been occured during : " + msg);
             }
-            
+
         }
-        
+
     }//GEN-LAST:event_sales_save_btnActionPerformed
 
     private void sales_cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_cancel_btnActionPerformed
@@ -3768,24 +3744,22 @@ public class MainFrame extends javax.swing.JFrame{
         sales_save_btn.setEnabled(false);
     }//GEN-LAST:event_sales_cancel_btnActionPerformed
 
-    
     int focus_counter = 0;
     private void sales_qty_TxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sales_qty_TxtFocusGained
-       
-         if (sales_available_qty_txt.getText().equals("0") && (focus_counter==0)) {
-                focus_counter++;
-                JOptionPane.showMessageDialog(null, "Sorry qty finished","Qty Finished", JOptionPane.WARNING_MESSAGE);
-                sales_itemno_combo.requestFocusInWindow();
+
+        if (sales_available_qty_txt.getText().equals("0") && (focus_counter == 0)) {
+            focus_counter++;
+            JOptionPane.showMessageDialog(null, "Sorry qty finished", "Qty Finished", JOptionPane.WARNING_MESSAGE);
+            sales_itemno_combo.requestFocusInWindow();
         }
-        
-        
-       
+
+
     }//GEN-LAST:event_sales_qty_TxtFocusGained
 
     private void updateQtylblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateQtylblMouseClicked
         update_itemNo_combo.removeAllItems();
-        ViewManipulation.changePanel(MainChangeFrame, Purchaising_base_panel);        
-        Purchaise.getInstance().setFields(update_itemNo_combo,purchaise_retailer_combo,purchaise_invoiceno_txt,update_description_txt,update_billPrice_txt,update_costP_txt,update_cost_lbl,update_sellingP_txt,update_selling_lbl,update_available_lbl,update_qty_txt,connector);
+        ViewManipulation.changePanel(MainChangeFrame, Purchaising_base_panel);
+        Purchaise.getInstance().setFields(update_itemNo_combo, purchaise_retailer_combo, purchaise_invoiceno_txt, update_description_txt, update_billPrice_txt, update_costP_txt, update_cost_lbl, update_sellingP_txt, update_selling_lbl, update_available_lbl, update_qty_txt, connector);
         Purchaise.getInstance().autoFill();
     }//GEN-LAST:event_updateQtylblMouseClicked
 
@@ -3794,12 +3768,12 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_update_description_txtKeyPressed
 
     private void update_billPrice_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_billPrice_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             update_costP_txt.selectAll();
             update_costP_txt.requestFocusInWindow();
-            
+
         }
-                
+
     }//GEN-LAST:event_update_billPrice_txtKeyPressed
 
     private void update_billPrice_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_billPrice_txtKeyTyped
@@ -3810,25 +3784,25 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_update_billPrice_txtKeyTyped
 
     private void update_costP_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_costP_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                 update_sellingP_txt.selectAll();
                 update_sellingP_txt.requestFocusInWindow();
                 String cost = Purchaise.getInstance().calculateCost();
-                if(!cost.isEmpty()){
+                if (!cost.isEmpty()) {
                     update_cost_lbl.setText(cost);
                 }
-                
+
             }
-            
+
         }
     }//GEN-LAST:event_update_costP_txtKeyPressed
 
     private void update_costP_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_costP_txtKeyTyped
-         char c = evt.getKeyChar();
-           if(Character.isLetter(c) && !evt.isAltDown()){
-               evt.consume();              
-           }
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c) && !evt.isAltDown()) {
+            evt.consume();
+        }
     }//GEN-LAST:event_update_costP_txtKeyTyped
 
     private void itemCancelBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCancelBtn1ActionPerformed
@@ -3840,37 +3814,37 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_update_save_btnMouseClicked
 
     private void update_save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_save_btnActionPerformed
-       if((!purchaise_invoiceno_txt.getText().equals("")) && (!update_qty_txt.getText().equals(""))){
-           if(Purchaise.getInstance().comparePrices()){
-               if (Purchaise.getInstance().updateQty_save()) {
-                   JOptionPane.showMessageDialog(null, "Qty is successfully Updated...");
-                   update_itemNo_combo.requestFocusInWindow();
-               } 
-           }
-           
-       }else{
-           JOptionPane.showMessageDialog(null, "Please fill the necessary fields before saving");
-       }
-        
+        if ((!purchaise_invoiceno_txt.getText().equals("")) && (!update_qty_txt.getText().equals(""))) {
+            if (Purchaise.getInstance().comparePrices()) {
+                if (Purchaise.getInstance().updateQty_save()) {
+                    JOptionPane.showMessageDialog(null, "Qty is successfully Updated...");
+                    update_itemNo_combo.requestFocusInWindow();
+                }
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Please fill the necessary fields before saving");
+        }
+
     }//GEN-LAST:event_update_save_btnActionPerformed
 
     private void update_save_btnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_save_btnKeyPressed
-         if((!purchaise_invoiceno_txt.getText().equals("")) && (!update_qty_txt.getText().equals(""))){
-           if(Purchaise.getInstance().comparePrices()){
-               if (Purchaise.getInstance().updateQty_save()) {
-                   JOptionPane.showMessageDialog(null, "Qty is successfully Updated...");
-                   update_itemNo_combo.requestFocusInWindow();
-               } 
-           }
-           
-       }else{
-           JOptionPane.showMessageDialog(null, "Please fill the necessary fields before saving");
-       }
-       
+        if ((!purchaise_invoiceno_txt.getText().equals("")) && (!update_qty_txt.getText().equals(""))) {
+            if (Purchaise.getInstance().comparePrices()) {
+                if (Purchaise.getInstance().updateQty_save()) {
+                    JOptionPane.showMessageDialog(null, "Qty is successfully Updated...");
+                    update_itemNo_combo.requestFocusInWindow();
+                }
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Please fill the necessary fields before saving");
+        }
+
     }//GEN-LAST:event_update_save_btnKeyPressed
 
     private void update_qty_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_qty_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             update_save_btn.requestFocusInWindow();
         }
     }//GEN-LAST:event_update_qty_txtKeyPressed
@@ -3883,39 +3857,39 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_update_qty_txtKeyTyped
 
     private void update_itemNo_comboFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_itemNo_comboFocusGained
-       
-        
+
+
     }//GEN-LAST:event_update_itemNo_comboFocusGained
 
     private void update_description_txtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_description_txtFocusGained
-       
+
     }//GEN-LAST:event_update_description_txtFocusGained
 
     private void update_billPrice_txtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_billPrice_txtFocusGained
-        
+
     }//GEN-LAST:event_update_billPrice_txtFocusGained
 
     private void sales_print_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_print_btnActionPerformed
         InvoicePrint print = new InvoicePrint(report_folder_path, sales_InvoiceID_txt, sales_CID_combo, sales_item_table, connector);
-        
+
         ArrayList<String> list = new ArrayList<String>();
-        
-        list.add(String.valueOf(sales_InvoiceID_txt.getText()));        
+
+        list.add(String.valueOf(sales_InvoiceID_txt.getText()));
         list.add(String.valueOf(sales_total_txt.getText()));
         list.add(String.valueOf(sales_discount_txt.getText()));
         list.add(String.valueOf(sales_grand_txt.getText()));
-        
+
         print.setMetaArrayList(list);
-        
-        if(String.valueOf(sales_CID_combo.getSelectedItem()).equals("1") ){
+
+        if (String.valueOf(sales_CID_combo.getSelectedItem()).equals("1")) {
             print.cashPrint();
-        }else{
+        } else {
             print.creditPrint2();
 //            print.creditPrint();
-        }        
+        }
     }//GEN-LAST:event_sales_print_btnActionPerformed
 
-    
+
     private void sales_remove_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_remove_btnActionPerformed
         DefaultTableModel model = (DefaultTableModel) sales_item_table.getModel();
         try {
@@ -3925,7 +3899,7 @@ public class MainFrame extends javax.swing.JFrame{
             calculateGrandTotal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Select a Row first....");
-                    
+
         }
     }//GEN-LAST:event_sales_remove_btnActionPerformed
 
@@ -3935,8 +3909,8 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_reports_dayEnd_btnActionPerformed
 
     private void report_items_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_items_btnActionPerformed
-        String path = report_folder_path+"\\item\\items.jrxml";
-        
+        String path = report_folder_path + "\\item\\items.jrxml";
+
         JasperReport jr;
         try {
             jr = JasperCompileManager.compileReport(path);
@@ -3949,12 +3923,12 @@ public class MainFrame extends javax.swing.JFrame{
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_report_items_btnActionPerformed
 
     private void reports_customer_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reports_customer_btn1ActionPerformed
-        String path = report_folder_path+"\\user\\userReport.jrxml";
-        
+        String path = report_folder_path + "\\user\\userReport.jrxml";
+
         JasperReport jr;
         try {
             jr = JasperCompileManager.compileReport(path);
@@ -3975,36 +3949,36 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void AddUserLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddUserLabelMouseClicked
         ViewManipulation.changePanel(MainChangeFrame, AddUserPannel);
-        AddCustomer.getInstance().setFields( NameTxt, AddressTxt,AddressTxt1, TelephoneTxt,newBtn,connector);
+        AddCustomer.getInstance().setFields(NameTxt, AddressTxt, AddressTxt1, TelephoneTxt, newBtn, connector);
         AddCustomer.getInstance().changeStateAddUser(false);
         newBtn.requestFocusInWindow();
-        
-        
+
+
     }//GEN-LAST:event_AddUserLabelMouseClicked
 
     private void payBillsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_payBillsLabelMouseClicked
-        
+
         ViewManipulation.changePanel(MainChangeFrame, bill_pay_panel);
-                
+
         ButtonGroup group = new ButtonGroup();
         group.add(bill_chooseDate);
         group.add(bill_currentDate);
         bill_currentDate.setSelected(true);
-        
+
         bill_paymentPane.setVisible(false);
         bill_cash_datePicker.setEnabled(false);
-        
-        BillPay.getInstance().setFields(bill_userID_combo, bill_name_combo, bill_InvoiceID_combo,bill_paying_txt,Bill_table, connector);
+
+        BillPay.getInstance().setFields(bill_userID_combo, bill_name_combo, bill_InvoiceID_combo, bill_paying_txt, Bill_table, connector);
         BillPay.getInstance().fillDataToCombo();
 //        newBillPay();
     }//GEN-LAST:event_payBillsLabelMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         BillPay.getInstance().checkForBills();
+        BillPay.getInstance().checkForBills();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void Bill_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Bill_tableMouseClicked
-         if (evt.getClickCount() == 2 && !evt.isConsumed()) {
+        if (evt.getClickCount() == 2 && !evt.isConsumed()) {
             evt.consume();
             Point point = evt.getPoint();
             int row = Bill_table.rowAtPoint(point);
@@ -4012,13 +3986,13 @@ public class MainFrame extends javax.swing.JFrame{
             String invoiceID = String.valueOf(model.getValueAt(row, 0));
             bill_paymentPane.setVisible(true);
             bill_InvoiceID_combo.setSelectedItem(invoiceID);
-            BillPay.getInstance().setBillPaymentFields(bill_invoiceValue_txt, Bill_date_txt,bill_payable_txt,bill_return_label, bill_paymentPane);
+            BillPay.getInstance().setBillPaymentFields(bill_invoiceValue_txt, Bill_date_txt, bill_payable_txt, bill_return_label, bill_paymentPane);
             BillPay.getInstance().filLBillPay();
         }
     }//GEN-LAST:event_Bill_tableMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if(!bill_payable_txt.getText().equals("0.0")){
+        if (!bill_payable_txt.getText().equals("0.0")) {
             BillPay.getInstance().setCashPayFields(bill_currentDate, bill_chooseDate, bill_cash_datePicker);
             BillPay.getInstance().cashPay();
 
@@ -4026,24 +4000,24 @@ public class MainFrame extends javax.swing.JFrame{
             bill_paymentPane.setVisible(false);
             bill_invoiceValue_txt.setText("");
             Bill_date_txt.setText("");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "This does not have any payable amount");
-                    
+
         }
-        
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    public boolean validationChequePanel(){
-        if(bill_chequeNo_txt.getText().equals("") || bill_chequeDatePicker.getDate().equals("")){
+    public boolean validationChequePanel() {
+        if (bill_chequeNo_txt.getText().equals("") || bill_chequeDatePicker.getDate().equals("")) {
             JOptionPane.showMessageDialog(null, "Please Enter chque number and date");
             return true;
         }
         return false;
-        
+
     }
 
     private void bill_chooseDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bill_chooseDateActionPerformed
-       bill_cash_datePicker.setEnabled(true);
+        bill_cash_datePicker.setEnabled(true);
     }//GEN-LAST:event_bill_chooseDateActionPerformed
 
     private void bill_currentDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bill_currentDateActionPerformed
@@ -4051,9 +4025,9 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_bill_currentDateActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        String orderID =String.valueOf(bill_InvoiceID_combo.getSelectedItem());
-        
-        if(!validationChequePanel()){
+        String orderID = String.valueOf(bill_InvoiceID_combo.getSelectedItem());
+
+        if (!validationChequePanel()) {
             Timestamp timestamp = new Timestamp(bill_chequeDatePicker.getDate().getTime());
             String dateStamp = String.valueOf(timestamp);
 
@@ -4066,32 +4040,30 @@ public class MainFrame extends javax.swing.JFrame{
             dateStamp = String.valueOf(timestamp);
             data.add(dateStamp);
             data.add(bill_chequeNo_txt.getText());
-            
+
             connector.editRecordInTable("orders", "orderID", "status", "1", orderID);
             connector.insertRecord("order_payment", data);
         }
-        
 
-        
-        
+
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void bill_pay_select_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bill_pay_select_btnActionPerformed
-        BillPay.getInstance().setBillPaymentFields(bill_invoiceValue_txt, Bill_date_txt,bill_payable_txt,bill_return_label, bill_paymentPane);
+        BillPay.getInstance().setBillPaymentFields(bill_invoiceValue_txt, Bill_date_txt, bill_payable_txt, bill_return_label, bill_paymentPane);
         BillPay.getInstance().filLBillPay();
     }//GEN-LAST:event_bill_pay_select_btnActionPerformed
 
     private void bill_userID_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bill_userID_comboActionPerformed
         String userID = String.valueOf(bill_userID_combo.getSelectedItem());
-        
+
         String name = connector.getRelavantRecord("customers", "name", "customer_code", userID);
         bill_name_combo.setSelectedItem(name);
     }//GEN-LAST:event_bill_userID_comboActionPerformed
 
     private void bill_name_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bill_name_comboActionPerformed
         String name = String.valueOf(bill_name_combo.getSelectedItem());
-        
-        String userID = connector.getRelavantRecord("customers","customer_code","name", name);
+
+        String userID = connector.getRelavantRecord("customers", "customer_code", "name", name);
         bill_userID_combo.setSelectedItem(userID);
     }//GEN-LAST:event_bill_name_comboActionPerformed
 
@@ -4108,27 +4080,27 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_update_costP_txtFocusGained
 
     private void update_qty_txtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_qty_txtFocusGained
- 
+
         update_qty_txt.selectAll();
     }//GEN-LAST:event_update_qty_txtFocusGained
 
     private void report_userID_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_userID_comboActionPerformed
         String userID = String.valueOf(report_userID_combo.getSelectedItem());
-        
+
         String name = connector.getRelavantRecord("customers", "name", "customer_code", userID);
         report_name_combo.setSelectedItem(name);
     }//GEN-LAST:event_report_userID_comboActionPerformed
 
     private void report_name_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_name_comboActionPerformed
-         String name = String.valueOf(report_name_combo.getSelectedItem());
-        
+        String name = String.valueOf(report_name_combo.getSelectedItem());
+
         String userID = connector.getRelavantRecord("customers", "customer_code", "name", name);
         report_userID_combo.setSelectedItem(userID);
     }//GEN-LAST:event_report_name_comboActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        String path = report_folder_path+"\\item\\emptyStock.jrxml";
-        
+        String path = report_folder_path + "\\item\\emptyStock.jrxml";
+
         JasperReport jr;
         try {
             jr = JasperCompileManager.compileReport(path);
@@ -4144,8 +4116,8 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        String path = report_folder_path+"\\item\\selling_history.jrxml";
-        HashMap hm  =  new HashMap();
+        String path = report_folder_path + "\\item\\selling_history.jrxml";
+        HashMap hm = new HashMap();
         hm.put("itemNo", String.valueOf(report_item_combo.getSelectedItem()));
         JasperReport jr;
         try {
@@ -4162,17 +4134,17 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        String path = report_folder_path+"\\SalesInvoice\\sales_invoice.jrxml";
-        System.out.println("Path :"+path);
-        String userID = String.valueOf(report_userID_combo.getSelectedItem());        
+        String path = report_folder_path + "\\SalesInvoice\\sales_invoice.jrxml";
+        System.out.println("Path :" + path);
+        String userID = String.valueOf(report_userID_combo.getSelectedItem());
         String sql = "select invoice_id,orderDate FROM invoices WHERE customer_code like ? ORDER BY orderDate DESC LIMIT 1 ";
         ArrayList list = new ArrayList();
         list.add(userID);
-        String invoiceID = connector.sqlExecution(sql,"invoice_id",list);
-        System.out.println("Invoice ID : "+invoiceID);
-        String sub_report_directory = report_folder_path+"\\SalesInvoice\\";
-        System.out.println("Sub report "+sub_report_directory );
-        if(invoiceID != null){
+        String invoiceID = connector.sqlExecution(sql, "invoice_id", list);
+        System.out.println("Invoice ID : " + invoiceID);
+        String sub_report_directory = report_folder_path + "\\SalesInvoice\\";
+        System.out.println("Sub report " + sub_report_directory);
+        if (invoiceID != null) {
             HashMap hm = new HashMap();
             hm.put("userID", userID);
             hm.put("invoiceID", invoiceID);
@@ -4187,44 +4159,43 @@ public class MainFrame extends javax.swing.JFrame{
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Error in printing : " + ex.getMessage());
 
-            } 
-        }else{
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "Sorry This User Does not have any bills...");
         }
-        
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void update_costP_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_costP_txtFocusLost
-        
+
     }//GEN-LAST:event_update_costP_txtFocusLost
 
     private void update_itemNo_comboFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_update_itemNo_comboFocusLost
-        
+
     }//GEN-LAST:event_update_itemNo_comboFocusLost
 
     private void add_itemNo_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_add_itemNo_txtFocusLost
-        
+
     }//GEN-LAST:event_add_itemNo_txtFocusLost
 
     private void sales_searchI_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_searchI_btn1ActionPerformed
-        InvoiceSearch search = new InvoiceSearch(sales_InvoiceID_txt, sales_CID_combo, sales_CName_combo, sales_item_table, sales_total_txt, sales_discount_txt, sales_grand_txt,sales_additional_txt, connector);
+        InvoiceSearch search = new InvoiceSearch(sales_InvoiceID_txt, sales_CID_combo, sales_CName_combo, sales_item_table, sales_total_txt, sales_discount_txt, sales_grand_txt, sales_additional_txt, connector);
         search.setHalfPayComponents(sales_halfPay_check, sales_halfPay_txt, sales_halfPay_creditTxt, sales_halfPay_panel);
-        JComboBox search_invoiceID = new JComboBox();       
+        JComboBox search_invoiceID = new JComboBox();
         AutoCompleteDecorator.decorate(search_invoiceID);
 
         manipulation.getRecords("invoices", "invoice_id", search_invoiceID);
-        String invoiceID="";
-        
-       
+        String invoiceID = "";
+
         final JComponent[] inputs = new JComponent[]{
             new JLabel("Invoice ID"),
             search_invoiceID
-            
+
         };
         int result = JOptionPane.showConfirmDialog(null, inputs, "Select Invoice number", JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             invoiceID = String.valueOf(search_invoiceID.getSelectedItem());
-            
+
             search.fillInvoice(invoiceID);
             sales_save_btn.setEnabled(false);
             sales_remove_btn.setEnabled(false);
@@ -4236,10 +4207,8 @@ public class MainFrame extends javax.swing.JFrame{
         } else {
             System.out.println("User canceled / closed the dialog, result = " + result);
         }
-        
-        
-        
-       
+
+
     }//GEN-LAST:event_sales_searchI_btn1ActionPerformed
 
     private void sales_grand_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_grand_txtActionPerformed
@@ -4247,7 +4216,7 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_sales_grand_txtActionPerformed
 
     private void add_itemNo_txtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_add_itemNo_txtFocusGained
-        
+
     }//GEN-LAST:event_add_itemNo_txtFocusGained
 
     private void update_costP_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_costP_txtActionPerformed
@@ -4256,7 +4225,7 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         ViewManipulation.changePanel(MainChangeFrame, ItemSearchPanel);
-        DataManipulation manipulation = new DataManipulation(connector); 
+        DataManipulation manipulation = new DataManipulation(connector);
         manipulation.getRecords("category", "CatName", item_search_category_combo);
         MyCombo autoCombo1 = new MyCombo();
         autoCombo1.setSearchableCombo(item_search_category_combo, true, "No Result Found");
@@ -4264,9 +4233,9 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        String path = report_folder_path+"\\item\\purchaise_history\\purchaise_history.jrxml";
+        String path = report_folder_path + "\\item\\purchaise_history\\purchaise_history.jrxml";
 //        String sub_path = report_folder_path+"\\item\\emptyStock_subreport1.jrxml";
-        HashMap hm  =  new HashMap();
+        HashMap hm = new HashMap();
         hm.put("itemNo", String.valueOf(report_item_combo.getSelectedItem()));
 //        hm.put("SUBREPORT_DIR",sub_path);
         JasperReport jr;
@@ -4284,12 +4253,12 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void item_report_checkBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_report_checkBoxActionPerformed
-        if(item_report_checkBox.isSelected()){
+        if (item_report_checkBox.isSelected()) {
             item_date1_label.setVisible(true);
             item_date2_label.setVisible(true);
             reports_date2_picker.setVisible(true);
             reports_date1_picker.setVisible(true);
-        }else{
+        } else {
             item_date1_label.setVisible(false);
             item_date2_label.setVisible(false);
             reports_date2_picker.setVisible(false);
@@ -4298,21 +4267,23 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_item_report_checkBoxActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        String path = report_folder_path+"\\user\\unpaid-bills.jrxml";
-        System.out.println("path"+path);
-        Calendar c = Calendar.getInstance();
-        Timestamp toDate = new Timestamp(c.getTimeInMillis());
-        c.add(Calendar.YEAR,-1);
-        Timestamp fromDate = new Timestamp(c.getTimeInMillis());
+        String path = report_folder_path + "\\user\\unpaid-bills.jrxml";
+        System.out.println("path" + path);
+//        Calendar c = Calendar.getInstance();
+//        Timestamp toDate = new Timestamp(c.getTimeInMillis());
+//        c.add(Calendar.YEAR,-1);
+        Timestamp toDate = new Timestamp(reports_date2_picker.getDate().getTime());
+
+        Timestamp fromDate = new Timestamp(reports_date1_picker.getDate().getTime());
         String fromDateString = String.valueOf(fromDate);
         String toDateString = String.valueOf(toDate);
-        
+
         HashMap hm = new HashMap();
-        hm.put("FromDate",fromDateString );
-        hm.put("ToDate", toDateString);  
-        System.out.println("FromDate : "+fromDateString);
-        System.out.println("FromDate : "+toDateString);
-        
+        hm.put("FromDate", fromDateString);
+        hm.put("ToDate", toDateString);
+        System.out.println("FromDate : " + fromDateString);
+        System.out.println("FromDate : " + toDateString);
+
         JasperReport jr;
         try {
             jr = JasperCompileManager.compileReport(path);
@@ -4328,35 +4299,33 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        String path = report_folder_path+"\\user\\all_selling.jrxml";
+        String path = report_folder_path + "\\user\\all_selling.jrxml";
         Date fromDate = reports_date1_picker.getDate();
-        Date toDate = reports_date2_picker.getDate();        
-        String fromDateString = new SimpleDateFormat("yyyy-MM-dd").format(fromDate);        
+        Date toDate = reports_date2_picker.getDate();
+        String fromDateString = new SimpleDateFormat("yyyy-MM-dd").format(fromDate);
         String toDateString = new SimpleDateFormat("yyyy-MM-dd").format(toDate);
-        
+
 //        Calendar c = Calendar.getInstance();
 ////        Timestamp toDate = new Timestamp(c.getTimeInMillis());
 //        c.add(Calendar.YEAR,-1);
 //        Timestamp fromDate = new Timestamp(c.getTimeInMillis());
 //        String fromDateString = String.valueOf(fromDate);
 //        String toDateString = String.valueOf(toDate);
-        
-        System.out.println("FRom "+fromDateString+ " To "+toDateString + " id "+String.valueOf(report_userID_combo.getSelectedItem()));
-        
+        System.out.println("FRom " + fromDateString + " To " + toDateString + " id " + String.valueOf(report_userID_combo.getSelectedItem()));
         HashMap hm = new HashMap();
-        hm.put("FromDate",fromDateString );
-        hm.put("ToDate", toDateString); 
-        hm.put("customer_code",String.valueOf(report_userID_combo.getSelectedItem()));
-        System.out.println("FromDate : "+fromDateString);
-        System.out.println("FromDate : "+toDateString);
-        
+        hm.put("FromDate", fromDateString);
+        hm.put("ToDate", toDateString);
+        hm.put("customer_code", String.valueOf(report_userID_combo.getSelectedItem()));
+        System.out.println("FromDate : " + fromDateString);
+        System.out.println("FromDate : " + toDateString);
+
         JasperReport jr;
         try {
             jr = JasperCompileManager.compileReport(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, hm, connector.startConnection());
             JasperViewer jw = new JasperViewer(jp, false);
-            jw.viewReport(jp,false);
-            
+            jw.viewReport(jp, false);
+
         } catch (JRException ex) {
             JOptionPane.showMessageDialog(null, "ERROR in Reporting all items...");
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -4367,30 +4336,29 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void Return_labelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Return_labelMouseClicked
 //        return_cancel_btn.setEnabled(false);
-        
+
         ArrayList<JComboBox> combos = new ArrayList<JComboBox>();
 
         combos.add(return_invoiceID_combo);
         combos.add(return_userID_combo);
         combos.add(return_userName_combo);
-        
+
         ViewManipulation.emptyComboBoxes(combos);
-        
+
         ButtonGroup return_yesno = new ButtonGroup();
         return_yesno.add(return_no);
         return_yesno.add(return_yes);
         return_yes.setSelected(true);
-        
-        setDefaultDateRange(return_from_picker,return_to_picker,6);
+
+        setDefaultDateRange(return_from_picker, return_to_picker, 6);
         ViewManipulation.changePanel(MainChangeFrame, SalesReturnPanel);
-        sales_return = new SalesReturn(return_invoiceID_combo,return_userID_combo,return_userName_combo,return_total_txt,connector);        
-        sales_return.fillDataToCombo(); 
+        sales_return = new SalesReturn(return_invoiceID_combo, return_userID_combo, return_userName_combo, return_total_txt, connector);
+        sales_return.fillDataToCombo();
         sales_return.changeTableView(return_item_table);
-        
+
         sales_return.eventForItemTable(return_item_table);
-        
-        
-        
+
+
     }//GEN-LAST:event_Return_labelMouseClicked
 
     private void return_noActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_noActionPerformed
@@ -4404,28 +4372,28 @@ public class MainFrame extends javax.swing.JFrame{
     private void return_cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_cancel_btnActionPerformed
         return_cancel_btn.setEnabled(false);
         return_search_invoice.setEnabled(true);
-        
+
         ViewManipulation.changePanel(sales_return_subPanel, returns_item_table);
-                
+
     }//GEN-LAST:event_return_cancel_btnActionPerformed
 
     private void return_search_invoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_search_invoiceActionPerformed
         return_cancel_btn.setEnabled(true);
         sales_return.setPanels(sales_return_subPanel, returns_item_table);
-        sales_return.searchInvoice(return_search_item_combo,return_invoiceSearch_table,return_item_table, connector);
-        ViewManipulation.changePanel(sales_return_subPanel,returns_search_panel);
+        sales_return.searchInvoice(return_search_item_combo, return_invoiceSearch_table, return_item_table, connector);
+        ViewManipulation.changePanel(sales_return_subPanel, returns_search_panel);
         return_search_invoice.setEnabled(false);
-        
+
     }//GEN-LAST:event_return_search_invoiceActionPerformed
 
     private void return_invoiceID_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_invoiceID_comboActionPerformed
         String invoice_id = (String) return_invoiceID_combo.getSelectedItem();
-       
+
         String customer_id = connector.getRelavantRecord("invoices", "customer_code", "invoice_id", invoice_id);
         return_userID_combo.setSelectedItem(customer_id);
 
         //Qty Adding to the text Box
-        String customer_name= connector.getRelavantRecord("customers", "name", "customer_code",customer_id);
+        String customer_name = connector.getRelavantRecord("customers", "name", "customer_code", customer_id);
         return_userName_combo.setSelectedItem(customer_name);
     }//GEN-LAST:event_return_invoiceID_comboActionPerformed
 
@@ -4434,30 +4402,28 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_Return_labelMouseEntered
 
     private void return_search_item_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_search_item_comboActionPerformed
-        
+
     }//GEN-LAST:event_return_search_item_comboActionPerformed
 
     private void return_userID_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_userID_comboActionPerformed
-        
+
     }//GEN-LAST:event_return_userID_comboActionPerformed
 
     private void return_userID_comboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_return_userID_comboKeyPressed
-        
-        
-        
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER ){
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (((JTextComponent) ((JComboBox) ((Component) evt
                     .getSource()).getParent()).getEditor()
                     .getEditorComponent()).getText().isEmpty()) {
                 System.out.println("please dont make me blank");
             }
-            
+
             //        Populating the combobox and make them dropdown
             String customer_id = (String) return_userID_combo.getSelectedItem();
 
             String customer_name = connector.getRelavantRecord("users", "name", "userID", customer_id);
             return_userName_combo.setSelectedItem(customer_name);
-            
+
             return_invoiceID_combo.removeAllItems();
             manipulation.getRecordsWithCondtion("orders", "orderID", "userID", customer_id, return_invoiceID_combo);
             return_invoiceID_combo.showPopup();
@@ -4504,10 +4470,10 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_return_calculation_btnActionPerformed
 
     private void sales_halfPay_checkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_halfPay_checkActionPerformed
-        if(sales_CID_combo.getSelectedItem().equals("1")){
+        if (sales_CID_combo.getSelectedItem().equals("1")) {
             JOptionPane.showMessageDialog(null, "Sorry half payments can only be done with credit users");
             sales_halfPay_check.setSelected(false);
-        }else{
+        } else {
             if (sales_halfPay_check.isSelected()) {
                 sales_halfPay_panel.setVisible(true);
                 sales_halfPay_txt.requestFocusInWindow();
@@ -4515,8 +4481,8 @@ public class MainFrame extends javax.swing.JFrame{
                 sales_halfPay_panel.setVisible(false);
             }
         }
-              
-        
+
+
     }//GEN-LAST:event_sales_halfPay_checkActionPerformed
 
     private void sales_halfPay_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_halfPay_txtKeyTyped
@@ -4532,17 +4498,17 @@ public class MainFrame extends javax.swing.JFrame{
 //                sales_halfPay_creditTxt.setText(Rounding.RoundTo5(credit, editable));
 //            }
 //            
-            
-        
+
+
     }//GEN-LAST:event_sales_halfPay_txtKeyTyped
 
     private void sales_halfPay_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_halfPay_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             double grand = Double.parseDouble(sales_grand_txt.getText());
             if (!sales_halfPay_txt.getText().equals("")) {
                 double cash = Double.parseDouble(sales_halfPay_txt.getText());
                 double credit = grand - cash;
-                
+
                 if (credit < 0) {
                     JOptionPane.showMessageDialog(null, "Sorry you are entering wrong cash amount");
                     sales_halfPay_txt.setText("");
@@ -4550,7 +4516,7 @@ public class MainFrame extends javax.swing.JFrame{
                 sales_halfPay_creditTxt.setText(Rounding.RoundTo5(credit, editable));
             }
         }
-        
+
     }//GEN-LAST:event_sales_halfPay_txtKeyPressed
 
     private void add_item_brand_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_brand_txtKeyPressed
@@ -4565,19 +4531,19 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void add_item_sellingP_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_sellingP_txtKeyPressed
         char c = evt.getKeyChar();
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-           add_item_location_txt.requestFocusInWindow();
-        }else if(Character.isLetter(c) && !evt.isAltDown()){
-           evt.consume();              
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            add_item_location_txt.requestFocusInWindow();
+        } else if (Character.isLetter(c) && !evt.isAltDown()) {
+            evt.consume();
         }
     }//GEN-LAST:event_add_item_sellingP_txtKeyPressed
 
     private void add_item_costP_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_costP_txtKeyPressed
         char c = evt.getKeyChar();
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-           add_item_sellingP_txt.requestFocusInWindow();
-        }else if(Character.isLetter(c) && !evt.isAltDown()){
-           evt.consume();              
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            add_item_sellingP_txt.requestFocusInWindow();
+        } else if (Character.isLetter(c) && !evt.isAltDown()) {
+            evt.consume();
         }
     }//GEN-LAST:event_add_item_costP_txtKeyPressed
 
@@ -4586,13 +4552,13 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_add_item_cost_txtKeyPressed
 
     private void add_item_location_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_location_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             add_item_unit_combo.requestFocusInWindow();
         }
     }//GEN-LAST:event_add_item_location_txtKeyPressed
 
     private void add_item_billPrice_txtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_add_item_billPrice_txtFocusGained
-        ItemAdd.getInstance().generateDescription();        
+        ItemAdd.getInstance().generateDescription();
     }//GEN-LAST:event_add_item_billPrice_txtFocusGained
 
     private void add_item_costP_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_add_item_costP_txtFocusLost
@@ -4618,19 +4584,19 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_add_item_sellingP_txtKeyTyped
 
     private void return_button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_button1ActionPerformed
-        
-        ReturnToDB toDB = new ReturnToDB(return_invoiceID_combo,return_reason_combo,return_item_table,connector);
-        if(toDB.checkReturnTable(return_item_table)){
+
+        ReturnToDB toDB = new ReturnToDB(return_invoiceID_combo, return_reason_combo, return_item_table, connector);
+        if (toDB.checkReturnTable(return_item_table)) {
             toDB.saveToDB();
         }
-        
+
     }//GEN-LAST:event_return_button1ActionPerformed
 
     private void return_userName_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_userName_comboActionPerformed
         String name = (String) return_userName_combo.getSelectedItem();
 
         String customer_id = connector.getRelavantRecord("customers", "customer_code", "name", name);
-        return_userID_combo.setSelectedItem(customer_id);        
+        return_userID_combo.setSelectedItem(customer_id);
     }//GEN-LAST:event_return_userName_comboActionPerformed
 
     private void NameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTxtActionPerformed
@@ -4647,15 +4613,15 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String workingDir = System.getProperty("user.dir");
-        System.out.println("Current :"+workingDir);
+        System.out.println("Current :" + workingDir);
         ViewManipulation.changePanel(MainChangeFrame, stock_count_panel);
-        Stock.getInstance().setFields(stock_item_combo, stock_qty_txt, stock_selling_txt, stock_selling_lbl,stock_description_lbl,stock_availableQty_lbl,stock_c_selling_lbl,stock_item_table, connector);
+        Stock.getInstance().setFields(stock_item_combo, stock_qty_txt, stock_selling_txt, stock_selling_lbl, stock_description_lbl, stock_availableQty_lbl, stock_c_selling_lbl, stock_item_table, connector);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void stock_selling_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stock_selling_txtFocusLost
-        if(!stock_selling_txt.getText().isEmpty()){
-             Stock stock = Stock.getInstance();
-            String selling = stock_selling_txt.getText();            
+        if (!stock_selling_txt.getText().isEmpty()) {
+            Stock stock = Stock.getInstance();
+            String selling = stock_selling_txt.getText();
             stock_selling_txt.setText(selling.toUpperCase());
             double selling_val = Double.valueOf(stock.parseToNumbers(selling));
             stock_selling_lbl.setText(Rounding.decimalFormatiing(selling_val));
@@ -4663,13 +4629,13 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_stock_selling_txtFocusLost
 
     private void stock_qty_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stock_qty_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             stock_selling_txt.requestFocusInWindow();
         }
     }//GEN-LAST:event_stock_qty_txtKeyPressed
 
     private void stock_selling_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stock_selling_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             Stock stock = Stock.getInstance();
             if (!stock_selling_txt.getText().equals("")) {
                 String selling = stock_selling_txt.getText();
@@ -4677,9 +4643,9 @@ public class MainFrame extends javax.swing.JFrame{
                 double selling_val = Double.valueOf(stock.parseToNumbers(selling));
                 stock_selling_lbl.setText(Rounding.decimalFormatiing(selling_val));
             }
-            
+
             stock_update_btn.requestFocusInWindow();
-            
+
         }
     }//GEN-LAST:event_stock_selling_txtKeyPressed
 
@@ -4690,24 +4656,23 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_stock_qty_txtFocusGained
 
     private void stock_update_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stock_update_btnActionPerformed
-         Stock stock = Stock.getInstance();
+        Stock stock = Stock.getInstance();
         stock.update();
     }//GEN-LAST:event_stock_update_btnActionPerformed
 
     private void stock_update_btnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stock_update_btnKeyPressed
-       if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-           Stock stock = Stock.getInstance();
-           stock.update();
-           stock_item_combo.getEditor().selectAll();
-           
-           
-       }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            Stock stock = Stock.getInstance();
+            stock.update();
+            stock_item_combo.getEditor().selectAll();
+
+        }
     }//GEN-LAST:event_stock_update_btnKeyPressed
 
     private void stock_selling_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stock_selling_txtKeyTyped
         char c = evt.getKeyChar();
 
-        if (!((c==KeyEvent.VK_A)|| (c==KeyEvent.VK_N)|| (c==KeyEvent.VK_K)|| (c==KeyEvent.VK_T)|| (c==KeyEvent.VK_G)|| (c==KeyEvent.VK_S)|| (c==KeyEvent.VK_L)|| (c==KeyEvent.VK_M)|| (c==KeyEvent.VK_P)|| (c==KeyEvent.VK_J)|| (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE)) {
+        if (!((c == KeyEvent.VK_A) || (c == KeyEvent.VK_N) || (c == KeyEvent.VK_K) || (c == KeyEvent.VK_T) || (c == KeyEvent.VK_G) || (c == KeyEvent.VK_S) || (c == KeyEvent.VK_L) || (c == KeyEvent.VK_M) || (c == KeyEvent.VK_P) || (c == KeyEvent.VK_J) || (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE)) {
             evt.consume();
         }
     }//GEN-LAST:event_stock_selling_txtKeyTyped
@@ -4741,7 +4706,7 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_add_item_billPrice_txtActionPerformed
 
     private void add_item_unit_comboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_unit_comboKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             add_item_save_btn.requestFocusInWindow();
         }
     }//GEN-LAST:event_add_item_unit_comboKeyPressed
@@ -4759,7 +4724,7 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_update_sellingP_txtActionPerformed
 
     private void update_sellingP_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_update_sellingP_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             update_qty_txt.requestFocusInWindow();
             update_qty_txt.selectAll();
             update_selling_lbl.setText(Purchaise.getInstance().calculateSelling());
@@ -4771,11 +4736,11 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_update_sellingP_txtKeyTyped
 
     private void update_itemNo_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_itemNo_comboActionPerformed
-        
-        String itemNo = String.valueOf(update_itemNo_combo.getSelectedItem());        
-        
+
+        String itemNo = String.valueOf(update_itemNo_combo.getSelectedItem());
+
         ArrayList list = connector.readRow("items", "item_code", itemNo);
-        if(list.size() != 0){
+        if (list.size() != 0) {
             String description = String.valueOf(list.get(4));
             String cost = String.valueOf(list.get(6));
             String selling = String.valueOf(list.get(7));
@@ -4784,11 +4749,10 @@ public class MainFrame extends javax.swing.JFrame{
             update_description_txt.setText(description);
             update_cost_lbl.setText(cost);
             update_selling_lbl.setText(selling);
-            update_available_lbl.setText(available_qty); 
+            update_available_lbl.setText(available_qty);
         }
-        
-          
-        
+
+
     }//GEN-LAST:event_update_itemNo_comboActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -4800,7 +4764,7 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         Retailer.getInstance().saveRetailer();
-        
+
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
@@ -4808,13 +4772,13 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void retailer_name_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_retailer_name_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             retailer_address_txt.requestFocusInWindow();
         }
     }//GEN-LAST:event_retailer_name_txtKeyPressed
 
     private void retailer_address_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_retailer_address_txtKeyPressed
-         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             retailer_contact_txt.requestFocusInWindow();
         }
     }//GEN-LAST:event_retailer_address_txtKeyPressed
@@ -4825,7 +4789,7 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void purchaise_invoiceno_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_purchaise_invoiceno_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             update_itemNo_combo.getEditor().getEditorComponent().requestFocusInWindow();
         }
     }//GEN-LAST:event_purchaise_invoiceno_txtKeyPressed
@@ -4834,51 +4798,48 @@ public class MainFrame extends javax.swing.JFrame{
         JFileChooser jf = new JFileChooser();
         jf.showOpenDialog(this);
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        
+
         String dbName = "prototype";
         String dbUser = "root";
         String dbPass = "";
-        
-        String default_backup = "C:/Inventory Data";   
-        default_backup+= "/backups/"+date+".sql";
+
+        String default_backup = "C:/Inventory Data";
+        default_backup += "/backups/" + date + ".sql";
         default_backup = default_backup.replace("\\", "/");
-        
-        
+
         try {
             File f = jf.getSelectedFile();
             backup_path = f.getAbsolutePath();
             backup_path = backup_path.replace('\\', '/');
-            backup_path = backup_path+"_"+date+".sql";
-            
+            backup_path = backup_path + "_" + date + ".sql";
+
             String executeCmd = "C:/wamp/bin/mysql/mysql5.7.21/bin/mysqldump.exe -u lakshan -p123 --add-drop-database -B prototype -r";
-            executeCmd = executeCmd+backup_path;
-            System.out.println("execute : "+executeCmd);
-            Process runtimeProcess =Runtime.getRuntime().exec(executeCmd);
-            
+            executeCmd = executeCmd + backup_path;
+            System.out.println("execute : " + executeCmd);
+            Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+
             int processComplete = runtimeProcess.waitFor();
-            
-            
-            
-            if(processComplete ==0){
-                 JOptionPane.showMessageDialog(null, "Backup Created Successfully....");             
-            }else{
-                 JOptionPane.showMessageDialog(null, "Backup Created Failure....");
+
+            if (processComplete == 0) {
+                JOptionPane.showMessageDialog(null, "Backup Created Successfully....");
+            } else {
+                JOptionPane.showMessageDialog(null, "Backup Created Failure....");
             }
-            
+
             String executeCmd2 = "C:/wamp/bin/mysql/mysql5.7.21/bin/mysqldump.exe -u lakshan -p123 --add-drop-database -B prototype -r";
-            executeCmd2+=default_backup;
-            System.out.println("Auto backup :"+executeCmd2);
-            Process runtimeProcess2 =Runtime.getRuntime().exec(executeCmd2);
+            executeCmd2 += default_backup;
+            System.out.println("Auto backup :" + executeCmd2);
+            Process runtimeProcess2 = Runtime.getRuntime().exec(executeCmd2);
             int processComplete2 = runtimeProcess2.waitFor();
-            
-            if(processComplete2 == 0){
+
+            if (processComplete2 == 0) {
                 JOptionPane.showMessageDialog(null, "Auto Backup Created Successfully....");
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Auto backup failure...");
-            } 
-            
+            }
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "error "+e.getMessage());
+            JOptionPane.showMessageDialog(null, "error " + e.getMessage());
         }
 //        DoBackup.Backupdbtosql();
     }//GEN-LAST:event_jButton18ActionPerformed
@@ -4889,7 +4850,7 @@ public class MainFrame extends javax.swing.JFrame{
 
         JTextField text = new JTextField();
         manipulation.getRecords("items", "item_code", combo);
-        String item_code="";
+        String item_code = "";
 
         final JComponent[] inputs = new JComponent[]{
             new JLabel("Item ID"),
@@ -4900,14 +4861,14 @@ public class MainFrame extends javax.swing.JFrame{
         };
         int result = JOptionPane.showConfirmDialog(null, inputs, "My custom dialog", JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
-            item_code= String.valueOf(combo.getSelectedItem());
+            item_code = String.valueOf(combo.getSelectedItem());
             int qty = Integer.parseInt(text.getText());
             String available_qty = connector.getRelavantRecord("items", "stock", "item_code", item_code);
-            System.out.println("Available :"+available_qty);
-            qty+=Integer.valueOf(available_qty);
-            if(connector.editRecordInTable("items", "item_code", "stock", String.valueOf(qty), item_code)){
-                JOptionPane.showMessageDialog(null, "Item qty added scuccessfully \n Item_code : "+item_code+" previous qty : "+available_qty+" after_update :  "+qty);
-            }else{
+            System.out.println("Available :" + available_qty);
+            qty += Integer.valueOf(available_qty);
+            if (connector.editRecordInTable("items", "item_code", "stock", String.valueOf(qty), item_code)) {
+                JOptionPane.showMessageDialog(null, "Item qty added scuccessfully \n Item_code : " + item_code + " previous qty : " + available_qty + " after_update :  " + qty);
+            } else {
                 JOptionPane.showMessageDialog(null, "Qty Update failure");
             }
 
@@ -4918,7 +4879,7 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void jLabel79MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel79MouseClicked
         ViewManipulation.changePanel(MainChangeFrame, settings_panel);
-        
+
     }//GEN-LAST:event_jLabel79MouseClicked
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
@@ -4927,10 +4888,10 @@ public class MainFrame extends javax.swing.JFrame{
 //        DataManipulation dm = new DataManipulation(connector);
 //        dm.getRecords("items", "item_code", settings_qty_edit_itemNo_combo);
 //        AutoCompleteDecorator.decorate(settings_qty_edit_itemNo_combo);
-        
+
         ViewManipulation.changePanel(settings_sub_panel, settings_sub_edit_panel);
         EditQty.getInstance().setFields(settings_qty_edit_itemNo_combo, settings_qty_edit_desctiption_lbl, settings_qty_edit_qty_lbl, settings_qty_edit_qty_txt, connector);
-        
+
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void settings_qty_edit_qty_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settings_qty_edit_qty_txtActionPerformed
@@ -4949,9 +4910,9 @@ public class MainFrame extends javax.swing.JFrame{
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
         String qty = settings_qty_edit_qty_txt.getText();
-        if(connector.editRecordInTable("items", "item_code", "stock", qty, String.valueOf(settings_qty_edit_itemNo_combo.getSelectedItem()))){
+        if (connector.editRecordInTable("items", "item_code", "stock", qty, String.valueOf(settings_qty_edit_itemNo_combo.getSelectedItem()))) {
             JOptionPane.showMessageDialog(null, "Qty Edited Successfully");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Qty Edit Failure");
         }
     }//GEN-LAST:event_jButton21ActionPerformed
@@ -4970,13 +4931,13 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton23ActionPerformed
 
     private void sales_addPrecent_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_addPrecent_txtKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             AddPrecentage addPrecentage = AddPrecentage.getInstance();
             addPrecentage.setTable(sales_item_table);
             addPrecentage.setPrecentage(sales_addPrecent_txt.getText());
             addPrecentage.updateTable();
             addPrecentage.calculateTotal(sales_total_txt, sales_discount_txt, sales_grand_txt);
-            
+
         }
     }//GEN-LAST:event_sales_addPrecent_txtKeyPressed
 
@@ -4993,8 +4954,8 @@ public class MainFrame extends javax.swing.JFrame{
                 clutch_plate_add_table,
                 connector);
         clutch_plate.add();
-        
-        
+
+
     }//GEN-LAST:event_clutch_plate_add_btnActionPerformed
 
     private void Clutch_Plate_TabbedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Clutch_Plate_TabbedMouseClicked
@@ -5020,14 +4981,14 @@ public class MainFrame extends javax.swing.JFrame{
             JOptionPane.showMessageDialog(null, "You should enter value for search an item");
         } else {
             ItemSearch search = ItemSearch.getInstance();
-            search.getSearchResults(connector, itemSearchTable,item_search_category_combo,searchPhrase,item_search_checkbox.isSelected());
+            search.getSearchResults(connector, itemSearchTable, item_search_category_combo, searchPhrase, item_search_checkbox.isSelected());
         }
     }//GEN-LAST:event_jButton27ActionPerformed
 
     private void item_search_checkboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_search_checkboxActionPerformed
-        if(item_search_checkbox.isSelected()){
+        if (item_search_checkbox.isSelected()) {
             item_search_category_combo.setEnabled(true);
-        }else{
+        } else {
             item_search_category_combo.setEnabled(false);
         }
     }//GEN-LAST:event_item_search_checkboxActionPerformed
@@ -5041,12 +5002,12 @@ public class MainFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton28ActionPerformed
 
     private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
-       String searchPhrase = user_search_txt.getText();
+        String searchPhrase = user_search_txt.getText();
         if (searchPhrase.equals("")) {
             JOptionPane.showMessageDialog(null, "You should enter value for search an item");
         } else {
             UserSearch search = UserSearch.getInstance();
-            search.getSearchResults(connector, userSearchTable,searchPhrase);
+            search.getSearchResults(connector, userSearchTable, searchPhrase);
         }
     }//GEN-LAST:event_jButton29ActionPerformed
 
@@ -5058,15 +5019,14 @@ public class MainFrame extends javax.swing.JFrame{
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
-  
-       
-    public void FillBill(String invoiceID){
-       ArrayList list =  connector.readRow("orders", "orderID", invoiceID);
-       bill_invoiceValue_txt.setText(String.valueOf(list.get(3)));
-       Bill_date_txt.setText(String.valueOf(list.get(4)));
-        
+
+    public void FillBill(String invoiceID) {
+        ArrayList list = connector.readRow("orders", "orderID", invoiceID);
+        bill_invoiceValue_txt.setText(String.valueOf(list.get(3)));
+        Bill_date_txt.setText(String.valueOf(list.get(4)));
+
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -5102,23 +5062,19 @@ public class MainFrame extends javax.swing.JFrame{
 //            }
 //        });
 //    }
-    
-    public String generateUserID(){
-        String lastID = connector.retreveLastRecord("users","userID", "addedDate");
+    public String generateUserID() {
+        String lastID = connector.retreveLastRecord("users", "userID", "addedDate");
         String parts[] = lastID.split("U");
         int currentID = Integer.parseInt(parts[1]);
         int nextID = ++currentID;
-        
+
         DecimalFormat formatter = new DecimalFormat("000");
         String idFormatted = formatter.format(nextID);
-        
-        
-        return "U"+idFormatted;
+
+        return "U" + idFormatted;
     }
 
-    
-                    
-    public void makeAllSalesComponents(boolean b){
+    public void makeAllSalesComponents(boolean b) {
         sales_CID_combo.setEnabled(b);
         sales_CName_combo.setEnabled(b);
         sales_InvoiceID_txt.setEnabled(b);
@@ -5135,14 +5091,14 @@ public class MainFrame extends javax.swing.JFrame{
         sales_halfPay_txt.setEnabled(b);
         sales_additional_txt.setEnabled(b);
     }
-    
-    public void calculatetotal(){
+
+    public void calculatetotal() {
         TableModel model = sales_item_table.getModel();
-        double total = 0 ;
+        double total = 0;
         for (int i = 0; i < model.getRowCount(); i++) {
             String t1 = String.valueOf(model.getValueAt(i, 5));
-            total+=Double.parseDouble(t1);
-                     
+            total += Double.parseDouble(t1);
+
         }
         BigDecimal bd = new BigDecimal(total);
         bd = bd.setScale(2, RoundingMode.HALF_UP);
@@ -5151,24 +5107,26 @@ public class MainFrame extends javax.swing.JFrame{
         sales_total_txt.setText(String.valueOf(total));
         calculateGrandTotal();
     }
-    
-    public void calculateGrandTotal(){
+
+    public void calculateGrandTotal() {
         double total = Double.parseDouble(sales_total_txt.getText());
         double discount = Double.parseDouble(sales_discount_txt.getText());
-        double grand = total-(total*(discount/100));
-        
+        double grand = total - (total * (discount / 100));
+
         sales_grand_txt.setText(Rounding.RoundTo5(grand, true));
     }
-    
+
     public static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
+        if (places < 0) {
+            throw new IllegalArgumentException();
+        }
 
         BigDecimal bd = new BigDecimal(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
-    
-    public void emptyFieldsInSales(){
+
+    public void emptyFieldsInSales() {
 //        sales_InvoiceID_txt.setText("");
 //        sales_CID_combo.setSelectedItem("");
 //        sales_CName_combo.setSelectedItem("");
@@ -5180,33 +5138,28 @@ public class MainFrame extends javax.swing.JFrame{
         sales_grand_txt.setText("");
         sales_discount_txt.setText("");
         ViewManipulation.emptyTable(sales_item_table);
-        
+
         sales_halfPay_check.setSelected(false);
         sales_halfPay_panel.setVisible(false);
-        
-        
-        
+
     }
-    
-    
-    
-      
-    public void newBillPay(){
+
+    public void newBillPay() {
         AutoCompleteDecorator.decorate(bill_InvoiceID_combo);
         AutoCompleteDecorator.decorate(bill_name_combo);
         AutoCompleteDecorator.decorate(bill_userID_combo);
-        
+
         bill_userID_combo.removeAllItems();
         bill_name_combo.removeAllItems();
         bill_InvoiceID_combo.removeAllItems();
-        
-        manipulation.getRecords("customers","customer_code",bill_userID_combo);
-        manipulation.getRecords("customers","name",bill_name_combo);
-        manipulation.getRecordsWithCondtion("invoices","invoice_id","status","0",bill_InvoiceID_combo);
-        
+
+        manipulation.getRecords("customers", "customer_code", bill_userID_combo);
+        manipulation.getRecords("customers", "name", bill_name_combo);
+        manipulation.getRecordsWithCondtion("invoices", "invoice_id", "status", "0", bill_InvoiceID_combo);
+
     }
-    
-        
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddItemPanel;
     private javax.swing.JLabel AddProductLabel;
@@ -5537,5 +5490,4 @@ public class MainFrame extends javax.swing.JFrame{
     private javax.swing.JTextField user_search_txt;
     // End of variables declaration//GEN-END:variables
 
-    
 }
