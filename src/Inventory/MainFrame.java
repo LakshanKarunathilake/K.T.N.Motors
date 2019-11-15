@@ -438,7 +438,7 @@ public class MainFrame extends javax.swing.JFrame {
         bill_paymentPane = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        cashPay = new javax.swing.JButton();
         bill_currentDate = new javax.swing.JRadioButton();
         bill_chooseDate = new javax.swing.JRadioButton();
         bill_cash_datePicker = new com.toedter.calendar.JDateChooser();
@@ -447,7 +447,7 @@ public class MainFrame extends javax.swing.JFrame {
         bill_chequeNo_txt = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
-        jButton12 = new javax.swing.JButton();
+        chequePay = new javax.swing.JButton();
         bill_chequeDatePicker = new com.toedter.calendar.JDateChooser();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -2712,11 +2712,11 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel35.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel35.setText("Pay Date : ");
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton5.setText("Pay");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        cashPay.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cashPay.setText("Pay");
+        cashPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                cashPayActionPerformed(evt);
             }
         });
 
@@ -2750,7 +2750,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(13, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cashPay, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
         );
         jPanel4Layout.setVerticalGroup(
@@ -2765,7 +2765,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bill_cash_datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cashPay, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(101, Short.MAX_VALUE))
         );
 
@@ -2783,11 +2783,11 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel40.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel40.setText("Cheque Number ");
 
-        jButton12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton12.setText("Pay");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        chequePay.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        chequePay.setText("Pay");
+        chequePay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                chequePayActionPerformed(evt);
             }
         });
 
@@ -2807,7 +2807,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(bill_chequeDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(bill_cheque_numberLayout.createSequentialGroup()
                                 .addGap(30, 30, 30)
-                                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(chequePay, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bill_cheque_numberLayout.createSequentialGroup()
                         .addContainerGap()
@@ -2834,7 +2834,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bill_chequeDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(chequePay, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -3991,7 +3991,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Bill_tableMouseClicked
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void cashPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashPayActionPerformed
         if (!bill_payable_txt.getText().equals("0.0")) {
             BillPay.getInstance().setCashPayFields(bill_currentDate, bill_chooseDate, bill_cash_datePicker);
             BillPay.getInstance().cashPay();
@@ -4005,7 +4005,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         }
 
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_cashPayActionPerformed
 
     public boolean validationChequePanel() {
         if (bill_chequeNo_txt.getText().equals("") || bill_chequeDatePicker.getDate().equals("")) {
@@ -4024,29 +4024,22 @@ public class MainFrame extends javax.swing.JFrame {
         bill_cash_datePicker.setEnabled(false);
     }//GEN-LAST:event_bill_currentDateActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        String orderID = String.valueOf(bill_InvoiceID_combo.getSelectedItem());
+    private void chequePayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chequePayActionPerformed
+        
+        if (!bill_payable_txt.getText().equals("0.0")) {
+            BillPay.getInstance().setChequePayFields(bill_bank_comnbo, bill_chequeDatePicker,bill_chequeNo_txt);
+            BillPay.getInstance().chequePay();
 
-        if (!validationChequePanel()) {
-            Timestamp timestamp = new Timestamp(bill_chequeDatePicker.getDate().getTime());
-            String dateStamp = String.valueOf(timestamp);
+            Bill_table.setVisible(false);
+            bill_paymentPane.setVisible(false);
+            bill_invoiceValue_txt.setText("");
+            Bill_date_txt.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "This does not have any payable amount");
 
-            ArrayList data = new ArrayList();
-            data.add(String.valueOf(bill_InvoiceID_combo.getSelectedItem()));
-            data.add(dateStamp);
-            data.add("CHEQUE");
-            data.add(String.valueOf(bill_bank_comnbo.getSelectedItem()));
-            timestamp = new Timestamp(bill_chequeDatePicker.getDate().getTime());
-            dateStamp = String.valueOf(timestamp);
-            data.add(dateStamp);
-            data.add(bill_chequeNo_txt.getText());
-
-            connector.editRecordInTable("orders", "orderID", "status", "1", orderID);
-            connector.insertRecord("order_payment", data);
         }
 
-
-    }//GEN-LAST:event_jButton12ActionPerformed
+    }//GEN-LAST:event_chequePayActionPerformed
 
     private void bill_pay_select_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bill_pay_select_btnActionPerformed
         BillPay.getInstance().setBillPaymentFields(bill_invoiceValue_txt, Bill_date_txt, bill_payable_txt, bill_return_label, bill_paymentPane);
@@ -5225,8 +5218,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel bill_return_label;
     private javax.swing.JComboBox<String> bill_userID_combo;
     private javax.swing.JButton cancelBtn;
+    private javax.swing.JButton cashPay;
     private javax.swing.JComboBox<String> change_item_combo;
     private javax.swing.JTextField changed_item_txt;
+    private javax.swing.JButton chequePay;
     private javax.swing.JLabel clock_txt;
     private javax.swing.JButton clutch_plate_add_btn;
     private javax.swing.JTextField clutch_plate_add_grew_txt;
@@ -5252,7 +5247,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
@@ -5273,7 +5267,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;

@@ -4581,7 +4581,7 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jButton5" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="cashPay" min="-2" pref="150" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -4598,7 +4598,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="bill_cash_datePicker" min="-2" pref="42" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton5" min="-2" pref="62" max="-2" attributes="0"/>
+                              <Component id="cashPay" min="-2" pref="62" max="-2" attributes="0"/>
                               <EmptySpace pref="101" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -4613,7 +4613,7 @@
                         <Property name="text" type="java.lang.String" value="Pay Date : "/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton5">
+                    <Component class="javax.swing.JButton" name="cashPay">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="18" style="1"/>
@@ -4621,7 +4621,7 @@
                         <Property name="text" type="java.lang.String" value="Pay"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cashPayActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="bill_currentDate">
@@ -4676,7 +4676,7 @@
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                              <Component id="jButton12" min="-2" pref="174" max="-2" attributes="0"/>
+                                              <Component id="chequePay" min="-2" pref="174" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -4712,7 +4712,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="bill_chequeDatePicker" min="-2" pref="48" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jButton12" min="-2" pref="62" max="-2" attributes="0"/>
+                              <Component id="chequePay" min="-2" pref="62" max="-2" attributes="0"/>
                               <EmptySpace pref="33" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -4765,7 +4765,7 @@
                         <Property name="text" type="java.lang.String" value="Cheque Number "/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton12">
+                    <Component class="javax.swing.JButton" name="chequePay">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="18" style="1"/>
@@ -4773,7 +4773,7 @@
                         <Property name="text" type="java.lang.String" value="Pay"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton12ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chequePayActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="com.toedter.calendar.JDateChooser" name="bill_chequeDatePicker">
