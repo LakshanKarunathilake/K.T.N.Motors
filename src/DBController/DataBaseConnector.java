@@ -248,6 +248,7 @@ public class DataBaseConnector {
                 + "WHERE " + coloumnName + " like " + "'" + condition + "'";
 
         try {
+            System.out.println("SQL : "+sql);
             statement.executeUpdate(sql);
             return true;
         } catch (SQLException ex) {
