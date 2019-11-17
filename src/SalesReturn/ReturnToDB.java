@@ -63,9 +63,9 @@ public class ReturnToDB {
             String itemNo = String.valueOf(model.getValueAt(i, 0));
             ArrayList temp = connector.retreveDataColoumnWithTwoCondition("invoiceitems", "returnable_qty", "invoice_id", invoiceID, "item_code", itemNo);
             String ta = String.valueOf(temp.get(0));
-            int current_returnable = Integer.valueOf(ta);
+            double current_returnable = Double.valueOf(ta);
             
-            if((condition_tick != null) && (!return_qty.equals("0")) && (Integer.parseInt(return_qty)<=current_returnable) ){
+            if((condition_tick != null) && (!return_qty.equals("0")) && (Double.parseDouble(return_qty)<=current_returnable) ){
                 
                 
                 String bought_qty = String.valueOf(model.getValueAt(i, 4));
@@ -78,6 +78,7 @@ public class ReturnToDB {
                 double selling_price = total_sold / Double.parseDouble(bought_qty);
 
                 double returnAmount = Double.parseDouble(return_qty) * selling_price;
+                returnAmount = Double.parseDouble(Rounding.RoundTo5(returnAmount, true));
                 
                 //Adding current items return to one time return total
                 one_time_return_total+=returnAmount;
@@ -103,7 +104,7 @@ public class ReturnToDB {
                 connector.insertRecordColoumnCount("sales_return", list, columns);
                 
                 //Updating the returnable_qty to make sure the qty reduced in the table record
-                current_returnable -= Integer.valueOf(return_qty);
+                current_returnable -= Double.valueOf(return_qty);
                 changeReturnableQty(itemNo, current_returnable);
 
                 if (isCustomerCash()) {
@@ -209,8 +210,8 @@ public class ReturnToDB {
         System.out.println("Not Suitable return");
 
         //Adding the restock to the current stock count
-        int current_stock = Integer.parseInt(connector.getRelavantRecord("items", "stock", "item_code", itemNo));
-        current_stock += Integer.parseInt(qty);
+        double current_stock = Double.parseDouble(connector.getRelavantRecord("items", "stock", "item_code", itemNo));
+        current_stock += Double.parseDouble(qty);
 
         connector.editRecordInTable("items", "item_code", "stock", String.valueOf(current_stock), itemNo);
     }
@@ -218,17 +219,17 @@ public class ReturnToDB {
     private void damageReplaceAction(String qty,String itemNo){
         System.out.println("Damaged Replacing return");
 
-        int current_stock = Integer.parseInt(connector.getRelavantRecord("items", "stock", "item_code", itemNo));
-        if (current_stock < Integer.parseInt(qty)) {
+        double current_stock = Double.parseDouble(connector.getRelavantRecord("items", "stock", "item_code", itemNo));
+        if (current_stock < Double.parseDouble(qty)) {
             JOptionPane.showConfirmDialog(null, "Sorry cant replace don't have that much stock Cash should be returned");
             uncompatibleAction(qty, itemNo);
         } else {
-            current_stock -= Integer.parseInt(qty);
+            current_stock -= Double.parseDouble(qty);
             connector.editRecordInTable("items", "item_code", "stock", String.valueOf(current_stock), itemNo);
         }
     }
     
-    private void changeReturnableQty(String itemNo,int updating){
+    private void changeReturnableQty(String itemNo,double updating){
         String sql = "Update invoiceitems set returnable_qty = ? where invoice_id like ? AND item_code LIKE ?";        
         ArrayList list = new ArrayList();
         list.add(updating);

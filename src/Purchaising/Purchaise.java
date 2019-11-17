@@ -123,9 +123,9 @@ public class Purchaise {
    }
    
    public boolean updateQty_save(){
-        int updateQty = Integer.parseInt(qty_txt.getText());
-        int avilableQty = Integer.parseInt(available_lbl.getText());
-        int nowQty = updateQty + avilableQty;
+        double updateQty = Double.parseDouble(qty_txt.getText());
+        double avilableQty = Double.parseDouble(available_lbl.getText());
+        double nowQty = updateQty + avilableQty;
         
         String itemNo = String.valueOf(itemNo_combo.getSelectedItem());
         String cost = cost_lbl.getText();

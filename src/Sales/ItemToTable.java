@@ -71,7 +71,7 @@ public class ItemToTable {
 
         if (qtyValidation()) {
 
-            int qty = Integer.parseInt(qtyText.getText());
+            double qty = Double.parseDouble(qtyText.getText());
             rowData[4] = qtyText.getText();
 
             double totalPrice = qty * unitPrice;
@@ -89,8 +89,8 @@ public class ItemToTable {
     }
     
     public boolean qtyValidation() {
-        int availableQty = Integer.parseInt(aQtyText.getText());
-        int requestedQty = Integer.parseInt(qtyText.getText());
+        double availableQty = Double.parseDouble(aQtyText.getText());
+        double requestedQty = Double.parseDouble(qtyText.getText());
         String item_number = (String) this.itemNo.getSelectedItem();
 
         if (checkItemIsInTable(item_number)) {
@@ -157,9 +157,9 @@ public class ItemToTable {
        
        
         String qtyNowString = String.valueOf(model.getValueAt(rowNo, 4));
-        int qtyNow = Integer.parseInt(qtyNowString);
-        int totalQty  = qtyNow + Integer.parseInt(qty);
-        int availability = Integer.parseInt(aQtyText.getText());
+        double qtyNow = Double.parseDouble(qtyNowString);
+        double totalQty  = qtyNow + Double.parseDouble(qty);
+        double availability = Double.parseDouble(aQtyText.getText());
         if(totalQty > availability){
             JOptionPane.showMessageDialog(null, "The maximum qty is set");
             totalQty = availability;
@@ -169,7 +169,7 @@ public class ItemToTable {
            
     }
     
-    public void updateTotal(int rowNo, int totalQty) {
+    public void updateTotal(int rowNo, double totalQty) {
         TableModel model = table.getModel();
         double d = Double.parseDouble(String.valueOf(model.getValueAt(rowNo, 3)));
         double total = d * totalQty;

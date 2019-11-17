@@ -3534,10 +3534,24 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sales_qty_TxtKeyPressed
 
     private void sales_qty_TxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_qty_TxtKeyTyped
+        String type = sales_unit_Txt.getText();
         char c = evt.getKeyChar();
-        if (!Character.isDigit(c)) {
-            evt.consume();
+        System.out.println("Type"+type);
+        if (type.equals("Feet") || type.equals("Meter")) {
+            System.out.println("first");
+            if (Character.isDigit(c) || evt.getKeyChar() == '.') {
+
+            } else {
+                evt.consume();
+            }
+        } else {
+            System.out.println("else");
+            if (!Character.isDigit(c)) {
+                evt.consume();
+
+            }
         }
+
     }//GEN-LAST:event_sales_qty_TxtKeyTyped
 
     private void sales_CName_comboFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sales_CName_comboFocusGained
@@ -3885,9 +3899,9 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_bill_currentDateActionPerformed
 
     private void chequePayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chequePayActionPerformed
-        
+
         if (!bill_payable_txt.getText().equals("0.0")) {
-            BillPay.getInstance().setChequePayFields(bill_bank_comnbo, bill_chequeDatePicker,bill_chequeNo_txt);
+            BillPay.getInstance().setChequePayFields(bill_bank_comnbo, bill_chequeDatePicker, bill_chequeNo_txt);
             BillPay.getInstance().chequePay();
 
             Bill_table.setVisible(false);
@@ -4373,7 +4387,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sales_halfPay_txtKeyPressed
 
     private void add_item_brand_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_brand_txtKeyPressed
-       
+
     }//GEN-LAST:event_add_item_brand_txtKeyPressed
 
     private void add_item_brand_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_brand_txtKeyTyped

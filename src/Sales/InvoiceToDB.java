@@ -113,11 +113,11 @@ public class InvoiceToDB {
             }
 
 //            int availableQty = Integer.parseInt(sales_available_qty_txt.getText());
-            int availableQty = Integer.parseInt(connector.getRelavantRecord("items", "stock", "item_code", itemNo));
-            int iqty = Integer.parseInt(qty);
-            availableQty -= iqty;
+            double availableQty = Double.parseDouble(connector.getRelavantRecord("items", "stock", "item_code", itemNo));
+            double iqty = Double.parseDouble(qty);
+            availableQty = availableQty- iqty;
 
-            System.out.println("QTy edit : " + iqty);
+            System.out.println("QTy edit : " + String.valueOf(availableQty));
             if (!connector.editRecordInTable("items", "item_code", "stock", String.valueOf(availableQty), itemNo)) {
                 JOptionPane.showMessageDialog(null, "Error quantity change ");
                 return false;
