@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="all_selling" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01d8fd24-35c6-4069-acbc-826f01998357">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Part Payments" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01d8fd24-35c6-4069-acbc-826f01998357">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="FromDate" class="java.lang.String"/>
 	<parameter name="ToDate" class="java.lang.String"/>
-	<parameter name="userID" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT * FROM credit_payments where credit_payments.paid_date BETWEEN $P{FromDate} AND $P{ToDate}]]>
+		<![CDATA[SELECT invoice_id,paid_date,Type,
+ifnull(Bank,'N/A') Bank,
+ifnull(chequeDate,'N/A')  chequeDate,
+ifnull(chequeNumber,'N/A') chequeNumber,
+amount
+FROM credit_payments;]]>
 	</queryString>
 	<field name="invoice_id" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -21,7 +25,7 @@
 	<field name="Bank" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="chequeDate" class="java.sql.Timestamp">
+	<field name="chequeDate" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="chequeNumber" class="java.lang.String">
@@ -89,63 +93,65 @@
 	<columnHeader>
 		<band height="21" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="79" height="20" uuid="71de286b-8aa7-4d9e-bb25-86968b1be4b2"/>
+				<reportElement x="0" y="0" width="65" height="20" uuid="71de286b-8aa7-4d9e-bb25-86968b1be4b2"/>
 				<text><![CDATA[invoice_id]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="79" y="0" width="79" height="20" uuid="2ee6a79c-3508-4b82-8dc8-500546647670"/>
+				<reportElement x="65" y="0" width="115" height="20" uuid="2ee6a79c-3508-4b82-8dc8-500546647670"/>
 				<text><![CDATA[paid_date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="158" y="0" width="79" height="20" uuid="b12b6553-5cd8-4685-bc0b-3da45549fc0c"/>
+				<reportElement x="180" y="0" width="79" height="20" uuid="b12b6553-5cd8-4685-bc0b-3da45549fc0c"/>
 				<text><![CDATA[Type]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="237" y="0" width="79" height="20" uuid="009083cc-ece3-4f29-a0d4-fedee83c5185"/>
+				<reportElement x="259" y="0" width="79" height="20" uuid="009083cc-ece3-4f29-a0d4-fedee83c5185"/>
 				<text><![CDATA[Bank]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="316" y="0" width="79" height="20" uuid="3d433042-7f6f-40a6-a75b-c77869b8b258"/>
-				<text><![CDATA[chequeDate]]></text>
+				<reportElement x="338" y="0" width="79" height="20" uuid="3d433042-7f6f-40a6-a75b-c77869b8b258"/>
+				<text><![CDATA[Cheque Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="395" y="0" width="79" height="20" uuid="dd710a7a-95f7-4e3c-8af4-c550fa81ff45"/>
-				<text><![CDATA[chequeNumber]]></text>
+				<reportElement x="417" y="0" width="79" height="20" uuid="dd710a7a-95f7-4e3c-8af4-c550fa81ff45"/>
+				<text><![CDATA[Cheque Number]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="474" y="0" width="79" height="20" uuid="63cfde8b-3ca3-407d-a204-dcf63eaf0a70"/>
-				<text><![CDATA[amount]]></text>
+				<reportElement x="497" y="0" width="56" height="20" uuid="63cfde8b-3ca3-407d-a204-dcf63eaf0a70"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Amount]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="79" height="20" uuid="8170a988-f51d-46a7-b248-73c8ee920cc7"/>
+				<reportElement x="0" y="0" width="65" height="20" uuid="8170a988-f51d-46a7-b248-73c8ee920cc7"/>
 				<textFieldExpression><![CDATA[$F{invoice_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="79" y="0" width="79" height="20" uuid="f9a9a758-2f54-4d6d-9cbf-b7f97d98d30f"/>
+				<reportElement x="65" y="0" width="115" height="20" uuid="f9a9a758-2f54-4d6d-9cbf-b7f97d98d30f"/>
 				<textFieldExpression><![CDATA[$F{paid_date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="158" y="0" width="79" height="20" uuid="fefb2207-5863-4556-9c81-7aa87bad49b0"/>
+				<reportElement x="179" y="0" width="79" height="20" uuid="fefb2207-5863-4556-9c81-7aa87bad49b0"/>
 				<textFieldExpression><![CDATA[$F{Type}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="237" y="0" width="79" height="20" uuid="ea3a3f5d-2cdd-4f0f-b5bb-2340e9db2b79"/>
+				<reportElement x="260" y="0" width="79" height="20" uuid="ea3a3f5d-2cdd-4f0f-b5bb-2340e9db2b79"/>
 				<textFieldExpression><![CDATA[$F{Bank}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="316" y="0" width="79" height="20" uuid="3834fffb-092e-47c4-b595-7c6614b281ce"/>
+				<reportElement x="338" y="0" width="79" height="20" uuid="3834fffb-092e-47c4-b595-7c6614b281ce"/>
 				<textFieldExpression><![CDATA[$F{chequeDate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="395" y="0" width="79" height="20" uuid="a79acf50-d02c-4f96-87f1-cc09cca3c473"/>
+				<reportElement x="417" y="0" width="79" height="20" uuid="a79acf50-d02c-4f96-87f1-cc09cca3c473"/>
 				<textFieldExpression><![CDATA[$F{chequeNumber}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="474" y="0" width="79" height="20" uuid="4d47155e-7bd9-4537-b429-99d21935b905"/>
+				<reportElement x="497" y="0" width="56" height="20" uuid="4d47155e-7bd9-4537-b429-99d21935b905"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
 			</textField>
 		</band>
