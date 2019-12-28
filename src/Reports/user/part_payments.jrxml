@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="all_selling" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01d8fd24-35c6-4069-acbc-826f01998357">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="FromDate" class="java.lang.String"/>
+	<parameter name="ToDate" class="java.lang.String"/>
+	<parameter name="userID" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM credit_payments where credit_payments.paid_date BETWEEN $P{FromDate} AND $P{ToDate}]]>
+	</queryString>
+	<field name="invoice_id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="paid_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Bank" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="chequeDate" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="chequeNumber" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="amount" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="65" splitType="Stretch">
+			<staticText>
+				<reportElement x="136" y="0" width="312" height="45" uuid="c99c2fa5-91f5-4c5a-ba1d-e7a628bff789"/>
+				<textElement>
+					<font size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[K.T.N. Motors (Pvt) Ltd.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="123" y="32" width="340" height="20" uuid="1647a3b6-456d-4b73-8bd8-1bb10f4d161f"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<text><![CDATA[No-152, Aluthgama Road, Mathugama Tel : 034-4939958 Fax: 034-2248844]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="43" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="2" uuid="4a879e73-4727-47b0-8f25-f5afe982eaaa"/>
+			</line>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="454" y="21" width="100" height="20" uuid="475fee81-cac7-4deb-bc9c-9a29d36f665c"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="2" width="554" height="39" uuid="8e7b610f-84a4-4380-ac85-4de3f21bbe55"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="25"/>
+				</textElement>
+				<text><![CDATA[Part Payments]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-1" y="41" width="555" height="2" uuid="2763e24d-229c-415a-9d69-7cf91d14c60e"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="2" width="41" height="20" uuid="7fa7de73-4568-45b3-8d3e-1f548977ff0f"/>
+				<text><![CDATA[FROM-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="21" width="41" height="20" uuid="56c8dfaf-6be6-472a-b0cb-6d28efc1087b"/>
+				<text><![CDATA[TO-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="41" y="2" width="100" height="20" uuid="840a08e9-f9a2-4114-b1cc-1be507a837d8"/>
+				<textFieldExpression><![CDATA[$P{FromDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="21" width="100" height="20" uuid="f251050f-55b9-4af2-b32e-d4128f00c071"/>
+				<textFieldExpression><![CDATA[$P{ToDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="79" height="20" uuid="71de286b-8aa7-4d9e-bb25-86968b1be4b2"/>
+				<text><![CDATA[invoice_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="79" y="0" width="79" height="20" uuid="2ee6a79c-3508-4b82-8dc8-500546647670"/>
+				<text><![CDATA[paid_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="0" width="79" height="20" uuid="b12b6553-5cd8-4685-bc0b-3da45549fc0c"/>
+				<text><![CDATA[Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="237" y="0" width="79" height="20" uuid="009083cc-ece3-4f29-a0d4-fedee83c5185"/>
+				<text><![CDATA[Bank]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="0" width="79" height="20" uuid="3d433042-7f6f-40a6-a75b-c77869b8b258"/>
+				<text><![CDATA[chequeDate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="0" width="79" height="20" uuid="dd710a7a-95f7-4e3c-8af4-c550fa81ff45"/>
+				<text><![CDATA[chequeNumber]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="474" y="0" width="79" height="20" uuid="63cfde8b-3ca3-407d-a204-dcf63eaf0a70"/>
+				<text><![CDATA[amount]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="79" height="20" uuid="8170a988-f51d-46a7-b248-73c8ee920cc7"/>
+				<textFieldExpression><![CDATA[$F{invoice_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="0" width="79" height="20" uuid="f9a9a758-2f54-4d6d-9cbf-b7f97d98d30f"/>
+				<textFieldExpression><![CDATA[$F{paid_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="158" y="0" width="79" height="20" uuid="fefb2207-5863-4556-9c81-7aa87bad49b0"/>
+				<textFieldExpression><![CDATA[$F{Type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="237" y="0" width="79" height="20" uuid="ea3a3f5d-2cdd-4f0f-b5bb-2340e9db2b79"/>
+				<textFieldExpression><![CDATA[$F{Bank}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="316" y="0" width="79" height="20" uuid="3834fffb-092e-47c4-b595-7c6614b281ce"/>
+				<textFieldExpression><![CDATA[$F{chequeDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="79" height="20" uuid="a79acf50-d02c-4f96-87f1-cc09cca3c473"/>
+				<textFieldExpression><![CDATA[$F{chequeNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="474" y="0" width="79" height="20" uuid="4d47155e-7bd9-4537-b429-99d21935b905"/>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="417" y="15" width="80" height="20" uuid="3c875981-2d13-43b1-bcb4-bbb313132cd8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="497" y="15" width="40" height="20" uuid="c4e48fba-c6e2-431d-aab8-2b3e4f25f3c1"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="10" y="13" width="100" height="20" uuid="95155b87-e06e-42b6-b1f6-6fb47f39c2af"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="10" y="13" width="555" height="2" uuid="af9e077b-6143-4e17-9e53-3e5915e47ca2"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
