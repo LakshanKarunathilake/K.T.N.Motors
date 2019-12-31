@@ -349,6 +349,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel44 = new javax.swing.JLabel();
         jButton13 = new javax.swing.JButton();
         jButton30 = new javax.swing.JButton();
+        jButton31 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         report_item_combo = new javax.swing.JComboBox<>();
         jButton9 = new javax.swing.JButton();
@@ -2002,7 +2003,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton13ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 160, 30));
+        jPanel3.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 160, 30));
 
         jButton30.setText("All Part Paymanets");
         jButton30.addActionListener(new java.awt.event.ActionListener() {
@@ -2011,6 +2012,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jButton30, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 160, 30));
+
+        jButton31.setText("Summary");
+        jButton31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton31ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton31, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 160, 30));
 
         jTabbedPane1.addTab("User Wise", jPanel3);
 
@@ -4877,6 +4886,39 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton30ActionPerformed
 
+    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
+        // TODO add your handling code here:
+        String path = report_folder_path + "\\user\\summary.jrxml";
+        System.out.println("path" + path);
+//        Calendar c = Calendar.getInstance();
+//        Timestamp toDate = new Timestamp(c.getTimeInMillis());
+//        c.add(Calendar.YEAR,-1);
+        Timestamp toDate = new Timestamp(reports_date2_picker.getDate().getTime());
+
+        Timestamp fromDate = new Timestamp(reports_date1_picker.getDate().getTime());
+        String fromDateString = String.valueOf(fromDate);
+        String toDateString = String.valueOf(toDate);
+
+        HashMap hm = new HashMap();
+        hm.put("FromDate", fromDateString);
+        hm.put("ToDate", toDateString);
+        System.out.println("FromDate : " + fromDateString);
+        System.out.println("FromDate : " + toDateString);
+
+        JasperReport jr;
+        try {
+            jr = JasperCompileManager.compileReport(path);
+            JasperPrint jp = JasperFillManager.fillReport(jr, hm, connector.startConnection());
+            JasperViewer jw = new JasperViewer(jp, false);
+            jw.viewReport(jp, false);
+        } catch (JRException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR in Reporting all items...");
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton31ActionPerformed
+
     public void FillBill(String invoiceID) {
         ArrayList list = connector.readRow("orders", "orderID", invoiceID);
         bill_invoiceValue_txt.setText(String.valueOf(list.get(3)));
@@ -5126,6 +5168,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton30;
+    private javax.swing.JButton jButton31;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
