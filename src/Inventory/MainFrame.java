@@ -30,6 +30,7 @@ import Settings.EditQty;
 import Settings.PartNumberChange;
 import Statistics.DayEndView;
 import StockCounting.Stock;
+import Utilities.AdminConfirmation;
 import Utilities.ItemSearch;
 import Utilities.UserSearch;
 
@@ -4443,8 +4444,14 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String workingDir = System.getProperty("user.dir");
         System.out.println("Current :" + workingDir);
-        ViewManipulation.changePanel(MainChangeFrame, stock_count_panel);
-        Stock.getInstance().setFields(stock_item_combo, stock_qty_txt, stock_selling_txt, stock_selling_lbl, stock_description_lbl, stock_availableQty_lbl, stock_c_selling_lbl, stock_item_table, connector);
+        AdminConfirmation confirmation = AdminConfirmation.getInstance();
+        boolean output = confirmation.presentDialog();
+        if (output) {
+            ViewManipulation.changePanel(MainChangeFrame, stock_count_panel);
+            Stock.getInstance().setFields(stock_item_combo, stock_qty_txt, stock_selling_txt, stock_selling_lbl, stock_description_lbl, stock_availableQty_lbl, stock_c_selling_lbl, stock_item_table, connector);
+        } else {
+            JOptionPane.showMessageDialog(null, "Sorry you are not authorized", "Authorization Failed", 0);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void stock_selling_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stock_selling_txtFocusLost
@@ -4699,8 +4706,14 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jLabel79MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel79MouseClicked
-        ViewManipulation.changePanel(MainChangeFrame, settings_panel);
+        AdminConfirmation confirmation = AdminConfirmation.getInstance();
+        boolean output = confirmation.presentDialog();
+        if (output) {
+            ViewManipulation.changePanel(MainChangeFrame, settings_panel);
 
+        } else {
+            JOptionPane.showMessageDialog(null, "Sorry you are not authorized", "Authorization Failed", 0);
+        }
     }//GEN-LAST:event_jLabel79MouseClicked
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
