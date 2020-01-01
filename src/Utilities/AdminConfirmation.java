@@ -6,6 +6,7 @@
 package Utilities;
 
 import DBController.DataBaseConnector;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,36 +15,30 @@ import DBController.DataBaseConnector;
 public class AdminConfirmation {
 
     private static AdminConfirmation adminConfirmation;
-    DataBaseConnector connector = DataBaseConnector.getInstance()
+    DataBaseConnector connector = DataBaseConnector.getInstance();
 
     private AdminConfirmation() {
 
     }
 
-    publi
-
-    static AdminConfirmation getInstance() {
+    public static AdminConfirmation getInstance() {
         if (adminConfirmation == null) {
-            adminConfirmation = new AdminConfirmation()
-        
-        
-        )
+            adminConfirmation = new AdminConfirmation();
         }
-        return adminConfirmation
+        return adminConfirmation;
     }
 
-    public void presentDialog() {
+    public boolean presentDialog() {
         String password = JOptionPane.showInputDialog(null, "Enter Administrator Password", JOptionPane.INFORMATION_MESSAGE);
-        return verfiyAdminPassword(password)
+        return verfiyAdminPassword(password);
     }
 
     private boolean verfiyAdminPassword(String password) {
-        String pass = connector.getRelavantRecord('users', 'password', 'user_name', 'nimal'
-        )
+        String pass = connector.getRelavantRecord("users", "password", "user_name", "nimal");
         if (pass.equals(password)) {
-            return true
+            return true;
         } else {
-            return false
+            return false;
         }
     }
 }
