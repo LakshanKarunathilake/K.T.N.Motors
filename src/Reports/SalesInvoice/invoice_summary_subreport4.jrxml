@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice_summary_subreport4" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8f6446fd-02e0-4e8c-a6a2-5a93f78f4248">
+	<property name="ireport.zoom" value="2.3579476910000023"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="invoiceID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select paid_date,type,ifnull(Bank,'-') as Bank,ifnull(chequeDate,'-') as chequeDate,ifnull(chequeNumber,'-') as chequeNumber,amount from credit_payments where invoice_id like $P{invoiceID}]]>
+	</queryString>
+	<field name="paid_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Bank" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="chequeDate" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="chequeNumber" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="amount" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="dec71f0c-4bb3-4c8d-b0e3-460d3e977fab"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Part Payments]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16">
+			<staticText>
+				<reportElement x="-1" y="0" width="92" height="16" uuid="c288782f-0f5e-4a23-aa31-e73e386007f9"/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="0" width="49" height="16" uuid="bb14a4a4-46cc-4617-b54a-d9b6b2315573"/>
+				<text><![CDATA[Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="0" width="92" height="16" uuid="1a91158f-4fa0-42da-b0d1-73ab368107a2"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Bank]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="232" y="0" width="92" height="16" uuid="1f78fe8f-d859-4ce4-a0a7-f267807d0fe6"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Cheque Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="0" width="92" height="16" uuid="c783161f-8204-4279-883b-68f873a43bf9"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Cheque Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="416" y="0" width="70" height="16" uuid="61daf71e-0ae4-4758-94f8-1466c13d9ee2"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="-1" y="0" width="92" height="16" uuid="b5ceecb8-2932-4743-854e-b1732546bd67"/>
+				<textFieldExpression><![CDATA[$F{paid_date}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="91" y="0" width="49" height="16" uuid="c9b4f2d1-c79f-4db9-8492-ffe42d59bc5b"/>
+				<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="140" y="0" width="92" height="16" uuid="6afdb5b2-f83a-4227-88a8-8fe01a281ed5"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Bank}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="232" y="0" width="92" height="16" uuid="0faf476a-79d9-4b94-b276-5b4268197aa5"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{chequeDate}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="324" y="0" width="92" height="16" uuid="a536bb55-5a80-4f9a-99f9-770b030b889e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{chequeNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="416" y="0" width="70" height="16" uuid="62d9fc72-6364-4765-946e-93d44ffc0cc0"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
