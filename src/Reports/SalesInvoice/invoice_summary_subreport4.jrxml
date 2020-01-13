@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice_summary_subreport4" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8f6446fd-02e0-4e8c-a6a2-5a93f78f4248">
 	<property name="ireport.zoom" value="2.3579476910000023"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="314"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="invoiceID" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -48,25 +48,37 @@
 		<band height="16">
 			<staticText>
 				<reportElement x="-1" y="0" width="92" height="16" uuid="c288782f-0f5e-4a23-aa31-e73e386007f9"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Date]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="91" y="0" width="49" height="16" uuid="bb14a4a4-46cc-4617-b54a-d9b6b2315573"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Type]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="140" y="0" width="92" height="16" uuid="1a91158f-4fa0-42da-b0d1-73ab368107a2"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Bank]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="232" y="0" width="92" height="16" uuid="1f78fe8f-d859-4ce4-a0a7-f267807d0fe6"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Cheque Date]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="324" y="0" width="92" height="16" uuid="c783161f-8204-4279-883b-68f873a43bf9"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Cheque Number]]></text>
 			</staticText>
 			<staticText>
@@ -74,6 +86,9 @@
 				<textElement textAlignment="Right"/>
 				<text><![CDATA[Amount]]></text>
 			</staticText>
+			<line>
+				<reportElement x="0" y="15" width="486" height="1" uuid="30584da3-e5ef-4eca-b95f-f26b5daf71e4"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
