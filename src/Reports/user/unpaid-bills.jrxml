@@ -119,7 +119,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="21" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="69" height="20" uuid="47ef69c4-a419-40c3-aeaf-c65e72941d1d"/>
 				<textElement>
@@ -128,65 +128,58 @@
 				<text><![CDATA[Invoice No]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="387" y="1" width="92" height="20" uuid="cf208d30-8923-4ad6-a4c7-47e7d49b3bc6"/>
+				<reportElement x="504" y="1" width="92" height="20" uuid="cf208d30-8923-4ad6-a4c7-47e7d49b3bc6"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[OrderDate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="480" y="1" width="74" height="20" uuid="e9a8010d-7e35-4544-a04d-eb69b069fbb0"/>
-				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Paid = True]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="211" y="1" width="59" height="20" uuid="afebb58b-83d4-4a91-9839-7cffb2369fcf"/>
+				<reportElement x="332" y="0" width="59" height="20" uuid="afebb58b-83d4-4a91-9839-7cffb2369fcf"/>
 				<textElement>
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Grand Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="270" y="1" width="43" height="20" uuid="38566117-1701-4b0b-8ae5-63650bcbb367"/>
+				<reportElement x="391" y="1" width="43" height="20" uuid="38566117-1701-4b0b-8ae5-63650bcbb367"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Paid]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="313" y="1" width="72" height="20" uuid="a523f1da-620d-4293-817d-92c2a372b2ee"/>
+				<reportElement x="432" y="0" width="72" height="20" uuid="a523f1da-620d-4293-817d-92c2a372b2ee"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Returned]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="67" y="1" width="144" height="20" uuid="1b23a85f-5316-4db4-b8e9-2cff4d3903ac"/>
+				<reportElement x="67" y="1" width="158" height="20" uuid="1b23a85f-5316-4db4-b8e9-2cff4d3903ac"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Customer Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="553" y="1" width="74" height="20" uuid="71517e0e-cb72-4bc1-b3d9-43ca0066ab46"/>
+				<reportElement x="597" y="1" width="74" height="20" uuid="71517e0e-cb72-4bc1-b3d9-43ca0066ab46"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Notes]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="228" y="1" width="104" height="20" uuid="e905399f-307c-4c16-b038-12292520678c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telephone]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="17" splitType="Stretch">
-			<textField>
-				<reportElement x="481" y="0" width="72" height="16" uuid="e32c5570-62a3-4056-81f0-848a1826419d"/>
-				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{Status}]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="0" y="1" width="69" height="16" uuid="b987c12b-d616-4156-b26c-35be68ac11cb"/>
 				<textElement>
@@ -195,28 +188,21 @@
 				<textFieldExpression><![CDATA[$F{invoice_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="228" y="1" width="42" height="16" uuid="b282adc6-9cf4-4aa2-ba0e-c6fb39c823ed"/>
-				<textElement>
+				<reportElement x="332" y="1" width="59" height="16" uuid="b282adc6-9cf4-4aa2-ba0e-c6fb39c823ed"/>
+				<textElement textAlignment="Center">
 					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{grandTotal}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="381" y="1" width="100" height="16" uuid="074f0e10-7415-4321-a818-02a72c768e8a"/>
+				<reportElement x="505" y="0" width="100" height="16" uuid="074f0e10-7415-4321-a818-02a72c768e8a"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{orderDate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="270" y="1" width="43" height="16" uuid="9c61e3bf-23a1-4d24-9994-33831f82a3b8"/>
-				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{cash_paid}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="313" y="1" width="70" height="16" uuid="b21fe86a-5c0e-49bf-bcfa-df1d11b91bf9"/>
+				<reportElement x="434" y="1" width="70" height="16" uuid="b21fe86a-5c0e-49bf-bcfa-df1d11b91bf9"/>
 				<textElement textAlignment="Center">
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -228,6 +214,20 @@
 					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="391" y="1" width="43" height="16" uuid="9c61e3bf-23a1-4d24-9994-33831f82a3b8"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cash_paid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="225" y="1" width="107" height="16" uuid="9e252073-2fef-401c-939f-63c7a96c0517"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Telephone}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
