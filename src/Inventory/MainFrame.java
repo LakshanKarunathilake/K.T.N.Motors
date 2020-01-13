@@ -1930,13 +1930,13 @@ public class MainFrame extends javax.swing.JFrame {
         ReportPanel.add(reports_customer_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 150, 70));
 
         reports_customer_btn2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        reports_customer_btn2.setText("Monthly Selling");
+        reports_customer_btn2.setText("Invoice Summary");
         reports_customer_btn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 reports_customer_btn2ActionPerformed(evt);
             }
         });
-        ReportPanel.add(reports_customer_btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 150, 70));
+        ReportPanel.add(reports_customer_btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 180, 70));
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
 
@@ -1958,7 +1958,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 160, 35));
 
-        jButton8.setText("Bill Information");
+        jButton8.setText("user payments");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -3555,7 +3555,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void sales_qty_TxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_qty_TxtKeyTyped
         String type = sales_unit_Txt.getText();
         char c = evt.getKeyChar();
-        System.out.println("Type"+type);
+        System.out.println("Type" + type);
         if (type.equals("Feet") || type.equals("Meter")) {
             System.out.println("first");
             if (Character.isDigit(c) || evt.getKeyChar() == '.') {
@@ -3838,6 +3838,41 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void reports_customer_btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reports_customer_btn2ActionPerformed
         // TODO add your handling code here:
+        InvoiceSearch search = new InvoiceSearch(sales_InvoiceID_txt, sales_CID_combo, sales_CName_combo, sales_item_table, sales_total_txt, sales_discount_txt, sales_grand_txt, sales_additional_txt, connector);
+        search.setHalfPayComponents(sales_halfPay_check, sales_halfPay_txt, sales_halfPay_creditTxt, sales_halfPay_panel);
+        JComboBox search_invoiceID = new JComboBox();
+        AutoCompleteDecorator.decorate(search_invoiceID);
+
+        manipulation.getRecords("invoices", "invoice_id", search_invoiceID);
+        String invoiceID = "";
+
+        final JComponent[] inputs = new JComponent[]{
+            new JLabel("Invoice ID"),
+            search_invoiceID
+
+        };
+        int result = JOptionPane.showConfirmDialog(null, inputs, "Select Invoice number", JOptionPane.PLAIN_MESSAGE);
+        if (result == JOptionPane.OK_OPTION) {
+            invoiceID = String.valueOf(search_invoiceID.getSelectedItem());
+            String path = report_folder_path + "\\SalesInvoice\\invoice_summary.jrxml";
+            HashMap hm = new HashMap();
+            hm.put("invoiceID", invoiceID);
+            JasperReport jr;
+            try {
+                jr = JasperCompileManager.compileReport(path);
+                JasperPrint jp = JasperFillManager.fillReport(jr, hm, connector.startConnection());
+                JasperViewer jw = new JasperViewer(jp, false);
+                jw.viewReport(jp, false);
+            } catch (JRException ex) {
+                JOptionPane.showMessageDialog(null, "ERROR in Reporting all items...");
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            System.out.println("User canceled / closed the dialog, result = " + result);
+        }
     }//GEN-LAST:event_reports_customer_btn2ActionPerformed
 
     private void AddUserLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddUserLabelMouseClicked
@@ -4852,6 +4887,33 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        String path = report_folder_path + "\\user\\user_payments.jrxml";
+        Date fromDate = reports_date1_picker.getDate();
+        Date toDate = reports_date2_picker.getDate();
+        String fromDateString = new SimpleDateFormat("yyyy-MM-dd").format(fromDate);
+        String toDateString = new SimpleDateFormat("yyyy-MM-dd").format(toDate);
+
+        System.out.println("FRom " + fromDateString + " To " + toDateString + " id " + String.valueOf(report_userID_combo.getSelectedItem()));
+        HashMap hm = new HashMap();
+        hm.put("FromDate", fromDateString);
+        hm.put("ToDate", toDateString);
+        hm.put("userID", String.valueOf(report_userID_combo.getSelectedItem()));
+        System.out.println("FromDate : " + fromDateString);
+        System.out.println("FromDate : " + toDateString);
+
+        JasperReport jr;
+        try {
+            jr = JasperCompileManager.compileReport(path);
+            JasperPrint jp = JasperFillManager.fillReport(jr, hm, connector.startConnection());
+            JasperViewer jw = new JasperViewer(jp, false);
+            jw.viewReport(jp, false);
+
+        } catch (JRException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR in Reporting all items...");
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void add_item_location_txtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_add_item_location_txtKeyPressed
@@ -4871,7 +4933,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_add_item_brand_txtFocusLost
 
     private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton30ActionPerformed
-        
+
         String path = report_folder_path + "\\user\\part_payments.jrxml";
         System.out.println("path" + path);
         Timestamp toDate = new Timestamp(reports_date2_picker.getDate().getTime());
