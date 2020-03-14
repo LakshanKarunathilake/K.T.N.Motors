@@ -3432,7 +3432,7 @@ public class MainFrame extends javax.swing.JFrame {
         sales_CName_combo.setEnabled(true);
         sales_item_name_combo.setEnabled(true);
         sales_itemno_combo.setEnabled(true);
-
+        sales_itemno_combo.setSelectedIndex(0);
         sales_CID_combo.requestFocusInWindow();
         sales_new_btn.setEnabled(false);
         sales_save_btn.setEnabled(false);
@@ -3529,8 +3529,8 @@ public class MainFrame extends javax.swing.JFrame {
              */
             int customer_code = Integer.parseInt(sales_CID_combo.getSelectedItem().toString());
             int row_count = sales_item_table.getRowCount();
-
-            if (!sales_qty_Txt.getText().equals("")) {
+            String salesQty = sales_qty_Txt.getText();
+            if (!salesQty.equals("") || !salesQty.equals("0.00")) {
                 try {
                     if (customer_code == 1 || row_count < 21) {
                         if (toTable.itemToTable()) {
