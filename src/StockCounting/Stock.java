@@ -128,7 +128,7 @@ public class Stock {
         
         
         String available_qty = connector.getRelavantRecord("items", "stock", "item_code", item_no);
-        int total_qty = Integer.valueOf(available_qty)+Integer.valueOf(qty);
+        double total_qty = Double.valueOf(available_qty)+Integer.valueOf(qty);
         
         Timestamp now = new Timestamp(System.currentTimeMillis());
         String timeStamp = String.valueOf(now);

@@ -143,8 +143,6 @@ public class ItemAdd {
             list.add(vehicle);
             list.add(brand);
             list.add(description);
-            list.add(cost);
-            list.add(selling);
             list.add(location);
             list.add(unit);
             list.add(now);
@@ -153,8 +151,6 @@ public class ItemAdd {
             coloumn.add("vehicle");
             coloumn.add("brand");
             coloumn.add("description");
-            coloumn.add("cost");
-            coloumn.add("selling");
             coloumn.add("Loctn");
             coloumn.add("Unit");
             coloumn.add("last_edit_date");
