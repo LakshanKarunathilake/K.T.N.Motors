@@ -3556,7 +3556,7 @@ public class MainFrame extends javax.swing.JFrame {
         String type = sales_unit_Txt.getText();
         char c = evt.getKeyChar();
         System.out.println("Type" + type);
-        if (type.equals("Feet") || type.equals("Meter")) {
+        if (type.equals("Feet") || type.equals("Meter") || type.equals("set")) {
             System.out.println("first");
             if (Character.isDigit(c) || evt.getKeyChar() == '.') {
 
