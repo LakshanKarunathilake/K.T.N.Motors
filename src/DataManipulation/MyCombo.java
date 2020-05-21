@@ -155,11 +155,11 @@ public class MyCombo {
                             String[] row = list.get(i);
                             Object[] rowData = new Object[5];
                             System.out.println("row" + row);
-                            rowData[0] = row[1];
-                            rowData[1] = row[2];
-                            rowData[2] = row[3];
-                            rowData[3] = row[4];
-                            rowData[4] = row[5];
+                            rowData[0] = row[0];
+                            rowData[1] = row[1];
+                            rowData[2] = row[2];
+                            rowData[3] = row[3];
+                            rowData[4] = row[4];
                             System.out.println("Row 4 :" + row[4]);
 
                             model.addRow(rowData);
