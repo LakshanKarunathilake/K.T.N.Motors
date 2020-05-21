@@ -89,7 +89,7 @@ public class BillPay {
 
         manipulation.getRecords("customers", "customer_code", customerID_combo);
         manipulation.getRecords("customers", "name", customerName_combo);
-        manipulation.getRecordsWithCondtion("invoices", "invoice_id", "status", "0", invoiceID_combo,"orderDate","ASC");
+        manipulation.getRecordsWithCondtion("invoices", "invoice_id", "status", "0", invoiceID_combo);
 
         autoCompleteCombo();
 
