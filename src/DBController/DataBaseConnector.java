@@ -312,8 +312,8 @@ public class DataBaseConnector {
 
     }
 
-    public ArrayList retreveDataColoumnWithTwoCondition(String tableName, String coloumnName, String coloumn2, String condition1, String coloumn3, String condition2,String orderByColumn,String orderType) {
-        String sql = "SELECT " + coloumnName + " from " + tableName + " where " + coloumn2 + " like " + "'" + condition1 + "' AND " + coloumn3 + " like " + "'" + condition2 + "'" + " Order by "+ orderByColumn + " " + orderType;
+    public ArrayList retreveDataColoumnWithTwoCondition(String tableName, String coloumnName, String coloumn2, String condition1, String coloumn3, String condition2) {
+        String sql = "SELECT " + coloumnName + " from " + tableName + " where " + coloumn2 + " like " + "'" + condition1 + "' AND " + coloumn3 + " like " + "'" + condition2 + "'";
         System.out.println("SQL : " + sql);
 
         try {
