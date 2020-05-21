@@ -16,8 +16,10 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -130,15 +132,17 @@ public class MyCombo {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                     String itemNo = String.valueOf(combo.getSelectedItem());
 
-                    String fromDate = from.getDateFormatString();
-                    String toDate = to.getDateFormatString();
+                    Date fromDate = reports_date1_picker.getDate();
+                    Date toDate = reports_date2_picker.getDate();
+                    String fromDateString = new SimpleDateFormat("yyyy-MM-dd").format(fromDate);
+                    String toDateString = new SimpleDateFormat("yyyy-MM-dd").format(toDate);
 
                     ViewManipulation.ViewManipulation.emptyTable(table);
 
-                    String sql = "SELECT i.invoice, i.createdAt, it.qty, it.selling,it.returnedQty from InvoiceItems it,Invoices i where i.createdAt BETWEEN CAST('"+fromDate+"' AS DATE) AND CAST('"+toDate+"' AS DATE) \n"
+                    String sql = "SELECT i.invoice, i.createdAt, it.qty, it.selling,it.returnedQty from InvoiceItems it,Invoices i where i.createdAt BETWEEN CAST('" + fromDateString + "' AS DATE) AND CAST('" + toDateString + "' AS DATE) \n"
                             + "AND it.invoiceId = i.invoice AND \n"
-                            + "it.code like '"+itemNo+"' Order by i.createdAt DESC";
-                    
+                            + "it.code like '" + itemNo + "' Order by i.createdAt DESC";
+
                     ArrayList<String[]> list = connector.sqlPlainExecution(sql);
 
                     if (list.size() == 0) {
@@ -149,7 +153,7 @@ public class MyCombo {
                         for (int i = 0; i < list.size(); i++) {
                             String[] row = list.get(i);
                             Object[] rowData = new Object[5];
-                            System.out.println("row"+row);
+                            System.out.println("row" + row);
                             rowData[0] = row[1];
                             rowData[1] = row[2];
                             rowData[2] = row[3];
