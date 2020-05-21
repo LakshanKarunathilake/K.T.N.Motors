@@ -139,9 +139,10 @@ public class MyCombo {
 
                     ViewManipulation.ViewManipulation.emptyTable(table);
 
-                    String sql = "SELECT i.invoice, i.createdAt, it.qty, it.selling,it.returnedQty from InvoiceItems it,Invoices i where i.createdAt BETWEEN CAST('" + fromDateString + "' AS DATE) AND CAST('" + toDateString + "' AS DATE) \n"
-                            + "AND it.invoiceId = i.invoice AND \n"
-                            + "it.code like '" + itemNo + "' Order by i.createdAt DESC";
+                    String sql = "SELECT i.invoice_id, i.orderDate, it.qty, it.total,it.returnable_qty from invoiceItems it,invoices i \n"
+                            + "where i.orderDate BETWEEN CAST('"+fromDateString+"' AS DATE) AND CAST('"+toDateString+"' AS DATE) \n"
+                            + "AND it.invoice_id = i.invoice_id AND \n"
+                            + "it.item_code like '"+itemNo+"' Order by i.orderDate DESC";
 
                     ArrayList<String[]> list = connector.sqlPlainExecution(sql);
 
