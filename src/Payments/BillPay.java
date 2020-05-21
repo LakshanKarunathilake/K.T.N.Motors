@@ -89,7 +89,7 @@ public class BillPay {
 
         manipulation.getRecords("customers", "customer_code", customerID_combo);
         manipulation.getRecords("customers", "name", customerName_combo);
-        manipulation.getRecordsWithCondtion("invoices", "invoice_id", "status", "0", invoiceID_combo);
+        manipulation.getRecordsWithCondtion("invoices", "invoice_id", "status", "0", invoiceID_combo,"orderDate","ASC");
 
         autoCompleteCombo();
 
@@ -201,7 +201,7 @@ public class BillPay {
     }
 
     public void checkForBills() {
-        ArrayList list = connector.retreveDataColoumnWithTwoCondition("invoices", "invoice_id", "customer_code", String.valueOf(customerID_combo.getSelectedItem()), "status", "0");
+        ArrayList list = connector.retreveDataColoumnWithTwoCondition("invoices", "invoice_id", "customer_code", String.valueOf(customerID_combo.getSelectedItem()), "status", "0", "orderDate","ASC");
         System.out.println("ArrayList Size : " + list.size());
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
