@@ -132,8 +132,8 @@ public class MyCombo {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                     String itemNo = String.valueOf(combo.getSelectedItem());
 
-                    Date fromDate = reports_date1_picker.getDate();
-                    Date toDate = reports_date2_picker.getDate();
+                    Date fromDate = from.getDate();
+                    Date toDate = to.getDate();
                     String fromDateString = new SimpleDateFormat("yyyy-MM-dd").format(fromDate);
                     String toDateString = new SimpleDateFormat("yyyy-MM-dd").format(toDate);
 
