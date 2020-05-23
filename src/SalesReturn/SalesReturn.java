@@ -10,6 +10,7 @@ import DataManipulation.DataManipulation;
 import DataManipulation.MyCombo;
 import DataManipulation.Rounding;
 import ViewManipulation.ViewManipulation;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -39,15 +40,18 @@ public class SalesReturn {
     JPanel panel1;
     JScrollPane panel2;
     JLabel total_lbl;
+    JDateChooser from;
+    JDateChooser to;
 
     boolean isDecorated = false;
-    
 
-    public SalesReturn(JComboBox invoice_no, JComboBox customer_no, JComboBox customer_name, JLabel total_lbl, DataBaseConnector connector) {
+    public SalesReturn(JComboBox invoice_no, JComboBox customer_no, JComboBox customer_name, JLabel total_lbl, JDateChooser from, JDateChooser to, DataBaseConnector connector) {
         this.invoice_no = invoice_no;
         this.customer_name = customer_name;
         this.customer_no = customer_no;
         this.total_lbl = total_lbl;
+        this.from = from;
+        this.to = to;
         this.connector = connector;
     }
 
@@ -110,7 +114,7 @@ public class SalesReturn {
             double price = Double.parseDouble(row[3]);
             double qty = Double.parseDouble(row[2]);
 
-            rowData[1] = Rounding.RoundTo5((price / (qty)),true);
+            rowData[1] = Rounding.RoundTo5((price / (qty)), true);
             rowData[2] = price;
             rowData[3] = row[4];
             rowData[4] = row[2];
@@ -161,7 +165,7 @@ public class SalesReturn {
         MyCombo autoCombo = new MyCombo();
         autoCombo.setSearchableCombo(combo, true, "No result Found");
 
-        autoCombo.populateAJTable(combo, table, connector);
+        autoCombo.populateAJTable(combo, table,from,to, connector);
 
         eventForSearchTable(table, item_table);
 

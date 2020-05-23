@@ -4273,7 +4273,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultDateRange(return_from_picker, return_to_picker, 6);
         ViewManipulation.changePanel(MainChangeFrame, SalesReturnPanel);
-        sales_return = new SalesReturn(return_invoiceID_combo, return_userID_combo, return_userName_combo, return_total_txt, connector);
+        sales_return = new SalesReturn(return_invoiceID_combo, return_userID_combo, return_userName_combo, return_total_txt,return_from_picker,return_to_picker, connector);
         sales_return.fillDataToCombo();
         sales_return.changeTableView(return_item_table);
 
