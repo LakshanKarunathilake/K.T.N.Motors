@@ -4666,7 +4666,7 @@ public class MainFrame extends javax.swing.JFrame {
         String dbUser = "root";
         String dbPass = "";
 
-        String default_backup = "C:/Inventory Data";
+        String default_backup = "C:/Inventory";
         default_backup += "/backups/" + date + ".sql";
         default_backup = default_backup.replace("\\", "/");
 
