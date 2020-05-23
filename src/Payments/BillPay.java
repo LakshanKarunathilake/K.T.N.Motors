@@ -201,7 +201,7 @@ public class BillPay {
     }
 
     public void checkForBills() {
-        ArrayList list = connector.retreveDataColoumnWithTwoCondition("invoices", "invoice_id", "customer_code", String.valueOf(customerID_combo.getSelectedItem()), "status", "0", "orderDate","ASC");
+        ArrayList list = connector.retreveDataColoumnWithTwoCondition("invoices", "invoice_id", "customer_code", String.valueOf(customerID_combo.getSelectedItem()), "status", "0");
         System.out.println("ArrayList Size : " + list.size());
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
