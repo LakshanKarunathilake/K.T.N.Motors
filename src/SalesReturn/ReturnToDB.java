@@ -61,7 +61,7 @@ public class ReturnToDB {
             String return_qty = String.valueOf(model.getValueAt(i, 3));
             Object condition_tick = model.getValueAt(i, 5);
             String itemNo = String.valueOf(model.getValueAt(i, 0));
-            ArrayList temp = connector.retreveDataColoumnWithTwoCondition("invoiceitems", "returnable_qty", "invoice_id", invoiceID, "item_code", itemNo,"orderDate","DESC");
+            ArrayList temp = connector.retreveDataColoumnWithTwoCondition("invoiceitems", "returnable_qty", "invoice_id", invoiceID, "item_code", itemNo);
             String ta = String.valueOf(temp.get(0));
             double current_returnable = Double.valueOf(ta);
             
