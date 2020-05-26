@@ -81,10 +81,11 @@ public class InvoiceSearch {
             String itemNo = String.valueOf(itemNoList.get(i));
             ArrayList item_data = new ArrayList();
             item_data = connector.readRow("items", "item_code", itemNo);
+            double unitPrice = Double.parseDouble(itemTotalList.get(i).toString()) / Double.parseDouble(itemQtyList.get(i).toString());
             rowData[0] = item_data.get(0);
             rowData[1] = item_data.get(4);
             rowData[2] = item_data.get(9);
-            rowData[3] = item_data.get(7);
+            rowData[3] = unitPrice;
             rowData[4] = itemQtyList.get(i);
             rowData[5] = itemTotalList.get(i);
             model.addRow(rowData);
