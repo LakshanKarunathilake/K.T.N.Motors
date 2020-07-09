@@ -1177,7 +1177,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addGap(99, 99, 99)
                                 .addComponent(clutch_plate_add_btn)))
                         .addGap(248, 248, 248)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Clutch_Plate_AddLayout.setVerticalGroup(
             Clutch_Plate_AddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1370,7 +1370,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(settings_panelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(settings_sub_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 758, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         settings_panelLayout.setVerticalGroup(
             settings_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1380,7 +1380,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jButton23, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
                     .addComponent(jButton24, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
                 .addComponent(settings_sub_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1407,7 +1407,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         stock_item_combo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         stock_item_combo.setNextFocusableComponent(stock_qty_txt);
-        stock_item_combo.setOpaque(false);
         stock_item_combo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 stock_item_comboFocusGained(evt);
@@ -2100,11 +2099,11 @@ public class MainFrame extends javax.swing.JFrame {
         SettingsPanel.setLayout(SettingsPanelLayout);
         SettingsPanelLayout.setHorizontalGroup(
             SettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 810, Short.MAX_VALUE)
+            .addGap(0, 814, Short.MAX_VALUE)
         );
         SettingsPanelLayout.setVerticalGroup(
             SettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 660, Short.MAX_VALUE)
+            .addGap(0, 850, Short.MAX_VALUE)
         );
 
         MainChangeFrame.add(SettingsPanel, "card6");
@@ -2254,7 +2253,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         add_item_category_combo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         add_item_category_combo.setNextFocusableComponent(add_item_vehicle_txt);
-        add_item_category_combo.setOpaque(false);
         add_item_category_combo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 add_item_category_comboActionPerformed(evt);
@@ -2661,7 +2659,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(bill_currentDate)
                     .addComponent(bill_cash_datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bill_chooseDate))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cashPay, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2942,7 +2940,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jLabel98)
                             .addGap(18, 18, 18)
                             .addComponent(item_search_category_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         ItemSearchPanelLayout.setVerticalGroup(
             ItemSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3030,12 +3028,12 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(UserSearchPanelLayout.createSequentialGroup()
                             .addComponent(jLabel99)
                             .addGap(653, 653, 653))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         UserSearchPanelLayout.setVerticalGroup(
             UserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(UserSearchPanelLayout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
+                .addContainerGap(241, Short.MAX_VALUE)
                 .addComponent(jLabel99)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(UserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -3185,12 +3183,16 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void newBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBtnActionPerformed
-        AddCustomer.getInstance().changeStateAddUser(true);
-        AddCustomer.addOrUpdate = "add";
-        AddCustomer.getInstance().emptyUserFields();
-        newBtn.setEnabled(false);
-
-
+        AdminConfirmation confirmation = AdminConfirmation.getInstance();
+        boolean output = confirmation.presentDialog();
+        if (output) {
+            AddCustomer.getInstance().changeStateAddUser(true);
+            AddCustomer.addOrUpdate = "add";
+            AddCustomer.getInstance().emptyUserFields();
+            newBtn.setEnabled(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Sorry you are not authorized", "Authorization Failed", 0);
+        }
     }//GEN-LAST:event_newBtnActionPerformed
 
     private void SalesLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalesLabelMouseClicked
@@ -3920,19 +3922,24 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_Bill_tableMouseClicked
 
     private void cashPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashPayActionPerformed
-        if (!bill_payable_txt.getText().equals("0.0")) {
-            BillPay.getInstance().setCashPayFields(bill_currentDate, bill_chooseDate, bill_cash_datePicker);
-            BillPay.getInstance().cashPay();
+        AdminConfirmation confirmation = AdminConfirmation.getInstance();
+        boolean output = confirmation.presentDialog();
+        if (output) {
+            if (!bill_payable_txt.getText().equals("0.0")) {
+                BillPay.getInstance().setCashPayFields(bill_currentDate, bill_chooseDate, bill_cash_datePicker);
+                BillPay.getInstance().cashPay();
 
-            Bill_table.setVisible(false);
-            bill_paymentPane.setVisible(false);
-            bill_invoiceValue_txt.setText("");
-            Bill_date_txt.setText("");
+                Bill_table.setVisible(false);
+                bill_paymentPane.setVisible(false);
+                bill_invoiceValue_txt.setText("");
+                Bill_date_txt.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "This does not have any payable amount");
+            }
+            newBtn.setEnabled(false);
         } else {
-            JOptionPane.showMessageDialog(null, "This does not have any payable amount");
-
-        }
-
+            JOptionPane.showMessageDialog(null, "Sorry you are not authorized", "Authorization Failed", 0);
+        }    
     }//GEN-LAST:event_cashPayActionPerformed
 
     public boolean validationChequePanel() {
