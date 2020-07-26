@@ -338,7 +338,7 @@ public class MainFrame extends javax.swing.JFrame {
         reports_customer_btn1 = new javax.swing.JButton();
         reports_customer_btn2 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
+        userWisePanel = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
@@ -351,13 +351,17 @@ public class MainFrame extends javax.swing.JFrame {
         jButton13 = new javax.swing.JButton();
         jButton30 = new javax.swing.JButton();
         jButton31 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        itemWisePanel = new javax.swing.JPanel();
         report_item_combo = new javax.swing.JComboBox<>();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
+        purchasingPanel = new javax.swing.JPanel();
+        report_purchasing_invoice_no = new javax.swing.JComboBox<>();
+        jButton32 = new javax.swing.JButton();
+        jLabel60 = new javax.swing.JLabel();
         item_report_checkBox = new javax.swing.JCheckBox();
         reports_date1_picker = new com.toedter.calendar.JDateChooser();
         reports_date2_picker = new com.toedter.calendar.JDateChooser();
@@ -1938,8 +1942,13 @@ public class MainFrame extends javax.swing.JFrame {
         ReportPanel.add(reports_customer_btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 180, 70));
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        userWisePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton6.setText("Last Bill");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -1947,7 +1956,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 160, 35));
+        userWisePanel.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 160, 35));
 
         jButton7.setText("All Selling");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -1955,7 +1964,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 160, 35));
+        userWisePanel.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 160, 35));
 
         jButton8.setText("user payments");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -1963,11 +1972,11 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton8ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, 160, 35));
+        userWisePanel.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, 160, 35));
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel29.setText("UserID :");
-        jPanel3.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+        userWisePanel.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
 
         report_name_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         report_name_combo.addActionListener(new java.awt.event.ActionListener() {
@@ -1975,7 +1984,7 @@ public class MainFrame extends javax.swing.JFrame {
                 report_name_comboActionPerformed(evt);
             }
         });
-        jPanel3.add(report_name_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 299, 36));
+        userWisePanel.add(report_name_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 299, 36));
 
         report_userID_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         report_userID_combo.addActionListener(new java.awt.event.ActionListener() {
@@ -1983,19 +1992,19 @@ public class MainFrame extends javax.swing.JFrame {
                 report_userID_comboActionPerformed(evt);
             }
         });
-        jPanel3.add(report_userID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 75, 36));
+        userWisePanel.add(report_userID_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 75, 36));
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel32.setText("Select user");
-        jPanel3.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
+        userWisePanel.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel43.setText("All Users Reports");
-        jPanel3.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, -1, -1));
+        userWisePanel.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, -1, -1));
 
         jLabel44.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel44.setText("Name :");
-        jPanel3.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, -1));
+        userWisePanel.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, -1));
 
         jButton13.setText("All Unpaid");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
@@ -2003,7 +2012,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton13ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 160, 30));
+        userWisePanel.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 160, 30));
 
         jButton30.setText("All Part Paymanets");
         jButton30.addActionListener(new java.awt.event.ActionListener() {
@@ -2011,7 +2020,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton30ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton30, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 160, 30));
+        userWisePanel.add(jButton30, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 160, 30));
 
         jButton31.setText("Summary");
         jButton31.addActionListener(new java.awt.event.ActionListener() {
@@ -2019,14 +2028,14 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton31ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton31, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 160, 30));
+        userWisePanel.add(jButton31, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 160, 30));
 
-        jTabbedPane1.addTab("User Wise", jPanel3);
+        jTabbedPane1.addTab("User Wise", userWisePanel);
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        itemWisePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         report_item_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jPanel2.add(report_item_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 370, 50));
+        itemWisePanel.add(report_item_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 370, 50));
 
         jButton9.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jButton9.setText("Empty Stock");
@@ -2035,7 +2044,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 160, 35));
+        itemWisePanel.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 160, 35));
 
         jButton10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jButton10.setText("Purchaising History");
@@ -2044,7 +2053,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton10ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, -1, 35));
+        itemWisePanel.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, -1, 35));
 
         jButton11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jButton11.setText("Selling History");
@@ -2053,17 +2062,42 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton11ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 160, 40));
+        itemWisePanel.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 160, 40));
 
         jLabel41.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel41.setText("Complete Item Report Reports");
-        jPanel2.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        itemWisePanel.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
         jLabel42.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel42.setText("Part Number");
-        jPanel2.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        itemWisePanel.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
-        jTabbedPane1.addTab("Item Wise", jPanel2);
+        jTabbedPane1.addTab("Item Wise", itemWisePanel);
+
+        purchasingPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        report_purchasing_invoice_no.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        report_purchasing_invoice_no.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                report_purchasing_invoice_noActionPerformed(evt);
+            }
+        });
+        purchasingPanel.add(report_purchasing_invoice_no, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 370, 50));
+
+        jButton32.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButton32.setText("View Invoice");
+        jButton32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton32ActionPerformed(evt);
+            }
+        });
+        purchasingPanel.add(jButton32, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 180, 50));
+
+        jLabel60.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel60.setText("Invoice Number");
+        purchasingPanel.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        jTabbedPane1.addTab("Purchasing Panel", purchasingPanel);
 
         ReportPanel.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 730, 340));
 
@@ -5001,6 +5035,35 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton31ActionPerformed
 
+    private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
+        String path = report_folder_path + "\\purchasing\\invoice\\purchase_invoice.jrxml";
+        HashMap hm = new HashMap();
+        hm.put("invoice_id", String.valueOf(report_purchasing_invoice_no.getSelectedItem()));
+        JasperReport jr;
+        try {
+            jr = JasperCompileManager.compileReport(path);
+            JasperPrint jp = JasperFillManager.fillReport(jr, hm, connector.startConnection());
+            JasperViewer jw = new JasperViewer(jp, false);
+            jw.viewReport(jp, false);
+        } catch (JRException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR in Reporting all items...");
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton32ActionPerformed
+
+    private void report_purchasing_invoice_noActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_purchasing_invoice_noActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_report_purchasing_invoice_noActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+       DataManipulation dm = new DataManipulation(connector);
+       dm.getRecords("purchaising", "invoice_id", report_purchasing_invoice_no);
+       MyCombo autocombo = new MyCombo();
+       autocombo.setSearchableCombo(report_purchasing_invoice_no, true, "No Result Found");
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
+
     public void FillBill(String invoiceID) {
         ArrayList list = connector.readRow("orders", "orderID", invoiceID);
         bill_invoiceValue_txt.setText(String.valueOf(list.get(3)));
@@ -5219,6 +5282,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton editBtn;
     private javax.swing.JButton itemCancelBtn1;
     private javax.swing.JTable itemSearchTable;
+    private javax.swing.JPanel itemWisePanel;
     private javax.swing.JButton item_add_edit_btn;
     private javax.swing.JButton item_add_new_btn;
     private javax.swing.JLabel item_date1_label;
@@ -5251,6 +5315,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton30;
     private javax.swing.JButton jButton31;
+    private javax.swing.JButton jButton32;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -5310,6 +5375,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
@@ -5351,8 +5417,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel98;
     private javax.swing.JLabel jLabel99;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
@@ -5371,9 +5435,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField purchaise_invoiceno_txt;
     private javax.swing.JComboBox<String> purchaise_retailer_combo;
     private javax.swing.JPanel purchaising_main_panel;
+    private javax.swing.JPanel purchasingPanel;
     private javax.swing.JComboBox<String> report_item_combo;
     private javax.swing.JButton report_items_btn;
     private javax.swing.JComboBox<String> report_name_combo;
+    private javax.swing.JComboBox<String> report_purchasing_invoice_no;
     private javax.swing.JComboBox<String> report_userID_combo;
     private javax.swing.JButton reports_customer_btn1;
     private javax.swing.JButton reports_customer_btn2;
@@ -5459,6 +5525,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField update_sellingP_txt;
     private javax.swing.JLabel update_selling_lbl;
     private javax.swing.JTable userSearchTable;
+    private javax.swing.JPanel userWisePanel;
     private javax.swing.JTextField user_search_txt;
     // End of variables declaration//GEN-END:variables
 
