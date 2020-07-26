@@ -358,6 +358,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
+        jButton12 = new javax.swing.JButton();
         purchasingPanel = new javax.swing.JPanel();
         report_purchasing_invoice_no = new javax.swing.JComboBox<>();
         jButton32 = new javax.swing.JButton();
@@ -2071,6 +2072,15 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel42.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel42.setText("Part Number");
         itemWisePanel.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        jButton12.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButton12.setText("Sales Returns");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+        itemWisePanel.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 160, 35));
 
         jTabbedPane1.addTab("Item Wise", itemWisePanel);
 
@@ -5064,6 +5074,24 @@ public class MainFrame extends javax.swing.JFrame {
        autocombo.setSearchableCombo(report_purchasing_invoice_no, true, "No Result Found");
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+         String path = report_folder_path + "\\item\\returns\\all_returns.jrxml";
+        HashMap hm = new HashMap();
+        hm.put("item_code", String.valueOf(report_item_combo.getSelectedItem()));
+        JasperReport jr;
+        try {
+            jr = JasperCompileManager.compileReport(path);
+            JasperPrint jp = JasperFillManager.fillReport(jr, hm, connector.startConnection());
+            JasperViewer jw = new JasperViewer(jp, false);
+            jw.viewReport(jp, false);
+        } catch (JRException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR in Reporting all items...");
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton12ActionPerformed
+
     public void FillBill(String invoiceID) {
         ArrayList list = connector.readRow("orders", "orderID", invoiceID);
         bill_invoiceValue_txt.setText(String.valueOf(list.get(3)));
@@ -5294,6 +5322,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
