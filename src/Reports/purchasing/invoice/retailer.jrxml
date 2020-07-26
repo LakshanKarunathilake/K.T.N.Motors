@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="retailer" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b3f1341f-1cb9-45e9-a6fc-884a3eb2da9b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="proto"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="invoice_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM prototype.retailers where retailer_id in (Select retailer_id from purchaising where invoice_id like  $P{invoice_id} )]]>
+	</queryString>
+	<field name="retailer_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="retailer_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="retailers"/>
+	</field>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="retailers"/>
+	</field>
+	<field name="address" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="address"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="retailers"/>
+	</field>
+	<field name="telephone" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="telephone"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="retailers"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="49" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="185" height="16" uuid="5b77ef42-4785-4d5f-933b-5480a2af01c9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="16" width="185" height="16" uuid="e5bdb019-440e-4030-ae14-09c59c002873">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="32" width="185" height="16" uuid="2d9c4c3a-65d2-4523-95dc-52613316d3e0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{telephone}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
