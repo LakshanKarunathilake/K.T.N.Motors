@@ -220,6 +220,8 @@ public class MainFrame extends javax.swing.JFrame {
         AdditionalTextPannel = new javax.swing.JPanel();
         jLabel96 = new javax.swing.JLabel();
         sales_additional_txt = new javax.swing.JTextField();
+        jLabel59 = new javax.swing.JLabel();
+        sales_CName_combo1 = new javax.swing.JComboBox<>();
         settings_panel = new javax.swing.JPanel();
         jButton20 = new javax.swing.JButton();
         settings_sub_panel = new javax.swing.JPanel();
@@ -603,8 +605,8 @@ public class MainFrame extends javax.swing.JFrame {
         SalesPanel.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("SF New Republic SC", 0, 18)); // NOI18N
-        jLabel15.setText("Name:");
-        SalesPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, 20));
+        jLabel15.setText("Rep");
+        SalesPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, -1, 20));
 
         sales_search_user_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         sales_search_user_btn.setText("Search User");
@@ -614,7 +616,7 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_search_user_btnActionPerformed(evt);
             }
         });
-        SalesPanel.add(sales_search_user_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 170, 40));
+        SalesPanel.add(sales_search_user_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 120, 40));
 
         sales_itemno_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         sales_itemno_combo.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -657,7 +659,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton14ActionPerformed(evt);
             }
         });
-        SalesPanel.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 180, 40));
+        SalesPanel.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 120, 40));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel16.setText("Part Number");
@@ -854,7 +856,7 @@ public class MainFrame extends javax.swing.JFrame {
                 sales_CName_comboKeyPressed(evt);
             }
         });
-        SalesPanel.add(sales_CName_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 280, 30));
+        SalesPanel.add(sales_CName_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 280, 30));
 
         sales_CID_combo.setEditable(true);
         sales_CID_combo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -1026,6 +1028,30 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         SalesPanel.add(AdditionalTextPannel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 760, 80));
+
+        jLabel59.setFont(new java.awt.Font("SF New Republic SC", 0, 18)); // NOI18N
+        jLabel59.setText("Name:");
+        SalesPanel.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, 20));
+
+        sales_CName_combo1.setEditable(true);
+        sales_CName_combo1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        sales_CName_combo1.setNextFocusableComponent(sales_itemno_combo);
+        sales_CName_combo1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                sales_CName_combo1FocusGained(evt);
+            }
+        });
+        sales_CName_combo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sales_CName_combo1ActionPerformed(evt);
+            }
+        });
+        sales_CName_combo1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sales_CName_combo1KeyPressed(evt);
+            }
+        });
+        SalesPanel.add(sales_CName_combo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 120, 30));
 
         MainChangeFrame.add(SalesPanel, "card2");
 
@@ -5092,6 +5118,18 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton12ActionPerformed
 
+    private void sales_CName_combo1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sales_CName_combo1FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sales_CName_combo1FocusGained
+
+    private void sales_CName_combo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_CName_combo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sales_CName_combo1ActionPerformed
+
+    private void sales_CName_combo1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_CName_combo1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sales_CName_combo1KeyPressed
+
     public void FillBill(String invoiceID) {
         ArrayList list = connector.readRow("orders", "orderID", invoiceID);
         bill_invoiceValue_txt.setText(String.valueOf(list.get(3)));
@@ -5403,6 +5441,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel63;
@@ -5499,6 +5538,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel returns_search_panel;
     private javax.swing.JComboBox<String> sales_CID_combo;
     private javax.swing.JComboBox<String> sales_CName_combo;
+    private javax.swing.JComboBox<String> sales_CName_combo1;
     private javax.swing.JTextField sales_InvoiceID_txt;
     private javax.swing.JTextField sales_addPrecent_txt;
     private javax.swing.JTextField sales_additional_txt;
