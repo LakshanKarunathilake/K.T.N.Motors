@@ -131,6 +131,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         ArrayList emptyCombos = new ArrayList<JComboBox>();
         emptyCombos.add(sales_CID_combo);
+        emptyCombos.add(sales_rep_combo);
         emptyCombos.add(sales_CName_combo);
         emptyCombos.add(sales_item_name_combo);
         emptyCombos.add(sales_itemno_combo);
@@ -145,7 +146,7 @@ public class MainFrame extends javax.swing.JFrame {
         ViewManipulation.changeTableView(itemSearchTable, itemSearchTableView);
         ViewManipulation.changeTableView(userSearchTable, userSearchTableView);
 
-        item_sale = new Invoice(sales_itemno_combo, sales_item_name_combo, sales_CID_combo, sales_CName_combo, sales_qty_Txt, connector);
+        item_sale = new Invoice(sales_itemno_combo, sales_item_name_combo, sales_CID_combo, sales_CName_combo, sales_qty_Txt,sales_rep_combo, connector);
         invoiceData = item_sale.fillDataToCombo();
 
         Invoice.setSaleID(sales_InvoiceID_txt, connector);
@@ -221,7 +222,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel96 = new javax.swing.JLabel();
         sales_additional_txt = new javax.swing.JTextField();
         jLabel59 = new javax.swing.JLabel();
-        sales_CName_combo1 = new javax.swing.JComboBox<>();
+        sales_rep_combo = new javax.swing.JComboBox<>();
         settings_panel = new javax.swing.JPanel();
         jButton20 = new javax.swing.JButton();
         settings_sub_panel = new javax.swing.JPanel();
@@ -1033,25 +1034,25 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel59.setText("Name:");
         SalesPanel.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, 20));
 
-        sales_CName_combo1.setEditable(true);
-        sales_CName_combo1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        sales_CName_combo1.setNextFocusableComponent(sales_itemno_combo);
-        sales_CName_combo1.addFocusListener(new java.awt.event.FocusAdapter() {
+        sales_rep_combo.setEditable(true);
+        sales_rep_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        sales_rep_combo.setNextFocusableComponent(sales_itemno_combo);
+        sales_rep_combo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                sales_CName_combo1FocusGained(evt);
+                sales_rep_comboFocusGained(evt);
             }
         });
-        sales_CName_combo1.addActionListener(new java.awt.event.ActionListener() {
+        sales_rep_combo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sales_CName_combo1ActionPerformed(evt);
+                sales_rep_comboActionPerformed(evt);
             }
         });
-        sales_CName_combo1.addKeyListener(new java.awt.event.KeyAdapter() {
+        sales_rep_combo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                sales_CName_combo1KeyPressed(evt);
+                sales_rep_comboKeyPressed(evt);
             }
         });
-        SalesPanel.add(sales_CName_combo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 120, 30));
+        SalesPanel.add(sales_rep_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 120, 30));
 
         MainChangeFrame.add(SalesPanel, "card2");
 
@@ -5118,17 +5119,17 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton12ActionPerformed
 
-    private void sales_CName_combo1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sales_CName_combo1FocusGained
+    private void sales_rep_comboFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sales_rep_comboFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_sales_CName_combo1FocusGained
+    }//GEN-LAST:event_sales_rep_comboFocusGained
 
-    private void sales_CName_combo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_CName_combo1ActionPerformed
+    private void sales_rep_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_rep_comboActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sales_CName_combo1ActionPerformed
+    }//GEN-LAST:event_sales_rep_comboActionPerformed
 
-    private void sales_CName_combo1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_CName_combo1KeyPressed
+    private void sales_rep_comboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sales_rep_comboKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sales_CName_combo1KeyPressed
+    }//GEN-LAST:event_sales_rep_comboKeyPressed
 
     public void FillBill(String invoiceID) {
         ArrayList list = connector.readRow("orders", "orderID", invoiceID);
@@ -5538,7 +5539,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel returns_search_panel;
     private javax.swing.JComboBox<String> sales_CID_combo;
     private javax.swing.JComboBox<String> sales_CName_combo;
-    private javax.swing.JComboBox<String> sales_CName_combo1;
     private javax.swing.JTextField sales_InvoiceID_txt;
     private javax.swing.JTextField sales_addPrecent_txt;
     private javax.swing.JTextField sales_additional_txt;
@@ -5557,6 +5557,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton sales_print_btn;
     private javax.swing.JTextField sales_qty_Txt;
     private javax.swing.JButton sales_remove_btn;
+    private javax.swing.JComboBox<String> sales_rep_combo;
     private javax.swing.JPanel sales_return_subPanel;
     private javax.swing.JButton sales_save_btn;
     private javax.swing.JButton sales_searchI_btn1;

@@ -31,6 +31,7 @@ public class Invoice {
     JComboBox category;
     JComboBox customerID;
     JComboBox customerName;
+    JComboBox salesRepName;
     DataBaseConnector connector;
     JTable table;
     JTextField qtyText;
@@ -42,37 +43,37 @@ public class Invoice {
     
     boolean isNotDecorated = true;
     
-    public Invoice(JComboBox itemNo,JComboBox category,JComboBox customerID,JComboBox customerName,JTextField qtyText,DataBaseConnector connector){
+    public Invoice(JComboBox itemNo,JComboBox category,JComboBox customerID,JComboBox customerName,JTextField qtyText,JComboBox salesRepName,DataBaseConnector connector){
         this.itemNo = itemNo;
         this.category = category;
         this.connector = connector;
         this.customerID = customerID;
         this.customerName = customerName;
+        this.salesRepName = salesRepName;
         this.qtyText = qtyText;
     }
     
     public void salesAutoCombo(){
         autoCombo1.setSearchableCombo(this.itemNo, true, "No Result Found");
         autoCombo2.setSearchableCombo(this.category, true, "No Result Found");
-        
-//        autoCombo3.setSearchableCombo(this.customerID, true, "No Result Found");
-//        autoCombo4.setSearchableCombo(this.customerName, true, "No Result Found");
     }
     
     public void decoratingCustomers(){
         if(isNotDecorated){
             AutoCompleteDecorator.decorate(customerID);
             AutoCompleteDecorator.decorate(customerName);
+            AutoCompleteDecorator.decorate(salesRepName);
             isNotDecorated = false;            
         }
         DataManipulation manipulation = new DataManipulation(connector);
         
         manipulation.getRecords("customers", "customer_code", customerID);
         manipulation.getRecords("customers", "name", customerName);
+        manipulation.getRecords("reps", "name", salesRepName);
         
         ViewManipulation.moveFocusToNext(customerID, itemNo);
         ViewManipulation.moveFocusToNext(customerName, itemNo);
-        
+        ViewManipulation.moveFocusToNext(salesRepName, itemNo);
         
     }
    
