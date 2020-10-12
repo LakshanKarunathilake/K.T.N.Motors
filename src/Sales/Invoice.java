@@ -59,6 +59,11 @@ public class Invoice {
     }
     
     public void decoratingCustomers(){
+        ArrayList boxes = new ArrayList<JComboBox>();
+        boxes.add(customerID);
+        boxes.add(customerName);
+        boxes.add(salesRepName);
+        ViewManipulation.emptyComboBoxes(boxes);
         if(isNotDecorated){
             AutoCompleteDecorator.decorate(customerID);
             AutoCompleteDecorator.decorate(customerName);
@@ -74,6 +79,9 @@ public class Invoice {
         ViewManipulation.moveFocusToNext(customerID, itemNo);
         ViewManipulation.moveFocusToNext(customerName, itemNo);
         ViewManipulation.moveFocusToNext(salesRepName, itemNo);
+        
+        customerID.setSelectedItem("1");
+        salesRepName.setSelectedItem("Nimal");
         
     }
    
