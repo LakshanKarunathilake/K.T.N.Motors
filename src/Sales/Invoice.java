@@ -91,8 +91,6 @@ public class Invoice {
         salesAutoCombo();
 
         ArrayList<String> catList1 = new ArrayList<>();
-        ArrayList<String> catList2 = new ArrayList<>();
-        ArrayList<String> catList3 = new ArrayList<>();
         
         //       Getting the value from a second table -- userID from the user table
         
@@ -103,33 +101,9 @@ public class Invoice {
         autoCombo2.populateSecondCombo(category, itemNo, connector, catList1, null, false);
         autoCombo2.moveFocusToNext(itemNo, qtyText);
         
-        
-//        catList2.add(0, "customers");
-//        catList2.add(1, "name");
-//        catList2.add(2, "customer_code");
-//        autoCombo3.populateSecondCombo(customerID, customerName, connector, catList2, null, false);
-//        
-//        catList3.add(0, "customers");
-//        catList3.add(1, "customer_code");
-//        catList3.add(2, "name");
-//        autoCombo4.populateSecondCombo(customerName, customerID, connector, catList3, null, false);
-        
-//        autoCombo1.moveFocusToNext(itemNo, qtyText);
-   
+    
     }
-    
-//    private void autoCompleteComboDecorate(){
-//        MyCombo autoCombo1 = new MyCombo();
-//        MyCombo autoCombo2 = new MyCombo();
-//        MyCombo autoCombo3 = new MyCombo();
-//        
-//        autoCombo1.setSearchableCombo(itemNo, true, noReultsText);
-//        autoCombo1.setSearchableCombo(category, true, noReultsText);
-//        autoCombo1.setSearchableCombo(customerID, true, noReultsText);
-//        autoCombo1.setSearchableCombo(customerName, true, noReultsText);
-//        autoCombo1.setSearchableCombo(itemNo, true, noReultsText);
-//    }
-    
+       
     public ArrayList[]  fillDataToCombo() {
         
         ArrayList[] lists = new ArrayList[2];
