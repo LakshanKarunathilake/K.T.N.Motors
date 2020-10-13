@@ -371,6 +371,7 @@ public class MainFrame extends javax.swing.JFrame {
         reports_date2_picker = new com.toedter.calendar.JDateChooser();
         item_date1_label = new javax.swing.JLabel();
         item_date2_label = new javax.swing.JLabel();
+        reports_dayEnd_btn1 = new javax.swing.JButton();
         SettingsPanel = new javax.swing.JPanel();
         AddItemPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -1936,7 +1937,7 @@ public class MainFrame extends javax.swing.JFrame {
                 reports_dayEnd_btnActionPerformed(evt);
             }
         });
-        ReportPanel.add(reports_dayEnd_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(577, 70, 160, 70));
+        ReportPanel.add(reports_dayEnd_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, 140, 70));
 
         report_items_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         report_items_btn.setText("Item Rport");
@@ -1958,7 +1959,7 @@ public class MainFrame extends javax.swing.JFrame {
                 reports_customer_btn1ActionPerformed(evt);
             }
         });
-        ReportPanel.add(reports_customer_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 150, 70));
+        ReportPanel.add(reports_customer_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 150, 70));
 
         reports_customer_btn2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         reports_customer_btn2.setText("Invoice Summary");
@@ -1967,7 +1968,7 @@ public class MainFrame extends javax.swing.JFrame {
                 reports_customer_btn2ActionPerformed(evt);
             }
         });
-        ReportPanel.add(reports_customer_btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 180, 70));
+        ReportPanel.add(reports_customer_btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 160, 70));
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2161,6 +2162,15 @@ public class MainFrame extends javax.swing.JFrame {
         item_date2_label.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         item_date2_label.setText("End :");
         ReportPanel.add(item_date2_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, -1, 40));
+
+        reports_dayEnd_btn1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        reports_dayEnd_btn1.setText("Commission");
+        reports_dayEnd_btn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reports_dayEnd_btn1ActionPerformed(evt);
+            }
+        });
+        ReportPanel.add(reports_dayEnd_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 140, 70));
 
         MainChangeFrame.add(ReportPanel, "card3");
 
@@ -5132,6 +5142,10 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sales_rep_comboKeyPressed
 
+    private void reports_dayEnd_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reports_dayEnd_btn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reports_dayEnd_btn1ActionPerformed
+
     public void FillBill(String invoiceID) {
         ArrayList list = connector.readRow("orders", "orderID", invoiceID);
         bill_invoiceValue_txt.setText(String.valueOf(list.get(3)));
@@ -5517,6 +5531,7 @@ public class MainFrame extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser reports_date1_picker;
     private com.toedter.calendar.JDateChooser reports_date2_picker;
     private javax.swing.JButton reports_dayEnd_btn;
+    private javax.swing.JButton reports_dayEnd_btn1;
     private javax.swing.JTextField retailer_address_txt;
     private javax.swing.JTextField retailer_contact_txt;
     private javax.swing.JTextField retailer_name_txt;
