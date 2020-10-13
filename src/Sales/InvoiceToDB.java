@@ -25,6 +25,7 @@ import javax.swing.table.TableModel;
  */
 public class InvoiceToDB {
     JComboBox customer_code;
+    JComboBox salesRepName;
     DataBaseConnector connector;
     JTable table;
     JTextField invoiceID_text;
@@ -35,12 +36,13 @@ public class InvoiceToDB {
     JCheckBox checkbox;
     JTextField additionalTxt;
     
-    public InvoiceToDB(JComboBox customer_code,JTextField invoiceID_text,JTable table,JTextField additonalTxt, DataBaseConnector connector){
+    public InvoiceToDB(JComboBox customer_code,JComboBox salesRepName,JTextField invoiceID_text,JTable table,JTextField additonalTxt, DataBaseConnector connector){
         this.customer_code = customer_code;
         this.connector = connector;
         this.table = table;
         this.invoiceID_text = invoiceID_text;
         this.additionalTxt = additonalTxt;
+        this.salesRepName = salesRepName;
     }
     
     public boolean validUserPurchaise() {
@@ -149,6 +151,10 @@ public class InvoiceToDB {
         String grandTotal = grandTxt.getText();
         String additionalNote = additionalTxt.getText();
 
+        String repsName = String.valueOf(salesRepName.getSelectedItem());
+        
+                
+                
         Timestamp now = new Timestamp(System.currentTimeMillis());
         String timeStamp = String.valueOf(now);
 
@@ -159,6 +165,7 @@ public class InvoiceToDB {
         record.add(grandTotal);
         record.add(timeStamp);
         record.add(userID);
+        
         
         if (userID.equals("1")) {
             record.add("1");
@@ -173,6 +180,7 @@ public class InvoiceToDB {
         }
         record.add("0");
         record.add(additionalNote);
+        record.add(repsName);
         if (!connector.insertRecord("invoices", record)) {
             JOptionPane.showMessageDialog(null, "Insertion fails in order ");
             return false;

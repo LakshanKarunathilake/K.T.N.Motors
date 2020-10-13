@@ -3502,6 +3502,7 @@ public class MainFrame extends javax.swing.JFrame {
 
 //        item_sale.salesAutoCombo();
         sales_CID_combo.setEnabled(true);
+        sales_rep_combo.setEnabled(true);
         sales_CName_combo.setEnabled(true);
         sales_item_name_combo.setEnabled(true);
         sales_itemno_combo.setEnabled(true);
@@ -3679,7 +3680,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void sales_save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_save_btnActionPerformed
         calculateGrandTotal();
 
-        InvoiceToDB toDB = new InvoiceToDB(sales_CID_combo, sales_InvoiceID_txt, sales_item_table, sales_additional_txt, connector);
+        InvoiceToDB toDB = new InvoiceToDB(sales_CID_combo,sales_rep_combo, sales_InvoiceID_txt, sales_item_table, sales_additional_txt, connector);
         toDB.setValuesForInsertOrder(sales_total_txt, sales_discount_txt, sales_grand_txt, sales_halfPay_txt, sales_halfPay_check);
 
         if (toDB.validUserPurchaise()) {
@@ -3911,7 +3912,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void reports_customer_btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reports_customer_btn2ActionPerformed
         // TODO add your handling code here:
-        InvoiceSearch search = new InvoiceSearch(sales_InvoiceID_txt, sales_CID_combo, sales_CName_combo, sales_item_table, sales_total_txt, sales_discount_txt, sales_grand_txt, sales_additional_txt, connector);
+        InvoiceSearch search = new InvoiceSearch(sales_InvoiceID_txt,sales_rep_combo, sales_CID_combo, sales_CName_combo, sales_item_table, sales_total_txt, sales_discount_txt, sales_grand_txt, sales_additional_txt, connector);
         search.setHalfPayComponents(sales_halfPay_check, sales_halfPay_txt, sales_halfPay_creditTxt, sales_halfPay_panel);
         JComboBox search_invoiceID = new JComboBox();
         AutoCompleteDecorator.decorate(search_invoiceID);
@@ -4178,7 +4179,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_add_itemNo_txtFocusLost
 
     private void sales_searchI_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_searchI_btn1ActionPerformed
-        InvoiceSearch search = new InvoiceSearch(sales_InvoiceID_txt, sales_CID_combo, sales_CName_combo, sales_item_table, sales_total_txt, sales_discount_txt, sales_grand_txt, sales_additional_txt, connector);
+        InvoiceSearch search = new InvoiceSearch(sales_InvoiceID_txt,sales_rep_combo, sales_CID_combo, sales_CName_combo, sales_item_table, sales_total_txt, sales_discount_txt, sales_grand_txt, sales_additional_txt, connector);
         search.setHalfPayComponents(sales_halfPay_check, sales_halfPay_txt, sales_halfPay_creditTxt, sales_halfPay_panel);
         JComboBox search_invoiceID = new JComboBox();
         AutoCompleteDecorator.decorate(search_invoiceID);
@@ -5187,6 +5188,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void makeAllSalesComponents(boolean b) {
         sales_CID_combo.setEnabled(b);
+        sales_rep_combo.setEnabled(b);
         sales_CName_combo.setEnabled(b);
         sales_InvoiceID_txt.setEnabled(b);
         sales_itemno_combo.setEnabled(b);
