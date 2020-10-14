@@ -29,6 +29,7 @@ import Settings.EditCustomer;
 import Settings.EditQty;
 import Settings.PartNumberChange;
 import Statistics.DayEndView;
+import Statistics.commision.CommisionView;
 import StockCounting.Stock;
 import Utilities.AdminConfirmation;
 import Utilities.ItemSearch;
@@ -1937,7 +1938,7 @@ public class MainFrame extends javax.swing.JFrame {
                 reports_dayEnd_btnActionPerformed(evt);
             }
         });
-        ReportPanel.add(reports_dayEnd_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, 140, 70));
+        ReportPanel.add(reports_dayEnd_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(627, 70, -1, 70));
 
         report_items_btn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         report_items_btn.setText("Item Rport");
@@ -5144,6 +5145,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void reports_dayEnd_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reports_dayEnd_btn1ActionPerformed
         // TODO add your handling code here:
+        CommisionView view = new CommisionView();
+        view.setVisible(true);
     }//GEN-LAST:event_reports_dayEnd_btn1ActionPerformed
 
     public void FillBill(String invoiceID) {
