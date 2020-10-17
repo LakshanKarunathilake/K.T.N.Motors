@@ -36,7 +36,7 @@ public class Commision {
     
     public String getCashSales(){ 
         setBeginAndEndDate();
-        String sql = "SELECT SUM(grandTotal) as val FROM invoices WHERE invoices.orderDate BETWEEN '"+date_begin+"' AND '"+date_end+"' AND Status like '1'";
+        String sql = "SELECT SUM(grandTotal) as val FROM invoices WHERE invoices.orderDate BETWEEN '"+date_begin+"' AND '"+date_end+"' AND Status like '1' AND repName like '"+repName+"'";
         System.out.println("sql : "+sql);
         return returningVal(sql);
     }
@@ -53,7 +53,7 @@ public class Commision {
     }
     
     public String getCreditSales(){
-        String sql = "SELECT SUM(grandTotal) as val FROM invoices WHERE invoices.orderDate BETWEEN '"+date_begin+"' AND '"+date_end+"' AND Status like '0'";
+        String sql = "SELECT SUM(grandTotal) as val FROM invoices WHERE invoices.orderDate BETWEEN '"+date_begin+"' AND '"+date_end+"' AND Status like '0'  AND repName like '"+repName+"'";
         String credit  = returningVal(sql);
 //        if(credit.equals("null"))
 //            credit = "0.00";
@@ -61,7 +61,7 @@ public class Commision {
     }
     
     public String getHalfPayments(){
-        String sql = "SELECT SUM(cash_paid) as val FROM invoices WHERE invoices.orderDate BETWEEN '"+date_begin+"' AND '"+date_end+"' AND Status like '0'";
+        String sql = "SELECT SUM(cash_paid) as val FROM invoices WHERE invoices.orderDate BETWEEN '"+date_begin+"' AND '"+date_end+"' AND Status like '0' AND repName like '"+repName+"'";
         String half_payments = returningVal(sql);
         if(half_payments.equals("null"))
             half_payments = "0.00";
@@ -69,7 +69,7 @@ public class Commision {
     }
     
     public String getCashReturns(){
-        String sql = "SELECT SUM(sales_return.amount) as val FROM sales_return WHERE sales_return.date BETWEEN '"+date_begin+"' AND '"+date_end+"' AND sales_return.invoice_id in(SELECT invoices.invoice_id FROM invoices WHERE invoices.Status like '1')";
+        String sql = "SELECT SUM(sales_return.amount) as val FROM sales_return WHERE sales_return.date BETWEEN '"+date_begin+"' AND '"+date_end+"' AND sales_return.invoice_id in(SELECT invoices.invoice_id FROM invoices WHERE invoices.Status like '1' AND repName like '"+repName+ "'"+ ")";
         String cash_return = returningVal(sql);
         if(cash_return.equals("null"))
             cash_return = "0.00";
@@ -77,7 +77,7 @@ public class Commision {
     }
     
     public String getCreditReturns(){
-        String sql = "SELECT SUM(sales_return.amount) as val FROM sales_return WHERE sales_return.date BETWEEN '"+date_begin+"' AND '"+date_end+"' AND sales_return.invoice_id in(SELECT invoices.invoice_id FROM invoices WHERE invoices.Status like '0')";
+        String sql = "SELECT SUM(sales_return.amount) as val FROM sales_return WHERE sales_return.date BETWEEN '"+date_begin+"' AND '"+date_end+"' AND sales_return.invoice_id in(SELECT invoices.invoice_id FROM invoices WHERE invoices.Status like '0'AND repName like '"+repName+ "'"+ ")";
         String credit_returns = returningVal(sql);
         if(credit_returns.equals("null"))
             credit_returns = "0.00";
@@ -85,15 +85,15 @@ public class Commision {
     }
     
     public String getPartPayments(){
-        String sql = "SELECT sum(credit_payments.amount) as val FROM credit_payments WHERE credit_payments.paid_date BETWEEN '"+date_begin+"' AND '"+date_end+"'";
+        String sql = "SELECT sum(credit_payments.amount) as val FROM credit_payments WHERE credit_payments.paid_date BETWEEN '"+date_begin+"' AND '"+date_end+"'"+repName+"'";
         String part_payments = returningVal(sql);
         if(part_payments.equals("null"))
             part_payments = "0.00";
         return  returningVal(sql);
     }
     
-    public void setRepName(repName){
-        this.repName = repName
+    public void setRepName(String repName){
+        this.repName = repName;
     }
    
     
