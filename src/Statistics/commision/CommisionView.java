@@ -6,6 +6,8 @@
 package Statistics.commision;
 
 import DataManipulation.Rounding;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -15,6 +17,11 @@ import javax.swing.JOptionPane;
  */
 public class CommisionView extends javax.swing.JFrame {
 
+    /**
+     * Creates new form DayEndView
+     */
+    Commision commision = Commision.getInstance();
+    
     /**
      * Creates new form CommisionView
      */
@@ -32,7 +39,7 @@ public class CommisionView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        datepicker = new com.toedter.calendar.JDateChooser();
+        commission_from_picker = new com.toedter.calendar.JDateChooser();
         refresh_btn = new javax.swing.JLabel();
         sales_panel = new javax.swing.JPanel();
         total_sales_lbl = new javax.swing.JLabel();
@@ -60,7 +67,7 @@ public class CommisionView extends javax.swing.JFrame {
         partPayments_panel = new javax.swing.JPanel();
         partpayments_lbl = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        datepicker1 = new com.toedter.calendar.JDateChooser();
+        commission_to_picker = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         commision_rep_name_combo = new javax.swing.JComboBox<>();
@@ -68,9 +75,9 @@ public class CommisionView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Commision Report");
+        jLabel1.setText("Commission Report");
 
-        datepicker.setDateFormatString("yyyy-MM-dd");
+        commission_from_picker.setDateFormatString("yyyy-MM-dd");
 
         refresh_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-refresh-filled-50.png"))); // NOI18N
         refresh_btn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -286,7 +293,7 @@ public class CommisionView extends javax.swing.JFrame {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        datepicker1.setDateFormatString("yyyy-MM-dd");
+        commission_to_picker.setDateFormatString("yyyy-MM-dd");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("From");
@@ -295,6 +302,11 @@ public class CommisionView extends javax.swing.JFrame {
         jLabel3.setText("To");
 
         commision_rep_name_combo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        commision_rep_name_combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                commision_rep_name_comboActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -319,8 +331,8 @@ public class CommisionView extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(datepicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(datepicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(commission_from_picker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(commission_to_picker, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(51, 51, 51)
                                 .addComponent(commision_rep_name_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -346,14 +358,14 @@ public class CommisionView extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(commision_rep_name_combo)
-                                    .addComponent(datepicker, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+                                    .addComponent(commission_from_picker, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(refresh_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(datepicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(commission_to_picker, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addComponent(sales_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -368,11 +380,16 @@ public class CommisionView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void refresh_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refresh_btnMouseClicked
-        Date date = datepicker.getDate();
+        Date from = commission_from_picker.getDate();
+        Date to = commission_to_picker.getDate()
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        report.setDate(df.format(date));
+        commision.setDate(df.format(date));
         generateReport();
     }//GEN-LAST:event_refresh_btnMouseClicked
+
+    private void commision_rep_name_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commision_rep_name_comboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_commision_rep_name_comboActionPerformed
 
     /**
      * @param args the command line arguments
@@ -412,10 +429,10 @@ public class CommisionView extends javax.swing.JFrame {
     public void generateReport(){
         
         Date today = new Date();
-        datepicker.setDate(today);
+        commission_from_picker.setDate(today);
         
         boolean disposed = false;
-        String cash_sale = report.getCashSales();
+        String cash_sale = commision.getCashSales();
         if(!cash_sale.equals("null")){
             cash_sales_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(cash_sale)));
         }else{
@@ -426,7 +443,7 @@ public class CommisionView extends javax.swing.JFrame {
         
         if(!disposed){
             
-            String credit_sales = report.getCreditSales();
+            String credit_sales = commision.getCreditSales();
             if (!credit_sales.equals("null")) {
                 credit_sales_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(credit_sales)));
             } else {
@@ -434,7 +451,7 @@ public class CommisionView extends javax.swing.JFrame {
                 credit_sales ="0.00";
             }
 
-            String half_payments = report.getHalfPayments();
+            String half_payments = commision.getHalfPayments();
             if (!half_payments.equals("null")) {
                 halfpayments_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(half_payments)));
             } else {
@@ -448,7 +465,7 @@ public class CommisionView extends javax.swing.JFrame {
             double t_cash_sales = Double.valueOf(cash_sale) + Double.valueOf(half_payments);
             total_cashSale_lbl.setText(Rounding.decimalFormatiing(t_cash_sales));
 
-            String cash_returns = report.getCashReturns();
+            String cash_returns = commision.getCashReturns();
             if (!cash_returns.equals("null")) {
                 cash_returns_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(cash_returns)));
             } else {
@@ -456,7 +473,7 @@ public class CommisionView extends javax.swing.JFrame {
                 cash_returns = "0.00";
             }
 
-            String credit_retunrs = report.getCreditReturns();
+            String credit_retunrs = commision.getCreditReturns();
             if (!credit_retunrs.equals("null")) {
                 credit_returns_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(credit_retunrs)));
             } else {
@@ -471,7 +488,7 @@ public class CommisionView extends javax.swing.JFrame {
                 total_returns_lbl.setText("0.00");
             }
 
-            String part_payments = report.getPartPayments();
+            String part_payments = commision.getPartPayments();
             if (!part_payments.equals("null")) {
                 partpayments_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(part_payments)));
             } else {
@@ -488,10 +505,10 @@ public class CommisionView extends javax.swing.JFrame {
     private javax.swing.JLabel cash_returns_lbl;
     private javax.swing.JLabel cash_sales_lbl;
     private javax.swing.JComboBox<String> commision_rep_name_combo;
+    private com.toedter.calendar.JDateChooser commission_from_picker;
+    private com.toedter.calendar.JDateChooser commission_to_picker;
     private javax.swing.JLabel credit_returns_lbl;
     private javax.swing.JLabel credit_sales_lbl;
-    private com.toedter.calendar.JDateChooser datepicker;
-    private com.toedter.calendar.JDateChooser datepicker1;
     private javax.swing.JLabel halfpayments_lbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
