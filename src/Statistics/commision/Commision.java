@@ -16,8 +16,10 @@ import java.util.Date;
  * @author lakshan
  */
 public class Commision {
-    private String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+    private String fromDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+    private String toDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     private String date_begin;
+    private String repName = "nimal";
     private String date_end;
     private DataBaseConnector connector;
     
@@ -39,14 +41,15 @@ public class Commision {
         return returningVal(sql);
     }
     
-    public void setDate(String date){
-        this.date = date;
+    public void setDate(String from,String to){
+        this.fromDate = from;
+        this.toDate = to;
         setBeginAndEndDate();
     }
     
     public void setBeginAndEndDate(){
-        date_begin = date + " 00:00:00";
-        date_end = date + " 23:59:00";
+        date_begin = fromDate + " 00:00:00";
+        date_end = toDate + " 23:59:00";
     }
     
     public String getCreditSales(){
@@ -89,6 +92,9 @@ public class Commision {
         return  returningVal(sql);
     }
     
+    public void setRepName(repName){
+        this.repName = repName
+    }
    
     
     public String returningVal(String sql){
