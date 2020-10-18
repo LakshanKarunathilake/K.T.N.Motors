@@ -562,6 +562,10 @@ public class CommisionView extends javax.swing.JFrame {
                 partpayments_lbl.setText("0.00");
                 part_payments = "0.00";
             }
+            Double commissionPercentage = 0.005;
+            String totalBalance = Rounding.decimalFormatiing((t_cash_sales - t_returns + Double.valueOf(part_payments)) *commissionPercentage);
+//            commission_value_lbl.setText(totalBalance);
+                    
         }
 
     }
