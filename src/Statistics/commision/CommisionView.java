@@ -24,13 +24,14 @@ public class CommisionView extends javax.swing.JFrame {
     /**
      * Creates new form DayEndView
      */
-    Commision commision = Commision.getInstance();
+    Commision commision;
 
     /**
      * Creates new form CommisionView
      */
     public CommisionView() {
         initComponents();
+        commision = Commision.getInstance();
         DataBaseConnector connector = DataBaseConnector.getInstance();
         AutoCompleteDecorator.decorate(commision_rep_name_combo);
         DataManipulation dm = new DataManipulation(connector);
@@ -38,8 +39,8 @@ public class CommisionView extends javax.swing.JFrame {
         LocalDate today = LocalDate.now();
         commission_from_picker.setDate(convertToDateViaSqlDate(today.withDayOfMonth(1)));
         commission_to_picker.setDate(convertToDateViaSqlDate(today.withDayOfMonth(today.lengthOfMonth())));
-        
-
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        commision.setDate(df.format(commission_from_picker.getDate()), df.format(commission_to_picker.getDate()));
         generateReport();
     }
 
@@ -65,12 +66,12 @@ public class CommisionView extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
         jLabel17 = new javax.swing.JLabel();
-        halfpayments_lbl = new javax.swing.JLabel();
+        commission_halfPayments_lbl = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         total_cashSale_lbl = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        halfpayments_lbl1 = new javax.swing.JLabel();
+        commission_pending_credit_lbl = new javax.swing.JLabel();
         returns_panel = new javax.swing.JPanel();
         total_returns_lbl = new javax.swing.JLabel();
         credit_returns_lbl = new javax.swing.JLabel();
@@ -85,6 +86,9 @@ public class CommisionView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         commision_rep_name_combo = new javax.swing.JComboBox<>();
+        partPayments_panel1 = new javax.swing.JPanel();
+        commission_value_lbl = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,9 +124,8 @@ public class CommisionView extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel17.setText("Half Payments");
 
-        halfpayments_lbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        halfpayments_lbl.setForeground(new java.awt.Color(255, 102, 102));
-        halfpayments_lbl.setText("xxxxx.xx");
+        commission_halfPayments_lbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        commission_halfPayments_lbl.setText("xxxxx.xx");
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel18.setText("Total Cash Sales");
@@ -136,8 +139,9 @@ public class CommisionView extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel22.setText("Pending Credit Payments");
 
-        halfpayments_lbl1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        halfpayments_lbl1.setText("xxxxx.xx");
+        commission_pending_credit_lbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        commission_pending_credit_lbl.setForeground(new java.awt.Color(255, 51, 51));
+        commission_pending_credit_lbl.setText("xxxxx.xx");
 
         javax.swing.GroupLayout sales_panelLayout = new javax.swing.GroupLayout(sales_panel);
         sales_panel.setLayout(sales_panelLayout);
@@ -167,11 +171,10 @@ public class CommisionView extends javax.swing.JFrame {
                                     .addComponent(jLabel17))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(halfpayments_lbl1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(commision_cash_sales, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(halfpayments_lbl, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(commision_credit_sales)))
+                            .addComponent(commision_credit_sales, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(commission_pending_credit_lbl, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(commission_halfPayments_lbl, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(19, 19, 19))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sales_panelLayout.createSequentialGroup()
                         .addComponent(jLabel24)
@@ -194,11 +197,11 @@ public class CommisionView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(halfpayments_lbl1))
+                    .addComponent(commission_halfPayments_lbl))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(halfpayments_lbl))
+                    .addComponent(commission_pending_credit_lbl))
                 .addGap(33, 33, 33)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -307,7 +310,7 @@ public class CommisionView extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, partPayments_panelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel10)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         commission_to_picker.setDateFormatString("yyyy-MM-dd");
@@ -324,6 +327,39 @@ public class CommisionView extends javax.swing.JFrame {
                 commision_rep_name_comboActionPerformed(evt);
             }
         });
+
+        partPayments_panel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Commision", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 18))); // NOI18N
+
+        commission_value_lbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        commission_value_lbl.setForeground(new java.awt.Color(0, 204, 102));
+        commission_value_lbl.setText("xxxxx.xx");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel11.setText("amount");
+
+        javax.swing.GroupLayout partPayments_panel1Layout = new javax.swing.GroupLayout(partPayments_panel1);
+        partPayments_panel1.setLayout(partPayments_panel1Layout);
+        partPayments_panel1Layout.setHorizontalGroup(
+            partPayments_panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, partPayments_panel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(commission_value_lbl)
+                .addGap(23, 23, 23))
+        );
+        partPayments_panel1Layout.setVerticalGroup(
+            partPayments_panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(partPayments_panel1Layout.createSequentialGroup()
+                .addGroup(partPayments_panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(partPayments_panel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(commission_value_lbl))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, partPayments_panel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel11)))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -357,7 +393,10 @@ public class CommisionView extends javax.swing.JFrame {
                                 .addGap(17, 17, 17))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(partPayments_panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -386,12 +425,17 @@ public class CommisionView extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addComponent(sales_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(returns_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(partPayments_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(partPayments_panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
+
+        partPayments_panel1.getAccessibleContext().setAccessibleName("Commision for period");
+        partPayments_panel1.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -471,10 +515,15 @@ public class CommisionView extends javax.swing.JFrame {
 
             String half_payments = commision.getHalfPayments();
             if (!half_payments.equals("null")) {
-                halfpayments_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(half_payments)));
+                commission_halfPayments_lbl.setText(Rounding.decimalFormatiing(Double.valueOf(half_payments)));
             } else {
-                halfpayments_lbl.setText("0.00");
+                commission_halfPayments_lbl.setText("0.00");
                 half_payments = "0.00";
+            }
+
+            if (!half_payments.equals("null") && !credit_sales.equals("null")) {
+                String pending_credit_amount = String.valueOf(Double.valueOf(credit_sales) - Double.valueOf(half_payments));
+                commission_pending_credit_lbl.setText(pending_credit_amount);
             }
 
             double t_sales = Double.valueOf(cash_sale) + Double.valueOf(credit_sales);
@@ -523,12 +572,14 @@ public class CommisionView extends javax.swing.JFrame {
     private javax.swing.JLabel commision_credit_sales;
     private javax.swing.JComboBox<String> commision_rep_name_combo;
     private com.toedter.calendar.JDateChooser commission_from_picker;
+    private javax.swing.JLabel commission_halfPayments_lbl;
+    private javax.swing.JLabel commission_pending_credit_lbl;
     private com.toedter.calendar.JDateChooser commission_to_picker;
+    private javax.swing.JLabel commission_value_lbl;
     private javax.swing.JLabel credit_returns_lbl;
-    private javax.swing.JLabel halfpayments_lbl;
-    private javax.swing.JLabel halfpayments_lbl1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -544,6 +595,7 @@ public class CommisionView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JPanel partPayments_panel;
+    private javax.swing.JPanel partPayments_panel1;
     private javax.swing.JLabel partpayments_lbl;
     private javax.swing.JLabel refresh_btn;
     private javax.swing.JPanel returns_panel;
