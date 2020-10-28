@@ -492,7 +492,7 @@ public class CommisionView extends javax.swing.JFrame {
     }
 
     public void generateReport() {
-
+        commision.setRepName(String.valueOf(commision_rep_name_combo.getSelectedItem()));
         boolean disposed = false;
         String cash_sale = commision.getCashSales();
         if (!cash_sale.equals("null")) {
