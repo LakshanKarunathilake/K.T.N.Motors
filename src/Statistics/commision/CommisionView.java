@@ -92,7 +92,7 @@ public class CommisionView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Commission Report");
 
         commission_from_picker.setDateFormatString("yyyy-MM-dd");
@@ -104,42 +104,42 @@ public class CommisionView extends javax.swing.JFrame {
             }
         });
 
-        sales_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 18))); // NOI18N
+        sales_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 12))); // NOI18N
 
-        total_sales_lbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        total_sales_lbl.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         total_sales_lbl.setText("xxxxx.xx");
 
-        commision_credit_sales.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        commision_credit_sales.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         commision_credit_sales.setText("xxxxx.xx");
 
-        commision_cash_sales.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        commision_cash_sales.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         commision_cash_sales.setText("xxxxx.xx");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setText("Cash Sales");
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel16.setText("Credit Sales");
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setText("Half Payments");
 
-        commission_halfPayments_lbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        commission_halfPayments_lbl.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         commission_halfPayments_lbl.setText("xxxxx.xx");
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel18.setText("Total Cash Sales");
 
-        total_cashSale_lbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        total_cashSale_lbl.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         total_cashSale_lbl.setText("xxxxx.xx");
 
-        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel24.setText("Total Sales");
 
-        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel22.setText("Pending Credit Payments");
 
-        commission_pending_credit_lbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        commission_pending_credit_lbl.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         commission_pending_credit_lbl.setForeground(new java.awt.Color(255, 51, 51));
         commission_pending_credit_lbl.setText("xxxxx.xx");
 
@@ -149,44 +149,50 @@ public class CommisionView extends javax.swing.JFrame {
             sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sales_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(sales_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sales_panelLayout.createSequentialGroup()
+                            .addGroup(sales_panelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(total_cashSale_lbl)
                                 .addGap(17, 17, 17))
-                            .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(sales_panelLayout.createSequentialGroup()
-                        .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel16)
                             .addGroup(sales_panelLayout.createSequentialGroup()
-                                .addGap(34, 34, 34)
                                 .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel22)
-                                    .addComponent(jLabel17))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(commision_cash_sales, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(commision_credit_sales, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(commission_pending_credit_lbl, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(commission_halfPayments_lbl, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(19, 19, 19))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sales_panelLayout.createSequentialGroup()
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel16)
+                                    .addGroup(sales_panelLayout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel22)
+                                            .addComponent(jLabel17))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(commision_cash_sales, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(commision_credit_sales, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(commission_pending_credit_lbl, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(commission_halfPayments_lbl, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(19, 19, 19))
+                            .addGroup(sales_panelLayout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addGap(289, 289, 289)
+                                .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(sales_panelLayout.createSequentialGroup()
                         .addComponent(jLabel24)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(total_sales_lbl)
-                        .addGap(17, 17, 17)))
-                .addContainerGap())
+                        .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sales_panelLayout.createSequentialGroup()
+                                .addComponent(total_sales_lbl)
+                                .addGap(20, 20, 20))))))
         );
         sales_panelLayout.setVerticalGroup(
             sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sales_panelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(commision_cash_sales)
                     .addComponent(jLabel15))
@@ -202,38 +208,39 @@ public class CommisionView extends javax.swing.JFrame {
                 .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(commission_pending_credit_lbl))
-                .addGap(33, 33, 33)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel24)
+                    .addGroup(sales_panelLayout.createSequentialGroup()
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(total_sales_lbl)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(total_sales_lbl)
-                    .addComponent(jLabel24))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(total_cashSale_lbl)
+                .addGroup(sales_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sales_panelLayout.createSequentialGroup()
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel18))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(total_cashSale_lbl))
         );
 
-        returns_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Returns", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 18))); // NOI18N
+        returns_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Returns", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 12))); // NOI18N
 
-        total_returns_lbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        total_returns_lbl.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         total_returns_lbl.setText("xxxxx.xx");
 
-        credit_returns_lbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        credit_returns_lbl.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         credit_returns_lbl.setText("xxxxx.xx");
 
-        cash_returns_lbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cash_returns_lbl.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cash_returns_lbl.setText("xxxxx.xx");
 
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel20.setText("Cash Returns");
 
-        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel21.setText("Credit Returns");
 
         javax.swing.GroupLayout returns_panelLayout = new javax.swing.GroupLayout(returns_panel);
@@ -258,7 +265,7 @@ public class CommisionView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, returns_panelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(total_returns_lbl)
-                .addGap(22, 22, 22))
+                .addGap(19, 19, 19))
         );
         returns_panelLayout.setVerticalGroup(
             returns_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,18 +282,17 @@ public class CommisionView extends javax.swing.JFrame {
                     .addComponent(credit_returns_lbl)
                     .addComponent(jLabel21))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(total_returns_lbl)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addComponent(total_returns_lbl))
         );
 
-        partPayments_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Part Payments", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 18))); // NOI18N
+        partPayments_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Part Payments", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 12))); // NOI18N
 
-        partpayments_lbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        partpayments_lbl.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         partpayments_lbl.setText("xxxxx.xx");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel10.setText("Part Payments");
 
         javax.swing.GroupLayout partPayments_panelLayout = new javax.swing.GroupLayout(partPayments_panel);
@@ -315,10 +321,10 @@ public class CommisionView extends javax.swing.JFrame {
 
         commission_to_picker.setDateFormatString("yyyy-MM-dd");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("From");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("To");
 
         commision_rep_name_combo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -328,13 +334,13 @@ public class CommisionView extends javax.swing.JFrame {
             }
         });
 
-        partPayments_panel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Commision", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 18))); // NOI18N
+        partPayments_panel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Commision", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 12))); // NOI18N
 
-        commission_value_lbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        commission_value_lbl.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         commission_value_lbl.setForeground(new java.awt.Color(0, 204, 102));
         commission_value_lbl.setText("xxxxx.xx");
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("amount");
 
         javax.swing.GroupLayout partPayments_panel1Layout = new javax.swing.GroupLayout(partPayments_panel1);
@@ -351,14 +357,11 @@ public class CommisionView extends javax.swing.JFrame {
         partPayments_panel1Layout.setVerticalGroup(
             partPayments_panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(partPayments_panel1Layout.createSequentialGroup()
-                .addGroup(partPayments_panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(partPayments_panel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(commission_value_lbl))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, partPayments_panel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel11)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGap(3, 3, 3)
+                .addComponent(commission_value_lbl))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, partPayments_panel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -372,9 +375,7 @@ public class CommisionView extends javax.swing.JFrame {
                         .addComponent(sales_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(returns_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(partPayments_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(partPayments_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,17 +387,20 @@ public class CommisionView extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(commission_from_picker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(commission_to_picker, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(51, 51, 51)
+                                .addGap(39, 39, 39)
                                 .addComponent(commision_rep_name_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(refresh_btn)
-                                .addGap(17, 17, 17))
+                                .addGap(37, 37, 37))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(partPayments_panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(partPayments_panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(returns_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -404,32 +408,29 @@ public class CommisionView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(26, 26, 26))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(commision_rep_name_combo)
-                                    .addComponent(commission_from_picker, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(refresh_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(commission_to_picker, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(commission_from_picker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(commision_rep_name_combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(commission_to_picker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(refresh_btn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sales_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(returns_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(partPayments_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(partPayments_panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -452,7 +453,7 @@ public class CommisionView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_commision_rep_name_comboActionPerformed
 
-    /**
+    /**here
      * @param args the command line arguments
      */
     public static void main(String args[]) {

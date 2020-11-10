@@ -31,10 +31,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="returns_panel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="partPayments_panel" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="partPayments_panel" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
@@ -49,11 +46,11 @@
                                   <Component id="commission_from_picker" max="32767" attributes="0"/>
                                   <Component id="commission_to_picker" min="-2" pref="199" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                               <Component id="commision_rep_name_combo" min="-2" pref="156" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="refresh_btn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -65,6 +62,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="partPayments_panel1" max="32767" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="returns_panel" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -75,40 +76,36 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="commision_rep_name_combo" max="32767" attributes="0"/>
-                                  <Component id="commission_from_picker" pref="31" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="commission_from_picker" min="-2" max="-2" attributes="0"/>
+                                  <Component id="commision_rep_name_combo" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <Component id="commission_to_picker" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                      <Component id="refresh_btn" min="-2" pref="49" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="refresh_btn" min="-2" max="-2" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="commission_to_picker" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="sales_panel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="returns_panel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="partPayments_panel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="partPayments_panel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -119,7 +116,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="24" style="1"/>
+          <Font name="Tahoma" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Commission Report"/>
       </Properties>
@@ -144,7 +141,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Sales">
-              <Font PropertyName="font" name="Tahoma" size="18" style="2"/>
+              <Font PropertyName="font" name="Tahoma" size="12" style="2"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -155,56 +152,66 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="123" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   <Component id="total_cashSale_lbl" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jSeparator5" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
-                              <Component id="jSeparator3" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
-                              <Component id="jSeparator6" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="commision_cash_sales" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="commision_credit_sales" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="commission_pending_credit_lbl" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="commission_halfPayments_lbl" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="289" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jSeparator5" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
+                                      <Component id="jSeparator6" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="commision_cash_sales" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="commision_credit_sales" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="commission_pending_credit_lbl" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="commission_halfPayments_lbl" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="total_sales_lbl" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jSeparator3" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="total_sales_lbl" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                  <EmptySpace pref="23" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="commision_cash_sales" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -224,23 +231,26 @@
                       <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="commission_pending_credit_lbl" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="total_sales_lbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel24" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jSeparator3" min="-2" pref="3" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="total_sales_lbl" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator5" min="-2" pref="10" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Component id="jSeparator6" min="-2" pref="10" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="total_cashSale_lbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jSeparator5" min="-2" pref="10" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="jSeparator6" min="-2" pref="10" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="23" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="total_cashSale_lbl" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -249,7 +259,7 @@
         <Component class="javax.swing.JLabel" name="total_sales_lbl">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="1"/>
+              <Font name="Tahoma" size="12" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="xxxxx.xx"/>
           </Properties>
@@ -257,7 +267,7 @@
         <Component class="javax.swing.JLabel" name="commision_credit_sales">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="xxxxx.xx"/>
           </Properties>
@@ -265,7 +275,7 @@
         <Component class="javax.swing.JLabel" name="commision_cash_sales">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="xxxxx.xx"/>
           </Properties>
@@ -273,7 +283,7 @@
         <Component class="javax.swing.JLabel" name="jLabel15">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cash Sales"/>
           </Properties>
@@ -281,7 +291,7 @@
         <Component class="javax.swing.JLabel" name="jLabel16">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Credit Sales"/>
           </Properties>
@@ -295,7 +305,7 @@
         <Component class="javax.swing.JLabel" name="jLabel17">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Half Payments"/>
           </Properties>
@@ -303,7 +313,7 @@
         <Component class="javax.swing.JLabel" name="commission_halfPayments_lbl">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="xxxxx.xx"/>
           </Properties>
@@ -311,7 +321,7 @@
         <Component class="javax.swing.JLabel" name="jLabel18">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Total Cash Sales"/>
           </Properties>
@@ -319,7 +329,7 @@
         <Component class="javax.swing.JLabel" name="total_cashSale_lbl">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="xxxxx.xx"/>
           </Properties>
@@ -327,7 +337,7 @@
         <Component class="javax.swing.JLabel" name="jLabel24">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Total Sales"/>
           </Properties>
@@ -335,7 +345,7 @@
         <Component class="javax.swing.JLabel" name="jLabel22">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Pending Credit Payments"/>
           </Properties>
@@ -343,7 +353,7 @@
         <Component class="javax.swing.JLabel" name="commission_pending_credit_lbl">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="ff" type="rgb"/>
@@ -358,7 +368,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Returns">
-              <Font PropertyName="font" name="Tahoma" size="18" style="2"/>
+              <Font PropertyName="font" name="Tahoma" size="12" style="2"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -391,7 +401,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="total_returns_lbl" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -414,10 +424,9 @@
                       <Component id="jLabel21" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator4" min="-2" pref="10" max="-2" attributes="0"/>
+                  <Component id="jSeparator4" min="-2" pref="5" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="total_returns_lbl" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -426,7 +435,7 @@
         <Component class="javax.swing.JLabel" name="total_returns_lbl">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="1"/>
+              <Font name="Tahoma" size="12" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="xxxxx.xx"/>
           </Properties>
@@ -434,7 +443,7 @@
         <Component class="javax.swing.JLabel" name="credit_returns_lbl">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="xxxxx.xx"/>
           </Properties>
@@ -442,7 +451,7 @@
         <Component class="javax.swing.JLabel" name="cash_returns_lbl">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="xxxxx.xx"/>
           </Properties>
@@ -450,7 +459,7 @@
         <Component class="javax.swing.JLabel" name="jLabel20">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cash Returns"/>
           </Properties>
@@ -458,7 +467,7 @@
         <Component class="javax.swing.JLabel" name="jLabel21">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Credit Returns"/>
           </Properties>
@@ -472,7 +481,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Part Payments">
-              <Font PropertyName="font" name="Tahoma" size="18" style="2"/>
+              <Font PropertyName="font" name="Tahoma" size="12" style="2"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -512,7 +521,7 @@
         <Component class="javax.swing.JLabel" name="partpayments_lbl">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="1"/>
+              <Font name="Tahoma" size="12" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="xxxxx.xx"/>
           </Properties>
@@ -520,7 +529,7 @@
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Part Payments"/>
           </Properties>
@@ -535,7 +544,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="0"/>
+          <Font name="Tahoma" size="12" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="From"/>
       </Properties>
@@ -543,7 +552,7 @@
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="0"/>
+          <Font name="Tahoma" size="12" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="To"/>
       </Properties>
@@ -569,7 +578,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Commision">
-              <Font PropertyName="font" name="Tahoma" size="18" style="2"/>
+              <Font PropertyName="font" name="Tahoma" size="12" style="2"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -594,17 +603,12 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                          <Component id="commission_value_lbl" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                  <Component id="commission_value_lbl" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -613,7 +617,7 @@
         <Component class="javax.swing.JLabel" name="commission_value_lbl">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="1"/>
+              <Font name="Tahoma" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="cc" red="0" type="rgb"/>
@@ -624,7 +628,7 @@
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="amount"/>
           </Properties>
