@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="all_selling" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01d8fd24-35c6-4069-acbc-826f01998357">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="FromDate" class="java.lang.String"/>
 	<parameter name="ToDate" class="java.lang.String"/>
 	<parameter name="userID" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT * FROM orders JOIN users on users.userID like orders.userID AND orders.orderDate BETWEEN $P{FromDate} AND $P{ToDate} AND orders.userID like $P{userID}]]>
+		<![CDATA[SELECT * FROM invoices JOIN customers on customers.customer_code like invoices.customer_code AND invoices.orderDate BETWEEN $P{FromDate} AND $P{ToDate}]]>
 	</queryString>
 	<field name="orderID" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -160,7 +163,7 @@
 			<textField>
 				<reportElement x="0" y="0" width="69" height="20" uuid="83dede48-249e-49b3-bae0-dda73f9bc677"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{orderID}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{invoice_id}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="253" y="0" width="92" height="20" uuid="e32c5570-62a3-4056-81f0-848a1826419d"/>

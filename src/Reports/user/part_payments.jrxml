@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Part Payments" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01d8fd24-35c6-4069-acbc-826f01998357">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="FromDate" class="java.lang.String"/>
 	<parameter name="ToDate" class="java.lang.String"/>
+	<parameter name="customer_code" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT invoice_id,paid_date,Type,
 ifnull(Bank,'N/A') Bank,
 ifnull(chequeDate,'N/A')  chequeDate,
 ifnull(chequeNumber,'N/A') chequeNumber,
 amount
-FROM credit_payments;]]>
+FROM credit_payments where invoice_id in ( Select invoice_id from invoices where orderDate BETWEEN  $P{FromDate}  AND  $P{ToDate}  AND customer_code like $P{customer_code}  );]]>
 	</queryString>
 	<field name="invoice_id" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
