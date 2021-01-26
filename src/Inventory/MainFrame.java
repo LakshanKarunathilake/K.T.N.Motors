@@ -355,6 +355,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton13 = new javax.swing.JButton();
         jButton30 = new javax.swing.JButton();
         jButton31 = new javax.swing.JButton();
+        jButton33 = new javax.swing.JButton();
         itemWisePanel = new javax.swing.JPanel();
         report_item_combo = new javax.swing.JComboBox<>();
         jButton9 = new javax.swing.JButton();
@@ -1994,7 +1995,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        userWisePanel.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 160, 35));
+        userWisePanel.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 160, 35));
 
         jButton8.setText("user payments");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -2042,7 +2043,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton13ActionPerformed(evt);
             }
         });
-        userWisePanel.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 160, 30));
+        userWisePanel.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, 160, 30));
 
         jButton30.setText("All Part Paymanets");
         jButton30.addActionListener(new java.awt.event.ActionListener() {
@@ -2058,7 +2059,15 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton31ActionPerformed(evt);
             }
         });
-        userWisePanel.add(jButton31, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 160, 30));
+        userWisePanel.add(jButton31, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 160, 30));
+
+        jButton33.setText("All Selling");
+        jButton33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton33ActionPerformed(evt);
+            }
+        });
+        userWisePanel.add(jButton33, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 160, 30));
 
         jTabbedPane1.addTab("User Wise", userWisePanel);
 
@@ -4313,8 +4322,8 @@ public class MainFrame extends javax.swing.JFrame {
         String path = report_folder_path + "\\user\\all_selling.jrxml";
         Date fromDate = reports_date1_picker.getDate();
         Date toDate = reports_date2_picker.getDate();
-        String fromDateString = new SimpleDateFormat("yyyy-MM-dd").format(fromDate);
-        String toDateString = new SimpleDateFormat("yyyy-MM-dd").format(toDate);
+        String fromDateString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(fromDate);
+        String toDateString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(toDate);
 
 //        Calendar c = Calendar.getInstance();
 ////        Timestamp toDate = new Timestamp(c.getTimeInMillis());
@@ -5149,6 +5158,43 @@ public class MainFrame extends javax.swing.JFrame {
         view.setVisible(true);
     }//GEN-LAST:event_reports_dayEnd_btn1ActionPerformed
 
+    private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
+        // TODO add your handling code here:
+        String path = report_folder_path + "\\user\\user_wise_all_selling.jrxml";
+        Date fromDate = reports_date1_picker.getDate();
+        Date toDate = reports_date2_picker.getDate();
+        String fromDateString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(fromDate);
+        String toDateString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(toDate);
+
+//        Calendar c = Calendar.getInstance();
+////        Timestamp toDate = new Timestamp(c.getTimeInMillis());
+//        c.add(Calendar.YEAR,-1);
+//        Timestamp fromDate = new Timestamp(c.getTimeInMillis());
+//        String fromDateString = String.valueOf(fromDate);
+//        String toDateString = String.valueOf(toDate);
+        System.out.println("FRom " + fromDateString + " To " + toDateString + " id " + String.valueOf(report_userID_combo.getSelectedItem()));
+        HashMap hm = new HashMap();
+        hm.put("FromDate", fromDateString);
+        hm.put("ToDate", toDateString);
+        hm.put("customer_code", String.valueOf(report_userID_combo.getSelectedItem()));
+        System.out.println("FromDate : " + fromDateString);
+        System.out.println("FromDate : " + toDateString);
+
+        JasperReport jr;
+        try {
+            jr = JasperCompileManager.compileReport(path);
+            JasperPrint jp = JasperFillManager.fillReport(jr, hm, connector.startConnection());
+            JasperViewer jw = new JasperViewer(jp, false);
+            jw.viewReport(jp, false);
+
+        } catch (JRException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR in Reporting all items...");
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton33ActionPerformed
+
     public void FillBill(String invoiceID) {
         ArrayList list = connector.readRow("orders", "orderID", invoiceID);
         bill_invoiceValue_txt.setText(String.valueOf(list.get(3)));
@@ -5403,6 +5449,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton30;
     private javax.swing.JButton jButton31;
     private javax.swing.JButton jButton32;
+    private javax.swing.JButton jButton33;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
