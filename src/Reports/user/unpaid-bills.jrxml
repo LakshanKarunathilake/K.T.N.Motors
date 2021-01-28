@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="unpaid_bills" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01d8fd24-35c6-4069-acbc-826f01998357">
 	<property name="ireport.zoom" value="1.6934217901613318"/>
 	<property name="ireport.x" value="0"/>
@@ -6,7 +7,9 @@
 	<parameter name="FromDate" class="java.lang.String"/>
 	<parameter name="ToDate" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT * FROM invoices JOIN customers on customers.customer_code like invoices.customer_code AND invoices.orderDate BETWEEN $P{FromDate} AND $P{ToDate} AND invoices.status = 0 order by orderDate]]>
+		<![CDATA[SELECT * FROM invoices JOIN customers on customers.customer_code like invoices.customer_code AND invoices.orderDate BETWEEN $P{FromDate} AND $P{ToDate} AND invoices.status = 0
+AND (cash_paid+returned) < grandTotal
+ order by orderDate]]>
 	</queryString>
 	<field name="invoice_id" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>

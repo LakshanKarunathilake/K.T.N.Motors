@@ -2,3 +2,7 @@ eclipse.preferences.version=1
 encoding//item/returns/all_returns.jrxml=UTF-8
 encoding//purchasing/invoice/purchase_invoice.jrxml=UTF-8
 encoding//purchasing/invoice/retailer.jrxml=UTF-8
+encoding//user/all_selling.jrxml=UTF-8
+encoding//user/part_payments.jrxml=UTF-8
+encoding//user/unpaid-bills.jrxml=UTF-8
+encoding//user/user_wise_all_selling.jrxml=UTF-8

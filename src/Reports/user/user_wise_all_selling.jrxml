@@ -4,7 +4,7 @@
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="FromDate" class="java.lang.String"/>
 	<parameter name="ToDate" class="java.lang.String"/>
@@ -12,41 +12,79 @@
 	<queryString>
 		<![CDATA[SELECT * FROM invoices JOIN customers on customers.customer_code like invoices.customer_code AND invoices.orderDate BETWEEN $P{FromDate} AND $P{ToDate}]]>
 	</queryString>
-	<field name="orderID" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
+	<field name="invoice_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="invoice_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoices"/>
 	</field>
 	<field name="total" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoices"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="discount" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="discount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoices"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="grandTotal" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="grandTotal"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoices"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="orderDate" class="java.sql.Date">
+	<field name="orderDate" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="orderDate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoices"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="userID" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
+	<field name="customer_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="customer_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoices"/>
 	</field>
 	<field name="Status" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="Status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoices"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="designation" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
+	<field name="cash_paid" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="cash_paid"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoices"/>
+	</field>
+	<field name="returned" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="returned"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoices"/>
+	</field>
+	<field name="additional_note" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="additional_note"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoices"/>
+	</field>
+	<field name="repName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="repName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoices"/>
+	</field>
+	<field name="COLUMN_12" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="customer_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="customers"/>
 	</field>
 	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="customers"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="address" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
+	<field name="Address1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Address1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="customers"/>
 	</field>
-	<field name="telNo" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
+	<field name="Address2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Address2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="customers"/>
 	</field>
-	<field name="addedDate" class="java.sql.Timestamp">
-		<fieldDescription><![CDATA[]]></fieldDescription>
+	<field name="State" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="State"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="customers"/>
+	</field>
+	<field name="Telephone" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Telephone"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="customers"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -106,10 +144,6 @@
 				<reportElement x="448" y="2" width="107" height="20" uuid="340c73fe-5607-4577-a6e9-ae1792aa0ef7"/>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="431" y="0" width="17" height="20" uuid="8f54716d-e139-4087-921c-8ddc8c7110b4"/>
-				<textFieldExpression><![CDATA[$F{designation}]]></textFieldExpression>
-			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -129,32 +163,32 @@
 				<text><![CDATA[Grand Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="161" y="1" width="92" height="20" uuid="cf208d30-8923-4ad6-a4c7-47e7d49b3bc6"/>
+				<reportElement x="146" y="1" width="92" height="20" uuid="cf208d30-8923-4ad6-a4c7-47e7d49b3bc6"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[OrderDate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="253" y="1" width="92" height="20" uuid="e9a8010d-7e35-4544-a04d-eb69b069fbb0"/>
+				<reportElement x="238" y="0" width="71" height="20" uuid="e9a8010d-7e35-4544-a04d-eb69b069fbb0"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Paid = True]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="417" y="1" width="137" height="20" uuid="6eaab3da-ad0d-4348-aedb-172098b8ab47"/>
+				<reportElement x="374" y="1" width="180" height="20" uuid="6eaab3da-ad0d-4348-aedb-172098b8ab47"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="345" y="0" width="54" height="20" uuid="9aa08e41-71a9-447e-bb5b-d91474f2a3cf"/>
+				<reportElement x="320" y="1" width="54" height="20" uuid="9aa08e41-71a9-447e-bb5b-d91474f2a3cf"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[User ID]]></text>
+				<text><![CDATA[cust Id]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -166,7 +200,7 @@
 				<textFieldExpression><![CDATA[$F{invoice_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="253" y="0" width="92" height="20" uuid="e32c5570-62a3-4056-81f0-848a1826419d"/>
+				<reportElement x="238" y="-1" width="82" height="20" uuid="e32c5570-62a3-4056-81f0-848a1826419d"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{Status}]]></textFieldExpression>
 			</textField>
@@ -176,22 +210,18 @@
 				<textFieldExpression><![CDATA[$F{grandTotal}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="161" y="0" width="92" height="20" uuid="89f7e481-b0bf-4f1f-95de-c8c58775e125"/>
+				<reportElement x="146" y="-1" width="92" height="20" uuid="89f7e481-b0bf-4f1f-95de-c8c58775e125"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{orderDate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="399" y="1" width="18" height="20" uuid="7cdbf24f-c69a-46c8-a1ba-27f422e36b85"/>
-				<textFieldExpression><![CDATA[$F{designation}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="417" y="1" width="138" height="20" uuid="af021ade-6101-40b1-8b5b-5b9aeba47468"/>
+				<reportElement x="373" y="-1" width="180" height="20" uuid="af021ade-6101-40b1-8b5b-5b9aeba47468"/>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="345" y="1" width="72" height="20" uuid="dfe08584-9b46-4888-9a12-76ecc5c51130"/>
+				<reportElement x="320" y="-1" width="54" height="20" uuid="dfe08584-9b46-4888-9a12-76ecc5c51130"/>
 				<textElement textAlignment="Justified"/>
-				<textFieldExpression><![CDATA[$F{userID}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{customer_code}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

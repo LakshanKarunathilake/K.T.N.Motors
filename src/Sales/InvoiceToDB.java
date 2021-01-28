@@ -57,7 +57,7 @@ public class InvoiceToDB {
         System.out.println("Current Date :" + currentDate);
         System.out.println("Current Date :" + beforeDate);
 
-        String sql = "Select invoice_id from invoices where customer_code like \"" + userID + "\" And orderDate <= \"" + beforeDate + "\" AND status like '0'";
+        String sql = "Select invoice_id from invoices where customer_code like \"" + userID + "\" And orderDate <= \"" + beforeDate + "\" AND status like '0' AND (cash_paid+returned) < grandTotal";
         System.out.println("SQL :" + sql);
         ArrayList list = connector.sqlExecutionaArray(sql, "invoice_id");
         System.out.println("Lits SIze : " + list.size());
