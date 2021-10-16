@@ -341,7 +341,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         reports_customer_btn1 = new javax.swing.JButton();
         reports_customer_btn2 = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        repWiseTab = new javax.swing.JTabbedPane();
         userWisePanel = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
@@ -368,6 +368,10 @@ public class MainFrame extends javax.swing.JFrame {
         report_purchasing_invoice_no = new javax.swing.JComboBox<>();
         jButton32 = new javax.swing.JButton();
         jLabel60 = new javax.swing.JLabel();
+        repWisePanel = new javax.swing.JPanel();
+        repWise_rep_combo = new javax.swing.JComboBox<>();
+        jButton34 = new javax.swing.JButton();
+        jLabel61 = new javax.swing.JLabel();
         item_report_checkBox = new javax.swing.JCheckBox();
         reports_date1_picker = new com.toedter.calendar.JDateChooser();
         reports_date2_picker = new com.toedter.calendar.JDateChooser();
@@ -1972,10 +1976,10 @@ public class MainFrame extends javax.swing.JFrame {
         });
         ReportPanel.add(reports_customer_btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 160, 70));
 
-        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+        repWiseTab.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        repWiseTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTabbedPane1MouseClicked(evt);
+                repWiseTabMouseClicked(evt);
             }
         });
 
@@ -1995,7 +1999,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        userWisePanel.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 160, 35));
+        userWisePanel.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 160, 35));
 
         jButton8.setText("user payments");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -2069,7 +2073,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         userWisePanel.add(jButton33, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 160, 30));
 
-        jTabbedPane1.addTab("User Wise", userWisePanel);
+        repWiseTab.addTab("User Wise", userWisePanel);
 
         itemWisePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -2120,7 +2124,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         itemWisePanel.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 160, 35));
 
-        jTabbedPane1.addTab("Item Wise", itemWisePanel);
+        repWiseTab.addTab("Item Wise", itemWisePanel);
 
         purchasingPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -2145,9 +2149,34 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel60.setText("Invoice Number");
         purchasingPanel.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
-        jTabbedPane1.addTab("Purchasing Panel", purchasingPanel);
+        repWiseTab.addTab("Purchasing Panel", purchasingPanel);
 
-        ReportPanel.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 730, 340));
+        repWisePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        repWise_rep_combo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        repWise_rep_combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                repWise_rep_comboActionPerformed(evt);
+            }
+        });
+        repWisePanel.add(repWise_rep_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 370, 50));
+
+        jButton34.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButton34.setText("View Invoice");
+        jButton34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton34ActionPerformed(evt);
+            }
+        });
+        repWisePanel.add(jButton34, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 180, 50));
+
+        jLabel61.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel61.setText("Invoice Number");
+        repWisePanel.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        repWiseTab.addTab("RepWise", repWisePanel);
+
+        ReportPanel.add(repWiseTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 730, 340));
 
         item_report_checkBox.setBackground(new java.awt.Color(255, 255, 255));
         item_report_checkBox.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -5115,12 +5144,12 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_report_purchasing_invoice_noActionPerformed
 
-    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+    private void repWiseTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_repWiseTabMouseClicked
        DataManipulation dm = new DataManipulation(connector);
-       dm.getRecords("purchaising", "invoice_id", report_purchasing_invoice_no);
+       dm.getRecords("reps", "name", repWise_rep_combo);
        MyCombo autocombo = new MyCombo();
-       autocombo.setSearchableCombo(report_purchasing_invoice_no, true, "No Result Found");
-    }//GEN-LAST:event_jTabbedPane1MouseClicked
+       autocombo.setSearchableCombo(repWise_rep_combo, true, "No Result Found");
+    }//GEN-LAST:event_repWiseTabMouseClicked
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
          String path = report_folder_path + "\\item\\returns\\all_returns.jrxml";
@@ -5194,6 +5223,14 @@ public class MainFrame extends javax.swing.JFrame {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton33ActionPerformed
+
+    private void repWise_rep_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repWise_rep_comboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_repWise_rep_comboActionPerformed
+
+    private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton34ActionPerformed
 
     public void FillBill(String invoiceID) {
         ArrayList list = connector.readRow("orders", "orderID", invoiceID);
@@ -5450,6 +5487,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton31;
     private javax.swing.JButton jButton32;
     private javax.swing.JButton jButton33;
+    private javax.swing.JButton jButton34;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -5511,6 +5549,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
@@ -5562,7 +5601,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton newBtn;
     private javax.swing.JPanel part_number_change_panel;
@@ -5571,6 +5609,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> purchaise_retailer_combo;
     private javax.swing.JPanel purchaising_main_panel;
     private javax.swing.JPanel purchasingPanel;
+    private javax.swing.JPanel repWisePanel;
+    private javax.swing.JTabbedPane repWiseTab;
+    private javax.swing.JComboBox<String> repWise_rep_combo;
     private javax.swing.JComboBox<String> report_item_combo;
     private javax.swing.JButton report_items_btn;
     private javax.swing.JComboBox<String> report_name_combo;
