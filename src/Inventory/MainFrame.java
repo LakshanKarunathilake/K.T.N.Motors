@@ -372,6 +372,7 @@ public class MainFrame extends javax.swing.JFrame {
         repWise_rep_combo = new javax.swing.JComboBox<>();
         jButton34 = new javax.swing.JButton();
         jLabel61 = new javax.swing.JLabel();
+        jButton35 = new javax.swing.JButton();
         item_report_checkBox = new javax.swing.JCheckBox();
         reports_date1_picker = new com.toedter.calendar.JDateChooser();
         reports_date2_picker = new com.toedter.calendar.JDateChooser();
@@ -2162,17 +2163,26 @@ public class MainFrame extends javax.swing.JFrame {
         repWisePanel.add(repWise_rep_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 370, 50));
 
         jButton34.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton34.setText("View Invoice");
+        jButton34.setText("View Items Sold");
         jButton34.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton34ActionPerformed(evt);
             }
         });
-        repWisePanel.add(jButton34, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 180, 50));
+        repWisePanel.add(jButton34, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 180, 50));
 
         jLabel61.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel61.setText("Invoice Number");
+        jLabel61.setText("RepName");
         repWisePanel.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        jButton35.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButton35.setText("View Invoices");
+        jButton35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton35ActionPerformed(evt);
+            }
+        });
+        repWisePanel.add(jButton35, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 180, 50));
 
         repWiseTab.addTab("RepWise", repWisePanel);
 
@@ -5230,7 +5240,61 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
         // TODO add your handling code here:
+        String path = report_folder_path + "\\repWise\\rep_wise_all_items.jrxml";
+        HashMap hm = new HashMap();
+        
+         Date fromDate = reports_date1_picker.getDate();
+        Date toDate = reports_date2_picker.getDate();
+        String fromDateString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(fromDate);
+        String toDateString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(toDate);
+        System.out.println("FRom " + fromDateString + " To " + toDateString + " id " + String.valueOf(report_userID_combo.getSelectedItem()));
+
+
+        hm.put("FromDate", fromDateString);
+        hm.put("ToDate", toDateString);
+        hm.put("repName", String.valueOf(repWise_rep_combo.getSelectedItem()));
+        JasperReport jr;
+        try {
+            jr = JasperCompileManager.compileReport(path);
+            JasperPrint jp = JasperFillManager.fillReport(jr, hm, connector.startConnection());
+            JasperViewer jw = new JasperViewer(jp, false);
+            jw.viewReport(jp, false);
+        } catch (JRException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR in Reporting all items...");
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton34ActionPerformed
+
+    private void jButton35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton35ActionPerformed
+        // TODO add your handling code here:
+        String path = report_folder_path + "\\repWise\\rep_wise_all_invoices.jrxml";
+        HashMap hm = new HashMap();
+        
+         Date fromDate = reports_date1_picker.getDate();
+        Date toDate = reports_date2_picker.getDate();
+        String fromDateString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(fromDate);
+        String toDateString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(toDate);
+        System.out.println("FRom " + fromDateString + " To " + toDateString + " id " + String.valueOf(report_userID_combo.getSelectedItem()));
+
+
+        hm.put("FromDate", fromDateString);
+        hm.put("ToDate", toDateString);
+        hm.put("repName", String.valueOf(repWise_rep_combo.getSelectedItem()));
+        JasperReport jr;
+        try {
+            jr = JasperCompileManager.compileReport(path);
+            JasperPrint jp = JasperFillManager.fillReport(jr, hm, connector.startConnection());
+            JasperViewer jw = new JasperViewer(jp, false);
+            jw.viewReport(jp, false);
+        } catch (JRException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR in Reporting all items...");
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton35ActionPerformed
 
     public void FillBill(String invoiceID) {
         ArrayList list = connector.readRow("orders", "orderID", invoiceID);
@@ -5488,6 +5552,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton32;
     private javax.swing.JButton jButton33;
     private javax.swing.JButton jButton34;
+    private javax.swing.JButton jButton35;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
