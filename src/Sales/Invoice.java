@@ -113,8 +113,6 @@ public class Invoice {
         lists[0] = manipulation.getRecords("items", "item_code", itemNo);
         lists[1] = manipulation.getRecords("items", "category", category);
         
-        
-        
         decoratingCustomers();
         autoCompleteCombo();
         return lists;

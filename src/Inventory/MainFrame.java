@@ -151,7 +151,9 @@ public class MainFrame extends javax.swing.JFrame {
         invoiceData = item_sale.fillDataToCombo();
 
         Invoice.setSaleID(sales_InvoiceID_txt, connector);
-
+        // Populating sales return at the begning
+        sales_return = SalesReturn.getInstance();
+        sales_return.setReturnItems(return_invoiceID_combo, return_userID_combo, return_userName_combo, return_search_item_combo, return_invoiceSearch_table, return_item_table, return_total_txt,return_from_picker,return_to_picker, connector);
         sales_halfPay_panel.setVisible(false);
 
     }
@@ -3300,15 +3302,20 @@ public class MainFrame extends javax.swing.JFrame {
             AutoCompleteDecorator.decorate(report_item_combo);
             AutoCompleteDecorator.decorate(report_name_combo);
             AutoCompleteDecorator.decorate(report_userID_combo);
+            AutoCompleteDecorator.decorate(report_purchasing_invoice_no);
+
             once = false;
         }
 
         report_item_combo.removeAllItems();
         report_name_combo.removeAllItems();
+        report_userID_combo.removeAllItems();        
         report_userID_combo.removeAllItems();
+
         manipulation.getRecords("items", "item_code", report_item_combo);
         manipulation.getRecords("customers", "customer_code", report_userID_combo);
         manipulation.getRecords("customers", "name", report_name_combo);
+        manipulation.getRecords("purchaising", "invoice_id", report_purchasing_invoice_no);
 
     }
 
@@ -4395,14 +4402,17 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void Return_labelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Return_labelMouseClicked
 //        return_cancel_btn.setEnabled(false);
+        ViewManipulation.changePanel(MainChangeFrame, SalesReturnPanel);
+        
+        // Loading at the begining
 
-        ArrayList<JComboBox> combos = new ArrayList<JComboBox>();
-
-        combos.add(return_invoiceID_combo);
-        combos.add(return_userID_combo);
-        combos.add(return_userName_combo);
-
-        ViewManipulation.emptyComboBoxes(combos);
+//        ArrayList<JComboBox> combos = new ArrayList<JComboBox>();
+//
+//        combos.add(return_invoiceID_combo);
+//        combos.add(return_userID_combo);
+//        combos.add(return_userName_combo);
+//
+//        ViewManipulation.emptyComboBoxes(combos);
 
         ButtonGroup return_yesno = new ButtonGroup();
         return_yesno.add(return_no);
@@ -4410,9 +4420,7 @@ public class MainFrame extends javax.swing.JFrame {
         return_yes.setSelected(true);
 
         setDefaultDateRange(return_from_picker, return_to_picker, 6);
-        ViewManipulation.changePanel(MainChangeFrame, SalesReturnPanel);
-        sales_return = new SalesReturn(return_invoiceID_combo, return_userID_combo, return_userName_combo, return_total_txt,return_from_picker,return_to_picker, connector);
-        sales_return.fillDataToCombo();
+        
         sales_return.changeTableView(return_item_table);
 
         sales_return.eventForItemTable(return_item_table);
@@ -4439,7 +4447,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void return_search_invoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_return_search_invoiceActionPerformed
         return_cancel_btn.setEnabled(true);
         sales_return.setPanels(sales_return_subPanel, returns_item_table);
-        sales_return.searchInvoice(return_search_item_combo, return_invoiceSearch_table, return_item_table, connector);
         ViewManipulation.changePanel(sales_return_subPanel, returns_search_panel);
         return_search_invoice.setEnabled(false);
 

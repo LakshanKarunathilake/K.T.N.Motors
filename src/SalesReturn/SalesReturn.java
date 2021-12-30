@@ -36,6 +36,9 @@ public class SalesReturn {
     JComboBox invoice_no;
     JComboBox customer_no;
     JComboBox customer_name;
+    JComboBox return_item_combo;
+    JTable return_invoiceSearch_table;
+    JTable return_item_table;
     DataBaseConnector connector;
     JPanel panel1;
     JScrollPane panel2;
@@ -44,25 +47,53 @@ public class SalesReturn {
     JDateChooser to;
 
     boolean isDecorated = false;
+    
+    private static SalesReturn salesReturn;
+    
+    private SalesReturn(){
+        
+    }
+    
+    public static SalesReturn getInstance(){
+        if(salesReturn == null)
+            salesReturn = new SalesReturn();
+        return salesReturn;
+    }
 
-    public SalesReturn(JComboBox invoice_no, JComboBox customer_no, JComboBox customer_name, JLabel total_lbl, JDateChooser from, JDateChooser to, DataBaseConnector connector) {
+    public void setReturnItems(JComboBox invoice_no, JComboBox customer_no, JComboBox customer_name, JComboBox return_item_combo,JTable return_invoiceSearch_table,JTable return_item_table, JLabel total_lbl, JDateChooser from, JDateChooser to, DataBaseConnector connector) {
         this.invoice_no = invoice_no;
         this.customer_name = customer_name;
         this.customer_no = customer_no;
+        this.return_item_combo = return_item_combo;
         this.total_lbl = total_lbl;
         this.from = from;
         this.to = to;
         this.connector = connector;
+        this.return_invoiceSearch_table = return_invoiceSearch_table;
+        this.return_item_table = return_item_table;
+        
+        if (!isDecorated) {
+            this.fillDataToCombo();
+        }
+        isDecorated = true;
     }
-
+    
+  
     private void autoCompleteCombo() {
         MyCombo autoCombo1 = new MyCombo();
         MyCombo autoCombo2 = new MyCombo();
         MyCombo autoCombo3 = new MyCombo();
+        MyCombo autoCombo4 = new MyCombo();
 
         autoCombo1.setSearchableCombo(this.invoice_no, true, "No Result Found");
         autoCombo2.setSearchableCombo(this.customer_no, true, "No Result Found");
         autoCombo3.setSearchableCombo(this.customer_name, true, "No Result Found");
+        autoCombo4.setSearchableCombo(this.return_item_combo, true, "No Result Found");
+
+        DataManipulation dm = new DataManipulation(connector);
+        dm.getRecords("items", "item_code", this.return_item_combo);
+        autoCombo4.populateAJTable(this.return_item_combo, this.return_invoiceSearch_table, from, to, connector);
+        eventForSearchTable(this.return_invoiceSearch_table, this.return_item_table);
 
         ArrayList<String> myList = new ArrayList<>();
         //       Getting the value from a second table -- userID from the user table
@@ -83,7 +114,7 @@ public class SalesReturn {
     }
 
     public void fillDataToCombo() {
-
+        System.out.println("Populating data");
         DataManipulation manipulation = new DataManipulation(connector);
 
         manipulation.getRecords("invoices", "invoice_id", invoice_no);
@@ -152,22 +183,22 @@ public class SalesReturn {
 
     }
 
-    public void searchInvoice(JComboBox combo, JTable table, JTable item_table, DataBaseConnector connector) {
+    public void searchInvoice(JTable table, JTable item_table, DataBaseConnector connector) {
         //First Have to clear comboboxes for replication of data
-        ArrayList<JComboBox> combos = new ArrayList<JComboBox>();
-        combos.add(combo);
+//        ArrayList<JComboBox> combos = new ArrayList<JComboBox>();
+//        combos.add(combo);
+//
+//        ViewManipulation.emptyComboBoxes(combos);
+//        //Populating combo with values
+//        DataManipulation dm = new DataManipulation(connector);
+//        dm.getRecords("items", "item_code", combo);
+//        //Make the combo autocomplete
+//        MyCombo autoCombo = new MyCombo();
+//        autoCombo.setSearchableCombo(combo, true, "No result Found");
+//
+//        autoCombo.populateAJTable(combo, table,from,to, connector);
 
-        ViewManipulation.emptyComboBoxes(combos);
-        //Populating combo with values
-        DataManipulation dm = new DataManipulation(connector);
-        dm.getRecords("items", "item_code", combo);
-        //Make the combo autocomplete
-        MyCombo autoCombo = new MyCombo();
-        autoCombo.setSearchableCombo(combo, true, "No result Found");
-
-        autoCombo.populateAJTable(combo, table,from,to, connector);
-
-        eventForSearchTable(table, item_table);
+//        eventForSearchTable(table, item_table);
 
     }
 
