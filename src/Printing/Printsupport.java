@@ -207,7 +207,7 @@ public class Printsupport {
                     Font subheading = new Font("Arial", Font.PLAIN, 8);
                     g2d.setFont(subheading);
                     g2d.drawString("No-152,Aluthgama Road,Mathugama", 30, y += 10);
-                    g2d.drawString("Tel:0344939958,0342248844", 45, y += 10);                 //shift a line by adding 10 to y value
+                    g2d.drawString("Tel:0344939957,0342248844", 45, y += 10);                 //shift a line by adding 10 to y value
                     g2d.setFont(font_bold);
                     g2d.drawString(now(), 0, y += 10);                                //print date
                     g2d.drawString("Invoice :", 0, y += 10);
@@ -313,7 +313,7 @@ public class Printsupport {
                     Font subheading = new Font("Arial", Font.BOLD, 8);
                     g2d.setFont(subheading);
                     g2d.drawString("No-152,Aluthgama Road,Mathugama", 30, y += 10);
-                    g2d.drawString("Tel:0344939958,0342248844", 45, y += 10);                 //shift a line by adding 10 to y value
+                    g2d.drawString("Tel:0344939957,0342248844", 45, y += 10);                 //shift a line by adding 10 to y value
                     g2d.setFont(font_bold);
                     g2d.drawString("Day End Report :", 0, y += 10);
                     g2d.drawString(now(), 80, y);                                //print date
@@ -422,7 +422,7 @@ public class Printsupport {
                     Font columnHeading = new Font("Arial", Font.PLAIN, 10);
                     g2d.setFont(subheading);
                     g2d.drawString("No-152,Aluthgama Road,Mathugama", 240, y += 10);
-                    g2d.drawString("Tel: 0344939958,0342248844 Email: ktn.motos.office@gmail.com", 200, y += 10);                 //shift a line by adding 10 to y value
+                    g2d.drawString("Tel: 0344939957,0342248844 Email: ktn.motos.office@gmail.com", 200, y += 10);                 //shift a line by adding 10 to y value
                     g2d.setFont(font);
 
                     /* Printing the invoice Id and the time*/
